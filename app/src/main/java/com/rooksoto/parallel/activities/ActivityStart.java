@@ -11,7 +11,9 @@ import com.rooksoto.parallel.fragments.activityStart.FragmentStartWelcome;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
 
-public class ActivityStart extends AppCompatActivity {
+import link.fls.swipestack.SwipeStack;
+
+public class ActivityStart extends AppCompatActivity implements SwipeStack.SwipeStackListener{
     private int containerID = R.id.activity_start_fragment_container;
     private CustomSoundEffects mCustomSoundEffects;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
@@ -55,5 +57,20 @@ public class ActivityStart extends AppCompatActivity {
     public void onClickToQuestions (View view) {
         mCustomSoundEffects.setDefaultClick();
         loadFragmentQuestions();
+    }
+
+    @Override
+    public void onViewSwipedToLeft (int position) {
+
+    }
+
+    @Override
+    public void onViewSwipedToRight (int position) {
+
+    }
+
+    @Override
+    public void onStackEmpty () {
+
     }
 }

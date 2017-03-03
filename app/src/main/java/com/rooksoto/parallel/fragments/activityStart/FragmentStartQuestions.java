@@ -34,6 +34,10 @@ public class FragmentStartQuestions extends Fragment {
     private void setSwipeStack () {
         List <Questions> tempList = new ArrayList <>();
         tempList.add(new Questions());
+        tempList.add(new Questions());
+        tempList.add(new Questions());
+        tempList.add(new Questions());
+
         SwipeStack swipeStack = (SwipeStack) mView.findViewById(R.id.fragment_start_questions_swipestack_holder);
         swipeStack.setAdapter(new SwipeAdapter(tempList));
     }

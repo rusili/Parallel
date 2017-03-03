@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:gravity="center_vertical"
+    tools:context="com.rooksoto.parallel.activities.ActivityStart">
 
         <link.fls.swipestack.SwipeStack
             android:id="@+id/fragment_start_questions_swipestack_holder"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/activity_start_fragment_height">
+            android:layout_height="300dp"
+            android:padding="32dp"
+            app:stack_rotation="10"
+            app:stack_size="3"/>
 
-        </link.fls.swipestack.SwipeStack>
-
-    </FrameLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

@@ -21,10 +21,20 @@
         >
 
         <ImageView
-            android:id="@+id/activity_login_logo"
+            android:id="@+id/activity_login_logoleft"
             android:layout_width="50dp"
             android:layout_height="100dp"
-            android:src="@drawable/lines"
+            android:src="@drawable/lineleft"
+            android:tint="#FFFFFF"
+            android:layout_gravity="center"
+            android:layout_marginBottom="140dp"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:id="@+id/activity_login_logoright"
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:src="@drawable/lineright"
             android:tint="#FFFFFF"
             android:layout_gravity="center"
             android:layout_marginBottom="140dp"

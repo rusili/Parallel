@@ -10,3 +10,4 @@ out/
 /captures
 .externalNativeBuild
 /app/google-services.json
+.idea/

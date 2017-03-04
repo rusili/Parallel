@@ -2,15 +2,72 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/activity_start_fragment_height"
+              android:layout_height="match_parent"
               android:onClick="onClickToLogin"
+              android:gravity="center"
     >
 
-    <ImageView
-        android:id="@+id/fragment_login_splash_icon"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:src="@android:drawable/btn_star"
-        />
+        >
+
+        <ImageView
+            android:id="@+id/fragment_login_splash_wordleft"
+            android:layout_width="@dimen/activity_start_edittext_width"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_final_word_left"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            android:tint="#F9f9f9"
+            />
+        <ImageView
+            android:id="@+id/fragment_login_splash_lineleft"
+            android:layout_width="@dimen/activity_start_edittext_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo_final_left"
+            android:visibility="invisible"
+            android:layout_gravity="center_vertical"
+            android:tint="#F9f9f9"
+            />
+        <ImageView
+            android:id="@+id/fragment_login_splash_lineright"
+            android:layout_width="@dimen/activity_start_edittext_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo_final_right"
+            android:visibility="invisible"
+            android:layout_gravity="center_vertical"
+            android:tint="#F9f9f9"
+            />
+        <ImageView
+            android:id="@+id/fragment_login_splash_wordright"
+            android:layout_width="@dimen/activity_start_edittext_width"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_final_word_right"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            android:tint="#F9f9f9"
+            />
+
+        <ImageView
+            android:id="@+id/fragment_login_splash_lineleft2"
+            android:layout_width="@dimen/activity_start_edittext_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo_final_left"
+            android:visibility="invisible"
+            android:layout_gravity="center_vertical"
+            android:tint="#F9f9f9"
+            />
+        <ImageView
+            android:id="@+id/fragment_login_splash_lineright2"
+            android:layout_width="@dimen/activity_start_edittext_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo_final_right"
+            android:visibility="invisible"
+            android:layout_gravity="center_vertical"
+            android:tint="#F9f9f9"
+            />
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.rooksoto.parallel.R;
 
-public class FragmentHubHub extends Fragment{
+public class FragmentHubHub extends Fragment {
     private View mView;
 
     @Nullable

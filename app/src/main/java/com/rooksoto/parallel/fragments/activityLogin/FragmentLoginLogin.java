@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +17,7 @@ import com.rooksoto.parallel.R;
 
 public class FragmentLoginLogin extends Fragment {
     private View mView;
+    private Button buttonLogin;
     private String username;
     private String password;
     private FirebaseAuth mAuth;

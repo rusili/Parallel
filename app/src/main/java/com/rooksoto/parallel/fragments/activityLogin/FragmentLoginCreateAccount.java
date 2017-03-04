@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.rooksoto.parallel.R;
 
 public class FragmentLoginCreateAccount extends Fragment {
     private View mView;
+    private Button buttonCreateAccount;
     private String username;
     private String password;
 
@@ -29,5 +31,6 @@ public class FragmentLoginCreateAccount extends Fragment {
 
         username = editTextUsername.getText().toString();
         password = editTextPassword.getText().toString();
+
     }
 }

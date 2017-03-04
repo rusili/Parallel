@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
-    android:layout_width="match_parent"
+             android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.rooksoto.parallel.activities.ActivityLogin"
-    android:gravity="center"
+    android:background="@drawable/uibackground1"
     >
 
     <FrameLayout
-        android:id="@+id/activity_login_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_start_fragment_height"
+        android:layout_height="match_parent"
+        android:background="#33000000"
         >
     </FrameLayout>
 
-</RelativeLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/activity_login_logoleft"
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:src="@drawable/lineleft"
+            android:tint="#FFFFFF"
+            android:layout_gravity="center"
+            android:layout_marginBottom="140dp"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:id="@+id/activity_login_logoright"
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:src="@drawable/lineright"
+            android:tint="#FFFFFF"
+            android:layout_gravity="center"
+            android:layout_marginBottom="140dp"
+            android:visibility="invisible"
+            />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_login_fragment_container"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
+
+    </LinearLayout>
+
+</FrameLayout>

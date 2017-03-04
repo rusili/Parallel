@@ -56,12 +56,12 @@ public class FragmentLoginSplash extends Fragment {
         parallelWordLeft.setVisibility(View.VISIBLE);
         parallelWordRight.setVisibility(View.VISIBLE);
 
-        final AnimatorSet setLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
+        AnimatorSet setLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                 R.animator.animator_fade_in_left);
         setLeftIn.setTarget(parallelWordLeft);
         setLeftIn.start();
 
-        final AnimatorSet setRightIn = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
+        AnimatorSet setRightIn = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                 R.animator.animator_fade_in_right);
         setRightIn.setTarget(parallelWordRight);
         setRightIn.start();

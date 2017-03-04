@@ -13,18 +13,6 @@
         android:layout_marginBottom="20dp"
         android:visibility="invisible"
         >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/lineleft"
-            />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/lineright"
-            />
-
     </FrameLayout>
 
     <android.support.design.widget.TextInputLayout

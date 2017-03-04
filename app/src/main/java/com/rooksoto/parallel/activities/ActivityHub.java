@@ -10,6 +10,7 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.fragments.activityHub.FragmentHubLocation;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.fragments.activityHub.FragmentChat;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
@@ -27,8 +28,10 @@ public class ActivityHub extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
+        locationService = ParallelLocation.getInstance();
         initialize();
-        loadFragmentChat();
+//        loadFragmentChat();
+        loadFragmentHubLocation();
     }
 
     @Override
@@ -80,6 +83,14 @@ public class ActivityHub extends AppCompatActivity {
         FragmentChat fragmentChat = new FragmentChat();
         getSupportFragmentManager().beginTransaction()
                 .replace(containerID, fragmentChat)
+                .commit();
+    }
+
+    private void loadFragmentHubLocation() {
+        FragmentHubLocation fragmentHubLocation = new FragmentHubLocation();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerID, fragmentHubLocation)
                 .commit();
     }
 

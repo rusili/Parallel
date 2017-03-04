@@ -52,7 +52,6 @@
     </android.support.design.widget.TextInputLayout>>
 
     <Button
-        android:id="@+id/fragment_login_login_button_login"
         android:layout_width="@dimen/activity_start_edittext_width"
         android:layout_height="@dimen/activity_start_edittext_height"
         android:text="Login"
@@ -92,7 +91,6 @@
 
         <TextView
             android:layout_gravity="bottom"
-            android:id="@+id/fragment_login_login_button_createaccount"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:text=" Create one"

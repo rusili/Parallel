@@ -32,7 +32,7 @@
             >
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/fragment_login_login_edittext_username"
+                android:id="@+id/fragment_start_enterid_eventid"
                 android:layout_width="@dimen/activity_start_edittext_width"
                 android:layout_height="@dimen/activity_start_edittext_height"
                 android:hint="Event ID"
@@ -43,7 +43,6 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/fragment_start_enterid_button"
             android:layout_width="@dimen/activity_start_edittext_width"
             android:layout_height="@dimen/activity_start_edittext_height"
             android:text="Enter"

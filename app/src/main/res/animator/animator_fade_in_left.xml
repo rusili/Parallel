@@ -4,8 +4,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:propertyName="x"
         android:valueType="floatType"
-        android:valueFrom="200"
-        android:valueTo="0"
+        android:valueFrom="-5%p"
+        android:valueTo="0%p"
         android:duration="1000"/>
     <objectAnimator
         android:valueFrom="0.0"

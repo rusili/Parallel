@@ -1,21 +1,18 @@
 package com.rooksoto.parallel.fragments.activityStart;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.TextView;
 
-import com.hanks.htextview.HTextView;
-import com.hanks.htextview.HTextViewType;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.utility.SoundPoolPlayer;
 
 public class FragmentStartEnterID extends Fragment {
     private View mView;
+    private TextView textViewEventID;
 
     @Nullable
     @Override
@@ -26,5 +23,6 @@ public class FragmentStartEnterID extends Fragment {
     }
 
     private void initialize(){
+        textViewEventID = (TextView) mView.findViewById(R.id.fragment_start_enterid_eventid);
     }
 }

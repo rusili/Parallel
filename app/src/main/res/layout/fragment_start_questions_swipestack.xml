@@ -30,7 +30,6 @@
             >
 
             <TextView
-                android:id="@+id/fragment_start_questions_swipestack_question"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:gravity="center"
@@ -64,7 +63,6 @@
                     android:layout_marginLeft="16dp"
                     >
                     <TextView
-                        android:id="@+id/fragment_start_questions_swipestack_leftanswer"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:gravity="center"
@@ -91,7 +89,6 @@
                     android:layout_marginRight="16dp"
                     >
                     <TextView
-                        android:id="@+id/fragment_start_questions_swipestack_rightanswer"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:gravity="center"

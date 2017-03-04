@@ -35,9 +35,6 @@ public class FragmentChat extends Fragment {
     private FirebaseListAdapter<Chat> messageListAdapter;
     private ImageView picImageView;
 
-    public FragmentChat() {
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

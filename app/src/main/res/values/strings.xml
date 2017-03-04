@@ -1,10 +1,4 @@
 <resources>
     <string name="app_name">Parallel</string>
 
-    <string name="no_network">No Network Detected</string>
-    <string name="account_created">Account Created</string>
-    <string name="incorrect_password">Incorrect Password</string>
-    <string name="incorrect_email">Incorrect Email</string>
-
-    <string name="ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu augue nec mi vestibulum tempor et ut nisi. Mauris a sem maximus, rutrum justo vel, sollicitudin odio. Morbi nec justo et mi consectetur feugiat non molestie turpis. Sed varius ipsum in nunc euismod rhoncus. Nullam efficitur sodales suscipit. Nulla non purus nec metus sollicitudin tempus. In hac habitasse platea dictumst. Morbi non orci metus. Maecenas faucibus ligula sit amet dui convallis, in ultricies leo convallis. Donec sit amet feugiat diam, ac convallis ante. Mauris aliquam metus in sapien euismod dignissim. Aliquam sed sodales lorem. Vestibulum nisl lectus, pretium at ligula vel, hendrerit lobortis elit. Sed ut vehicula enim.</string>
 </resources>

@@ -28,7 +28,6 @@
         >
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/fragment_login_createaccount_edittext_email"
             android:layout_width="@dimen/activity_start_edittext_width"
             android:layout_height="@dimen/activity_start_edittext_height"
             android:hint="Enter an email address"
@@ -79,7 +78,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/fragment_login_createaccount_button_createaccount"
         android:layout_width="@dimen/activity_start_edittext_width"
         android:layout_height="@dimen/activity_start_edittext_height"
         android:text="Create"

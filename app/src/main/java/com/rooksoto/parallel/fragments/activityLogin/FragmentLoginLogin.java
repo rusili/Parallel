@@ -25,6 +25,7 @@ public class FragmentLoginLogin extends Fragment {
         return mView;
     }
 
+
     private void initialize () {
         EditText editTextUsername = (EditText) mView.findViewById(R.id.fragment_login_login_edittext_username);
         EditText editTextPassword = (EditText) mView.findViewById(R.id.fragment_login_login_edittext_password);

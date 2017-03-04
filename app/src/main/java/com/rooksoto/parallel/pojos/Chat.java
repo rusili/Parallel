@@ -1,34 +1,36 @@
 package com.rooksoto.parallel.pojos;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by huilin on 3/2/17.
  */
-
+@IgnoreExtraProperties
 public class Chat {
-    private String mName;
-    private String mText;
+    private String name;
+    private String text;
 
     public Chat() {
     }
 
     public Chat(String name, String text) {
-        this.mName = name;
-        this.mText = text;
+        this.name = name;
+        this.text = text;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        this.mName = name;
+        this.name = name;
     }
 
     public String getText() {
-        return mText;
+        return text;
     }
 
     public void setText(String text) {
-        this.mText = text;
+        this.text = text;
     }
 }

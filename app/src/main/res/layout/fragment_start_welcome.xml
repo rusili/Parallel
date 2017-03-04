@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:htext="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:onClick="onClickToQuestions"
     >
 
-    <TextView
+    <com.hanks.htextview.HTextView
+        android:id="@+id/fragment_start_welcome_htextview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Welcome"
-        android:textSize="144sp"
+        android:background="#00000000"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        htext:animateType="scale"
         />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</LinearLayout>
+</FrameLayout>

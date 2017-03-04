@@ -21,6 +21,7 @@
         android:textSize="@dimen/chat_username_textsize"
         android:textStyle="bold"
         android:layout_margin="5dp"
+        android:textColor="@color/textMain"
         tools:text="Name" />
 
     <TextView
@@ -31,5 +32,6 @@
         android:layout_below="@id/nameTextView"
         android:layout_margin="5dp"
         android:textSize="@dimen/chat_message_textsize"
+        android:textColor="@color/textMain"
         tools:text="Message" />
 </RelativeLayout>

@@ -4,12 +4,13 @@
     android:id="@+id/activity_hub"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rooksoto.parallel.activities.ActivityHub">
+    tools:context="com.rooksoto.parallel.activities.ActivityHub"
+    android:background="@drawable/uibackground1">
 
     <FrameLayout
         android:id="@+id/activity_hub_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_start_fragment_height"
+        android:layout_height="match_parent"
         >
     </FrameLayout>
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.view.View;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.fragments.activityStart.FragmentStartQuestions;
 import com.rooksoto.parallel.fragments.activityStart.FragmentStartWelcome;
+import com.rooksoto.parallel.fragments.activityStart.FragmentStartEnterID;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
 
@@ -23,11 +24,18 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         initialize();
-        loadFragmentWelcome();
+        loadFragmentEnterID();
     }
 
     private void initialize () {
         mCustomSoundEffects = new CustomSoundEffects(getWindow().getDecorView().getRootView());
+    }
+
+    private void loadFragmentEnterID () {
+        FragmentStartEnterID mFragmentStartEnterID = new FragmentStartEnterID();
+        getSupportFragmentManager().beginTransaction()
+                .replace(containerID, mFragmentStartEnterID)
+                .commit();
     }
 
     private void loadFragmentWelcome () {
@@ -72,5 +80,9 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
     @Override
     public void onStackEmpty () {
 
+    }
+
+    public void onClicktoWelcome (View view) {
+        loadFragmentWelcome();
     }
 }

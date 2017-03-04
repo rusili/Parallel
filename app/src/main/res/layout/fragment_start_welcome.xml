@@ -1,70 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+             xmlns:htext="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:onClick="onClickToQuestions"
     >
 
-    <FrameLayout
+    <com.hanks.htextview.HTextView
+        android:id="@+id/fragment_start_welcome_htextview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        >
-
-        <ImageView
-            android:id="@+id/fragment_start_welcome_top"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/welcomesplashtopback"
-            />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="to"
-            android:textColor="@color/textMain"
-            android:textSize="48sp"
-            android:layout_marginTop="150dp"
-            android:layout_marginLeft="256dp"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="[ 3.3 Demo Day ]"
-            android:textColor="@color/textMain"
-            android:textSize="48sp"
-            android:layout_marginTop="300dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="hosted by: "
-            android:layout_gravity="bottom"
-            android:textColor="@color/textAlt"
-            android:layout_marginBottom="24dp"
-            android:layout_marginLeft="180dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Google"
-            android:layout_gravity="bottom"
-            android:textColor="@color/textAlt"
-            android:layout_marginBottom="24dp"
-            android:layout_marginLeft="280dp"
-            />
-
-    </FrameLayout>
-
+        android:background="#00000000"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        htext:animateType="scale"
+        />
 
 </FrameLayout>

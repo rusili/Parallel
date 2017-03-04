@@ -1,6 +1,7 @@
 package com.rooksoto.parallel.fragments.activityStart;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.hanks.htextview.HTextView;
+import com.hanks.htextview.HTextViewType;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.utility.SoundPoolPlayer;
 
@@ -16,6 +19,11 @@ public class FragmentStartWelcome extends Fragment {
     private SoundPoolPlayer mSoundPoolPlayer;
     private FrameLayout mFrameLayoutLeft;
     private FrameLayout mFrameLayoutRight;
+    private String[] welcomeText = new String[]{"", "Welcome", "to", "C4Q's", "3.3 Demo Day", "Enjoy"};
+    private int counter = 0;
+
+    private boolean started = false;
+    private Handler handler = new Handler();
 
     @Nullable
     @Override
@@ -26,7 +34,8 @@ public class FragmentStartWelcome extends Fragment {
     }
 
     private void initialize(){
-        welcomeAnimation();
+        start();
+        playWelcomeVoice();
     }
 
     private void playWelcomeVoice () {
@@ -34,6 +43,22 @@ public class FragmentStartWelcome extends Fragment {
         mSoundPoolPlayer.playShortResource(R.raw.welcome);
         mSoundPoolPlayer.release();
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            HTextView textView = (HTextView) mView.findViewById(R.id.fragment_start_welcome_htextview);
+            textView.setAnimateType(HTextViewType.SCALE);
+            textView.animateText(welcomeText[counter]); // animate
+            counter++;
+            if(started) {
+                start();
+            }
+            if (counter==6){
+                stop();
+            }
+        }
+    };
 
     private void welcomeAnimation () {
 //        mFrameLayoutLeft = (FrameLayout) mView.findViewById(R.id.fragment_start_welcome_top);
@@ -58,5 +83,15 @@ public class FragmentStartWelcome extends Fragment {
 
     private void showWelcome () {
         //?
+    }
+
+    public void stop() {
+        started = false;
+        handler.removeCallbacks(runnable);
+    }
+
+    public void start() {
+        started = true;
+        handler.postDelayed(runnable, 1500);
     }
 }

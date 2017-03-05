@@ -44,12 +44,6 @@ public class ActivityHub extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        startLocationServices();
-    }
-
     private void checkForGoogleApiAvail() {
         int hasGpsInstalled = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
         if (hasGpsInstalled != ConnectionResult.SUCCESS) {

@@ -4,7 +4,7 @@
              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:onClick="onClickToActivityHub">
+              android:onClick="onClickToQuestions">
 
     <com.hanks.htextview.HTextView
         android:id="@+id/fragment_start_welcome_htextview"
@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:background="#00000000"
         android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
+        android:textColor="#F9f9f9"
+        android:textSize="48sp"
         htext:animateType="scale"
         />
 

@@ -5,15 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.hanks.htextview.HTextView;
+import com.hanks.htextview.HTextViewType;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.network.objects.Questions;
 
 import java.util.List;
 
-public class SwipeAdapter extends BaseAdapter {
+public class SwipeStackAdapter extends BaseAdapter {
     private List <Questions> listOfQuestions;
 
-    public SwipeAdapter (List <Questions> listParam) {
+    public SwipeStackAdapter (List <Questions> listParam) {
         this.listOfQuestions = listParam;
     }
 
@@ -30,10 +32,13 @@ public class SwipeAdapter extends BaseAdapter {
     @Override
     public View getView (int position, View viewParam, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View questionView = inflater.inflate(R.layout.fragment_start_questions_swipestack, parent, false);
-        // bind
+        View mView = inflater.inflate(R.layout.fragment_start_questions_swipestack, parent, false);
 
-        return questionView;
+        HTextView hTextViewQuestion = (HTextView) mView.findViewById(R.id.fragment_start_questions_htextview_question);
+        hTextViewQuestion.setAnimateType(HTextViewType.SCALE);
+        hTextViewQuestion.animateText(listOfQuestions.get(position).getQuestion());
+
+        return mView;
     }
 
     @Override

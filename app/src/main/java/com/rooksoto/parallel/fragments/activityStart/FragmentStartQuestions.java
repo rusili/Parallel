@@ -1,6 +1,8 @@
 package com.rooksoto.parallel.fragments.activityStart;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,16 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.activities.ActivityHub;
 import com.rooksoto.parallel.network.objects.Questions;
-import com.rooksoto.parallel.viewwidgets.swipestack.SwipeAdapter;
+import com.rooksoto.parallel.viewwidgets.swipestack.SwipeStackAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import link.fls.swipestack.SwipeStack;
 
-public class FragmentStartQuestions extends Fragment {
+public class FragmentStartQuestions extends Fragment implements SwipeStack.SwipeStackListener{
     private View mView;
+    private SwipeStack mSwipeStack;
+    private List <Questions> listofQuestions;
 
     @Nullable
     @Override
@@ -32,13 +37,42 @@ public class FragmentStartQuestions extends Fragment {
     }
 
     private void setSwipeStack () {
-        List <Questions> tempList = new ArrayList <>();
-        tempList.add(new Questions());
-        tempList.add(new Questions());
-        tempList.add(new Questions());
-        tempList.add(new Questions());
+        listofQuestions = new ArrayList <>();
+        listofQuestions.add(new Questions("Are you an IOS developer?"));
+        listofQuestions.add(new Questions("Are you an Android developer?"));
+        listofQuestions.add(new Questions("Are you affiliated with C4Q?"));
+        listofQuestions.add(new Questions("Do you have more than 3 years of programming experience?"));
+        listofQuestions.add(new Questions("Are dogs better than cats?"));
 
-        SwipeStack swipeStack = (SwipeStack) mView.findViewById(R.id.fragment_start_questions_swipestack_holder);
-        swipeStack.setAdapter(new SwipeAdapter(tempList));
+        mSwipeStack = (SwipeStack) mView.findViewById(R.id.fragment_start_questions_swipestack_holder);
+        mSwipeStack.setAdapter(new SwipeStackAdapter(listofQuestions));
+        mSwipeStack.setListener(this);
+    }
+
+    @Override
+    public void onViewSwipedToLeft (int position) {
+        if (position==listofQuestions.size()-1){
+            toActivityHub();
+        }
+    }
+
+    @Override
+    public void onViewSwipedToRight (int position) {
+        if (position==listofQuestions.size()-1){
+            toActivityHub();
+        }
+    }
+
+    @Override
+    public void onStackEmpty () {}
+
+    private void toActivityHub () {
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                Intent intentToActivityHub = new Intent(mView.getContext(), ActivityHub.class);
+                startActivity(intentToActivityHub);
+            }
+        }, 1000);
+
     }
 }

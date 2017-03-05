@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    android:gravity="center_vertical"
     tools:context="com.rooksoto.parallel.activities.ActivityStart">
 
         <link.fls.swipestack.SwipeStack
             android:id="@+id/fragment_start_questions_swipestack_holder"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:padding="32dp"
+            android:layout_height="match_parent"
+            android:padding="16dp"
             app:stack_rotation="0"
-            app:swipe_rotation="10"
+            app:swipe_rotation="0"
             app:animation_duration="200"
             app:stack_size="1"/>
-
-
-</RelativeLayout>
+</FrameLayout>

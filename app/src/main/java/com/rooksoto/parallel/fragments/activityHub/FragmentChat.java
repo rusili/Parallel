@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.pojos.Chat;
+import com.rooksoto.parallel.network.objects.Chat;
 import com.squareup.picasso.Picasso;
 
 import static android.content.ContentValues.TAG;

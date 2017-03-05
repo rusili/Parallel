@@ -29,6 +29,7 @@
             android:inputType="textWebEmailAddress"
             android:textColor="@color/textMain"
             android:typeface="sans"
+            android:singleLine="true"
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -47,6 +48,7 @@
             android:gravity="center_vertical"
             android:inputType="textPassword"
             android:textColor="@color/textMain"
+            android:singleLine="true"
             />
     </android.support.design.widget.TextInputLayout>>
 
@@ -100,7 +102,6 @@
             />
 
     </LinearLayout>
-
     <TextView
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
@@ -116,5 +117,4 @@
         android:layout_gravity="center"
         android:layout_width="150dp"
         android:layout_height="40dp" />
-
 </LinearLayout>

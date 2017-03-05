@@ -30,12 +30,16 @@ public class ParallelLocation {
 
     private static final String TAG = "ParallelLocation";
 
-    private static GoogleApiClient googleApiClient = null;
+    private static GoogleApiClient googleApiClient;
     private static ParallelLocation instance;
     private static double parallelLatitude;
     private static double parallelLongitude;
 
     private String GOFENCE_ID = "geoFenceID";
+
+    private static double eventLatitude = 40.7417145;
+    private static double eventLongitude = -73.9352932;
+    private static float eventGeofenceRadius = 100;
 
     public static ParallelLocation getInstance() {
         if (instance == null) {
@@ -45,13 +49,15 @@ public class ParallelLocation {
     }
 
     private ParallelLocation() {
-        Context context = AppContext.getAppContext();
-        googleApiClient = new GoogleApiClient.Builder(context) // FIXME: 3/2/17 - googleApiClient.getContext() may return null;
+        final Context context = AppContext.getAppContext();
+        googleApiClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
                     public void onConnected(@Nullable Bundle bundle) {
                         Log.d(TAG, "Successfully Connected to GPS-L");
+                        startLocationMonitoring();
+                        startGeofenceMonitoring(context);
                     }
 
                     @Override
@@ -66,7 +72,9 @@ public class ParallelLocation {
                     }
                 })
                 .build();
+        googleApiClient.connect();
     }
+
 
     public void connect() {
         googleApiClient.reconnect();
@@ -98,8 +106,6 @@ public class ParallelLocation {
         } catch (SecurityException e) {
             Log.d(TAG, "Security Exception: " + e.getMessage());
         }
-
-
     }
 
     public void startGeofenceMonitoring(Context context) {
@@ -109,7 +115,7 @@ public class ParallelLocation {
         try {
             Geofence geofence = new Geofence.Builder()
                     .setRequestId(GOFENCE_ID)
-                    .setCircularRegion(40.741895, -73.989308, 100)
+                    .setCircularRegion(eventLatitude, eventLongitude, eventGeofenceRadius)
                     .setExpirationDuration(Geofence.NEVER_EXPIRE)
                     .setNotificationResponsiveness(1000)
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)

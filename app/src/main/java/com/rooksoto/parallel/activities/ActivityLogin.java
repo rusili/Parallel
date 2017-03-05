@@ -26,6 +26,8 @@ public class ActivityLogin extends AppCompatActivity {
     private ImageView logoViewLeft;
     private ImageView logoViewRight;
     private boolean logoVisible = false;
+    private FragmentLoginLogin mFragmentLoginLogin;
+    private boolean isNew = true;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     private void loadFragmentLogin () {
-        FragmentLoginLogin mFragmentLoginLogin = new FragmentLoginLogin();
+        mFragmentLoginLogin = FragmentLoginLogin.newInstance(isNew);
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left)
                 .replace(containerID, mFragmentLoginLogin, "Login")
@@ -66,6 +68,7 @@ public class ActivityLogin extends AppCompatActivity {
             logoViewRight.startAnimation(fadeInDown);
             logoVisible = true;
         }
+        isNew = false;
     }
 
     private void loadFragmentCreateAccount () {
@@ -87,7 +90,8 @@ public class ActivityLogin extends AppCompatActivity {
         Animation fadeOutUp = AnimationUtils.loadAnimation(this, R.anim.fadeoutup);
         fadeOutUp.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart (Animation animation) {}
+            public void onAnimationStart (Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd (Animation animation) {
@@ -96,7 +100,8 @@ public class ActivityLogin extends AppCompatActivity {
             }
 
             @Override
-            public void onAnimationRepeat (Animation animation) {}
+            public void onAnimationRepeat (Animation animation) {
+            }
         });
         logoViewRight.startAnimation(fadeOutUp);
     }

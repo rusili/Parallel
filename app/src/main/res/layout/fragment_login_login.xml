@@ -73,11 +73,36 @@
         android:typeface="sans"
         />
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:alpha="0"
+            />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_googleplus"
+            android:background="#00FFFFFF"
+            android:layout_gravity="center"
+            android:tint="@color/teal"
+            />
+
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center"
+        android:layout_gravity="bottom"
         >
 
         <TextView
@@ -102,19 +127,6 @@
             />
 
     </LinearLayout>
-    <TextView
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:text="Or, sign in using your Google Account"
-        android:gravity="center_horizontal"
-        android:textColor="@color/textAlt"
-        android:typeface="sans"
-        android:id="@+id/textView2" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_gravity="center"
-        android:layout_width="150dp"
-        android:layout_height="40dp" />
+
 </LinearLayout>

@@ -18,18 +18,18 @@ public class GeofenceService extends IntentService {
 
     private static final String TAG = "GeofenceService";
 
-    public GeofenceService() {
+    public GeofenceService () {
         super(TAG);
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleIntent (Intent intent) {
         GeofencingEvent event = GeofencingEvent.fromIntent(intent);
         if (event.hasError()) {
             // TODO: 3/2/17 - Handle Error
         } else {
             int transition = event.getGeofenceTransition();
-            List<Geofence> geofences = event.getTriggeringGeofences();
+            List <Geofence> geofences = event.getTriggeringGeofences();
             Geofence geofence = geofences.get(0);
             String requestID = geofence.getRequestId();
 
@@ -39,7 +39,7 @@ public class GeofenceService extends IntentService {
                         getApplicationContext(),
                         "You have entered the geofence",
                         Toast.LENGTH_SHORT);
-                        toast.show();
+                toast.show();
             } else if (transition == Geofence.GEOFENCE_TRANSITION_EXIT) {
                 Log.d(TAG, "onHandleIntent: Exiting Geofence = " + requestID);
                 Toast toast = Toast.makeText(

@@ -28,7 +28,7 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
     ParallelLocation locationService = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         locationService = ParallelLocation.getInstance();
@@ -40,7 +40,7 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
         loadFragmentEnterID();
     }
 
-    private void checkForGoogleApiAvail() {
+    private void checkForGoogleApiAvail () {
         int hasGpsInstalled = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
         if (hasGpsInstalled != ConnectionResult.SUCCESS) {
             GoogleApiAvailability.getInstance().getErrorDialog(this, hasGpsInstalled, 1).show();
@@ -50,33 +50,33 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void getLocationPermissions() {
-        requestPermissions(new String[]{
+    @RequiresApi (api = Build.VERSION_CODES.M)
+    private void getLocationPermissions () {
+        requestPermissions(new String[] {
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION},
                 9999);
     }
 
-    private void initialize() {
+    private void initialize () {
         mCustomSoundEffects = new CustomSoundEffects(getWindow().getDecorView().getRootView());
     }
 
-    private void loadFragmentEnterID() {
+    private void loadFragmentEnterID () {
         FragmentStartEnterID mFragmentStartEnterID = new FragmentStartEnterID();
         getSupportFragmentManager().beginTransaction()
                 .replace(containerID, mFragmentStartEnterID)
                 .commit();
     }
 
-    private void loadFragmentWelcome() {
+    private void loadFragmentWelcome () {
         FragmentStartWelcome mFragmentStartWelcome = new FragmentStartWelcome();
         getSupportFragmentManager().beginTransaction()
                 .replace(containerID, mFragmentStartWelcome)
                 .commit();
     }
 
-    private void loadFragmentQuestions() {
+    private void loadFragmentQuestions () {
         FragmentStartQuestions mFragmentStartQuestions = new FragmentStartQuestions();
         getSupportFragmentManager().beginTransaction()
                 .replace(containerID, mFragmentStartQuestions)
@@ -84,7 +84,7 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed () {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(containerID);
         if (currentFragment instanceof FragmentStartWelcome) {
             mCustomAlertDialog.exit(this);
@@ -93,38 +93,38 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
         }
     }
 
-    public void onClickToQuestions(View view) {
+    public void onClickToQuestions (View view) {
         mCustomSoundEffects.setDefaultClick();
         loadFragmentQuestions();
     }
 
-    public void onClickToActivityHub(View view) {
+    public void onClickToActivityHub (View view) {
         mCustomSoundEffects.setDefaultClick();
         Intent intent = new Intent(this, ActivityHub.class);
         startActivity(intent);
     }
 
     @Override
-    public void onViewSwipedToLeft(int position) {
+    public void onViewSwipedToLeft (int position) {
 
     }
 
     @Override
-    public void onViewSwipedToRight(int position) {
+    public void onViewSwipedToRight (int position) {
 
     }
 
     @Override
-    public void onStackEmpty() {
+    public void onStackEmpty () {
 
     }
 
-    public void onClicktoWelcome(View view) {
+    public void onClicktoWelcome (View view) {
         loadFragmentWelcome();
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop () {
         locationService.disconnect();
         super.onStop();
     }

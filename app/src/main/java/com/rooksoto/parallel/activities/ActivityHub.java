@@ -32,14 +32,14 @@ public class ActivityHub extends AppCompatActivity {
         setupViewpager();
     }
 
-    private void setupViewpager() {
+    private void setupViewpager () {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         pagerAdapter = new HubPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart () {
         super.onStart();
     }
 
@@ -58,7 +58,7 @@ public class ActivityHub extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop () {
         locationService.disconnect();
         super.onStop();
     }

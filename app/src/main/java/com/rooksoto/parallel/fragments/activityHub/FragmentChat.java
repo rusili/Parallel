@@ -39,7 +39,7 @@ public class FragmentChat extends Fragment {
     private EditText messageEditText;
     private Button sendButton;
     private ListView messageListView;
-    private FirebaseListAdapter<Chat> messageListAdapter;
+    private FirebaseListAdapter <Chat> messageListAdapter;
     private ImageView picImageView;
     private FirebaseAuth.AuthStateListener authStateListener;
     private String userName;
@@ -48,12 +48,12 @@ public class FragmentChat extends Fragment {
     private String profilePic;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged (@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -70,7 +70,7 @@ public class FragmentChat extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chatroom, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         messageEditText = (EditText) view.findViewById(R.id.messageEditText);
@@ -80,7 +80,7 @@ public class FragmentChat extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated (View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         createFirebaseListAdapter(ref);
         messageListView.setAdapter(messageListAdapter);
@@ -88,7 +88,7 @@ public class FragmentChat extends Fragment {
         // FIXME: pass in the uri into the database
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick (View view) {
                 ref.push().setValue(new Chat(userName, messageEditText.getText().toString(), profilePic));
                 messageEditText.setText("");
             }
@@ -97,15 +97,15 @@ public class FragmentChat extends Fragment {
 
     }
 
-    private void setupTextChangedListenerForMessage() {
+    private void setupTextChangedListenerForMessage () {
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged (CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged (CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().trim().length() == 0) {
                     sendButton.setEnabled(false);
                 } else {
@@ -114,17 +114,17 @@ public class FragmentChat extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged (Editable editable) {
 
             }
         });
     }
 
 
-    private void createFirebaseListAdapter(final DatabaseReference ref) {
-        messageListAdapter = new FirebaseListAdapter<Chat>(getActivity(), Chat.class, R.layout.item_message, ref) {
+    private void createFirebaseListAdapter (final DatabaseReference ref) {
+        messageListAdapter = new FirebaseListAdapter <Chat>(getActivity(), Chat.class, R.layout.item_message, ref) {
             @Override
-            protected void populateView(View view, Chat chatMessage, int position) {
+            protected void populateView (View view, Chat chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);
                 picImageView = (ImageView) view.findViewById(R.id.picImageView);
                 // TODO: must get profilepic link from database
@@ -141,13 +141,13 @@ public class FragmentChat extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart () {
         super.onStart();
         firebaseAuth.addAuthStateListener(authStateListener);
     }
 
     @Override
-    public void onStop() {
+    public void onStop () {
         super.onStop();
         if (authStateListener != null) {
             firebaseAuth.removeAuthStateListener(authStateListener);
@@ -155,7 +155,7 @@ public class FragmentChat extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy () {
         super.onDestroy();
         messageListAdapter.cleanup();
     }

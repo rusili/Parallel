@@ -18,7 +18,7 @@ import com.rooksoto.parallel.R;
 
 public class FragmentStartWelcome extends Fragment {
     private View mView;
-    private String[] welcomeText = new String[]{"Welcome", "to", "C4Q's", "3.3 Demo Day", "Enjoy"};
+    private String[] welcomeText = new String[] {"Welcome", "to", "C4Q's", "3.3 Demo Day", "Enjoy"};
     private int counter = 0;
 
     private boolean started = false;
@@ -32,15 +32,15 @@ public class FragmentStartWelcome extends Fragment {
         return mView;
     }
 
-    private void initialize(){
+    private void initialize () {
         start();
     }
 
-    private void playWelcomeVoice() {
+    private void playWelcomeVoice () {
         MediaPlayer mediaPlayer = MediaPlayer.create(mView.getContext(), R.raw.welcome);
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
+            public void onCompletion (MediaPlayer mediaPlayer) {
                 mediaPlayer.stop();
             }
         });
@@ -49,22 +49,22 @@ public class FragmentStartWelcome extends Fragment {
 
     private Runnable runnableHTextView = new Runnable() {
         @Override
-        public void run() {
+        public void run () {
             final HTextView textView = (HTextView) mView.findViewById(R.id.fragment_start_welcome_htextview);
             textView.setAnimateType(HTextViewType.SCALE);
             textView.animateText(welcomeText[counter]); // animate
             counter++;
-            if(started) {
+            if (started) {
                 start();
             }
-            if (counter==1){
+            if (counter == 1) {
                 playWelcomeVoice();
             }
-            if (counter==5){
+            if (counter == 5) {
                 stop();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
-                    public void run() {
+                    public void run () {
                         runHostAnimation();
                     }
                 }, 1000);
@@ -98,12 +98,12 @@ public class FragmentStartWelcome extends Fragment {
 
     }
 
-    public void stop() {
+    public void stop () {
         started = false;
         handler.removeCallbacks(runnableHTextView);
     }
 
-    public void start() {
+    public void start () {
         started = true;
         handler.postDelayed(runnableHTextView, 1500);
     }

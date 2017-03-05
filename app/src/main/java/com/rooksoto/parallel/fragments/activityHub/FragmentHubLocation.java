@@ -26,7 +26,7 @@ public class FragmentHubLocation extends Fragment {
     private ParallelLocation locationService = null;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate (@Nullable Bundle savedInstanceState) {
         locationService = ParallelLocation.getInstance();
         super.onCreate(savedInstanceState);
     }
@@ -43,19 +43,19 @@ public class FragmentHubLocation extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated (View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
-    public void onResume() {
+    public void onResume () {
         super.onResume();
         tvLatitude.setText(String.valueOf(locationService.getLatitude()));
         tvLongitude.setText(String.valueOf(locationService.getLongitude()));
     }
 
     @Override
-    public void onStop() {
+    public void onStop () {
         super.onStop();
         locationService.disconnect();
     }

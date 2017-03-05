@@ -31,7 +31,9 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:textSize="12sp"
-            android:textColor="@color/textMain"/>
+            android:textColor="@color/textMain"
+            android:inputType="textCapSentences"
+            />
 
         <Button
             android:id="@+id/sendButton"

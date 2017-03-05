@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.HTextViewType;
@@ -13,6 +14,7 @@ import com.rooksoto.parallel.network.objects.Questions;
 import java.util.List;
 
 public class SwipeStackAdapter extends BaseAdapter {
+    private View mView;
     private List <Questions> listOfQuestions;
 
     public SwipeStackAdapter (List <Questions> listParam) {
@@ -32,13 +34,25 @@ public class SwipeStackAdapter extends BaseAdapter {
     @Override
     public View getView (int position, View viewParam, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View mView = inflater.inflate(R.layout.fragment_start_questions_swipestack, parent, false);
-
-        HTextView hTextViewQuestion = (HTextView) mView.findViewById(R.id.fragment_start_questions_htextview_question);
-        hTextViewQuestion.setAnimateType(HTextViewType.SCALE);
-        hTextViewQuestion.animateText(listOfQuestions.get(position).getQuestion());
+        mView = inflater.inflate(R.layout.fragment_start_questions_swipestack, parent, false);
+        bind(position);
 
         return mView;
+    }
+
+    private void bind (int position) {
+        Questions question = listOfQuestions.get(position);
+        HTextView hTextViewQuestion = (HTextView) mView.findViewById(R.id.fragment_start_questions_htextview_question);
+        hTextViewQuestion.setAnimateType(HTextViewType.SCALE);
+        hTextViewQuestion.animateText(question.getQuestion());
+
+        if (question.getLeftResID() != 0) {
+            ImageView imageViewLeft = (ImageView) mView.findViewById(R.id.fragment_start_questions_swipestack_leftanswer);
+            ImageView imageViewRight = (ImageView) mView.findViewById(R.id.fragment_start_questions_swipestack_rightanswer);
+            imageViewLeft.setImageResource(question.getLeftResID());
+            imageViewLeft.setImageResource(question.getRightResID());
+        }
+
     }
 
     @Override

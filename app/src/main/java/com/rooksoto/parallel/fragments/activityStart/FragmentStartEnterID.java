@@ -22,7 +22,7 @@ public class FragmentStartEnterID extends Fragment {
         return mView;
     }
 
-    private void initialize(){
+    private void initialize () {
         textViewEventID = (TextView) mView.findViewById(R.id.fragment_start_enterid_eventid);
     }
 }

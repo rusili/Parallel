@@ -4,29 +4,14 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="purpleDark">#280d37</color>
-    <color name="purpleMedium">#64286d</color>
-    <color name="purpleLight">#ca6998</color>
-    <color name="peachMedium">#f29f9b</color>
     <color name="peachLight">#ffc19d</color>
 
     <color name="teal">#6bdecd</color>
-    <color name="skyblue">#88c7e6</color>
-
-    <color name="magentaLight">#c2295f</color>
-    <color name="magentaDark">#502c38</color>
 
     <color name="textMain">#f9f9f9</color>
     <color name="textAlt">#80dbdbdb</color>
     <color name="gray10">#e6e6e6</color>
     <color name="gray30">#b3b3b3</color>
-    <color name="gray50">#808080</color>
-    <color name="gray70">#4d4d4d</color>
-    <color name="gray90">#1a1a1a</color>
 
-
-    <color name="activity_login_edittext_hint">#80f9f9f9</color>
-
-    <color name="transparent">#00000000</color>
 
 </resources>

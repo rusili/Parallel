@@ -23,6 +23,12 @@ public class FragmentHubLocation extends Fragment {
 
     private ParallelLocation locationService = null;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        locationService = ParallelLocation.getInstance();
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,12 +43,18 @@ public class FragmentHubLocation extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
 
-        locationService = ParallelLocation.getInstance();
-
-        // Test Current Location Here
+    @Override
+    public void onResume() {
+        super.onResume();
         tvLatitude.setText(String.valueOf(locationService.getLatitude()));
         tvLongitude.setText(String.valueOf(locationService.getLongitude()));
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        locationService.disconnect();
     }
 }

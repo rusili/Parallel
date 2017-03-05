@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 
+// THIS FRAGMENT IS NOW USELESS
+
 public class FragmentHubLocation extends Fragment {
 
     private View mView;

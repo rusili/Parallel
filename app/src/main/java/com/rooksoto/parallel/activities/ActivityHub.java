@@ -32,11 +32,11 @@ public class ActivityHub extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hub);
+        setContentView(R.layout.activity_hub_viewpager);
         locationService = ParallelLocation.getInstance();
         initialize();
         setupViewpager();
-        loadFragmentHubLocation();
+//        loadFragmentHubLocation();
     }
 
     private void setupViewpager() {

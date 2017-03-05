@@ -12,7 +12,7 @@ import com.rooksoto.parallel.utility.CustomSoundEffects;
 import com.rooksoto.parallel.viewwidgets.hubviewpager.HubPagerAdapter;
 
 public class ActivityHub extends AppCompatActivity {
-    private int containerID = R.id.activity_hub_fragment_container;
+    private int containerID = R.id.viewpager;
     private CustomSoundEffects mCustomSoundEffects;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
 

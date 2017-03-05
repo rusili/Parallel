@@ -64,6 +64,7 @@ public class FragmentChat extends Fragment {
                 }
             }
         };
+        // FIXME need to use eventID/chatId for latter child method
         ref = FirebaseDatabase.getInstance().getReference().child("chatIds").child("001");
     }
 
@@ -81,11 +82,10 @@ public class FragmentChat extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // FIXME LILY: will need to expand and grab person name from FirebaseAuth and eventID/chatId for latter child method
         createFirebaseListAdapter(ref);
         messageListView.setAdapter(messageListAdapter);
         setupTextChangedListenerForMessage();
-
+        // FIXME: pass in the uri into the database
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +127,7 @@ public class FragmentChat extends Fragment {
             protected void populateView(View view, Chat chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);
                 picImageView = (ImageView) view.findViewById(R.id.picImageView);
+                // TODO: must get profilepic link from database
                 Picasso.with(getContext()).load(Uri.parse(chatMessage.getProfilePic())).error(R.drawable.bruttino_large).fit().into(picImageView);
                 ((TextView) view.findViewById(R.id.messageTextView)).setText(chatMessage.getText());
                 ((TextView) view.findViewById(R.id.nameTextView)).setText(chatMessage.getName());

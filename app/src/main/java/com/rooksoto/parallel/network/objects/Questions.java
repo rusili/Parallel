@@ -5,16 +5,14 @@ public class Questions {
     String leftAnswer;
     String rightAnswer;
 
-    public void setQuestion (String question) {
-        this.question = question;
+    public Questions(String questionParam){
+        this.question = questionParam;
     }
 
-    public void setLeftAnswer (String leftAnswer) {
-        this.leftAnswer = leftAnswer;
-    }
-
-    public void setRightAnswer (String rightAnswer) {
-        this.rightAnswer = rightAnswer;
+    public Questions(String questionParam, String leftAnswerParam, String rightAnswerParam){
+        this.question = questionParam;
+        this.leftAnswer = leftAnswerParam;
+        this.rightAnswer = rightAnswerParam;
     }
 
     public String getQuestion () {

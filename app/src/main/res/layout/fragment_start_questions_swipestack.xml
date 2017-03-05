@@ -2,102 +2,82 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_height="200dp"
+    xmlns:htext="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    card_view:cardBackgroundColor="#40000000"
+    card_view:cardBackgroundColor="#00FFFFFF"
     card_view:cardCornerRadius="0dp"
-    card_view:cardElevation="5dp"
+    card_view:cardElevation="0dp"
     >
 
-    <TextView
-        android:layout_width="128dp"
-        android:layout_height="8dp"
-        android:layout_gravity="bottom"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            >
 
-        android:background="@color/teal"
-        />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:src="@drawable/leftchevron"
+                android:layout_alignParentLeft="true"
+                />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:src="@drawable/rightchevron"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="48dp"
             >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+            <com.hanks.htextview.HTextView
+                android:id="@+id/fragment_start_questions_htextview_question"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="18sp"
-                android:textColor="@color/textMain"
-                android:text="Are you an IOS or Android developer?"
+                android:textColor="#F9f9f9"
+                android:textSize="24sp"
+                htext:animateType="scale"
+                android:layout_marginTop="64dp"
                 />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
                 >
 
-                <ImageView
-                    android:id="@+id/fragment_start_questions_swipestack_leftarrow"
-                    android:layout_width="36dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/blackleftarrow"
-                    android:layout_alignParentLeft="true"
-                    android:tint="#f9f9f9"
+                <com.hanks.htextview.HTextView
+                    android:id="@+id/fragment_start_questions_htextview_leftanswer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="#F9f9f9"
+                    android:textSize="36sp"
+                    htext:animateType="scale"
                     />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_toRightOf="@id/fragment_start_questions_swipestack_leftarrow"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:textSize="24sp"
-                        android:textColor="@color/textMain"
-                        android:text="IOS"
-                        />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/fragment_start_questions_swipestack_rightarrow"
-                    android:layout_width="36dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/blackrightarrow"
-                    android:layout_alignParentRight="true"
-                    android:tint="#f9f9f9"
+                <com.hanks.htextview.HTextView
+                    android:id="@+id/fragment_start_questions_htextview_rightanswer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="#F9f9f9"
+                    android:textSize="36sp"
+                    htext:animateType="scale"
                     />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_toLeftOf="@id/fragment_start_questions_swipestack_rightarrow"
-                    android:gravity="center_vertical"
-                    android:layout_marginRight="16dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:textSize="24sp"
-                        android:textColor="@color/textMain"
-                        android:text="Android"
-                        />
-                </LinearLayout>
+            </LinearLayout>
 
-            </RelativeLayout>
         </LinearLayout>
-    </FrameLayout>
+
 </android.support.v7.widget.CardView>

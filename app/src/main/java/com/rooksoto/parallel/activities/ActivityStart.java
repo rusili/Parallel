@@ -12,6 +12,7 @@ import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.fragments.activityStart.FragmentStartEnterID;
 import com.rooksoto.parallel.fragments.activityStart.FragmentStartQuestions;
 import com.rooksoto.parallel.fragments.activityStart.FragmentStartWelcome;
 import com.rooksoto.parallel.fragments.activityStart.FragmentStartEnterID;
@@ -19,9 +20,7 @@ import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
 
-import link.fls.swipestack.SwipeStack;
-
-public class ActivityStart extends AppCompatActivity implements SwipeStack.SwipeStackListener{
+public class ActivityStart extends AppCompatActivity {
     private int containerID = R.id.activity_start_fragment_container;
     private CustomSoundEffects mCustomSoundEffects;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
@@ -96,21 +95,6 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
     public void onClickToQuestions (View view) {
         mCustomSoundEffects.setDefaultClick();
         loadFragmentQuestions();
-    }
-
-    @Override
-    public void onViewSwipedToLeft (int position) {
-
-    }
-
-    @Override
-    public void onViewSwipedToRight (int position) {
-
-    }
-
-    @Override
-    public void onStackEmpty () {
-
     }
 
     public void onClicktoWelcome (View view) {

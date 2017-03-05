@@ -1,10 +1,7 @@
-package com.rooksoto.parallel.pojos;
+package com.rooksoto.parallel.network.objects;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-/**
- * Created by huilin on 3/2/17.
- */
 @IgnoreExtraProperties
 public class Chat {
     private String name;

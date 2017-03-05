@@ -30,7 +30,6 @@ public class ActivityHub extends AppCompatActivity {
         locationService.startGeofenceMonitoring(this);
         initialize();
         setupViewpager();
-//        loadFragmentHubLocation();
     }
 
     private void setupViewpager() {

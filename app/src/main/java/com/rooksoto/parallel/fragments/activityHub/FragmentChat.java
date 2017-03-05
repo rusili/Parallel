@@ -1,10 +1,13 @@
 package com.rooksoto.parallel.fragments.activityHub;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +19,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.pojos.Chat;
 import com.squareup.picasso.Picasso;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by huilin on 3/2/17.
@@ -34,6 +41,31 @@ public class FragmentChat extends Fragment {
     private ListView messageListView;
     private FirebaseListAdapter<Chat> messageListAdapter;
     private ImageView picImageView;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private String userName;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference ref;
+    private Uri profilePic;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    userName = user.getDisplayName();
+                    profilePic = user.getPhotoUrl();
+                } else {
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+        ref = FirebaseDatabase.getInstance().getReference().child("chatIds").child("001");
+    }
 
     @Nullable
     @Override
@@ -50,7 +82,6 @@ public class FragmentChat extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // FIXME LILY: will need to expand and grab person name from FirebaseAuth and eventID/chatId for latter child method
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("chatIds").child("001");
         createFirebaseListAdapter(ref);
         messageListView.setAdapter(messageListAdapter);
         setupTextChangedListenerForMessage();
@@ -58,7 +89,7 @@ public class FragmentChat extends Fragment {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ref.push().setValue(new Chat("Lily", messageEditText.getText().toString()));
+                ref.push().setValue(new Chat(userName, messageEditText.getText().toString(), Uri.encode(profilePic)));
                 messageEditText.setText("");
             }
         });
@@ -96,12 +127,26 @@ public class FragmentChat extends Fragment {
             protected void populateView(View view, Chat chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);
                 picImageView = (ImageView) view.findViewById(R.id.picImageView);
-                Picasso.with(getContext()).load(R.drawable.bruttino_large).fit().into(picImageView);
+                Picasso.with(getContext()).load(Uri.parse(chatMessage.getProfilePic())).error(R.drawable.bruttino_large).fit().into(picImageView);
                 ((TextView) view.findViewById(R.id.messageTextView)).setText(chatMessage.getText());
                 ((TextView) view.findViewById(R.id.nameTextView)).setText(chatMessage.getName());
 
             }
         };
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authStateListener != null) {
+            firebaseAuth.removeAuthStateListener(authStateListener);
+        }
     }
 
     @Override

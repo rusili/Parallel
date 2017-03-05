@@ -4,31 +4,39 @@ import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.fragments.activityHub.FragmentChat;
+import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
+import com.rooksoto.parallel.viewwidgets.hubviewpager.HubPagerAdapter;
 
 public class ActivityHub extends AppCompatActivity {
     private int containerID = R.id.activity_hub_fragment_container;
     private CustomSoundEffects mCustomSoundEffects;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
-
     private static final String TAG = "ActivityHub";
     ParallelLocation locationService = null;
+    private ViewPager viewPager;
+    private PagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
         initialize();
-        loadFragmentChat();
+//        loadFragmentChat();
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        pagerAdapter = new HubPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
     }
 
     @Override
@@ -87,5 +95,13 @@ public class ActivityHub extends AppCompatActivity {
     public void onBackPressed () {
         mCustomAlertDialog.exit(this);
         //super.onBackPressed();
+        if (viewPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+        }
     }
 }

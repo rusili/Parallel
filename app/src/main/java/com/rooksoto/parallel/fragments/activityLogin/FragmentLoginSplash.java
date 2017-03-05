@@ -23,7 +23,6 @@ public class FragmentLoginSplash extends Fragment {
     private ImageView parallelWordLeft;
     private ImageView parallelWordRight;
 
-
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

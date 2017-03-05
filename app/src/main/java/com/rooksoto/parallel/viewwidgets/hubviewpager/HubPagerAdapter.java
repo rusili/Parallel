@@ -15,12 +15,12 @@ import com.rooksoto.parallel.fragments.activityHub.FragmentEventInfo;
 public class HubPagerAdapter extends FragmentStatePagerAdapter {
     private static final int NUM_PAGES = 3;
 
-    public HubPagerAdapter(FragmentManager fm) {
+    public HubPagerAdapter (FragmentManager fm) {
         super(fm);
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public Fragment getItem (int position) {
         Fragment fragment = null;
         switch (position) {
             case 0:
@@ -37,7 +37,7 @@ public class HubPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getCount () {
         return NUM_PAGES;
     }
 }

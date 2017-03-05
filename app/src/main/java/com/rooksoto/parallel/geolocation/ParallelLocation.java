@@ -41,33 +41,33 @@ public class ParallelLocation {
     private static double eventLongitude = -73.9352932;
     private static float eventGeofenceRadius = 100;
 
-    public static ParallelLocation getInstance() {
+    public static ParallelLocation getInstance () {
         if (instance == null) {
             instance = new ParallelLocation();
         }
         return instance;
     }
 
-    private ParallelLocation() {
+    private ParallelLocation () {
         final Context context = AppContext.getAppContext();
         googleApiClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
-                    public void onConnected(@Nullable Bundle bundle) {
+                    public void onConnected (@Nullable Bundle bundle) {
                         Log.d(TAG, "Successfully Connected to GPS-L");
                         startLocationMonitoring();
                         startGeofenceMonitoring(context);
                     }
 
                     @Override
-                    public void onConnectionSuspended(int i) {
+                    public void onConnectionSuspended (int i) {
                         Log.d(TAG, "Connection to GPS-L Suspended");
                     }
                 })
                 .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                    public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {
                         Log.d(TAG, "Failed to Connect to GPS-L");
                     }
                 })
@@ -76,15 +76,15 @@ public class ParallelLocation {
     }
 
 
-    public void connect() {
+    public void connect () {
         googleApiClient.reconnect();
     }
 
-    public void disconnect() {
+    public void disconnect () {
         googleApiClient.disconnect();
     }
 
-    public void startLocationMonitoring() {
+    public void startLocationMonitoring () {
         Log.d(TAG, "startLocationMonitoring: Called Successfully");
         try {
             LocationRequest locationRequest = LocationRequest.create()
@@ -96,7 +96,7 @@ public class ParallelLocation {
                     locationRequest,
                     new LocationListener() {
                         @Override
-                        public void onLocationChanged(Location location) {
+                        public void onLocationChanged (Location location) {
                             Log.d(TAG, "onLocationChanged: Current Lat: " + location.getLatitude());
                             parallelLatitude = location.getLatitude();
                             Log.d(TAG, "onLocationChanged: Current Long: " + location.getLongitude());
@@ -108,7 +108,7 @@ public class ParallelLocation {
         }
     }
 
-    public void startGeofenceMonitoring(Context context) {
+    public void startGeofenceMonitoring (Context context) {
 
         Log.d(TAG, "startGeofenceMonitoring: Called");
 
@@ -136,9 +136,9 @@ public class ParallelLocation {
                 Log.d(TAG, "startGeofenceMonitoring: Not Connected!");
             } else {
                 LocationServices.GeofencingApi.addGeofences(googleApiClient, geofencingRequest, pendingIntent)
-                        .setResultCallback(new ResultCallback<Status>() {
+                        .setResultCallback(new ResultCallback <Status>() {
                             @Override
-                            public void onResult(@NonNull Status status) {
+                            public void onResult (@NonNull Status status) {
                                 if (status.isSuccess()) {
                                     Log.d(TAG, "onResult: Geofence added successfully!");
                                 } else {
@@ -147,23 +147,22 @@ public class ParallelLocation {
                             }
                         });
             }
-        }
-        catch (SecurityException e) {
+        } catch (SecurityException e) {
             Log.d(TAG, "startGeofenceMonitoring: SecurityException " + e.getMessage());
         }
     }
 
-    public void stopGeofenceMonitoring() {
+    public void stopGeofenceMonitoring () {
         Log.d(TAG, "stopGeofenceMonitoring: Called");
-        ArrayList<String> geofenceIds = new ArrayList<>();
+        ArrayList <String> geofenceIds = new ArrayList <>();
         geofenceIds.add(GOFENCE_ID);
     }
 
-    public double getLatitude() {
+    public double getLatitude () {
         return parallelLatitude;
     }
 
-    public double getLongitude() {
+    public double getLongitude () {
         return parallelLongitude;
     }
 }

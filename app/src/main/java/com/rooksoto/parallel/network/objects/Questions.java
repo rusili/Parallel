@@ -2,28 +2,28 @@ package com.rooksoto.parallel.network.objects;
 
 public class Questions {
     String question;
-    String leftAnswer = "No";
-    String rightAnswer = "Yes";
+    int leftResID = 0;
+    int rightResID = 0;
 
-    public Questions(String questionParam){
+    public Questions (String questionParam) {
         this.question = questionParam;
     }
 
-    public Questions(String questionParam, String leftAnswerParam, String rightAnswerParam){
+    public Questions (String questionParam, int leftResIDParam, int rightResIDParam) {
         this.question = questionParam;
-        this.leftAnswer = leftAnswerParam;
-        this.rightAnswer = rightAnswerParam;
+        this.leftResID = leftResIDParam;
+        this.rightResID = rightResIDParam;
     }
 
     public String getQuestion () {
         return question;
     }
 
-    public String getLeftAnswer () {
-        return leftAnswer;
+    public int getLeftResID () {
+        return leftResID;
     }
 
-    public String getRightAnswer () {
-        return rightAnswer;
+    public int getRightResID () {
+        return rightResID;
     }
 }

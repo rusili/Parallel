@@ -19,7 +19,7 @@ import java.util.List;
 
 import link.fls.swipestack.SwipeStack;
 
-public class FragmentStartQuestions extends Fragment implements SwipeStack.SwipeStackListener{
+public class FragmentStartQuestions extends Fragment implements SwipeStack.SwipeStackListener {
     private View mView;
     private SwipeStack mSwipeStack;
     private List <Questions> listofQuestions;
@@ -38,8 +38,7 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
 
     private void setSwipeStack () {
         listofQuestions = new ArrayList <>();
-        listofQuestions.add(new Questions("Are you an IOS developer?"));
-        listofQuestions.add(new Questions("Are you an Android developer?"));
+        listofQuestions.add(new Questions("Are you an IOS or Android developer?", R.drawable.ic_appleicon, R.drawable.ic_androidicon));
         listofQuestions.add(new Questions("Are you affiliated with C4Q?"));
         listofQuestions.add(new Questions("Do you have more than 3 years of programming experience?"));
         listofQuestions.add(new Questions("Are dogs better than cats?"));
@@ -51,24 +50,25 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
 
     @Override
     public void onViewSwipedToLeft (int position) {
-        if (position==listofQuestions.size()-1){
+        if (position == listofQuestions.size() - 1) {
             toActivityHub();
         }
     }
 
     @Override
     public void onViewSwipedToRight (int position) {
-        if (position==listofQuestions.size()-1){
+        if (position == listofQuestions.size() - 1) {
             toActivityHub();
         }
     }
 
     @Override
-    public void onStackEmpty () {}
+    public void onStackEmpty () {
+    }
 
     private void toActivityHub () {
         new Handler().postDelayed(new Runnable() {
-            public void run() {
+            public void run () {
                 Intent intentToActivityHub = new Intent(mView.getContext(), ActivityHub.class);
                 startActivity(intentToActivityHub);
             }

@@ -45,7 +45,7 @@ public class FragmentChat extends Fragment {
     private String userName;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference ref;
-    private Uri profilePic;
+    private String profilePic;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class FragmentChat extends Fragment {
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     userName = user.getDisplayName();
-                    profilePic = user.getPhotoUrl();
+                    profilePic = user.getPhotoUrl().toString();
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -89,7 +89,7 @@ public class FragmentChat extends Fragment {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ref.push().setValue(new Chat(userName, messageEditText.getText().toString(), Uri.encode(profilePic)));
+                ref.push().setValue(new Chat(userName, messageEditText.getText().toString(), profilePic));
                 messageEditText.setText("");
             }
         });
@@ -128,7 +128,11 @@ public class FragmentChat extends Fragment {
                 progressBar.setVisibility(View.INVISIBLE);
                 picImageView = (ImageView) view.findViewById(R.id.picImageView);
                 // TODO: must get profilepic link from database
-                Picasso.with(getContext()).load(Uri.parse(chatMessage.getProfilePic())).error(R.drawable.bruttino_large).fit().into(picImageView);
+                if (chatMessage.getProfilePic() == null) {
+                    Picasso.with(getContext()).load(R.drawable.bruttino_large).fit().into(picImageView);
+                } else {
+                    Picasso.with(getContext()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageView);
+                }
                 ((TextView) view.findViewById(R.id.messageTextView)).setText(chatMessage.getText());
                 ((TextView) view.findViewById(R.id.nameTextView)).setText(chatMessage.getName());
 

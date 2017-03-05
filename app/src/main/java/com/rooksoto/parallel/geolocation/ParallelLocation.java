@@ -106,8 +106,6 @@ public class ParallelLocation {
         } catch (SecurityException e) {
             Log.d(TAG, "Security Exception: " + e.getMessage());
         }
-
-
     }
 
     public void startGeofenceMonitoring(Context context) {

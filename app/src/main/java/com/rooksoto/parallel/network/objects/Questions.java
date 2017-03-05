@@ -2,8 +2,8 @@ package com.rooksoto.parallel.network.objects;
 
 public class Questions {
     String question;
-    String leftAnswer;
-    String rightAnswer;
+    String leftAnswer = "No";
+    String rightAnswer = "Yes";
 
     public Questions(String questionParam){
         this.question = questionParam;

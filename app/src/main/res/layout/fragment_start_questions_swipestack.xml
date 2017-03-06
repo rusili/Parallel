@@ -61,13 +61,14 @@
 
             <com.hanks.htextview.HTextView
                 android:id="@+id/fragment_start_questions_htextview_question"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="#F9f9f9"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 htext:animateType="scale"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="96dp"
+                android:maxLines="3"
                 />
 
             <LinearLayout

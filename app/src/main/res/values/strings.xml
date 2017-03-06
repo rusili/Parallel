@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Parallel</string>
-
+    <string name="request_permission">Request permission</string>
+    <string name="camera_error">Camera error</string>
 </resources>

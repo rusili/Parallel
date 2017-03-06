@@ -9,10 +9,10 @@ import com.rooksoto.parallel.fragments.activityHub.FragmentChat;
 import com.rooksoto.parallel.fragments.activityHub.FragmentEventInfo;
 import com.rooksoto.parallel.utility.camera2.Camera2BasicFragment;
 
-public class HubPagerAdapter extends FragmentStatePagerAdapter {
+public class HubPagerAdapter2 extends FragmentStatePagerAdapter {
     private static final int NUM_PAGES = 4;
 
-    public HubPagerAdapter (FragmentManager fm) {
+    public HubPagerAdapter2 (FragmentManager fm) {
         super(fm);
     }
 

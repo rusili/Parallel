@@ -5,11 +5,19 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.eftimoff.viewpagertransformers.TabletTransformer;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
+import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.fragments.activityHub.FragmentAttendees;
+import com.rooksoto.parallel.fragments.activityHub.FragmentChat;
+import com.rooksoto.parallel.fragments.activityHub.FragmentEventInfo;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
-import com.rooksoto.parallel.viewwidgets.hubviewpager.HubPagerAdapter;
+import com.rooksoto.parallel.utility.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity {
     private int containerID = R.id.viewpager;
@@ -34,8 +42,18 @@ public class ActivityHub extends AppCompatActivity {
 
     private void setupViewpager () {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        pagerAdapter = new HubPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
+        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
+
+        FragmentPagerItems pages = new FragmentPagerItems(this);
+        pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
+        pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
+        pages.add(FragmentPagerItem.of("Camera", Camera2BasicFragment.class));
+        pages.add(FragmentPagerItem.of("Event Info", FragmentEventInfo.class));
+
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), pages);
+        viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new TabletTransformer());
+        viewPagerTab.setViewPager(viewPager);
     }
 
     @Override

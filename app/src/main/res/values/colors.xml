@@ -9,9 +9,8 @@
     <color name="teal">#6bdecd</color>
 
     <color name="textMain">#f9f9f9</color>
-    <color name="textAlt">#80dbdbdb</color>
+    <color name="textAlt">#dbdbdb</color>
     <color name="gray10">#e6e6e6</color>
     <color name="gray30">#b3b3b3</color>
-
 
 </resources>

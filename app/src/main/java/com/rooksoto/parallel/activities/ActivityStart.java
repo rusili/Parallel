@@ -18,6 +18,7 @@ import com.rooksoto.parallel.fragments.activityStart.FragmentStartWelcome;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
+import com.rooksoto.parallel.utility.camera2.Camera2BasicFragment;
 
 import link.fls.swipestack.SwipeStack;
 
@@ -38,6 +39,12 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
         locationService.startGeofenceMonitoring(this); // Hardcoded Geofence (Currently: C4Q HQ @ 100m)
         initialize();
         loadFragmentEnterID();
+    }
+
+    private void loadtestCamera () {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.activity_start_fragment_container, Camera2BasicFragment.newInstance())
+                    .commit();
     }
 
     private void checkForGoogleApiAvail () {

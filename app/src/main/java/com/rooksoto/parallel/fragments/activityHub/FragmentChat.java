@@ -1,10 +1,10 @@
 package com.rooksoto.parallel.fragments.activityHub;
 
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.network.objects.Chat;
 import com.squareup.picasso.Picasso;
@@ -82,6 +83,7 @@ public class FragmentChat extends Fragment {
     @Override
     public void onViewCreated (View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        int position = FragmentPagerItem.getPosition(getArguments());
         createFirebaseListAdapter(ref);
         messageListView.setAdapter(messageListAdapter);
         setupTextChangedListenerForMessage();
@@ -122,7 +124,7 @@ public class FragmentChat extends Fragment {
 
 
     private void createFirebaseListAdapter (final DatabaseReference ref) {
-        messageListAdapter = new FirebaseListAdapter <Chat>(getActivity(), Chat.class, R.layout.item_message, ref) {
+        messageListAdapter = new FirebaseListAdapter <Chat>(getActivity(), Chat.class, R.layout.chat_message, ref) {
             @Override
             protected void populateView (View view, Chat chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activities.ActivityHub;
 import com.rooksoto.parallel.network.objects.Questions;
+import com.rooksoto.parallel.viewwidgets.swipestack.FixedSwipeStack;
 import com.rooksoto.parallel.viewwidgets.swipestack.SwipeStackAdapter;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import link.fls.swipestack.SwipeStack;
 
 public class FragmentStartQuestions extends Fragment implements SwipeStack.SwipeStackListener {
     private View mView;
-    private SwipeStack mSwipeStack;
+    private FixedSwipeStack mSwipeStack;
     private List <Questions> listofQuestions;
 
     @Nullable
@@ -43,7 +44,7 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
         listofQuestions.add(new Questions("Do you have more than 3 years of programming experience?"));
         listofQuestions.add(new Questions("Are dogs better than cats?"));
 
-        mSwipeStack = (SwipeStack) mView.findViewById(R.id.fragment_start_questions_swipestack_holder);
+        mSwipeStack = (FixedSwipeStack) mView.findViewById(R.id.fragment_start_questions_swipestack_holder);
         mSwipeStack.setAdapter(new SwipeStackAdapter(listofQuestions));
         mSwipeStack.setListener(this);
     }
@@ -52,6 +53,8 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
     public void onViewSwipedToLeft (int position) {
         if (position == listofQuestions.size() - 1) {
             toActivityHub();
+        } else {
+            // put question & left answer into user profile
         }
     }
 
@@ -59,12 +62,13 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
     public void onViewSwipedToRight (int position) {
         if (position == listofQuestions.size() - 1) {
             toActivityHub();
+        } else {
+            // put question & answer answer into user profile
         }
     }
 
     @Override
-    public void onStackEmpty () {
-    }
+    public void onStackEmpty () {}
 
     private void toActivityHub () {
         new Handler().postDelayed(new Runnable() {
@@ -72,7 +76,7 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
                 Intent intentToActivityHub = new Intent(mView.getContext(), ActivityHub.class);
                 startActivity(intentToActivityHub);
             }
-        }, 1000);
+        }, 500);
 
     }
 }

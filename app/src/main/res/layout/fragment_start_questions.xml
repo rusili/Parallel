@@ -8,7 +8,7 @@
     android:clipChildren="false"
     tools:context="com.rooksoto.parallel.activities.ActivityStart">
 
-        <link.fls.swipestack.SwipeStack
+        <com.rooksoto.parallel.viewwidgets.swipestack.FixedSwipeStack
             android:id="@+id/fragment_start_questions_swipestack_holder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -17,4 +17,5 @@
             app:swipe_rotation="0"
             app:animation_duration="200"
             app:stack_size="1"/>
+
 </FrameLayout>

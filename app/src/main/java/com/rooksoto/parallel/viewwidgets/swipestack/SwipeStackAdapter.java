@@ -50,7 +50,7 @@ public class SwipeStackAdapter extends BaseAdapter {
             ImageView imageViewLeft = (ImageView) mView.findViewById(R.id.fragment_start_questions_swipestack_leftanswer);
             ImageView imageViewRight = (ImageView) mView.findViewById(R.id.fragment_start_questions_swipestack_rightanswer);
             imageViewLeft.setImageResource(question.getLeftResID());
-            imageViewLeft.setImageResource(question.getRightResID());
+            imageViewRight.setImageResource(question.getRightResID());
         }
 
     }

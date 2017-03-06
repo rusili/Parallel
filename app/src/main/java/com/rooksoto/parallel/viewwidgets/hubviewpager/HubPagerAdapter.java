@@ -7,7 +7,7 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 import com.rooksoto.parallel.fragments.activityHub.FragmentAttendees;
 import com.rooksoto.parallel.fragments.activityHub.FragmentChat;
 import com.rooksoto.parallel.fragments.activityHub.FragmentEventInfo;
-import com.rooksoto.parallel.utility.camera2.Camera2BasicFragment;
+import com.rooksoto.parallel.viewwidgets.camera2.Camera2BasicFragment;
 
 public class HubPagerAdapter extends FragmentStatePagerAdapter {
     private static final int NUM_PAGES = 4;

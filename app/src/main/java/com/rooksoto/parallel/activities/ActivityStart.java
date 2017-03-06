@@ -18,7 +18,7 @@ import com.rooksoto.parallel.fragments.activityStart.FragmentStartWelcome;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
-import com.rooksoto.parallel.utility.camera2.Camera2BasicFragment;
+import com.rooksoto.parallel.viewwidgets.camera2.Camera2BasicFragment;
 
 import link.fls.swipestack.SwipeStack;
 

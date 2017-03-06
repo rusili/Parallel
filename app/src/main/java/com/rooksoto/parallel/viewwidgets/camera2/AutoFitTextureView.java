@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.rooksoto.parallel.utility.camera2;
+package com.rooksoto.parallel.viewwidgets.camera2;
 
 import android.content.Context;
 import android.util.AttributeSet;

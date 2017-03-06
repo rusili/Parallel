@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.rooksoto.parallel.utility.camera2;
+package com.rooksoto.parallel.viewwidgets.camera2;
 
 import android.Manifest;
 import android.app.Activity;
@@ -427,6 +427,7 @@ public class Camera2BasicFragment extends Fragment
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
+
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.fragment_hub_camera_textureview);
     }
 

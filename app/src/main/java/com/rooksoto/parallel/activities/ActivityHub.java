@@ -1,7 +1,6 @@
 package com.rooksoto.parallel.activities;
 
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,7 +16,7 @@ import com.rooksoto.parallel.fragments.activityHub.FragmentEventInfo;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
-import com.rooksoto.parallel.utility.camera2.Camera2BasicFragment;
+import com.rooksoto.parallel.viewwidgets.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity {
     private int containerID = R.id.viewpager;
@@ -27,12 +26,11 @@ public class ActivityHub extends AppCompatActivity {
     private static final String TAG = "ActivityHub";
     ParallelLocation locationService = null;
     private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hub_viewpager);
+        setContentView(R.layout.activity_hub);
         locationService = ParallelLocation.getInstance();
         locationService.connect();
         locationService.startGeofenceMonitoring(this);
@@ -45,10 +43,10 @@ public class ActivityHub extends AppCompatActivity {
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
 
         FragmentPagerItems pages = new FragmentPagerItems(this);
-        pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
-        pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
-        pages.add(FragmentPagerItem.of("Camera", Camera2BasicFragment.class));
         pages.add(FragmentPagerItem.of("Event Info", FragmentEventInfo.class));
+        pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
+        pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
+        pages.add(FragmentPagerItem.of("Camera", Camera2BasicFragment.class));
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), pages);
         viewPager.setAdapter(adapter);

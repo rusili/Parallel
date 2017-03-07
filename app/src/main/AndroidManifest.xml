@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         >
-        <activity android:name=".activities.ActivityLogin"
+        <activity android:name=".view.activityLogin.ActivityLogin"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
             <intent-filter>
@@ -32,12 +32,12 @@
 
         </activity>
 
-        <activity android:name=".activities.ActivityStart"
+        <activity android:name=".view.activityStart.ActivityStart"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityStart">
 
         </activity>
-        <activity android:name=".activities.ActivityHub"
+        <activity android:name=".view.activityHub.ActivityHub"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityStart">
 

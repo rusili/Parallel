@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.fragments.activityLogin;
+package com.rooksoto.parallel.view.activityLogin;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;

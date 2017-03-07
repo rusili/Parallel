@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.fragments.activityLogin;
+package com.rooksoto.parallel.view.activityLogin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.rooksoto.parallel.BuildConfig;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activities.ActivityStart;
+import com.rooksoto.parallel.view.activityStart.ActivityStart;
 
 public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
     private static final String CLIENTID = BuildConfig.OAUTHCLIENTID;

@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activities;
+package com.rooksoto.parallel.view.activityLogin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.fragments.activityLogin.FragmentLoginCreateAccount;
-import com.rooksoto.parallel.fragments.activityLogin.FragmentLoginLogin;
-import com.rooksoto.parallel.fragments.activityLogin.FragmentLoginSplash;
-import com.rooksoto.parallel.fragments.activityLogin.FragmentLoginWait;
+import com.rooksoto.parallel.view.activityHub.ActivityHub;
+import com.rooksoto.parallel.view.activityStart.ActivityStart;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
 import com.rooksoto.parallel.utility.CustomToast;

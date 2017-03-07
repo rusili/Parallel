@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.fragments.activityStart;
+package com.rooksoto.parallel.view.activityStart;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;

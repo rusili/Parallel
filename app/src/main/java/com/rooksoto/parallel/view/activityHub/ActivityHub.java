@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activities;
+package com.rooksoto.parallel.view.activityHub;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -10,9 +10,6 @@ import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.fragments.activityHub.FragmentAttendees;
-import com.rooksoto.parallel.fragments.activityHub.FragmentChat;
-import com.rooksoto.parallel.fragments.activityHub.FragmentEventInfo;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;

@@ -1,4 +1,5 @@
-package com.rooksoto.parallel.fragments.activityHub;
+package com.rooksoto.parallel.view.activityLogin;
+
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,13 +10,13 @@ import android.view.ViewGroup;
 
 import com.rooksoto.parallel.R;
 
-public class FragmentHubHub extends Fragment {
+public class FragmentLoginWait extends Fragment {
     private View mView;
 
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_hub_hub, container, false);
+        mView = inflater.inflate(R.layout.fragment_login_wait, container, false);
         return mView;
     }
 }

@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activities;
+package com.rooksoto.parallel.view.activityStart;
 
 import android.Manifest;
 import android.content.Intent;
@@ -12,9 +12,7 @@ import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.fragments.activityStart.FragmentStartEnterID;
-import com.rooksoto.parallel.fragments.activityStart.FragmentStartQuestions;
-import com.rooksoto.parallel.fragments.activityStart.FragmentStartWelcome;
+import com.rooksoto.parallel.view.activityHub.ActivityHub;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;

@@ -4,9 +4,9 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
-import com.rooksoto.parallel.view.activityHub.FragmentAttendees;
-import com.rooksoto.parallel.view.activityHub.FragmentChat;
-import com.rooksoto.parallel.view.activityHub.FragmentEventInfo;
+import com.rooksoto.parallel.userHub.FragmentAttendees;
+import com.rooksoto.parallel.userHub.FragmentChat;
+import com.rooksoto.parallel.userHub.FragmentEventInfo;
 import com.rooksoto.parallel.viewwidgets.camera2.Camera2BasicFragment;
 
 public class HubPagerAdapter extends FragmentStatePagerAdapter {

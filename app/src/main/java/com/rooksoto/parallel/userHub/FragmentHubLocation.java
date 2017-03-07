@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.view.activityHub;
+package com.rooksoto.parallel.userHub;
 
 /**
  * Created by rook on 3/2/17.

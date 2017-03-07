@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.view.activityHub;
+package com.rooksoto.parallel.userHub;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -10,7 +10,6 @@ import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;
 import com.rooksoto.parallel.viewwidgets.camera2.Camera2BasicFragment;
@@ -21,21 +20,19 @@ public class ActivityHub extends AppCompatActivity {
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
 
     private static final String TAG = "ActivityHub";
-    ParallelLocation locationService = null;
     private ViewPager viewPager;
+    private UserHubPresenter userHubPresenter;
 
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
-        locationService = ParallelLocation.getInstance();
-        locationService.connect();
-        locationService.startGeofenceMonitoring(this);
-        initialize();
+        userHubPresenter = new UserHubPresenter();
+        userHubPresenter.start();
         setupViewpager();
     }
 
-    private void setupViewpager () {
+    private void setupViewpager() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
 
@@ -52,16 +49,13 @@ public class ActivityHub extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart () {
+    protected void onStart() {
         super.onStart();
     }
 
-    private void initialize () {
-        mCustomSoundEffects = new CustomSoundEffects(getWindow().getDecorView().getRootView());
-    }
 
     @Override
-    public void onBackPressed () {
+    public void onBackPressed() {
         mCustomAlertDialog.exit(this);
         if (viewPager.getCurrentItem() == 0) {
             super.onBackPressed();
@@ -71,8 +65,8 @@ public class ActivityHub extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop () {
-        locationService.disconnect();
+    protected void onStop() {
+        userHubPresenter.stopLocationServices();
         super.onStop();
     }
 }

@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.view.activityHub;
+package com.rooksoto.parallel.userHub;
 
 import android.app.Fragment;
 import android.net.Uri;
@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.network.objects.Chat;
+import com.rooksoto.parallel.utility.AppContext;
 import com.squareup.picasso.Picasso;
 
 import static android.content.ContentValues.TAG;
@@ -131,9 +132,9 @@ public class FragmentChat extends Fragment {
                 picImageView = (ImageView) view.findViewById(R.id.picImageView);
                 // TODO: must get profilepic link from database
                 if (chatMessage.getProfilePic() == null) {
-                    Picasso.with(getContext()).load(R.drawable.bruttino_large).fit().into(picImageView);
+                    Picasso.with(AppContext.getAppContext()).load(R.drawable.bruttino_large).fit().into(picImageView);
                 } else {
-                    Picasso.with(getContext()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageView);
+                    Picasso.with(AppContext.getAppContext()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageView);
                 }
                 ((TextView) view.findViewById(R.id.messageTextView)).setText(chatMessage.getText());
                 ((TextView) view.findViewById(R.id.nameTextView)).setText(chatMessage.getName());

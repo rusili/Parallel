@@ -10,7 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.view.activityHub.ActivityHub;
+import com.rooksoto.parallel.userHub.ActivityHub;
 import com.rooksoto.parallel.view.activityStart.ActivityStart;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;

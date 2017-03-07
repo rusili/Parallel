@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.view.activityHub.ActivityHub;
+import com.rooksoto.parallel.userHub.ActivityHub;
 import com.rooksoto.parallel.network.objects.Questions;
 import com.rooksoto.parallel.viewwidgets.swipestack.FixedSwipeStack;
 import com.rooksoto.parallel.viewwidgets.swipestack.SwipeStackAdapter;

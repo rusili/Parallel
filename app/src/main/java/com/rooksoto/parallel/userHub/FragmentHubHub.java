@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.view.activityHub;
+package com.rooksoto.parallel.userHub;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -12,7 +12,7 @@ import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.view.activityHub.ActivityHub;
+import com.rooksoto.parallel.userHub.ActivityHub;
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomSoundEffects;

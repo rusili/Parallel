@@ -1,8 +1,5 @@
 package com.rooksoto.parallel.view.activityStart;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -44,11 +41,18 @@ public class FragmentStartEnterID extends Fragment implements FragmentStartEnter
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     public void setPresenter(FragmentStartEnterIDContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
     private void initialize () {
+        presenter = new FragmentStartEnterIDPresenter();
+        setPresenter(presenter);
         textViewEventID = (TextView) mView.findViewById(R.id.fragment_start_enterid_eventid);
     }
 

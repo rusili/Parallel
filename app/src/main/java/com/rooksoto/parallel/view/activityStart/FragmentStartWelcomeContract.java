@@ -7,7 +7,7 @@ import com.rooksoto.parallel.BaseView;
  * Created by rook on 3/6/17.
  */
 
-public interface FragmentStartWelcomeContract {
+interface FragmentStartWelcomeContract {
 
     interface View extends BaseView<Presenter> {
 

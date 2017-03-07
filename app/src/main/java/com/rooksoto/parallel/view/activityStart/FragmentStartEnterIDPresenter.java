@@ -11,7 +11,11 @@ import com.rooksoto.parallel.utility.AppContext;
  * Created by rook on 3/6/17.
  */
 
-public class FragmentStartEnterIDPresenter implements FragmentStartEnterIDContract.Presenter{
+class FragmentStartEnterIDPresenter implements FragmentStartEnterIDContract.Presenter{
+
+    FragmentStartEnterIDPresenter() {
+    }
+
     @Override
     public void start() {
 

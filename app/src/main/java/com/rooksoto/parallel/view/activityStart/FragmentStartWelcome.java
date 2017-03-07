@@ -1,6 +1,5 @@
 package com.rooksoto.parallel.view.activityStart;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -36,11 +35,18 @@ public class FragmentStartWelcome extends Fragment implements FragmentStartWelco
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     public void setPresenter(FragmentStartWelcomeContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
     private void initialize () {
+        presenter = new FragmentStartWelcomePresenter(mView);
+        setPresenter(presenter);
         start();
     }
 

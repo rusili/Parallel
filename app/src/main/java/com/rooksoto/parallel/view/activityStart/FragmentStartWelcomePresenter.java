@@ -10,9 +10,13 @@ import com.rooksoto.parallel.R;
  * Created by rook on 3/6/17.
  */
 
-public class FragmentStartWelcomePresenter implements FragmentStartWelcomeContract.Presenter {
+class FragmentStartWelcomePresenter implements FragmentStartWelcomeContract.Presenter {
 
     View view;
+
+    FragmentStartWelcomePresenter(View view) {
+        this.view = view;
+    }
 
     @Override
     public void start() {

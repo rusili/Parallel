@@ -8,21 +8,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.viewwidgets.swipestack.FixedSwipeStack;
+import com.rooksoto.parallel.viewwidgets.swipestack.SwipeStackAdapter;
 
 import link.fls.swipestack.SwipeStack;
 
 public class FragmentStartQuestions extends Fragment implements SwipeStack.SwipeStackListener, FragmentStartQuestionsContract.View {
 
-    View mView;
-
+    private View view;
+    private FixedSwipeStack swipeStack;
     private FragmentStartQuestionsContract.Presenter presenter;
 
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_start_questions, container, false);
+        view = inflater.inflate(R.layout.fragment_start_questions, container, false);
         initialize();
-        return mView;
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -31,11 +38,15 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
     }
 
     private void initialize () {
+        presenter = new FragmentStartQuestionsPresenter(view);
+        setPresenter(presenter);
         setSwipeStack();
     }
 
     private void setSwipeStack () {
-        presenter.setSwipeStack(this);
+        presenter.getQuestions();
+        swipeStack = (FixedSwipeStack) view.findViewById(R.id.fragment_start_questions_swipestack_holder);
+        swipeStack.setAdapter(new SwipeStackAdapter(presenter.getQuestions()));
     }
 
     @Override

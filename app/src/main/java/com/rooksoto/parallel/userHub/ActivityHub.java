@@ -11,15 +11,11 @@ import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
-import com.rooksoto.parallel.utility.CustomSoundEffects;
 import com.rooksoto.parallel.viewwidgets.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity {
-    private int containerID = R.id.viewpager;
-    private CustomSoundEffects mCustomSoundEffects;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
 
-    private static final String TAG = "ActivityHub";
     private ViewPager viewPager;
     private UserHubPresenter userHubPresenter;
 

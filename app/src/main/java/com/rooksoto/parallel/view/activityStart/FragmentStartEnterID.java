@@ -15,10 +15,11 @@ import android.widget.Toast;
 
 import com.rooksoto.parallel.R;
 
-public class FragmentStartEnterID extends Fragment {
+public class FragmentStartEnterID extends Fragment implements FragmentStartEnterIDContract.View {
     private View mView;
     private TextView textViewEventID;
     private Button button;
+    private FragmentStartEnterIDContract.Presenter presenter;
 
     @Nullable
     @Override
@@ -42,19 +43,16 @@ public class FragmentStartEnterID extends Fragment {
         return mView;
     }
 
+    @Override
+    public void setPresenter(FragmentStartEnterIDContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
     private void initialize () {
         textViewEventID = (TextView) mView.findViewById(R.id.fragment_start_enterid_eventid);
     }
 
     public boolean isOnline() {
-        ConnectivityManager connManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
-
-        if(networkInfo != null && networkInfo.isConnectedOrConnecting()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return presenter.isOnline();
     }
 }

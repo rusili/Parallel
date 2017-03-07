@@ -16,13 +16,16 @@ import com.hanks.htextview.HTextView;
 import com.hanks.htextview.HTextViewType;
 import com.rooksoto.parallel.R;
 
-public class FragmentStartWelcome extends Fragment {
+public class FragmentStartWelcome extends Fragment implements FragmentStartWelcomeContract.View{
+
     private View mView;
     private String[] welcomeText = new String[] {"Welcome", "to", "C4Q's", "3.3 Demo Day", "Enjoy"};
     private int counter = 0;
 
     private boolean started = false;
     private Handler handler = new Handler();
+
+    private FragmentStartWelcomeContract.Presenter presenter;
 
     @Nullable
     @Override
@@ -32,21 +35,20 @@ public class FragmentStartWelcome extends Fragment {
         return mView;
     }
 
+    @Override
+    public void setPresenter(FragmentStartWelcomeContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
     private void initialize () {
         start();
     }
 
     private void playWelcomeVoice () {
-        MediaPlayer mediaPlayer = MediaPlayer.create(mView.getContext(), R.raw.welcome);
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion (MediaPlayer mediaPlayer) {
-                mediaPlayer.stop();
-            }
-        });
-        mediaPlayer.start();
+        presenter.playWelcomeVoice();
     }
 
+    // This method is related to view. Keeping in fragment.
     private Runnable runnableHTextView = new Runnable() {
         @Override
         public void run () {
@@ -72,6 +74,7 @@ public class FragmentStartWelcome extends Fragment {
         }
     };
 
+    // This method is related to view. Keeping in fragment.
     private void runHostAnimation () {
         TextView textViewHostedBy = (TextView) mView.findViewById(R.id.fragment_start_welcome_hostedby);
         final TextView textViewHost = (TextView) mView.findViewById(R.id.fragment_start_welcome_host);

@@ -25,6 +25,7 @@
         <activity android:name=".view.activityLogin.ActivityLogin"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,12 +35,14 @@
 
         <activity android:name=".view.activityStart.ActivityStart"
                   android:screenOrientation="portrait"
-                  android:theme="@style/ActivityStart">
+                  android:theme="@style/ActivityLogin">
 
         </activity>
         <activity android:name=".view.activityHub.ActivityHub"
                   android:screenOrientation="portrait"
-                  android:theme="@style/ActivityStart">
+                  android:theme="@style/ActivityHub"
+                  android:windowSoftInputMode="adjustPan"
+            >
 
         </activity>
         <service

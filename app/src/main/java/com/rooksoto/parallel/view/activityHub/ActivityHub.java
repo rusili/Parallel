@@ -1,8 +1,14 @@
 package com.rooksoto.parallel.view.activityHub;
 
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.eftimoff.viewpagertransformers.TabletTransformer;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -44,6 +50,34 @@ public class ActivityHub extends AppCompatActivity {
         pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
         pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
         pages.add(FragmentPagerItem.of("Camera", Camera2BasicFragment.class));
+
+        final LayoutInflater inflater = LayoutInflater.from(this);
+        final Resources res = getResources();
+
+        viewPagerTab.setCustomTabView(new SmartTabLayout.TabProvider() {
+            @Override
+            public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
+                ImageView icon = (ImageView) inflater.inflate(R.layout.custom_tab_icon, container,
+                        false);
+                switch (position) {
+                    case 0:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_today));
+                        break;
+                    case 1:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
+                        break;
+                    case 2:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_people_outline));
+                        break;
+                    case 3:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_panorama_wide_angle));
+                        break;
+                    default:
+                        throw new IllegalStateException("Invalid position: " + position);
+                }
+                return icon;
+            }
+        });
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), pages);
         viewPager.setAdapter(adapter);

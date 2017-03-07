@@ -1,10 +1,11 @@
 package com.rooksoto.parallel.view.activityLogin;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.rooksoto.parallel.BuildConfig;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.view.activityStart.ActivityStart;
 
 public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
     private static final String CLIENTID = BuildConfig.OAUTHCLIENTID;
@@ -56,6 +56,12 @@ public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnCo
             }
         });
         initialize();
+
+        firebase();
+        if (isNew == true) {
+            checkGoogleSignIn();
+        }
+
         return mView;
     }
 
@@ -71,10 +77,6 @@ public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnCo
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebase();
-        if (isNew == true) {
-            checkGoogleSignIn();
-        }
     }
 
     private void firebase () {
@@ -86,8 +88,8 @@ public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnCo
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    Intent intent = new Intent(getActivity(), ActivityStart.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(getActivity(), ActivityStart.class);
+                    //startActivity(intent);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -101,8 +103,8 @@ public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnCo
                 .requestIdToken(CLIENTID)
                 .requestEmail()
                 .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
-                .enableAutoManage(getActivity(), this /* OnConnectionFailedListener */)
+        mGoogleApiClient = new GoogleApiClient.Builder(mView.getContext())
+                .enableAutoManage((FragmentActivity) getActivity(), this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
     }

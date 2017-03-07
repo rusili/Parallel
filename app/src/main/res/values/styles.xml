@@ -17,8 +17,8 @@
         <item name="android:textAppearance">@style/CustomTextAppearance</item>
     </style>
 
-    <style name="ActivityStart" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:windowTranslucentStatus">false</item>
+    <style name="ActivityHub" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

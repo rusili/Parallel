@@ -13,4 +13,7 @@
     <color name="gray10">#e6e6e6</color>
     <color name="gray30">#b3b3b3</color>
 
+    <color name="icon_enabled">#FF6bdecd</color>
+    <color name="icon_disabled">#FFf9f9f9</color>
+
 </resources>

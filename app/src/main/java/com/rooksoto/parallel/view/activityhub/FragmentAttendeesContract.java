@@ -10,8 +10,13 @@ import com.rooksoto.parallel.BaseView;
 public interface FragmentAttendeesContract {
 
     interface View extends BaseView<Presenter> {
+        void displayRv();
+        void updateRv();
+        void clickToSeeProfile();
     }
 
     interface Presenter extends BasePresenter {
+        void showProfile();
+        void updateRvAdapterEveryArrivalDeparture();
     }
 }

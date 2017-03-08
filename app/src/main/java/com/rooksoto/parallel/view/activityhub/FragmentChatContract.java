@@ -1,5 +1,8 @@
 package com.rooksoto.parallel.view.activityhub;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.BaseView;
 
@@ -9,5 +12,14 @@ import com.rooksoto.parallel.BaseView;
 
 public class FragmentChatContract {
     interface View extends BaseView<Presenter> {}
-    interface Presenter extends BasePresenter {}
+    interface Presenter extends BasePresenter {
+
+        void getUserInformation(FirebaseUser user);
+
+        DatabaseReference getRef();
+
+        void sendTextToDb(String text);
+
+        FirebaseAuth getFirebaseAuth();
+    }
 }

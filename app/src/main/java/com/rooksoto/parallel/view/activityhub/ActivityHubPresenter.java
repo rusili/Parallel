@@ -13,9 +13,7 @@ import com.rooksoto.parallel.utility.AppContext;
 public class ActivityHubPresenter implements ActivityHubContract.Presenter {
     ParallelLocation locationService;
 
-
-    @Override
-    public void start() {
+    public void startLocationServices() {
         locationService = ParallelLocation.getInstance();
         locationService.connect();
         locationService.startGeofenceMonitoring(AppContext.getAppContext());
@@ -32,5 +30,10 @@ public class ActivityHubPresenter implements ActivityHubContract.Presenter {
         } else {
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
+    }
+
+    @Override
+    public void start() {
+
     }
 }

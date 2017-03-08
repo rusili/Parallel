@@ -11,4 +11,14 @@ public class FragmentAttendeesPresenter implements FragmentAttendeesContract.Pre
     public void start() {
 
     }
+
+    @Override
+    public void showProfile() {
+
+    }
+
+    @Override
+    public void updateRvAdapterEveryArrivalDeparture() {
+
+    }
 }

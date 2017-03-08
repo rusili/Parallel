@@ -31,4 +31,19 @@ public class FragmentAttendees extends Fragment implements FragmentAttendeesCont
         attendeePresenter = presenter;
 
     }
+
+    @Override
+    public void displayRv() {
+
+    }
+
+    @Override
+    public void updateRv() {
+
+    }
+
+    @Override
+    public void clickToSeeProfile() {
+
+    }
 }

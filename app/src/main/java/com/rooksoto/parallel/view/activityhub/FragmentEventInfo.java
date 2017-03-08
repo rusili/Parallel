@@ -12,7 +12,7 @@ import com.rooksoto.parallel.R;
  * Created by huilin on 3/4/17.
  */
 
-public class FragmentEventInfo extends Fragment {
+public class FragmentEventInfo extends Fragment implements FragmentEventInfoContract.View{
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
@@ -21,5 +21,10 @@ public class FragmentEventInfo extends Fragment {
                 R.layout.fragment_hub_screen_page, container, false);
 
         return rootView;
+    }
+
+    @Override
+    public void setPresenter(FragmentEventInfoContract.Presenter presenter) {
+
     }
 }

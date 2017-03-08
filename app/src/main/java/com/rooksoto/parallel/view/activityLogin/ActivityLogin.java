@@ -92,10 +92,6 @@ public class ActivityLogin extends AppCompatActivity {
             public void onAnimationEnd (Animation animation) {
                 logoViewLeft.setVisibility(View.INVISIBLE);
                 logoViewRight.setVisibility(View.INVISIBLE);
-                getFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.animator.animator_fade_in_right, R.animator.animator_fade_out_right)
-                        .replace(containerID, mFragmentLoginWait)
-                        .commit();
             }
 
             @Override
@@ -103,6 +99,10 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
         logoViewRight.startAnimation(fadeOutUp);
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.animator.animator_fade_in_right, R.animator.animator_fade_out_right)
+                .replace(containerID, mFragmentLoginWait)
+                .commit();
     }
 
     public void onClickToLogin (View view) {

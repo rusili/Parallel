@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.view.activityHub.ActivityHub;
+import com.rooksoto.parallel.network.objects.Answers;
 import com.rooksoto.parallel.network.objects.Questions;
+import com.rooksoto.parallel.view.activityHub.ActivityHub;
 import com.rooksoto.parallel.viewwidgets.swipestack.FixedSwipeStack;
 import com.rooksoto.parallel.viewwidgets.swipestack.SwipeStackAdapter;
 
@@ -24,6 +25,7 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
     private View mView;
     private FixedSwipeStack mSwipeStack;
     private List <Questions> listofQuestions;
+    private List <Answers> listofAnswers = new ArrayList <>();
 
     @Nullable
     @Override
@@ -53,8 +55,10 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
     public void onViewSwipedToLeft (int position) {
         if (position == listofQuestions.size() - 1) {
             toActivityHub();
+        } else if (position==0){
+            listofAnswers.add(new Answers(listofQuestions.get(position).getQuestion(), "IOS"));
         } else {
-            // put question & left answer into user profile
+            listofAnswers.add(new Answers(listofQuestions.get(position).getQuestion(), "False"));
         }
     }
 
@@ -62,8 +66,10 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
     public void onViewSwipedToRight (int position) {
         if (position == listofQuestions.size() - 1) {
             toActivityHub();
+        } else if (position==0){
+            listofAnswers.add(new Answers(listofQuestions.get(position).getQuestion(), "Android"));
         } else {
-            // put question & answer answer into user profile
+            listofAnswers.add(new Answers(listofQuestions.get(position).getQuestion(), "True"));
         }
     }
 
@@ -71,6 +77,7 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
     public void onStackEmpty () {}
 
     private void toActivityHub () {
+        saveUserInfo();
         new Handler().postDelayed(new Runnable() {
             public void run () {
                 Intent intentToActivityHub = new Intent(mView.getContext(), ActivityHub.class);
@@ -78,5 +85,10 @@ public class FragmentStartQuestions extends Fragment implements SwipeStack.Swipe
             }
         }, 500);
 
+    }
+
+    private void saveUserInfo () {
+        // get currentUserInfo;
+        //User newUser = new User();
     }
 }

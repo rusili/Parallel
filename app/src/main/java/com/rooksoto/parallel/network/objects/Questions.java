@@ -2,6 +2,7 @@ package com.rooksoto.parallel.network.objects;
 
 public class Questions {
     String question;
+    boolean answer;
     int leftResID = 0;
     int rightResID = 0;
 
@@ -13,6 +14,14 @@ public class Questions {
         this.question = questionParam;
         this.leftResID = leftResIDParam;
         this.rightResID = rightResIDParam;
+    }
+
+    public void setAnswer (boolean answer) {
+        this.answer = answer;
+    }
+
+    public boolean isAnswer () {
+        return answer;
     }
 
     public String getQuestion () {

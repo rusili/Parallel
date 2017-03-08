@@ -4,12 +4,19 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:onClick="onClickToActivityStart"
+              android:layout_marginTop="48dp"
     >
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="40dp"
         android:text="WAIT"
-        android:textSize="144sp"
+        android:textSize="44sp"
         />
+    <com.malinskiy.superrecyclerview.SuperRecyclerView
+        android:id="@+id/fragment_login_wait_page_superrecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.malinskiy.superrecyclerview.SuperRecyclerView>
 </LinearLayout>

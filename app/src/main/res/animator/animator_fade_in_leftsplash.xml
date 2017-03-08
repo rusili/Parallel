@@ -4,12 +4,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:propertyName="x"
         android:valueType="floatType"
-        android:valueFrom="200"
+        android:valueFrom="-100"
         android:valueTo="0"
-        android:duration="500"/>
+        android:duration="750"/>
     <objectAnimator
         android:valueFrom="0.0"
         android:valueTo="1"
         android:propertyName="alpha"
-        android:duration="500" />
+        android:duration="750" />
 </set>

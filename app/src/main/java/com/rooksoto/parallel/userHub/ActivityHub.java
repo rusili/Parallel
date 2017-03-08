@@ -14,8 +14,8 @@ import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.viewwidgets.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity {
-    private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
 
+    private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
     private ViewPager viewPager;
     private UserHubPresenter userHubPresenter;
 

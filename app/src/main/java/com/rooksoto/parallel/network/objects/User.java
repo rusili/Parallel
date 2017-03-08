@@ -7,15 +7,15 @@ public class User {
     String name;
     String email;
     String pictureLink;
-    List<Questions> listofQuestions = new ArrayList<>();
+    List<Questions> listofAnswers = new ArrayList<>();
 
     public User(String nameParam, String emailParam){
         this.name = nameParam;
         this.email = emailParam;
     }
 
-    public void setListofQuestions (List <Questions> listofQuestions) {
-        this.listofQuestions = listofQuestions;
+    public void setListofAnswers (List <Questions> listofAnswers) {
+        this.listofAnswers = listofAnswers;
     }
 
     public void setPictureLink (String pictureLinkParam) {
@@ -34,7 +34,7 @@ public class User {
         return pictureLink;
     }
 
-    public List <Questions> getListofQuestions () {
-        return listofQuestions;
+    public List <Questions> getListofAnswers () {
+        return listofAnswers;
     }
 }

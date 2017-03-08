@@ -3,21 +3,21 @@ package com.rooksoto.parallel.network.objects;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class Chat {
+public class ChatMessage {
     private String name;
     private String text;
     private String profilePic;
 
-    public Chat () {
+    public ChatMessage () {
     }
 
-    public Chat (String name, String text, String profilePic) {
+    public ChatMessage (String name, String text, String profilePic) {
         this.name = name;
         this.text = text;
         this.profilePic = profilePic;
     }
 
-    public Chat (String name, String text) {
+    public ChatMessage (String name, String text) {
         this.name = name;
         this.text = text;
     }
@@ -41,9 +41,5 @@ public class Chat {
 
     public String getProfilePic () {
         return profilePic;
-    }
-
-    public void setProfilePic (String profilePic) {
-        this.profilePic = profilePic;
     }
 }

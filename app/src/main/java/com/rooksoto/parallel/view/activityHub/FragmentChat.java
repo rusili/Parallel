@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,9 +26,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.network.objects.Chat;
+import com.rooksoto.parallel.network.objects.ChatMessage;
 import com.rooksoto.parallel.utility.AppContext;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
@@ -36,18 +40,20 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FragmentChat extends Fragment {
-
+    private View mView;
     private ProgressBar progressBar;
     private EditText messageEditText;
     private Button sendButton;
     private ListView messageListView;
-    private FirebaseListAdapter <Chat> messageListAdapter;
+    private ListView chatroomListView;
+    private FirebaseListAdapter <ChatMessage> messageListAdapter;
     private ImageView picImageView;
     private FirebaseAuth.AuthStateListener authStateListener;
     private String userName;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference ref;
     private String profilePic;
+    private List<String> chatroomArray = new ArrayList<>();
 
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState) {
@@ -70,15 +76,28 @@ public class FragmentChat extends Fragment {
         ref = FirebaseDatabase.getInstance().getReference().child("chatIds").child("001");
     }
 
+    private void setUpChatRooms(){
+        chatroomArray.add("Main");
+        chatroomArray.add("IOS");
+        chatroomArray.add("Android");
+        chatroomListView.setTextFilterEnabled(true);
+        chatroomListView.setAdapter(new ArrayAdapter<String>(mView.getContext(), R.layout.chat_rooms, R.id.fragment_hub_chat_room_view_text, chatroomArray));
+    }
+
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chatroom, container, false);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        messageEditText = (EditText) view.findViewById(R.id.messageEditText);
-        sendButton = (Button) view.findViewById(R.id.sendButton);
-        messageListView = (ListView) view.findViewById(R.id.messageListView);
-        return view;
+        mView = inflater.inflate(R.layout.fragment_hub_chatroom, container, false);
+        initialize();
+        return mView;
+    }
+
+    private void initialize () {
+        progressBar = (ProgressBar) mView.findViewById(R.id.progressBar);
+        messageEditText = (EditText) mView.findViewById(R.id.messageEditText);
+        sendButton = (Button) mView.findViewById(R.id.sendButton);
+        messageListView = (ListView) mView.findViewById(R.id.fragment_hub_chat_main_messageListView);
+        chatroomListView = (ListView) mView.findViewById(R.id.fragment_hub_chat_roomlistview);
     }
 
     @Override
@@ -92,12 +111,11 @@ public class FragmentChat extends Fragment {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                ref.push().setValue(new Chat(userName, messageEditText.getText().toString(), profilePic));
+                ref.push().setValue(new ChatMessage(userName, messageEditText.getText().toString(), profilePic));
                 messageEditText.setText("");
             }
         });
-
-
+        setUpChatRooms();
     }
 
     private void setupTextChangedListenerForMessage () {
@@ -123,9 +141,9 @@ public class FragmentChat extends Fragment {
 
 
     private void createFirebaseListAdapter (final DatabaseReference ref) {
-        messageListAdapter = new FirebaseListAdapter <Chat>(getActivity(), Chat.class, R.layout.chat_message, ref) {
+        messageListAdapter = new FirebaseListAdapter <ChatMessage>(getActivity(), ChatMessage.class, R.layout.chat_message, ref) {
             @Override
-            protected void populateView (View view, Chat chatMessage, int position) {
+            protected void populateView (View view, ChatMessage chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);
                 picImageView = (ImageView) view.findViewById(R.id.picImageView);
                 // TODO: must get profilepic link from database

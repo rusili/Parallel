@@ -13,13 +13,15 @@ import com.rooksoto.parallel.R;
  */
 
 public class FragmentEventInfo extends Fragment {
+    private View mView;
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_hub_screen_page, container, false);
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mView = inflater.inflate(R.layout.fragment_hub_eventinfo, container, false);
+        return mView;
+    }
 
-        return rootView;
+    private void initialize(){
+
     }
 }

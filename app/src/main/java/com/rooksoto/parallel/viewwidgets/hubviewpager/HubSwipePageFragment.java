@@ -18,7 +18,7 @@ public class HubSwipePageFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_hub_screen_page, container, false);
+                R.layout.fragment_hub_eventinfo, container, false);
 
         return rootView;
     }

@@ -427,7 +427,8 @@ public class Camera2BasicFragment extends Fragment
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-
+        view.findViewById(R.id.picture).setOnClickListener(this);
+        view.findViewById(R.id.info).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.fragment_hub_camera_textureview);
     }
 
@@ -886,7 +887,7 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.fragment_hub_camera_textureview: {
+            case R.id.picture: {
                 takePicture();
                 break;
             }
@@ -894,6 +895,7 @@ public class Camera2BasicFragment extends Fragment
                 Activity activity = getActivity();
                 if (null != activity) {
                     new AlertDialog.Builder(activity)
+                            .setMessage("Picture taken")
                             .setPositiveButton(android.R.string.ok, null)
                             .show();
                 }

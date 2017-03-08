@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.userHub;
+package com.rooksoto.parallel.view.activityhub;
 
 import android.app.Fragment;
 import android.net.Uri;

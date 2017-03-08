@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.rooksoto.parallel.BuildConfig;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.view.activityStart.ActivityStart;
+import com.rooksoto.parallel.view.activityhub.ActivityHub;
 
 public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
     private static final String CLIENTID = BuildConfig.OAUTHCLIENTID;
@@ -86,7 +86,7 @@ public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnCo
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    Intent intent = new Intent(getActivity(), ActivityStart.class);
+                    Intent intent = new Intent(getActivity(), ActivityHub.class);
                     startActivity(intent);
                 } else {
                     // User is signed out

@@ -1,20 +1,17 @@
-package com.rooksoto.parallel.userHub;
+package com.rooksoto.parallel.view.activityhub;
 
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.BaseView;
 
 /**
- * Created by huilin on 3/6/17.
+ * Created by huilin on 3/7/17.
  */
 
-public class UserHubContract {
+public interface FragmentAttendeesContract {
 
     interface View extends BaseView<Presenter> {
-
-
     }
 
     interface Presenter extends BasePresenter {
-        void stopLocationServices();
     }
 }

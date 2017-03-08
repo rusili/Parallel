@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.userHub;
+package com.rooksoto.parallel.view.activityhub;
 
 import android.os.Bundle;
 import android.app.Fragment;
@@ -12,7 +12,9 @@ import com.rooksoto.parallel.R;
  * Created by huilin on 3/4/17.
  */
 
-public class FragmentAttendees extends Fragment {
+public class FragmentAttendees extends Fragment implements FragmentAttendeesContract.View {
+
+    private FragmentAttendeesContract.Presenter attendeePresenter;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
@@ -21,5 +23,12 @@ public class FragmentAttendees extends Fragment {
                 R.layout.fragment_hub_screen_page, container, false);
 
         return rootView;
+    }
+
+    @Override
+    public void setPresenter(FragmentAttendeesContract.Presenter presenter) {
+
+        attendeePresenter = presenter;
+
     }
 }

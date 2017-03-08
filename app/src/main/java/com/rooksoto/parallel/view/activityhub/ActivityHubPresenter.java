@@ -1,4 +1,7 @@
-package com.rooksoto.parallel.userHub;
+package com.rooksoto.parallel.view.activityhub;
+
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 
 import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.AppContext;
@@ -7,7 +10,7 @@ import com.rooksoto.parallel.utility.AppContext;
  * Created by huilin on 3/6/17.
  */
 
-public class UserHubPresenter implements UserHubContract.Presenter {
+public class ActivityHubPresenter implements ActivityHubContract.Presenter {
     ParallelLocation locationService;
 
 
@@ -21,5 +24,13 @@ public class UserHubPresenter implements UserHubContract.Presenter {
     @Override
     public void stopLocationServices() {
         locationService.disconnect();
+    }
+
+    public void changeBackPressResult(ViewPager viewPager, FragmentActivity fragmentActivity) {
+        if (viewPager.getCurrentItem() == 0) {
+            fragmentActivity.onBackPressed();
+        } else {
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+        }
     }
 }

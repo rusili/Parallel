@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.userHub;
+package com.rooksoto.parallel.view.activityhub;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -17,14 +17,14 @@ public class ActivityHub extends AppCompatActivity {
 
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
     private ViewPager viewPager;
-    private UserHubPresenter userHubPresenter;
+    private ActivityHubPresenter activityHubPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
-        userHubPresenter = new UserHubPresenter();
-        userHubPresenter.start();
+        activityHubPresenter = new ActivityHubPresenter();
+        activityHubPresenter.start();
         setupViewpager();
     }
 
@@ -53,16 +53,12 @@ public class ActivityHub extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         mCustomAlertDialog.exit(this);
-        if (viewPager.getCurrentItem() == 0) {
-            super.onBackPressed();
-        } else {
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-        }
+        activityHubPresenter.changeBackPressResult(viewPager, this);
     }
 
     @Override
     protected void onStop() {
-        userHubPresenter.stopLocationServices();
+        activityHubPresenter.stopLocationServices();
         super.onStop();
     }
 }

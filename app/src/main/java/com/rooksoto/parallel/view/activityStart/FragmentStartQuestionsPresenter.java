@@ -1,6 +1,7 @@
 package com.rooksoto.parallel.view.activityStart;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.view.View;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.network.objects.Questions;
 import com.rooksoto.parallel.utility.AppContext;
-import com.rooksoto.parallel.view.activityHub.ActivityHub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +70,7 @@ class FragmentStartQuestionsPresenter implements FragmentStartQuestionsContract.
     public void toActivityHub() {
         new Handler().postDelayed(new Runnable() {
             public void run () {
-                Intent intentToActivityHub = new Intent(view.getContext(), ActivityHub.class);
+                Intent intentToActivityHub = new Intent(view.getContext(), Activity.class);
                 AppContext.getAppContext().startActivity(intentToActivityHub);
             }
         }, 500);

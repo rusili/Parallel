@@ -1,5 +1,6 @@
-package com.rooksoto.parallel.view.activityHub;
+package com.rooksoto.parallel.view.activityhub;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,34 +11,27 @@ import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
-import com.rooksoto.parallel.utility.CustomSoundEffects;
 import com.rooksoto.parallel.viewwidgets.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity {
-    private int containerID = R.id.viewpager;
-    private CustomSoundEffects mCustomSoundEffects;
-    private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
 
-    private static final String TAG = "ActivityHub";
-    ParallelLocation locationService = null;
+    private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
     private ViewPager viewPager;
+    private ActivityHubPresenter activityHubPresenter;
 
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
-        locationService = ParallelLocation.getInstance();
-        locationService.connect();
-        locationService.startGeofenceMonitoring(this);
-        initialize();
+        activityHubPresenter = new ActivityHubPresenter();
+        activityHubPresenter.startLocationServices();
         setupViewpager();
     }
 
-    private void setupViewpager () {
+    private void setupViewpager() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        final SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
 
         FragmentPagerItems pages = new FragmentPagerItems(this);
         pages.add(FragmentPagerItem.of("Event Info", FragmentEventInfo.class));
@@ -45,34 +39,43 @@ public class ActivityHub extends AppCompatActivity {
         pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
         pages.add(FragmentPagerItem.of("Camera", Camera2BasicFragment.class));
 
+
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), pages);
+
         viewPager.setAdapter(adapter);
         viewPager.setPageTransformer(true, new TabletTransformer());
         viewPagerTab.setViewPager(viewPager);
     }
 
     @Override
-    protected void onStart () {
+    protected void onStart() {
         super.onStart();
     }
 
-    private void initialize () {
-        mCustomSoundEffects = new CustomSoundEffects(getWindow().getDecorView().getRootView());
-    }
 
     @Override
-    public void onBackPressed () {
+    public void onBackPressed() {
         mCustomAlertDialog.exit(this);
-        if (viewPager.getCurrentItem() == 0) {
-            super.onBackPressed();
-        } else {
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-        }
+        activityHubPresenter.changeBackPressResult(viewPager, this);
     }
 
     @Override
-    protected void onStop () {
-        locationService.disconnect();
+    protected void onStop() {
+        activityHubPresenter.stopLocationServices();
         super.onStop();
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if (fragment instanceof FragmentEventInfo) {
+            ((FragmentEventInfo) fragment).setPresenter(new FragmentEventInfoPresenter());
+        }
+        if (fragment instanceof FragmentChat) {
+            ((FragmentChat) fragment).setPresenter(new FragmentChatPresenter());
+        }
+        if (fragment instanceof FragmentAttendees) {
+            ((FragmentAttendees) fragment).setPresenter(new FragmentAttendeesPresenter());
+        }
     }
 }

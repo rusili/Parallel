@@ -37,7 +37,7 @@
                   android:theme="@style/ActivityStart">
 
         </activity>
-        <activity android:name=".view.activityHub.ActivityHub"
+        <activity android:name=".view.activityhub.ActivityHub"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityStart">
 

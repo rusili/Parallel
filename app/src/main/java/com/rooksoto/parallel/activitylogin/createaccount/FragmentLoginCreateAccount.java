@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activitylogin;
+package com.rooksoto.parallel.activitylogin.createaccount;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,8 +13,10 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 
 public class FragmentLoginCreateAccount extends Fragment implements BaseView{
-    private FragmentLoginPresenter fragmentLoginPresenter;
-    private View mView;
+    private FragmentLoginCreateAccountPresenter fragmentLoginCreateAccountPresenter = new FragmentLoginCreateAccountPresenter();
+
+    private View view;
+
     private String email;
     private String username;
     private String password;
@@ -22,9 +24,9 @@ public class FragmentLoginCreateAccount extends Fragment implements BaseView{
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_login_createaccount, container, false);
+        view = inflater.inflate(R.layout.fragment_login_createaccount, container, false);
         initialize();
-        return mView;
+        return view;
     }
 
     @Override
@@ -34,10 +36,10 @@ public class FragmentLoginCreateAccount extends Fragment implements BaseView{
 
     @Override
     public void setViews () {
-        EditText editTextEmail = (EditText) mView.findViewById(R.id.fragment_login_createaccount_edittext_email);
-        EditText editTextUsername = (EditText) mView.findViewById(R.id.fragment_login_createaccount_edittext_username);
-        EditText editTextPassword = (EditText) mView.findViewById(R.id.fragment_login_createaccount_edittext_password);
-        Button buttonCreateAccount = (Button) mView.findViewById(R.id.fragment_login_createaccount_button_createaccount);
+        EditText editTextEmail = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_email);
+        EditText editTextUsername = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_username);
+        EditText editTextPassword = (EditText) view.findViewById(R.id.fragment_login_createaccount_edittext_password);
+        Button buttonCreateAccount = (Button) view.findViewById(R.id.fragment_login_createaccount_button_createaccount);
 
         email = editTextEmail.getText().toString();
         username = editTextUsername.getText().toString();
@@ -46,7 +48,7 @@ public class FragmentLoginCreateAccount extends Fragment implements BaseView{
         buttonCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentLoginPresenter.createNewAccount(email, username, password);
+                fragmentLoginCreateAccountPresenter.createNewAccount(email, username, password);
             }
         });
     }

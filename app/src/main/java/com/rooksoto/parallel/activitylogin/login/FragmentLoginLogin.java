@@ -3,65 +3,37 @@ package com.rooksoto.parallel.activitylogin.login;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.rooksoto.parallel.BuildConfig;
+import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 
-public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
-    private static final String CLIENTID = BuildConfig.OAUTHCLIENTID;
+public class FragmentLoginLogin extends Fragment implements BaseView {
+    private FragmentLoginLoginPresenter fragmentLoginLoginPresenter = new FragmentLoginLoginPresenter();
+
     private View mView;
+    private int containerID = R.id.activity_login_fragment_container;
     private String username;
     private String password;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+
     private final String TAG = getClass().toString();
-    private GoogleApiClient mGoogleApiClient;
-    private SignInButton signInButton;
     private static final int RC_SIGN_IN = 9001;
+
     private boolean isNew = true;
 
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_login_login, container, false);
-        signInButton = (SignInButton) mView.findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view) {
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
         initialize();
-
-        firebase();
-        if (isNew == true) {
-            checkGoogleSignIn();
-        }
-
         return mView;
     }
 
@@ -79,96 +51,67 @@ public class FragmentLoginLogin extends Fragment implements GoogleApiClient.OnCo
         super.onCreate(savedInstanceState);
     }
 
-    private void firebase () {
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged (@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    //Intent intent = new Intent(getActivity(), ActivityStart.class);
-                    //startActivity(intent);
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-            }
-        };
+    private void checkFirebaseAuth () {
+        fragmentLoginLoginPresenter.checkFirebaseAuth();
     }
 
     private void checkGoogleSignIn () {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(CLIENTID)
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(mView.getContext())
-                .enableAutoManage((FragmentActivity) getActivity(), this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+        fragmentLoginLoginPresenter.checkGoogleSignIn(mView, getActivity());
     }
 
     @Override
     public void onStart () {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        fragmentLoginLoginPresenter.addAuthStateListener();
     }
 
     @Override
     public void onStop () {
         super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+        fragmentLoginLoginPresenter.removeAuthStateListener();
+
     }
 
-    private void initialize () {
-        EditText editTextUsername = (EditText) mView.findViewById(R.id.fragment_login_login_edittext_username);
-        EditText editTextPassword = (EditText) mView.findViewById(R.id.fragment_login_login_edittext_password);
+    public void initialize () {
+        checkFirebaseAuth();
 
-        username = editTextUsername.getText().toString();
-        password = editTextPassword.getText().toString();
+        if (isNew == true) {
+            checkGoogleSignIn();
+        }
+
+        setViews();
     }
 
     @Override
-    public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {
+    public void setViews () {
+        EditText editTextUsername = (EditText) mView.findViewById(R.id.fragment_login_login_edittext_username);
+        EditText editTextPassword = (EditText) mView.findViewById(R.id.fragment_login_login_edittext_password);
+        SignInButton signInButton = (SignInButton) mView.findViewById(R.id.fragment_login_login_button_googlesignin);
+
+        username = editTextUsername.getText().toString();
+        password = editTextPassword.getText().toString();
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(fragmentLoginLoginPresenter.getGoogleAPI());
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
     }
 
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        }
+        fragmentLoginLoginPresenter.checkLoginID(requestCode, resultCode, data);
     }
 
     private void handleSignInResult (GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
-            GoogleSignInAccount acct = result.getSignInAccount();
-            firebaseAuthWithGoogle(acct);
-        } else {
-            Log.d(TAG, "Did not sign in correctly :/");
-        }
+        fragmentLoginLoginPresenter.handleSignInResult(result);
     }
 
     private void firebaseAuthWithGoogle (GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener <AuthResult>() {
-                    @Override
-                    public void onComplete (@NonNull Task <AuthResult> task) {
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+        fragmentLoginLoginPresenter.firebaseAuthWithGoogle(acct);
     }
 
 }

@@ -1,11 +1,8 @@
 package com.rooksoto.parallel;
 
-/**
- * Created by rook on 3/6/17.
- */
+public interface BaseView {
 
-public interface BaseView<T> {
+    void initialize();
 
-    void setPresenter(T presenter);
-
+    void setViews();
 }

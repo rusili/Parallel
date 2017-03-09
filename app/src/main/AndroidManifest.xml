@@ -22,20 +22,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         >
-        <activity android:name=".view.activityLogin.ActivityLogin"
+        <activity android:name=".activitylogin.ActivityLogin"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
-
-
-
         </activity>
 
-        <activity android:name=".view.activityStart.ActivityStart"
+        <activity android:name=".activityStart.ActivityStart"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
 
         </activity>
-        <activity android:name=".view.activityHub.ActivityHub"
+        <activity android:name=".activityHub.ActivityHub"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityHub"
                   android:windowSoftInputMode="adjustPan"
@@ -47,7 +44,7 @@
 
         </activity>
         <service
-            android:name=".geolocation.GeofenceService"
+            android:name=".utility.geolocation.GeofenceService"
             android:enabled="true"
             android:exported="true" />
     </application>

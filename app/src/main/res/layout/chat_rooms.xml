@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="48dp"
-              android:layout_height="48dp">
+              android:layout_height="64dp"
+                android:gravity="center_vertical"
+    >
 
     <TextView
         android:id="@+id/fragment_hub_chat_room_view_text"
@@ -13,6 +15,7 @@
         android:textSize="12dp"
         android:visibility="visible"
         android:textColor="@color/textAlt"
+        android:layout_gravity="center"
         />
 
     <ImageButton
@@ -22,6 +25,7 @@
         android:src="@drawable/ic_androidicon"
         android:background="#00000000"
         android:tint="@color/textAlt"
+        android:layout_gravity="center"
         />
 
-</FrameLayout>
+</RelativeLayout>

@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    tools:context="com.rooksoto.parallel.view.activityStart.ActivityStart">
+    tools:context="com.rooksoto.parallel.activityStart.ActivityStart">
 
-        <com.rooksoto.parallel.viewwidgets.swipestack.FixedSwipeStack
+        <com.rooksoto.parallel.utility.widgets.swipestack.FixedSwipeStack
             android:id="@+id/fragment_start_questions_swipestack_holder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

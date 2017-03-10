@@ -11,11 +11,13 @@ import android.widget.EditText;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
 
 public class FragmentLoginCreateAccount extends Fragment implements BaseView{
     private FragmentLoginCreateAccountPresenter fragmentLoginCreateAccountPresenter = new FragmentLoginCreateAccountPresenter();
 
     private View view;
+    private int containerID = R.id.activity_login_fragment_container;
 
     private String email;
     private String username;
@@ -49,6 +51,7 @@ public class FragmentLoginCreateAccount extends Fragment implements BaseView{
             @Override
             public void onClick (View v) {
                 fragmentLoginCreateAccountPresenter.createNewAccount(email, username, password);
+                fragmentLoginCreateAccountPresenter.setOnClickReplace(new FragmentLoginLogin(),view, containerID, "Login");
             }
         });
     }

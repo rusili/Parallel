@@ -1,6 +1,7 @@
 package com.rooksoto.parallel.activitylogin.login;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -23,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.BuildConfig;
+import com.rooksoto.parallel.R;
 
 public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClient.OnConnectionFailedListener {
     private View view;
@@ -131,5 +133,16 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
             googleApiClient.stopAutoManage((FragmentActivity) view.getContext());
             googleApiClient.disconnect();
         }
+    }
+
+    public void setOnClickReplace (Fragment fragment, View viewP, int containerID, String id) {
+        ((Activity) viewP.getContext()).getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.animator.animator_fade_in_right, R.animator.animator_fade_out_right)
+                .replace(containerID, fragment, id)
+                .commit();
+    }
+
+    public void checkLoginInfo (String usernameP, String passwordP) {
+        // // TODO: 3/9/17 Check username/password for Firebase authentication
     }
 }

@@ -45,7 +45,7 @@ public class FragmentLoginSplash extends Fragment implements BaseView{
         parallelWordRight = (ImageView) view.findViewById(R.id.fragment_login_splash_wordright);
         parallelLineLeft = (ImageView) view.findViewById(R.id.fragment_login_splash_lineleft);
         parallelLineRight = (ImageView) view.findViewById(R.id.fragment_login_splash_lineright);
-        parallelLineLeft.setOnClickListener(new View.OnClickListener() {
+        parallelWordLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
                 fragmentLoginSplashPresenter.setOnClickReplace(parallelWordLeft, containerID, "Login");

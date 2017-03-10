@@ -7,19 +7,23 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.SignInButton;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.activitylogin.createaccount.FragmentLoginCreateAccount;
+import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;
 
 public class FragmentLoginLogin extends Fragment implements BaseView {
     private FragmentLoginLoginPresenter fragmentLoginLoginPresenter = new FragmentLoginLoginPresenter();
 
-    private View mView;
+    private View view;
     private int containerID = R.id.activity_login_fragment_container;
     private String username;
     private String password;
@@ -32,9 +36,9 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_login_login, container, false);
+        view = inflater.inflate(R.layout.fragment_login_login, container, false);
         initialize();
-        return mView;
+        return view;
     }
 
     public static FragmentLoginLogin newInstance (boolean isNewParam) {
@@ -56,7 +60,7 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
     }
 
     private void checkGoogleSignIn () {
-        fragmentLoginLoginPresenter.checkGoogleSignIn(mView, getActivity());
+        fragmentLoginLoginPresenter.checkGoogleSignIn(view, getActivity());
     }
 
     @Override
@@ -85,12 +89,34 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-        EditText editTextUsername = (EditText) mView.findViewById(R.id.fragment_login_login_edittext_username);
-        EditText editTextPassword = (EditText) mView.findViewById(R.id.fragment_login_login_edittext_password);
-        SignInButton signInButton = (SignInButton) mView.findViewById(R.id.fragment_login_login_button_googlesignin);
-
+        final EditText editTextUsername = (EditText) view.findViewById(R.id.fragment_login_login_edittext_username);
+        final EditText editTextPassword = (EditText) view.findViewById(R.id.fragment_login_login_edittext_password);
         username = editTextUsername.getText().toString();
         password = editTextPassword.getText().toString();
+
+        Button signInButton = (Button) view.findViewById(R.id.fragment_login_login_button_login);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                fragmentLoginLoginPresenter.checkLoginInfo(username, password);
+                fragmentLoginLoginPresenter.setOnClickReplace(new FragmentLoginWait(), v, containerID, "Wait");
+            }
+        });
+        TextView textViewCreateAccount = (TextView) view.findViewById(R.id.fragment_login_login_button_createaccount);
+        textViewCreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                fragmentLoginLoginPresenter.setOnClickReplace(new FragmentLoginCreateAccount(), v, containerID, "CreateAccount");
+            }
+        });
+        ImageView imageViewGoogleSignIn = (ImageView) view.findViewById(R.id.fragment_login_login_button_googlesignin);
+        imageViewGoogleSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                fragmentLoginLoginPresenter.checkGoogleSignIn(view, getActivity());
+                fragmentLoginLoginPresenter.setOnClickReplace(new FragmentLoginWait(), v, containerID, "Wait");
+            }
+        });
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override

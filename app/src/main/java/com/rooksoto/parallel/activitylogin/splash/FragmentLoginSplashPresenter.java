@@ -2,16 +2,15 @@ package com.rooksoto.parallel.activitylogin.splash;
 
 import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.app.Fragment;
 import android.view.View;
 import android.view.animation.Animation;
 
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activitylogin.ActivityLoginPresenter;
-import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentLoginSplashPresenter implements BasePresenter {
-    private ActivityLoginPresenter activityLoginPresenter;
     private View viewAnimatorSet1;
     private View viewAnimatorSet2;
     private View viewAnimation1;
@@ -19,6 +18,12 @@ public class FragmentLoginSplashPresenter implements BasePresenter {
 
     @Override
     public void start () {
+    }
+
+    @Override
+    public void onBackPressedOverride (View viewP) {
+        CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+        customAlertDialog.exit(viewP.getContext());
     }
 
     // Animations:
@@ -59,14 +64,10 @@ public class FragmentLoginSplashPresenter implements BasePresenter {
         animationSet2P.start();
     }
 
-    @Override
-    public void onBackPressed () {
-    }
-
-    public void setOnClickReplace (View viewP, int containerID, String id) {
+    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
         ((Activity) viewP.getContext()).getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out_right)
-                .replace(containerID, new FragmentLoginLogin(), id)
+                .replace(containerID, fragmentP, id)
                 .commit();
     }
 }

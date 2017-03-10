@@ -12,12 +12,11 @@ public class FragmentLoginCreateAccountPresenter implements BasePresenter {
     public void start () {
     }
 
+    @Override
+    public void onBackPressedOverride (View viewP) {}
+
     public void createNewAccount (String email, String username, String password) {
         // TODO: 3/8/17 Creates new Account
-    }
-
-    @Override
-    public void onBackPressed () {
     }
 
     public void setOnClickReplace (Fragment fragment, View viewP, int containerID, String id) {

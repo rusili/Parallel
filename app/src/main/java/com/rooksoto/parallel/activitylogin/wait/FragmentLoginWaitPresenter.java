@@ -1,6 +1,7 @@
 package com.rooksoto.parallel.activitylogin.wait;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.BasePresenter;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentLoginWaitPresenter implements BasePresenter {
     private View view;
@@ -19,6 +21,15 @@ public class FragmentLoginWaitPresenter implements BasePresenter {
     @Override
     public void start () {
     }
+
+    @Override
+    public void onBackPressedOverride (View viewP) {
+        CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+        customAlertDialog.exit(viewP.getContext());
+    }
+
+    @Override
+    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {}
 
     public void setViewPager(View viewP, ViewPager viewPagerP, SmartTabLayout smartTabLayoutP){
         this.view = viewP;
@@ -34,9 +45,5 @@ public class FragmentLoginWaitPresenter implements BasePresenter {
         viewPager.setAdapter(adapter);
         viewPager.setPageTransformer(true, new TabletTransformer());
         smartTabLayout.setViewPager(viewPager);
-    }
-
-    @Override
-    public void onBackPressed () {
     }
 }

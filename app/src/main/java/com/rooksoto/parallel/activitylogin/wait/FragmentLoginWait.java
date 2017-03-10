@@ -15,14 +15,14 @@ import com.rooksoto.parallel.R;
 
 public class FragmentLoginWait extends Fragment implements BaseView{
     private FragmentLoginWaitPresenter fragmentLoginWaitPresenter = new FragmentLoginWaitPresenter();
-    private View mView;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_login_viewpager, container, false);
+        view = inflater.inflate(R.layout.fragment_login_viewpager, container, false);
         initialize();
-        return mView;
+        return view;
     }
 
     @Override
@@ -32,9 +32,14 @@ public class FragmentLoginWait extends Fragment implements BaseView{
 
     @Override
     public void setViews () {
-        ViewPager viewPager = (ViewPager) mView.findViewById(R.id.viewpager);
-        SmartTabLayout viewPagerTab = (SmartTabLayout) mView.findViewById(R.id.viewpagertab);
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        SmartTabLayout viewPagerTab = (SmartTabLayout) view.findViewById(R.id.viewpagertab);
 
-        fragmentLoginWaitPresenter.setViewPager(mView, viewPager, viewPagerTab);
+        fragmentLoginWaitPresenter.setViewPager(view, viewPager, viewPagerTab);
+    }
+
+    @Override
+    public void onBackPressed () {
+        fragmentLoginWaitPresenter.onBackPressedOverride(view);
     }
 }

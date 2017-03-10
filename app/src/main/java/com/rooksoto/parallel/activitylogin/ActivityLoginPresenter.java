@@ -11,10 +11,7 @@ import android.widget.ImageView;
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityHub.ActivityHub;
-import com.rooksoto.parallel.activityStart.ActivityStart;
-import com.rooksoto.parallel.activitylogin.createaccount.FragmentLoginCreateAccount;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
-import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomToast;
 
@@ -34,29 +31,16 @@ public class ActivityLoginPresenter implements BasePresenter{
     }
 
     @Override
-    public void onBackPressed () {
-    }
+    public void onBackPressedOverride (View viewP) {}
 
-    public void onBackPressedOverride () {
-        Fragment currentFragment = activity.getFragmentManager().findFragmentById(containerID);
-        if (currentFragment instanceof FragmentLoginLogin || currentFragment instanceof FragmentLoginWait) {
-            mCustomAlertDialog.exit(activity);
-        } else if (currentFragment instanceof FragmentLoginCreateAccount) {
-        } else {
-            activity.onBackPressed();
-        }
-    }
-
-    public void onClickToActivityStart (View view) {
-        activity.finish();
-        Intent intentToActivityStart = new Intent(activity, ActivityStart.class);
-        activity.startActivity(intentToActivityStart);
-    }
+    @Override
+    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {}
 
     public void loadFragment (Fragment fragmentP, int animator1, int animator2, int containerID, String id) {
         activity.getFragmentManager().beginTransaction()
                 .setCustomAnimations(animator1, animator2)
                 .add(containerID, fragmentP, id)
+                .addToBackStack(null)
                 .commit();
     }
 

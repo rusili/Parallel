@@ -41,6 +41,10 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
     public void start () {
     }
 
+    @Override
+    public void onBackPressedOverride (View viewP) {
+    }
+
     public void checkFirebaseAuth (){
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -115,10 +119,6 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
                         }
                     }
                 });
-    }
-
-    @Override
-    public void onBackPressed () {
     }
 
     @Override

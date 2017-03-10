@@ -125,4 +125,11 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
     public GoogleApiClient getGoogleAPI () {
         return googleApiClient;
     }
+
+    public void disconnectGoogleAPI(){
+        if (googleApiClient != null && googleApiClient.isConnected()) {
+            googleApiClient.stopAutoManage((FragmentActivity) view.getContext());
+            googleApiClient.disconnect();
+        }
+    }
 }

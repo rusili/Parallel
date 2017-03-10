@@ -69,6 +69,7 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
     public void onStop () {
         super.onStop();
         fragmentLoginLoginPresenter.removeAuthStateListener();
+        fragmentLoginLoginPresenter.disconnectGoogleAPI();
 
     }
 

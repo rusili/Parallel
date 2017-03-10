@@ -66,7 +66,7 @@ public class FragmentLoginSplashPresenter implements BasePresenter {
     public void setOnClickReplace (View viewP, int containerID, String id) {
         ((Activity) viewP.getContext()).getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out_right)
-                .add(containerID, new FragmentLoginLogin(), id)
+                .replace(containerID, new FragmentLoginLogin(), id)
                 .commit();
     }
 }

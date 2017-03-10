@@ -12,13 +12,13 @@ public class AppContext extends Application {
     // This only keeps a reference to the APPLICATION CONTEXT
     private static Context appContext;
 
+    public static Context getAppContext () {
+        return appContext;
+    }
+
     @Override
     public void onCreate () {
         super.onCreate();
         appContext = this;
-    }
-
-    public static Context getAppContext () {
-        return appContext;
     }
 }

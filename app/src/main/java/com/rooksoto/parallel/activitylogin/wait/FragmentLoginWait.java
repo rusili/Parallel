@@ -13,7 +13,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 
-public class FragmentLoginWait extends Fragment implements BaseView{
+public class FragmentLoginWait extends Fragment implements BaseView {
     private FragmentLoginWaitPresenter fragmentLoginWaitPresenter = new FragmentLoginWaitPresenter();
     private View view;
 

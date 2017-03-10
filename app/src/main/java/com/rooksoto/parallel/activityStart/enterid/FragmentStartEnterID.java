@@ -13,7 +13,7 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityStart.questions.FragmentStartQuestions;
 
-public class FragmentStartEnterID extends Fragment implements BaseView{
+public class FragmentStartEnterID extends Fragment implements BaseView {
     private FragmentStartEnterIDPresenter fragmentStartEnterIDPresenter;
 
     private View view;
@@ -43,8 +43,8 @@ public class FragmentStartEnterID extends Fragment implements BaseView{
         button = (Button) view.findViewById(R.id.enter_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                fragmentStartEnterIDPresenter.checkEventID();
+            public void onClick (View v) {
+                fragmentStartEnterIDPresenter.checkEventID(eventID);
                 fragmentStartEnterIDPresenter.setOnClickReplace(new FragmentStartQuestions(), view, containerID, "Questions");
             }
         });

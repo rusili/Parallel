@@ -29,9 +29,10 @@ public class FragmentLoginWaitPresenter implements BasePresenter {
     }
 
     @Override
-    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {}
+    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
+    }
 
-    public void setViewPager(View viewP, ViewPager viewPagerP, SmartTabLayout smartTabLayoutP){
+    public void setViewPager (View viewP, ViewPager viewPagerP, SmartTabLayout smartTabLayoutP) {
         this.view = viewP;
         this.viewPager = viewPagerP;
         this.smartTabLayout = smartTabLayoutP;

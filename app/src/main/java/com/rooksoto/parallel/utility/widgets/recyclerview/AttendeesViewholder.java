@@ -18,7 +18,7 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
     private TextView textViewName;
     private TextView textViewEmail;
     private ImageView imageViewProfile;
-    private List<Answers> answersList;
+    private List <Answers> answersList;
 
     public AttendeesViewholder (View itemView) {
         super(itemView);
@@ -27,7 +27,7 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
         imageViewProfile = (ImageView) itemView.findViewById(R.id.fragment_hub_attendees_viewholder_picture);
     }
 
-    public void bind(User userParam){
+    public void bind (User userParam) {
         textViewName.setText(userParam.getName());
         textViewEmail.setText(userParam.getEmail());
         if (userParam.getPictureLink() == null) {

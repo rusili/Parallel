@@ -21,25 +21,14 @@ import com.rooksoto.parallel.activitylogin.createaccount.FragmentLoginCreateAcco
 import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;
 
 public class FragmentLoginLogin extends Fragment implements BaseView {
+    private static final int RC_SIGN_IN = 9001;
+    private final String TAG = getClass().toString();
     private FragmentLoginLoginPresenter fragmentLoginLoginPresenter = new FragmentLoginLoginPresenter();
-
     private View view;
     private int containerID = R.id.activity_login_fragment_container;
     private String username;
     private String password;
-
-    private final String TAG = getClass().toString();
-    private static final int RC_SIGN_IN = 9001;
-
     private boolean isNew = true;
-
-    @Nullable
-    @Override
-    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_login_login, container, false);
-        initialize();
-        return view;
-    }
 
     public static FragmentLoginLogin newInstance (boolean isNewParam) {
         Bundle args = new Bundle();
@@ -48,6 +37,14 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
         fragment.isNew = isNewParam;
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_login_login, container, false);
+        initialize();
+        return view;
     }
 
     @Override

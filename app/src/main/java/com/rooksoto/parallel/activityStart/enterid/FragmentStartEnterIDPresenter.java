@@ -15,7 +15,8 @@ import com.rooksoto.parallel.utility.CustomAlertDialog;
 public class FragmentStartEnterIDPresenter implements BasePresenter {
 
     @Override
-    public void start () {}
+    public void start () {
+    }
 
     public void onBackPressedOverride (View viewP) {
         CustomAlertDialog customAlertDialog = new CustomAlertDialog();
@@ -37,15 +38,14 @@ public class FragmentStartEnterIDPresenter implements BasePresenter {
         ConnectivityManager connManager = (ConnectivityManager) viewP.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
-        if(networkInfo != null && networkInfo.isConnectedOrConnecting()){
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public void checkEventID () {
+    public void checkEventID (String eventID) {
         // TODO: 3/10/17 Check Event ID
     }
 }

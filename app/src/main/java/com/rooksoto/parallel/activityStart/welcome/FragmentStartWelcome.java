@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 
-public class FragmentStartWelcome extends Fragment implements BaseView{
+public class FragmentStartWelcome extends Fragment implements BaseView {
     private FragmentStartWelcomePresenter fragmentStartWelcomePresenter;
 
     private View view;
@@ -26,7 +26,7 @@ public class FragmentStartWelcome extends Fragment implements BaseView{
         return view;
     }
 
-    public void initialize (){
+    public void initialize () {
         setViews();
     }
 

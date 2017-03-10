@@ -16,12 +16,12 @@ public class Questions {
         this.rightResID = rightResIDParam;
     }
 
-    public void setAnswer (boolean answer) {
-        this.answer = answer;
-    }
-
     public boolean isAnswer () {
         return answer;
+    }
+
+    public void setAnswer (boolean answer) {
+        this.answer = answer;
     }
 
     public String getQuestion () {

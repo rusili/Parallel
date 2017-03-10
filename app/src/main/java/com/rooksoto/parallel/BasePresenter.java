@@ -5,7 +5,7 @@ import android.view.View;
 
 public interface BasePresenter {
 
-    void start();
+    void start ();
 
     void onBackPressedOverride (View viewP);
 

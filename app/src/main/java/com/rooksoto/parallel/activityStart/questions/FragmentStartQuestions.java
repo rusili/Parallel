@@ -57,6 +57,7 @@ public class FragmentStartQuestions extends Fragment implements BaseView, SwipeS
     }
 
     @Override
-    public void onStackEmpty () {}
+    public void onStackEmpty () {
+    }
 
 }

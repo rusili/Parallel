@@ -2,9 +2,9 @@ package com.rooksoto.parallel;
 
 public interface BaseView {
 
-    void initialize();
+    void initialize ();
 
-    void setViews();
+    void setViews ();
 
-    void onBackPressed();
+    void onBackPressed ();
 }

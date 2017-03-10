@@ -12,7 +12,7 @@ import com.rooksoto.parallel.activitylogin.splash.FragmentLoginSplash;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomToast;
 
-public class ActivityLogin extends AppCompatActivity implements BaseView{
+public class ActivityLogin extends AppCompatActivity implements BaseView {
     private ActivityLoginPresenter activityLoginPresenter = new ActivityLoginPresenter();
     private int containerID = R.id.activity_login_fragment_container;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();

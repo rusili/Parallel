@@ -13,7 +13,7 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
 
-public class FragmentLoginCreateAccount extends Fragment implements BaseView{
+public class FragmentLoginCreateAccount extends Fragment implements BaseView {
     private FragmentLoginCreateAccountPresenter fragmentLoginCreateAccountPresenter = new FragmentLoginCreateAccountPresenter();
 
     private View view;
@@ -51,11 +51,12 @@ public class FragmentLoginCreateAccount extends Fragment implements BaseView{
             @Override
             public void onClick (View v) {
                 fragmentLoginCreateAccountPresenter.createNewAccount(email, username, password);
-                fragmentLoginCreateAccountPresenter.setOnClickReplace(new FragmentLoginLogin(),view, containerID, "Login");
+                fragmentLoginCreateAccountPresenter.setOnClickReplace(new FragmentLoginLogin(), view, containerID, "Login");
             }
         });
     }
 
     @Override
-    public void onBackPressed () {}
+    public void onBackPressed () {
+    }
 }

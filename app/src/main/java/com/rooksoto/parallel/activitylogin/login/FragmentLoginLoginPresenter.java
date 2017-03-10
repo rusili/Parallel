@@ -27,15 +27,13 @@ import com.rooksoto.parallel.BuildConfig;
 import com.rooksoto.parallel.R;
 
 public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClient.OnConnectionFailedListener {
+    private static final String CLIENTID = BuildConfig.OAUTHCLIENTID;
+    private static final int RC_SIGN_IN = 9001;
     private View view;
-
     private GoogleApiClient googleApiClient;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
-
-    private static final String CLIENTID = BuildConfig.OAUTHCLIENTID;
     private String TAG = "Fragment Login Login";
-    private static final int RC_SIGN_IN = 9001;
 
     @Override
     public void start () {
@@ -45,7 +43,7 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
     public void onBackPressedOverride (View viewP) {
     }
 
-    public void checkFirebaseAuth (){
+    public void checkFirebaseAuth () {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -77,17 +75,17 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
                 .build();
     }
 
-    public void addAuthStateListener(){
+    public void addAuthStateListener () {
         firebaseAuth.addAuthStateListener(firebaseAuthStateListener);
     }
 
-    public void removeAuthStateListener(){
-        if (firebaseAuthStateListener != null){
+    public void removeAuthStateListener () {
+        if (firebaseAuthStateListener != null) {
             firebaseAuth.removeAuthStateListener(firebaseAuthStateListener);
         }
     }
 
-    public void checkLoginID (int code, int requestCode, Intent data){
+    public void checkLoginID (int code, int requestCode, Intent data) {
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
@@ -109,9 +107,9 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener((Activity) view.getContext(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener((Activity) view.getContext(), new OnCompleteListener <AuthResult>() {
                     @Override
-                    public void onComplete (@NonNull Task<AuthResult> task) {
+                    public void onComplete (@NonNull Task <AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
@@ -122,13 +120,14 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
     }
 
     @Override
-    public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {}
+    public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {
+    }
 
     public GoogleApiClient getGoogleAPI () {
         return googleApiClient;
     }
 
-    public void disconnectGoogleAPI(){
+    public void disconnectGoogleAPI () {
         if (googleApiClient != null && googleApiClient.isConnected()) {
             googleApiClient.stopAutoManage((FragmentActivity) view.getContext());
             googleApiClient.disconnect();

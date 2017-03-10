@@ -22,58 +22,6 @@ public class FragmentStartWelcomePresenter implements BasePresenter {
     private int counter = 0;
     private boolean started = false;
     private Handler handler = new Handler();
-
-    @Override
-    public void start () {}
-
-    public void onBackPressedOverride (View viewP) {
-        CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-        customAlertDialog.exit(viewP.getContext());
-    }
-
-    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
-    }
-
-    private void playAudio(int RawID){
-        MediaPlayer mediaPlayer = MediaPlayer.create(view.getContext(), R.raw.welcome);
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion (MediaPlayer mediaPlayer) {
-                mediaPlayer.stop();
-            }
-        });
-        mediaPlayer.start();
-    }
-
-    public void stop () {
-        started = false;
-        handler.removeCallbacks(runnableHTextView);
-    }
-
-    public void setRunnableHTextView (View viewP, String[] arrayStringP, View viewAnimation1, View viewAnimation2){
-        this.view = viewP;
-        this.arrayString = arrayStringP;
-        this.viewAnimation1 = viewAnimation1;
-        this.viewAnimation2 = viewAnimation2;
-
-        started = true;
-        handler.postDelayed(runnableHTextView, 1500);
-    }
-
-    private void startOnAnimationsEnd (Animation animation1P, final Animation animation2P){
-        animation1P.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart (Animation animation) {}
-            @Override
-            public void onAnimationEnd (Animation animation) {
-                viewAnimation2.startAnimation(animation2P);
-            }
-            @Override
-            public void onAnimationRepeat (Animation animation) {}
-        });
-        viewAnimation1.startAnimation(animation1P);
-    }
-
     private Runnable runnableHTextView = new Runnable() {
         @Override
         public void run () {
@@ -102,5 +50,61 @@ public class FragmentStartWelcomePresenter implements BasePresenter {
             }
         }
     };
+
+    @Override
+    public void start () {
+    }
+
+    public void onBackPressedOverride (View viewP) {
+        CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+        customAlertDialog.exit(viewP.getContext());
+    }
+
+    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
+    }
+
+    private void playAudio (int RawID) {
+        MediaPlayer mediaPlayer = MediaPlayer.create(view.getContext(), R.raw.welcome);
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion (MediaPlayer mediaPlayer) {
+                mediaPlayer.stop();
+            }
+        });
+        mediaPlayer.start();
+    }
+
+    public void stop () {
+        started = false;
+        handler.removeCallbacks(runnableHTextView);
+    }
+
+    public void setRunnableHTextView (View viewP, String[] arrayStringP, View viewAnimation1, View viewAnimation2) {
+        this.view = viewP;
+        this.arrayString = arrayStringP;
+        this.viewAnimation1 = viewAnimation1;
+        this.viewAnimation2 = viewAnimation2;
+
+        started = true;
+        handler.postDelayed(runnableHTextView, 1500);
+    }
+
+    private void startOnAnimationsEnd (Animation animation1P, final Animation animation2P) {
+        animation1P.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart (Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd (Animation animation) {
+                viewAnimation2.startAnimation(animation2P);
+            }
+
+            @Override
+            public void onAnimationRepeat (Animation animation) {
+            }
+        });
+        viewAnimation1.startAnimation(animation1P);
+    }
 
 }

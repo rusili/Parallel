@@ -34,19 +34,10 @@ public class ParallelLocation {
     private static ParallelLocation instance;
     private static double parallelLatitude;
     private static double parallelLongitude;
-
-    private String GOFENCE_ID = "geoFenceID";
-
     private static double eventLatitude = 40.7417145;
     private static double eventLongitude = -73.9352932;
     private static float eventGeofenceRadius = 100;
-
-    public static ParallelLocation getInstance () {
-        if (instance == null) {
-            instance = new ParallelLocation();
-        }
-        return instance;
-    }
+    private String GOFENCE_ID = "geoFenceID";
 
     private ParallelLocation () {
         final Context context = AppContext.getAppContext();
@@ -75,6 +66,12 @@ public class ParallelLocation {
         googleApiClient.connect();
     }
 
+    public static ParallelLocation getInstance () {
+        if (instance == null) {
+            instance = new ParallelLocation();
+        }
+        return instance;
+    }
 
     public void connect () {
         googleApiClient.reconnect();

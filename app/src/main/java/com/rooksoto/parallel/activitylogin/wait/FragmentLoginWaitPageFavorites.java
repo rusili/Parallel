@@ -28,8 +28,8 @@ public class FragmentLoginWaitPageFavorites extends Fragment {
         return mView;
     }
 
-    private void setDemoDayEvent(){
-        List<Events> eventsList = new ArrayList<>();
+    private void setDemoDayEvent () {
+        List <Events> eventsList = new ArrayList <>();
         eventsList.add(new Events());
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.fragment_login_wait_event_current_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mView.getContext()));

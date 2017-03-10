@@ -20,7 +20,7 @@ public class FixedSwipeStack extends SwipeStack {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
+    public boolean onTouchEvent (MotionEvent ev) {
         try {
             return super.onTouchEvent(ev);
         } catch (IllegalArgumentException ex) {
@@ -30,7 +30,7 @@ public class FixedSwipeStack extends SwipeStack {
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public boolean onInterceptTouchEvent (MotionEvent ev) {
         try {
             return super.onInterceptTouchEvent(ev);
         } catch (IllegalArgumentException ex) {

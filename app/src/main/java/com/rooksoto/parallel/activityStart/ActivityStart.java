@@ -1,27 +1,13 @@
 package com.rooksoto.parallel.activityStart;
 
-import android.Manifest;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityHub.ActivityHub;
 import com.rooksoto.parallel.activityStart.enterid.FragmentStartEnterID;
-import com.rooksoto.parallel.activityStart.questions.FragmentStartQuestions;
-import com.rooksoto.parallel.activityStart.welcome.FragmentStartWelcome;
-import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
-import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
-
-import link.fls.swipestack.SwipeStack;
 
 public class ActivityStart extends AppCompatActivity implements BaseView {
     private ActivityStartPresenter activityStartPresenter;

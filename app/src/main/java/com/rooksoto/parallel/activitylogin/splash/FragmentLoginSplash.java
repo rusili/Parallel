@@ -17,7 +17,7 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
 
-public class FragmentLoginSplash extends Fragment implements BaseView{
+public class FragmentLoginSplash extends Fragment implements BaseView {
     private FragmentLoginSplashPresenter fragmentLoginSplashPresenter = new FragmentLoginSplashPresenter();
 
     private View view;
@@ -60,7 +60,7 @@ public class FragmentLoginSplash extends Fragment implements BaseView{
 
         new Handler().postDelayed(new Runnable() {
             @Override
-            public void run() {
+            public void run () {
                 splashWordAnimation();
             }
         }, 1250);

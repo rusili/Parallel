@@ -15,7 +15,7 @@ import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomToast;
 
-public class ActivityLoginPresenter implements BasePresenter{
+public class ActivityLoginPresenter implements BasePresenter {
     private Activity activity;
     private int containerID = R.id.activity_login_fragment_container;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
@@ -31,10 +31,12 @@ public class ActivityLoginPresenter implements BasePresenter{
     }
 
     @Override
-    public void onBackPressedOverride (View viewP) {}
+    public void onBackPressedOverride (View viewP) {
+    }
 
     @Override
-    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {}
+    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
+    }
 
     public void loadFragment (Fragment fragmentP, int animator1, int animator2, int containerID, String id) {
         activity.getFragmentManager().beginTransaction()
@@ -44,20 +46,24 @@ public class ActivityLoginPresenter implements BasePresenter{
                 .commit();
     }
 
-    public void startAnimations (final View view1, final View view2, Animation animation1P, Animation animation2P){
+    public void startAnimations (final View view1, final View view2, Animation animation1P, Animation animation2P) {
         view1.setVisibility(View.VISIBLE);
         view2.setVisibility(View.VISIBLE);
 
         animation1P.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart (Animation animation) {}
+            public void onAnimationStart (Animation animation) {
+            }
+
             @Override
             public void onAnimationEnd (Animation animation) {
                 view1.setVisibility(View.INVISIBLE);
                 view2.setVisibility(View.INVISIBLE);
             }
+
             @Override
-            public void onAnimationRepeat (Animation animation) {}
+            public void onAnimationRepeat (Animation animation) {
+            }
         });
         view1.startAnimation(animation1P);
         view2.startAnimation(animation2P);
@@ -78,7 +84,7 @@ public class ActivityLoginPresenter implements BasePresenter{
         }
     }
 
-    public void intentToActivityStart (){
+    public void intentToActivityStart () {
         Intent fromActivityStartToActivityHub = new Intent(activity, ActivityHub.class);
         activity.startActivity(fromActivityStartToActivityHub);
         activity.finish();

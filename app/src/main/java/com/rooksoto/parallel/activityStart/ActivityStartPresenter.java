@@ -18,7 +18,8 @@ public class ActivityStartPresenter implements BasePresenter {
     private View view;
 
     @Override
-    public void start () {}
+    public void start () {
+    }
 
     public void onBackPressedOverride (View viewP) {
         CustomAlertDialog customAlertDialog = new CustomAlertDialog();
@@ -67,4 +68,5 @@ public class ActivityStartPresenter implements BasePresenter {
     public void disconnectLocationServices () {
         locationServices.disconnect();
     }
+
 }

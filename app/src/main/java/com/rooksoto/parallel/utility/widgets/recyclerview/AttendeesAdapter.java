@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AttendeesAdapter extends RecyclerView.Adapter {
-    private List<User> userList = new ArrayList<>();
+    private List <User> userList = new ArrayList <>();
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {

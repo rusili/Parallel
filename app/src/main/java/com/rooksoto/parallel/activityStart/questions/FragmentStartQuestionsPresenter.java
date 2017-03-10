@@ -21,11 +21,12 @@ import java.util.List;
 public class FragmentStartQuestionsPresenter implements BasePresenter {
     private View view;
 
-    private List<Questions> listofQuestions = new ArrayList<>();
+    private List <Questions> listofQuestions = new ArrayList <>();
     private List <Answers> listofAnswers = new ArrayList <>();
 
     @Override
-    public void start () {}
+    public void start () {
+    }
 
     public void onBackPressedOverride (View viewP) {
         this.view = viewP;
@@ -33,7 +34,7 @@ public class FragmentStartQuestionsPresenter implements BasePresenter {
         customAlertDialog.exit(viewP.getContext());
     }
 
-    public void setSwipeStack (FixedSwipeStack swipeStack){
+    public void setSwipeStack (FixedSwipeStack swipeStack) {
         listofQuestions.add(new Questions("Are you an IOS or Android developer?", R.drawable.ic_appleicon, R.drawable.ic_androidicon));
         listofQuestions.add(new Questions("Are you affiliated with C4Q?"));
         listofQuestions.add(new Questions("Do you have more than 3 years of programming experience?"));
@@ -52,7 +53,7 @@ public class FragmentStartQuestionsPresenter implements BasePresenter {
     public void onViewSwipedToLeft (int position) {
         if (position == listofQuestions.size() - 1) {
             toActivityHub();
-        } else if (position==0){
+        } else if (position == 0) {
             listofAnswers.add(new Answers(listofQuestions.get(position).getQuestion(), "IOS"));
         } else {
             listofAnswers.add(new Answers(listofQuestions.get(position).getQuestion(), "False"));
@@ -62,7 +63,7 @@ public class FragmentStartQuestionsPresenter implements BasePresenter {
     public void onViewSwipedToRight (int position) {
         if (position == listofQuestions.size() - 1) {
             toActivityHub();
-        } else if (position==0){
+        } else if (position == 0) {
             listofAnswers.add(new Answers(listofQuestions.get(position).getQuestion(), "Android"));
         } else {
             listofAnswers.add(new Answers(listofQuestions.get(position).getQuestion(), "True"));

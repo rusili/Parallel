@@ -10,12 +10,14 @@ import android.widget.TextView;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.activityStart.questions.FragmentStartQuestions;
 
 public class FragmentStartWelcome extends Fragment implements BaseView {
     private FragmentStartWelcomePresenter fragmentStartWelcomePresenter = new FragmentStartWelcomePresenter();
 
     private View view;
 
+    private int containerID = R.id.activity_start_fragment_container;
     private String[] welcomeText = new String[] {"Welcome", "to", "C4Q's", "3.3 Demo Day", "Enjoy"};
 
     @Nullable
@@ -35,6 +37,14 @@ public class FragmentStartWelcome extends Fragment implements BaseView {
         TextView textViewHostedBy = (TextView) view.findViewById(R.id.fragment_start_welcome_hostedby);
         TextView textViewHost = (TextView) view.findViewById(R.id.fragment_start_welcome_host);
         fragmentStartWelcomePresenter.setRunnableHTextView(view, welcomeText, textViewHostedBy, textViewHost);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                fragmentStartWelcomePresenter.setOnClickReplace(new FragmentStartQuestions(), view, containerID, "Questions");
+            }
+        });
+
+        fragmentStartWelcomePresenter.start();
     }
 
     @Override

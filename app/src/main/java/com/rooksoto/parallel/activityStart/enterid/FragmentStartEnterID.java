@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityStart.questions.FragmentStartQuestions;
+import com.rooksoto.parallel.activityStart.welcome.FragmentStartWelcome;
 
 public class FragmentStartEnterID extends Fragment implements BaseView {
     private FragmentStartEnterIDPresenter fragmentStartEnterIDPresenter = new FragmentStartEnterIDPresenter();
@@ -45,7 +45,7 @@ public class FragmentStartEnterID extends Fragment implements BaseView {
             @Override
             public void onClick (View v) {
                 fragmentStartEnterIDPresenter.checkEventID(eventID);
-                fragmentStartEnterIDPresenter.setOnClickReplace(new FragmentStartQuestions(), buttonEnter, containerID, "Questions");
+                fragmentStartEnterIDPresenter.setOnClickReplace(new FragmentStartWelcome(), buttonEnter, containerID, "Questions");
             }
         });
     }

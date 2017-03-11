@@ -51,6 +51,8 @@ dependencies {
     compile 'com.malinskiy:superrecyclerview:1.1.3'
     // Swipe Viewholder
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    // Autofit Text View:
+    compile 'me.grantland:autofittextview:0.2.+'
     // Fragment Animation Library:
     compile 'com.labo.kaji:fragmentanimations:0.1.1'
     // Edittext MaterialTextField

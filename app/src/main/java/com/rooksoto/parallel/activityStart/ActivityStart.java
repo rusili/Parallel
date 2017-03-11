@@ -34,7 +34,7 @@ public class ActivityStart extends AppCompatActivity implements BaseView {
     }
 
     private void loadFragmentEnterID () {
-        activityStartPresenter.loadFragment(new FragmentStartEnterID(), R.animator.animator_fade_in_left, R.animator.animator_fade_out_right, containerID, "EnterID");
+        activityStartPresenter.loadFragment(new FragmentStartEnterID(), R.animator.animator_fade_in, R.animator.animator_fade_out, containerID, "EnterID");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.rooksoto.parallel.activityStart.welcome;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -22,6 +23,7 @@ public class FragmentStartWelcomePresenter implements BasePresenter {
     private int counter = 0;
     private boolean started = false;
     private Handler handler = new Handler();
+
     private Runnable runnableHTextView = new Runnable() {
         @Override
         public void run () {
@@ -53,6 +55,8 @@ public class FragmentStartWelcomePresenter implements BasePresenter {
 
     @Override
     public void start () {
+        started = true;
+        handler.postDelayed(runnableHTextView, 1500);
     }
 
     public void onBackPressedOverride (View viewP) {
@@ -61,10 +65,14 @@ public class FragmentStartWelcomePresenter implements BasePresenter {
     }
 
     public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
+        ((Activity) viewP.getContext()).getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out_right)
+                .replace(containerID, fragmentP, id)
+                .commit();
     }
 
-    private void playAudio (int RawID) {
-        MediaPlayer mediaPlayer = MediaPlayer.create(view.getContext(), R.raw.welcome);
+    private void playAudio (int rawID) {
+        MediaPlayer mediaPlayer = MediaPlayer.create(view.getContext(), rawID);
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion (MediaPlayer mediaPlayer) {
@@ -84,9 +92,6 @@ public class FragmentStartWelcomePresenter implements BasePresenter {
         this.arrayString = arrayStringP;
         this.viewAnimation1 = viewAnimation1;
         this.viewAnimation2 = viewAnimation2;
-
-        started = true;
-        handler.postDelayed(runnableHTextView, 1500);
     }
 
     private void startOnAnimationsEnd (Animation animation1P, final Animation animation2P) {

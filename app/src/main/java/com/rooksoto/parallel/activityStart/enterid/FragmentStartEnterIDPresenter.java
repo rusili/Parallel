@@ -28,8 +28,8 @@ public class FragmentStartEnterIDPresenter implements BasePresenter {
             Toast.makeText(viewP.getContext(), "Cannot Connect - Please Check Internet Connection", Toast.LENGTH_SHORT).show();
         } else {
             ((Activity) viewP.getContext()).getFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out_right)
-                    .add(containerID, fragmentP, id)
+                    .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out)
+                    .replace(containerID, fragmentP, id)
                     .commit();
         }
     }

@@ -4,7 +4,7 @@
              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:onClick="onClickToQuestions">
+              >
 
     <com.hanks.htextview.HTextView
         android:id="@+id/fragment_start_welcome_htextview"

@@ -36,8 +36,8 @@ public class FragmentStartQuestionsPresenter implements BasePresenter {
 
     public void setSwipeStack (FixedSwipeStack swipeStack) {
         listofQuestions.add(new Questions("Are you an IOS or Android developer?", R.drawable.ic_appleicon, R.drawable.ic_androidicon));
+        listofQuestions.add(new Questions("Are you an experienced programmer?"));
         listofQuestions.add(new Questions("Are you affiliated with C4Q?"));
-        listofQuestions.add(new Questions("Do you have more than 3 years of programming experience?"));
         listofQuestions.add(new Questions("Are dogs better than cats?"));
 
         swipeStack.setAdapter(new SwipeStackAdapter(listofQuestions));
@@ -74,7 +74,7 @@ public class FragmentStartQuestionsPresenter implements BasePresenter {
         saveUserInfo();
         new Handler().postDelayed(new Runnable() {
             public void run () {
-                Intent intentToActivityHub = new Intent(view.getContext(), ActivityHub.class);
+                Intent intentToActivityHub = new Intent(((Activity) view.getContext()), ActivityHub.class);
                 view.getContext().startActivity(intentToActivityHub);
             }
         }, 500);

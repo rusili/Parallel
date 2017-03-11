@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Events;
 import com.rooksoto.parallel.utility.widgets.recyclerview.EventsAdapter;
@@ -16,7 +17,7 @@ import com.rooksoto.parallel.utility.widgets.recyclerview.EventsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentLoginWaitPageCurrent extends Fragment {
+public class FragmentLoginWaitPageCurrent extends Fragment implements BaseView{
     private View mView;
     private RecyclerView mRecyclerView;
 
@@ -34,5 +35,20 @@ public class FragmentLoginWaitPageCurrent extends Fragment {
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.fragment_login_wait_event_current_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mView.getContext()));
         mRecyclerView.setAdapter(new EventsAdapter(eventsList));
+    }
+
+    @Override
+    public void initialize () {
+
+    }
+
+    @Override
+    public void setViews () {
+
+    }
+
+    @Override
+    public void onBackPressed () {
+
     }
 }

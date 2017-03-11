@@ -17,10 +17,12 @@ import com.rooksoto.parallel.activityHub.eventinfo.FragmentEventInfo;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity implements BaseView {
-    private static final String TAG = "ActivityHub";
-    private ActivityHubPresenter activityHubPresenter;
+    private ActivityHubPresenter activityHubPresenter = new ActivityHubPresenter();
+
     private View view;
+
     private int containerID = R.id.viewpager;
+    private static final String TAG = "ActivityHub";
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {

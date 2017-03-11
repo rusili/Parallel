@@ -14,7 +14,7 @@ import com.rooksoto.parallel.R;
  */
 
 public class FragmentEventInfo extends Fragment implements BaseView {
-    private FragmentEventInfoPresenter fragmentEventInfoPresenter;
+    private FragmentEventInfoPresenter fragmentEventInfoPresenter = new FragmentEventInfoPresenter();
 
     private View view;
 

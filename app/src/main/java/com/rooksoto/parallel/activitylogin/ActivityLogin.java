@@ -31,12 +31,12 @@ public class ActivityLogin extends AppCompatActivity implements BaseView {
     }
 
     public void initialize () {
-        activityLoginPresenter.giveActivity(this);
         setViews();
     }
 
     @Override
     public void setViews () {
+        activityLoginPresenter.giveActivity(this, getWindow().getDecorView().getRootView());
         loadFragmentSplash();
     }
 

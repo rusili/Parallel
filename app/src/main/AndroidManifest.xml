@@ -42,7 +42,6 @@
                   android:windowSoftInputMode="adjustPan"
             >
 
-
         </activity>
         <service
             android:name=".utility.geolocation.GeofenceService"

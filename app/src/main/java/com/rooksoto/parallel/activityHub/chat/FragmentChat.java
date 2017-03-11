@@ -18,7 +18,7 @@ import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.ChatMessage;
 
 public class FragmentChat extends Fragment implements BaseView {
-    private FragmentChatPresenter fragmentChatPresenter;
+    private FragmentChatPresenter fragmentChatPresenter = new FragmentChatPresenter();
 
     private View view;
     private ProgressBar progressBar;

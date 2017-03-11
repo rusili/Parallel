@@ -134,14 +134,16 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
         }
     }
 
-    public void setOnClickReplace (Fragment fragment, View viewP, int containerID, String id) {
+    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
         ((Activity) viewP.getContext()).getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.animator_fade_in_right, R.animator.animator_fade_out_right)
-                .replace(containerID, fragment, id)
+                .replace(containerID, fragmentP, id)
                 .commit();
     }
 
     public void checkLoginInfo (String usernameP, String passwordP) {
         // // TODO: 3/9/17 Check username/password for Firebase authentication
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(getGoogleAPI());
+        ((Activity) view.getContext()).startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 }

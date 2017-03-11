@@ -13,7 +13,7 @@ import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.utility.widgets.recyclerview.AttendeesAdapter;
 
 public class FragmentAttendees extends Fragment implements BaseView {
-    private FragmentAttendeesPresenter fragmentAttendeesPresenter;
+    private FragmentAttendeesPresenter fragmentAttendeesPresenter = new FragmentAttendeesPresenter();
 
     private View view;
     private RecyclerView recyclerView;

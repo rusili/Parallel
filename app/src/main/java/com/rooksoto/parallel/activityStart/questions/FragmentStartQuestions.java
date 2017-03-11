@@ -14,7 +14,7 @@ import com.rooksoto.parallel.utility.widgets.swipestack.FixedSwipeStack;
 import link.fls.swipestack.SwipeStack;
 
 public class FragmentStartQuestions extends Fragment implements BaseView, SwipeStack.SwipeStackListener {
-    private FragmentStartQuestionsPresenter fragmentStartQuestionsPresenter;
+    private FragmentStartQuestionsPresenter fragmentStartQuestionsPresenter = new FragmentStartQuestionsPresenter();
 
     private View view;
 

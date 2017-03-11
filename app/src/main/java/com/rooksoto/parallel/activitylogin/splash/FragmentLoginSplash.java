@@ -49,7 +49,7 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
         parallelWordLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin(), parallelWordLeft, containerID, "Login");
+                fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
             }
         });
 
@@ -86,6 +86,6 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
         Animation slowDown = AnimationUtils.loadAnimation(view.getContext(), R.anim.slowdown);
         Animation slowUp = AnimationUtils.loadAnimation(view.getContext(), R.anim.slowup);
 
-        fragmentLoginSplashPresenter.startOnAnimationsEnd(accelerateUp, accelerateDown, slowDown, slowUp);
+        fragmentLoginSplashPresenter.startOnAnimationsEnd(accelerateDown, accelerateUp, slowUp, slowDown);
     }
 }

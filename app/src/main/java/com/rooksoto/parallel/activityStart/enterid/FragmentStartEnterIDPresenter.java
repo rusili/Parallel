@@ -25,11 +25,11 @@ public class FragmentStartEnterIDPresenter implements BasePresenter {
 
     public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
         if (!isOnline(viewP)) {
-            Toast.makeText(viewP.getContext(), "Cannot Connect - Please Check Internet Connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(viewP.getContext(), "Cannot Connect - Please Check Internet Connection", Toast.LENGTH_SHORT).show();
         } else {
             ((Activity) viewP.getContext()).getFragmentManager().beginTransaction()
                     .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out_right)
-                    .replace(containerID, fragmentP, id)
+                    .add(containerID, fragmentP, id)
                     .commit();
         }
     }

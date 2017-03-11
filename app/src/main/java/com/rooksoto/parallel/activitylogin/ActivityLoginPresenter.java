@@ -20,8 +20,6 @@ public class ActivityLoginPresenter implements BasePresenter {
     private int containerID = R.id.activity_login_fragment_container;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
     private CustomToast mCustomToast = new CustomToast();
-    private ImageView logoViewLeft;
-    private ImageView logoViewRight;
     private boolean logoVisible = false;
     private FragmentLoginLogin mFragmentLoginLogin;
     private boolean isNew = true;
@@ -69,16 +67,16 @@ public class ActivityLoginPresenter implements BasePresenter {
         view2.startAnimation(animation2P);
     }
 
-    public void checkLogoVisibility (boolean logoVisibleP, ImageView logoViewLeft, ImageView logoViewRight) {
+    public void checkLogoVisibility (View viewP) {
         if (!logoVisible) {
-            logoViewLeft = (ImageView) activity.findViewById(R.id.activity_login_logoleft);
+            ImageView logoViewLeft = (ImageView) ((Activity) viewP.getContext()).findViewById(R.id.activity_login_logoleft);
             logoViewLeft.setVisibility(View.VISIBLE);
-            Animation fadeInUp = AnimationUtils.loadAnimation(activity, R.anim.fadeinup);
+            Animation fadeInUp = AnimationUtils.loadAnimation(viewP.getContext(), R.anim.fadeinup);
             logoViewLeft.startAnimation(fadeInUp);
 
-            logoViewRight = (ImageView) activity.findViewById(R.id.activity_login_logoright);
+            ImageView logoViewRight = (ImageView) ((Activity) viewP.getContext()).findViewById(R.id.activity_login_logoright);
             logoViewRight.setVisibility(View.VISIBLE);
-            Animation fadeInDown = AnimationUtils.loadAnimation(activity, R.anim.fadeindown);
+            Animation fadeInDown = AnimationUtils.loadAnimation(viewP.getContext(), R.anim.fadeindown);
             logoViewRight.startAnimation(fadeInDown);
             logoVisible = true;
         }
@@ -90,7 +88,7 @@ public class ActivityLoginPresenter implements BasePresenter {
         activity.finish();
     }
 
-    public void giveActivity (Activity activityP) {
+    public void giveActivity (Activity activityP, View rootView) {
         this.activity = activityP;
     }
 }

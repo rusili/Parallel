@@ -14,11 +14,11 @@ import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityStart.questions.FragmentStartQuestions;
 
 public class FragmentStartEnterID extends Fragment implements BaseView {
-    private FragmentStartEnterIDPresenter fragmentStartEnterIDPresenter;
+    private FragmentStartEnterIDPresenter fragmentStartEnterIDPresenter = new FragmentStartEnterIDPresenter();
 
     private View view;
     private EditText textViewEventID;
-    private Button button;
+    private Button buttonEnter;
 
     private int containerID = R.id.activity_start_fragment_container;
     private String eventID;
@@ -40,12 +40,12 @@ public class FragmentStartEnterID extends Fragment implements BaseView {
         textViewEventID = (EditText) view.findViewById(R.id.fragment_start_enterid_eventid);
         eventID = textViewEventID.getText().toString();
 
-        button = (Button) view.findViewById(R.id.enter_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonEnter = (Button) view.findViewById(R.id.enter_button);
+        buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
                 fragmentStartEnterIDPresenter.checkEventID(eventID);
-                fragmentStartEnterIDPresenter.setOnClickReplace(new FragmentStartQuestions(), view, containerID, "Questions");
+                fragmentStartEnterIDPresenter.setOnClickReplace(new FragmentStartQuestions(), buttonEnter, containerID, "Questions");
             }
         });
     }

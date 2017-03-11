@@ -12,7 +12,7 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 
 public class FragmentStartWelcome extends Fragment implements BaseView {
-    private FragmentStartWelcomePresenter fragmentStartWelcomePresenter;
+    private FragmentStartWelcomePresenter fragmentStartWelcomePresenter = new FragmentStartWelcomePresenter();
 
     private View view;
 

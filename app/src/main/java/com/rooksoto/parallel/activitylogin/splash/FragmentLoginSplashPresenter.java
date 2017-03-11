@@ -30,15 +30,12 @@ public class FragmentLoginSplashPresenter implements BasePresenter {
     public void setAnimatorSetViews (View view1P, View view2P) {
         this.viewAnimatorSet1 = view1P;
         this.viewAnimatorSet2 = view2P;
-        viewAnimatorSet1.setVisibility(View.VISIBLE);
-        viewAnimatorSet2.setVisibility(View.VISIBLE);
+
     }
 
     public void setAnimationViews (View view1P, View view2P) {
         this.viewAnimation1 = view1P;
         this.viewAnimation2 = view2P;
-        viewAnimation1.setVisibility(View.VISIBLE);
-        viewAnimation2.setVisibility(View.VISIBLE);
     }
 
     public void startOnAnimationsEnd (Animation animation1P, Animation animation2P, final Animation animation11P, final Animation animation22P) {
@@ -57,6 +54,9 @@ public class FragmentLoginSplashPresenter implements BasePresenter {
             public void onAnimationRepeat (Animation animation) {
             }
         });
+        viewAnimation1.setVisibility(View.VISIBLE);
+        viewAnimation2.setVisibility(View.VISIBLE);
+
         viewAnimation1.startAnimation(animation1P);
         viewAnimation2.startAnimation(animation2P);
     }
@@ -64,6 +64,10 @@ public class FragmentLoginSplashPresenter implements BasePresenter {
     public void startAnimatorSet (AnimatorSet animationSet1P, AnimatorSet animationSet2P) {
         animationSet1P.setTarget(viewAnimatorSet1);
         animationSet2P.setTarget(viewAnimatorSet2);
+
+        viewAnimatorSet1.setVisibility(View.VISIBLE);
+        viewAnimatorSet2.setVisibility(View.VISIBLE);
+
         animationSet1P.start();
         animationSet2P.start();
     }

@@ -7,15 +7,13 @@ import android.view.View;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityStart.enterid.FragmentStartEnterID;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class ActivityStart extends AppCompatActivity implements BaseView {
-    private ActivityStartPresenter activityStartPresenter;
+    private ActivityStartPresenter activityStartPresenter = new ActivityStartPresenter();
 
     private View view;
 
     private int containerID = R.id.activity_start_fragment_container;
-    private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -36,7 +34,7 @@ public class ActivityStart extends AppCompatActivity implements BaseView {
     }
 
     private void loadFragmentEnterID () {
-        activityStartPresenter.loadFragment(new FragmentStartEnterID(), containerID, R.animator.animator_fade_in_left, R.animator.animator_fade_out_right, "EnterID");
+        activityStartPresenter.loadFragment(new FragmentStartEnterID(), R.animator.animator_fade_in_left, R.animator.animator_fade_out_right, containerID, "EnterID");
     }
 
     @Override

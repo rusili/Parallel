@@ -7,9 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 
-public class FragmentLoginWaitPageFuture extends Fragment {
+public class FragmentLoginWaitPageFuture extends Fragment implements BaseView{
     private View mView;
 
     @Nullable
@@ -17,5 +18,20 @@ public class FragmentLoginWaitPageFuture extends Fragment {
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_login_wait_event, container, false);
         return mView;
+    }
+
+    @Override
+    public void initialize () {
+
+    }
+
+    @Override
+    public void setViews () {
+
+    }
+
+    @Override
+    public void onBackPressed () {
+
     }
 }

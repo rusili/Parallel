@@ -1,9 +1,11 @@
 package com.rooksoto.parallel.activitylogin.login;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.ActivityLoginPresenter;
@@ -56,12 +56,12 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
         super.onCreate(savedInstanceState);
     }
 
-    private void checkFirebaseAuth () {
-        fragmentLoginLoginPresenter.checkFirebaseAuth();
+    private void checkFirebaseAuth(View view) {
+        fragmentLoginLoginPresenter.checkFirebaseAuth(view);
     }
 
-    private void checkGoogleSignIn () {
-        fragmentLoginLoginPresenter.checkGoogleSignIn(view, getActivity());
+    private void buildGoogleSignInAndClient(Activity activity) {
+        fragmentLoginLoginPresenter.buildGoogleSignInAndClient(activity);
     }
 
     @Override
@@ -79,11 +79,13 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
     }
 
     public void initialize () {
-        checkFirebaseAuth();
 
-        if (isNew == true) {
-            checkGoogleSignIn();
+        checkFirebaseAuth(view);
+
+        if (isNew) {
+            buildGoogleSignInAndClient(getActivity());
         }
+
         setViews();
     }
 
@@ -113,8 +115,10 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
         imageViewGoogleSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentLoginLoginPresenter.checkGoogleSignIn(view, getActivity());
-                fragmentLoginLoginPresenter.setOnClickReplace(new FragmentLoginWait(), imageViewGoogleSignIn, containerID, "Wait");
+//                fragmentLoginLoginPresenter.buildGoogleSignInAndClient(view, getActivity());
+//                fragmentLoginLoginPresenter.setOnClickReplace(new FragmentLoginWait(), imageViewGoogleSignIn, containerID, "Wait");
+                fragmentLoginLoginPresenter.onGoogleSignInClicked(getActivity());
+
             }
         });
 
@@ -125,18 +129,13 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
     public void onBackPressed () {
     }
 
+
+
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: ");
         fragmentLoginLoginPresenter.checkLoginID(requestCode, resultCode, data);
-    }
-
-    private void handleSignInResult (GoogleSignInResult result) {
-        fragmentLoginLoginPresenter.handleSignInResult(result);
-    }
-
-    private void firebaseAuthWithGoogle (GoogleSignInAccount acct) {
-        fragmentLoginLoginPresenter.firebaseAuthWithGoogle(acct);
     }
 
 }

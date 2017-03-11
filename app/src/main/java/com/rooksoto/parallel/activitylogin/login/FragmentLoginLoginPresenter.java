@@ -25,6 +25,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.BuildConfig;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.activityStart.ActivityStart;
 
 public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClient.OnConnectionFailedListener {
     private static final String CLIENTID = BuildConfig.OAUTHCLIENTID;
@@ -43,7 +44,8 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
     public void onBackPressedOverride (View viewP) {
     }
 
-    public void checkFirebaseAuth () {
+    public void checkFirebaseAuth (final View view) {
+        this.view = view;
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -52,8 +54,8 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    //Intent intent = new Intent(getActivity(), ActivityStart.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), ActivityStart.class);
+                    view.getContext().startActivity(intent);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -62,15 +64,14 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
         };
     }
 
-    public void checkGoogleSignIn (View viewP, Activity activityP) {
-        this.view = viewP;
+    public void buildGoogleSignInAndClient(Activity activity) {
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(CLIENTID)
                 .requestEmail()
                 .build();
         googleApiClient = new GoogleApiClient.Builder(view.getContext())
-                .enableAutoManage((FragmentActivity) activityP, this)
+                .enableAutoManage((FragmentActivity) activity, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
     }
@@ -86,6 +87,7 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
     }
 
     public void checkLoginID (int code, int requestCode, Intent data) {
+        Log.d(TAG, "checkLoginID: ");
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
@@ -145,5 +147,11 @@ public class FragmentLoginLoginPresenter implements BasePresenter, GoogleApiClie
         // // TODO: 3/9/17 Check username/password for Firebase authentication
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(getGoogleAPI());
         ((Activity) view.getContext()).startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    public void onGoogleSignInClicked(Activity activity) {
+        Log.d(TAG, "onGoogleSignInClicked: ");
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+
     }
 }

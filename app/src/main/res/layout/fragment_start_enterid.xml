@@ -39,6 +39,7 @@
                 android:textColor="@color/textMain"
                 android:typeface="sans"
                 android:singleLine="true"
+                android:imeOptions="actionDone"
                 />
         </android.support.design.widget.TextInputLayout>
 

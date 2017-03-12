@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityStart.welcome.FragmentStartWelcome;
@@ -22,6 +24,16 @@ public class FragmentStartEnterID extends Fragment implements BaseView {
 
     private int containerID = R.id.activity_start_fragment_container;
     private String eventID;
+
+    private FirebaseDatabase database;
+    private DatabaseReference rootReference;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        database = FirebaseDatabase.getInstance();
+        rootReference = database.getReference();
+    }
 
     @Nullable
     @Override
@@ -44,7 +56,7 @@ public class FragmentStartEnterID extends Fragment implements BaseView {
         buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentStartEnterIDPresenter.checkEventID(eventID);
+                fragmentStartEnterIDPresenter.checkEventID(eventID, rootReference);
                 fragmentStartEnterIDPresenter.setOnClickReplace(new FragmentStartWelcome(), buttonEnter, containerID, "Questions");
             }
         });

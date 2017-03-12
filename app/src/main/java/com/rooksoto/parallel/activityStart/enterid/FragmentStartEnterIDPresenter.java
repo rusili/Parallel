@@ -8,6 +8,10 @@ import android.net.NetworkInfo;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
@@ -45,7 +49,23 @@ public class FragmentStartEnterIDPresenter implements BasePresenter {
         }
     }
 
-    public void checkEventID (String eventID) {
-        // TODO: 3/10/17 Check Event ID
+    // TODO: 3/12/17 - ROOK - Implement check for valid eventID. See comments. 
+    void checkEventID (final String eventID, DatabaseReference reference) {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(eventID)) {
+                    // Command the fragment to load the next screen, using eventID data
+                } else {
+                    // User typed invalid eventID... Handle here (Send to error page?)
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }

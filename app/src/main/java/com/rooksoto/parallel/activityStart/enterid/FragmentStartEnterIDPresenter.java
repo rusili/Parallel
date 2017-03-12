@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentStartEnterIDPresenter implements BasePresenter {
+
+    private static final String TAG = "EnterIDPresenter";
 
     @Override
     public void start () {
@@ -56,14 +59,20 @@ public class FragmentStartEnterIDPresenter implements BasePresenter {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(eventID)) {
                     // Command the fragment to load the next screen, using eventID data
+                    // There should be a reference to the FragmentStartEnterID fragment here
+                    // So we can call its "load next fragment" method
                 } else {
                     // User typed invalid eventID... Handle here (Send to error page?)
+                    // There should be a reference to the FragmentStartEnterID fragment here
+                    // So that we can call the fragment's "invalid event id" method
+                    // Which should probably show a toast or take the user to an error page
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                // Handle cancellation
+                Log.d(TAG, "onCancelled: " + databaseError.getMessage());
             }
         });
 

@@ -8,9 +8,24 @@ public class Admin {
 
     @SerializedName("authenticated")
     @Expose
-    public Boolean authenticated;
+    private Boolean authenticated;
     @SerializedName("admin_name")
     @Expose
-    public String adminName;
+    private String adminName;
 
+    public Boolean getAuthenticated() {
+        return authenticated;
+    }
+
+    public void setAuthenticated(Boolean authenticated) {
+        this.authenticated = authenticated;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
 }

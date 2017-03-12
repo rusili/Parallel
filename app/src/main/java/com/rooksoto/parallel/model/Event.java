@@ -8,24 +8,79 @@ public class Event {
 
     @SerializedName("admin")
     @Expose
-    public Admin admin;
-    @SerializedName("rooms")
+    private Admin admin;
+    @SerializedName("room_list")
     @Expose
-    public Rooms rooms;
+    private RoomList roomList;
     @SerializedName("event_description")
     @Expose
-    public String eventDescription;
+    private String eventDescription;
     @SerializedName("event_name")
     @Expose
-    public String eventName;
+    private String eventName;
     @SerializedName("event_id")
     @Expose
-    public String eventId;
+    private String eventId;
     @SerializedName("event_location")
     @Expose
-    public EventLocation eventLocation;
-    @SerializedName("attendees")
+    private EventLocation eventLocation;
+    @SerializedName("attendee_list")
     @Expose
-    public Attendees attendees;
+    private AttendeeList attendeeList;
 
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public RoomList getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(RoomList roomList) {
+        this.roomList = roomList;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
+    }
+
+    public EventLocation getEventLocation() {
+        return eventLocation;
+    }
+
+    public void setEventLocation(EventLocation eventLocation) {
+        this.eventLocation = eventLocation;
+    }
+
+    public AttendeeList getAttendeeList() {
+        return attendeeList;
+    }
+
+    public void setAttendeeList(AttendeeList attendeeList) {
+        this.attendeeList = attendeeList;
+    }
 }

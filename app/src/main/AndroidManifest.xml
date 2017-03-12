@@ -36,6 +36,12 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
         </activity>
+
+        <activity android:name=".activityStart.ActivityStart"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/ActivityLogin">
+
+        </activity>
         <activity android:name=".activityHub.ActivityHub"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityHub"

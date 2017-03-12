@@ -17,8 +17,8 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.ChatMessage;
 
-public class FragmentChat extends Fragment implements  {
-    private FragmentChatPresenter fragmentChatPresenter = new FragmentChatPresenter();
+public class FragmentChat extends Fragment implements FragmentChatPresenter.Listener{
+    private FragmentChatPresenter fragmentChatPresenter;
 
     private View view;
     private ProgressBar progressBar;
@@ -33,7 +33,8 @@ public class FragmentChat extends Fragment implements  {
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragmentChatPresenter.getProfileInfo();
+        fragmentChatPresenter = new FragmentChatPresenter(this);
+        fragmentChatPresenter.onCreate();
     }
 
     @Nullable

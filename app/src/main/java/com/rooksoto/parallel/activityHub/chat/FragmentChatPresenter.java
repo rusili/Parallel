@@ -35,6 +35,7 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 public class FragmentChatPresenter {
+    private Listener listener;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private DatabaseReference databaseRef;
@@ -50,6 +51,10 @@ public class FragmentChatPresenter {
     private String userName;
     private String profilePic;
     private FirebaseListAdapter messageListAdapter;
+
+    public FragmentChatPresenter(Listener listener) {
+        this.listener = listener;
+    }
 
     @Override
     public void start () {
@@ -171,6 +176,13 @@ public class FragmentChatPresenter {
 
             }
         });
+    }
+
+    public void onCreate() {
+    }
+
+    interface Listener {
+        
     }
 
 }

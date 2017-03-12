@@ -1,9 +1,7 @@
 package com.rooksoto.parallel.activitylogin.login;
 
-import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -80,8 +78,12 @@ class FragmentLoginLoginPresenter {
         }
     }
 
-    public void onGeneralLoginClicked(Fragment fragment, View view, int containerID, String id) {
-        listener.replaceFragment(fragment, view, containerID, id);
+    public void onGeneralLoginClicked(String id) {
+        listener.startFragmentReplacement(id);
+    }
+
+    public void onDestroy() {
+        listener.demolishGoogleClient(googleApiClient);
     }
 
 
@@ -98,6 +100,8 @@ class FragmentLoginLoginPresenter {
 
         void firebaseAuthWithGoogle(GoogleSignInAccount acct, FirebaseAuth firebaseAuth);
 
-        void replaceFragment(Fragment fragment, View view, int containerID, String id);
+        void startFragmentReplacement(String id);
+
+        void demolishGoogleClient(GoogleApiClient googleApiClient);
     }
 }

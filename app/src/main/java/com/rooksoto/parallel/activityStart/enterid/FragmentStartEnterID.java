@@ -3,11 +3,14 @@ package com.rooksoto.parallel.activityStart.enterid;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,6 +38,12 @@ public class FragmentStartEnterID extends Fragment implements BaseView {
         rootReference = database.getReference();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +60,17 @@ public class FragmentStartEnterID extends Fragment implements BaseView {
     public void setViews () {
         textViewEventID = (EditText) view.findViewById(R.id.fragment_start_enterid_eventid);
         eventID = textViewEventID.getText().toString();
+
+        textViewEventID.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    buttonEnter.performClick();
+                    return false;
+                }
+                return false;
+            }
+        });
 
         buttonEnter = (Button) view.findViewById(R.id.enter_button);
         buttonEnter.setOnClickListener(new View.OnClickListener() {

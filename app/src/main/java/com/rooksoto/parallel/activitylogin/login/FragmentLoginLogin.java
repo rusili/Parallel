@@ -35,6 +35,8 @@ import com.rooksoto.parallel.activitylogin.createaccount.FragmentLoginCreateAcco
 import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;
 
 public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPresenter.Listener, GoogleApiClient.OnConnectionFailedListener {
+    public static final String WAIT = "Wait";
+    public static final String CREATE_ACCOUNT = "CreateAccount";
     private View view;
     private String username;
     private String password;
@@ -110,14 +112,15 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
             @Override
             public void onClick(View v) {
                 //fragmentLoginLoginPresenter.checkLoginInfo(username, password);
-                loginFragmentPresenter.onGeneralLoginClicked(new FragmentLoginWait(), signInButton, containerID, "Wait");
+//                loginFragmentPresenter.onGeneralLoginClicked(new FragmentLoginWait(), signInButton, containerID, "Wait");
+                loginFragmentPresenter.onGeneralLoginClicked(WAIT);
             }
         });
         final TextView textViewCreateAccount = (TextView) view.findViewById(R.id.fragment_login_login_button_createaccount);
         textViewCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginFragmentPresenter.onGeneralLoginClicked(new FragmentLoginCreateAccount(), textViewCreateAccount, containerID, "CreateAccount");
+                loginFragmentPresenter.onGeneralLoginClicked(CREATE_ACCOUNT);
             }
         });
         final ImageView imageViewGoogleSignIn = (ImageView) view.findViewById(R.id.fragment_login_login_button_googlesignin);
@@ -196,13 +199,38 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
     }
 
     @Override
-    public void replaceFragment(Fragment fragment, View view, int containerID, String id) {
+    public void startFragmentReplacement(String id) {
+        switch (id) {
+
+            case WAIT:
+                replaceFragment(new FragmentLoginWait(), id);
+                break;
+            case CREATE_ACCOUNT:
+                replaceFragment(new FragmentLoginCreateAccount(), id);
+        }
+
+    }
+
+    @Override
+    public void demolishGoogleClient(GoogleApiClient googleApiClient) {
+        googleApiClient.stopAutoManage((FragmentActivity) getActivity());
+        googleApiClient.disconnect();
+
+    }
+
+    private void replaceFragment(Fragment fragment, String id) {
         getActivity().getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.animator_fade_in_right, R.animator.animator_fade_out_right)
                 .replace(containerID, fragment, id)
                 .commit();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        loginFragmentPresenter.onDestroy();
+
+    }
 }
 
 

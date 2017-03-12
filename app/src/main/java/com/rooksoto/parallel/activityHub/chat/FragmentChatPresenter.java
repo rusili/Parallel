@@ -34,7 +34,7 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-public class FragmentChatPresenter implements BasePresenter {
+public class FragmentChatPresenter {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private DatabaseReference databaseRef;

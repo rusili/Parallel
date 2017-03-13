@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
->
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/picImageView"
@@ -16,24 +15,24 @@
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/picImageView"
+        android:textColor="@color/textAlt"
         android:textSize="@dimen/chat_username_textsize"
         android:textStyle="bold"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/textAlt"
         tools:text="Name" />
 
     <TextView
         android:id="@+id/messageTextView"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
-        android:layout_toRightOf="@id/picImageView"
         android:layout_below="@id/nameTextView"
-        android:layout_marginLeft="5dp"
         android:layout_marginBottom="5dp"
-        android:textSize="@dimen/chat_message_textsize"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/picImageView"
         android:textColor="@color/textMain"
+        android:textSize="@dimen/chat_message_textsize"
         tools:text="Message" />
 </RelativeLayout>

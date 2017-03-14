@@ -26,11 +26,13 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
 
+
         </activity>
 
         <activity android:name=".activityStart.ActivityStart"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -39,9 +41,7 @@
         <activity android:name=".activityHub.ActivityHub"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityHub"
-                  android:windowSoftInputMode="adjustPan"
-            >
-
+                  android:windowSoftInputMode="adjustPan">
         </activity>
         <service
             android:name=".utility.geolocation.GeofenceService"

@@ -25,7 +25,6 @@ public class FragmentChat extends Fragment implements BaseView {
     private EditText messageEditText;
     private Button sendButton;
     private ListView messageListView;
-    private ListView chatroomListView;
     private ImageView picImageView;
 
     private FirebaseListAdapter <ChatMessage> messageListAdapter;
@@ -46,16 +45,15 @@ public class FragmentChat extends Fragment implements BaseView {
 
     public void initialize () {
         setViews();
-        fragmentChatPresenter.getViews(view, chatroomListView, progressBar, messageEditText, sendButton, messageListView, picImageView);
+        fragmentChatPresenter.getViews(view, progressBar, messageEditText, sendButton, messageListView, picImageView);
     }
 
     @Override
     public void setViews () {
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        messageEditText = (EditText) view.findViewById(R.id.messageEditText);
+        messageEditText = (EditText) view.findViewById(R.id.fragment_hub_chatroom_edittext_message);
         sendButton = (Button) view.findViewById(R.id.sendButton);
         messageListView = (ListView) view.findViewById(R.id.fragment_hub_chat_main_messageListView);
-        chatroomListView = (ListView) view.findViewById(R.id.fragment_hub_chat_roomlistview);
         picImageView = (ImageView) view.findViewById(R.id.picImageView);
     }
 

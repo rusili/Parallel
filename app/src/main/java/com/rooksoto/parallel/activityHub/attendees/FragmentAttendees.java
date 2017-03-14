@@ -10,13 +10,20 @@ import android.view.ViewGroup;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.objects.User;
 import com.rooksoto.parallel.utility.widgets.recyclerview.AttendeesAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentAttendees extends Fragment implements BaseView {
     private FragmentAttendeesPresenter fragmentAttendeesPresenter = new FragmentAttendeesPresenter();
 
     private View view;
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewAttendees;
+    private AttendeesAdapter attendeesAdapter;
+
+    private List<User> listofUsers = new ArrayList<>();
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,13 +38,19 @@ public class FragmentAttendees extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_hub_attendees_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new AttendeesAdapter());
+        tempRV();
+        recyclerViewAttendees = (RecyclerView) view.findViewById(R.id.fragment_hub_attendees_recyclerview);
+        recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerViewAttendees.setAdapter(attendeesAdapter);
     }
 
     @Override
     public void onBackPressed () {
+    }
 
+    private void tempRV(){
+        listofUsers.add(new User("Temp", "Temp@Temp.com"));
+        listofUsers.add(new User("Temp", "Temp@Temp.com"));
+        attendeesAdapter = new AttendeesAdapter(listofUsers);
     }
 }

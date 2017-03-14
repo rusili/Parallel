@@ -6,34 +6,34 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.objects.Answers;
+import com.rooksoto.parallel.objects.Session;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileAdapter extends RecyclerView.Adapter {
-    List <Answers> listofAnswers = new ArrayList <>();
+public class ItineraryAdapter extends RecyclerView.Adapter {
+    List <Session> listofSessions = new ArrayList <>();
 
-    public ProfileAdapter (List <Answers> listofAnswersP) {
-        this.listofAnswers = listofAnswersP;
+    public ItineraryAdapter (List <Session> listofSessionsP) {
+        this.listofSessions = listofSessionsP;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View profileView = inflater.inflate(R.layout.fragment_hub_profile_questionsviewholder, parent, false);
-        ProfileViewholder viewHolder = new ProfileViewholder(profileView);
+        View sessionView = inflater.inflate(R.layout.fragment_hub_eventinfo_sessions_viewholder, parent, false);
+        ItineraryViewholder viewHolder = new ItineraryViewholder(sessionView);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder (RecyclerView.ViewHolder holder, int position) {
-        ProfileViewholder profileViewholder = (ProfileViewholder) holder;
-        profileViewholder.bind(position, listofAnswers.get(position));
+        ItineraryViewholder itineraryViewholder = (ItineraryViewholder) holder;
+        itineraryViewholder.bind(position, listofSessions.get(position));
     }
 
     @Override
     public int getItemCount () {
-        return listofAnswers.size();
+        return listofSessions.size();
     }
 }

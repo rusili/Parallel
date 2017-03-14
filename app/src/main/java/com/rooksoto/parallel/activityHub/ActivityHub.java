@@ -13,7 +13,8 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityHub.attendees.FragmentAttendees;
 import com.rooksoto.parallel.activityHub.chat.FragmentChat;
-import com.rooksoto.parallel.activityHub.eventinfo.FragmentEventInfo;
+import com.rooksoto.parallel.activityHub.eventinfo.FragmentItinerary;
+import com.rooksoto.parallel.activityHub.profile.FragmentProfile;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity implements BaseView {
@@ -37,7 +38,8 @@ public class ActivityHub extends AppCompatActivity implements BaseView {
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
 
         FragmentPagerItems pages = new FragmentPagerItems(this);
-        pages.add(FragmentPagerItem.of("Event Info", FragmentEventInfo.class));
+        pages.add(FragmentPagerItem.of("Profile", FragmentProfile.class));
+        pages.add(FragmentPagerItem.of("Event Info", FragmentItinerary.class));
         pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
         pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
         pages.add(FragmentPagerItem.of("Camera", Camera2BasicFragment.class));

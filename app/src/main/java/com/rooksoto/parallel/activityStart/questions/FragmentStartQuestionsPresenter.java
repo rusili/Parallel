@@ -34,7 +34,10 @@ public class FragmentStartQuestionsPresenter implements BasePresenter {
         customAlertDialog.exit(viewP.getContext());
     }
 
-    public void setSwipeStack (FixedSwipeStack swipeStack) {
+    public void setSwipeStack (FixedSwipeStack swipeStack, View viewP) {
+        this.view = viewP;
+        listofQuestions.add(new Questions("Please answer the next few questions:"));
+
         listofQuestions.add(new Questions("Are you an IOS or Android developer?", R.drawable.ic_appleicon, R.drawable.ic_androidicon));
         listofQuestions.add(new Questions("Are you an experienced programmer?"));
         listofQuestions.add(new Questions("Are you affiliated with C4Q?"));

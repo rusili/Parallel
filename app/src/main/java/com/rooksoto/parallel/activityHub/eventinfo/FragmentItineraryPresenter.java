@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.rooksoto.parallel.BasePresenter;
 
-public class FragmentEventInfoPresenter implements BasePresenter {
+public class FragmentItineraryPresenter implements BasePresenter {
 
     @Override
     public void start () {

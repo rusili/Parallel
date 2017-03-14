@@ -9,7 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,7 +39,6 @@ public class FragmentChatPresenter implements BasePresenter {
     private DatabaseReference databaseRef;
 
     private View view;
-    private ListView chatroomListView;
     private Button buttonSend;
     private ListView messageListView;
     private EditText editTextMessage;
@@ -74,9 +72,8 @@ public class FragmentChatPresenter implements BasePresenter {
         databaseRef = FirebaseDatabase.getInstance().getReference().child("chatIds").child("001");
     }
 
-    public void getViews (View viewP, ListView chatroomListView, ProgressBar progressBarP, EditText messageEditTextP, Button sendButtonP, ListView listViewP, ImageView picImageViewP) {
+    public void getViews (View viewP, ProgressBar progressBarP, EditText messageEditTextP, Button sendButtonP, ListView listViewP, ImageView picImageViewP) {
         this.view = viewP;
-        this.chatroomListView = listViewP;
         this.progressBar = progressBarP;
         this.editTextMessage = messageEditTextP;
         this.buttonSend = sendButtonP;
@@ -128,9 +125,6 @@ public class FragmentChatPresenter implements BasePresenter {
         chatroomArray.add("Main");
         chatroomArray.add("IOS");
         chatroomArray.add("Android");
-
-        chatroomListView.setTextFilterEnabled(true);
-        chatroomListView.setAdapter(new ArrayAdapter <String>(view.getContext(), R.layout.chat_rooms, R.id.fragment_hub_chat_room_view_text, chatroomArray));
     }
 
     private void createFirebaseListAdapter (final DatabaseReference ref) {

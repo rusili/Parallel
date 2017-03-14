@@ -18,7 +18,7 @@ import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityHub.attendees.FragmentAttendees;
 import com.rooksoto.parallel.activityHub.chat.FragmentChat;
-import com.rooksoto.parallel.activityHub.eventinfo.FragmentEventInfo;
+import com.rooksoto.parallel.activityHub.eventinfo.FragmentItinerary;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 
@@ -59,7 +59,7 @@ public class ActivityHubPresenter implements BasePresenter {
         this.viewPager = viewPagerP;
 
         FragmentPagerItems pages = new FragmentPagerItems(view.getContext());
-        pages.add(FragmentPagerItem.of("Event Info", FragmentEventInfo.class));
+        pages.add(FragmentPagerItem.of("Event Info", FragmentItinerary.class));
         pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
         pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
         pages.add(FragmentPagerItem.of("Camera", Camera2BasicFragment.class));
@@ -74,15 +74,18 @@ public class ActivityHubPresenter implements BasePresenter {
                         false);
                 switch (position) {
                     case 0:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_today));
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_person_outline_black_24dp));
                         break;
                     case 1:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_today));
                         break;
                     case 2:
-                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_people_outline));
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
                         break;
                     case 3:
+                        icon.setImageDrawable(res.getDrawable(R.drawable.ic_people_outline));
+                        break;
+                    case 4:
                         icon.setImageDrawable(res.getDrawable(R.drawable.ic_panorama_wide_angle));
                         break;
                     default:

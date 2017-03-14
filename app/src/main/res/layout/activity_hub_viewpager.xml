@@ -7,7 +7,7 @@
                 android:background="@drawable/uibackground1"
     >
 
-    <android.support.v4.view.ViewPager
+    <com.rooksoto.parallel.utility.widgets.viewpager.FixedViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

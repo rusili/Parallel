@@ -5,8 +5,8 @@
     <dimen name="activity_start_fragment_height">400dp</dimen>
     <dimen name="activity_start_edittext_height">40dp</dimen>
     <dimen name="activity_start_edittext_width">256dp</dimen>
-    <dimen name="chat_username_textsize">12sp</dimen>
-    <dimen name="chat_message_textsize">12sp</dimen>
+    <dimen name="chat_username_textsize">13sp</dimen>
+    <dimen name="chat_message_textsize">13sp</dimen>
 
     <!-- Activity Main -->
 </resources>

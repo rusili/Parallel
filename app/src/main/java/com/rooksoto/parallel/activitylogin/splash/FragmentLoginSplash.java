@@ -49,7 +49,7 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
         parallelWordLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
+                //fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
             }
         });
 
@@ -64,6 +64,13 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
                 splashWordAnimation();
             }
         }, 1250);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run () {
+                fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
+            }
+        }, 3000);
+
     }
 
     @Override

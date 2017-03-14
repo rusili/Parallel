@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
@@ -15,6 +16,7 @@ import link.fls.swipestack.SwipeStack;
 
 public class FragmentStartQuestions extends Fragment implements BaseView, SwipeStack.SwipeStackListener {
     private FragmentStartQuestionsPresenter fragmentStartQuestionsPresenter = new FragmentStartQuestionsPresenter();
+    private FixedSwipeStack swipeStack;
 
     private View view;
 
@@ -33,6 +35,7 @@ public class FragmentStartQuestions extends Fragment implements BaseView, SwipeS
     @Override
     public void setViews () {
         setSwipeStack();
+        setOnClickListeners();
     }
 
     @Override
@@ -41,9 +44,9 @@ public class FragmentStartQuestions extends Fragment implements BaseView, SwipeS
     }
 
     private void setSwipeStack () {
-        FixedSwipeStack swipeStack = (FixedSwipeStack) view.findViewById(R.id.fragment_start_questions_swipestack_holder);
+        swipeStack = (FixedSwipeStack) view.findViewById(R.id.fragment_start_questions_swipestack_holder);
         swipeStack.setListener(this);
-        fragmentStartQuestionsPresenter.setSwipeStack(swipeStack);
+        fragmentStartQuestionsPresenter.setSwipeStack(swipeStack, view);
     }
 
     @Override
@@ -60,4 +63,13 @@ public class FragmentStartQuestions extends Fragment implements BaseView, SwipeS
     public void onStackEmpty () {
     }
 
+    private void setOnClickListeners(){
+        ImageView imageViewLeft = (ImageView) view.findViewById(R.id.fragment_start_questions_swipestack_leftanswer);
+        imageViewLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                onViewSwipedToLeft(swipeStack.getCurrentPosition());
+            }
+        });
+    }
 }

@@ -34,8 +34,8 @@ public class ParallelLocation {
     private static ParallelLocation instance;
     private static double parallelLatitude;
     private static double parallelLongitude;
-    private static double eventLatitude = 40.7417145;
-    private static double eventLongitude = -73.9352932;
+    private static double eventLatitude = 42.339670;
+    private static double eventLongitude = -71.104664;
     private static float eventGeofenceRadius = 100;
     private String GOFENCE_ID = "geoFenceID";
 

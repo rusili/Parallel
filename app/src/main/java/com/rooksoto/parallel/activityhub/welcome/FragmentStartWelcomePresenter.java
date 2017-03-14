@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityStart.welcome;
+package com.rooksoto.parallel.activityhub.welcome;
 
 import android.app.Activity;
 import android.app.Fragment;

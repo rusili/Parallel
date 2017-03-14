@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityStart.enterid;
+package com.rooksoto.parallel.activityhub.enterid;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -11,22 +11,22 @@ import android.widget.EditText;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityStart.welcome.FragmentStartWelcome;
+import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
 
-public class FragmentStartEnterID extends Fragment implements BaseView {
-    private FragmentStartEnterIDPresenter fragmentStartEnterIDPresenter = new FragmentStartEnterIDPresenter();
+public class FragmentHubEnterID extends Fragment implements BaseView {
+    private FragmentHubEnterIDPresenter fragmentHubEnterIDPresenter = new FragmentHubEnterIDPresenter();
 
     private View view;
     private EditText textViewEventID;
     private Button buttonEnter;
 
-    private int containerID = R.id.activity_start_fragment_container;
+    private int containerID = R.id.content_frame;
     private String eventID;
 
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_start_enterid, container, false);
+        view = inflater.inflate(R.layout.fragment_hub_enterid, container, false);
         initialize();
         return view;
     }
@@ -37,6 +37,8 @@ public class FragmentStartEnterID extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
+        final FragmentHubQuestions fragmentHubQuestions = new FragmentHubQuestions();
+
         textViewEventID = (EditText) view.findViewById(R.id.fragment_start_enterid_eventid);
         eventID = textViewEventID.getText().toString();
 
@@ -44,15 +46,15 @@ public class FragmentStartEnterID extends Fragment implements BaseView {
         buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentStartEnterIDPresenter.checkEventID(eventID);
-                fragmentStartEnterIDPresenter.setOnClickReplace(new FragmentStartWelcome(), buttonEnter, containerID, "Questions");
+                fragmentHubEnterIDPresenter.checkEventID(eventID);
+                fragmentHubEnterIDPresenter.setOnClickReplace(fragmentHubQuestions, buttonEnter, containerID, "Questions");
             }
         });
     }
 
     @Override
     public void onBackPressed () {
-        fragmentStartEnterIDPresenter.onBackPressedOverride(view);
+        fragmentHubEnterIDPresenter.onBackPressedOverride(view);
     }
 
 }

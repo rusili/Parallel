@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityStart.questions;
+package com.rooksoto.parallel.activityhub.questions;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityHub.ActivityHub;
+import com.rooksoto.parallel.activityhub.ActivityHub;
 import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.objects.Questions;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
@@ -18,7 +18,7 @@ import com.rooksoto.parallel.utility.widgets.swipestack.SwipeStackAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentStartQuestionsPresenter implements BasePresenter {
+public class FragmentHubQuestionsPresenter implements BasePresenter {
     private View view;
 
     private List <Questions> listofQuestions = new ArrayList <>();

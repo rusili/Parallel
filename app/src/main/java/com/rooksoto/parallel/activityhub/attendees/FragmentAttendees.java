@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityHub.attendees;
+package com.rooksoto.parallel.activityhub.attendees;
 
 import android.app.Fragment;
 import android.os.Bundle;

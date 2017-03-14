@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityHub.eventinfo;
+package com.rooksoto.parallel.activityhub.eventinfo;
 
 import android.app.Fragment;
 import android.os.Bundle;

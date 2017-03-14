@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityHub.chat;
+package com.rooksoto.parallel.activityhub.chat;
 
 import android.app.Activity;
 import android.app.Fragment;

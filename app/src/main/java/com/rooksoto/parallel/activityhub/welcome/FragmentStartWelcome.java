@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityStart.welcome;
+package com.rooksoto.parallel.activityhub.welcome;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityStart.questions.FragmentStartQuestions;
+import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
 
 public class FragmentStartWelcome extends Fragment implements BaseView {
     private FragmentStartWelcomePresenter fragmentStartWelcomePresenter = new FragmentStartWelcomePresenter();
@@ -23,7 +23,7 @@ public class FragmentStartWelcome extends Fragment implements BaseView {
     @Nullable
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_start_welcome, container, false);
+        view = inflater.inflate(R.layout.fragment_hub_welcome, container, false);
         initialize();
         return view;
     }
@@ -40,7 +40,7 @@ public class FragmentStartWelcome extends Fragment implements BaseView {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentStartWelcomePresenter.setOnClickReplace(new FragmentStartQuestions(), view, containerID, "Questions");
+                fragmentStartWelcomePresenter.setOnClickReplace(new FragmentHubQuestions(), view, containerID, "Questions");
             }
         });
 

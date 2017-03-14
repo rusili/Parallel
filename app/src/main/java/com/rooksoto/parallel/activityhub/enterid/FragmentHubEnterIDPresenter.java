@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityStart.enterid;
+package com.rooksoto.parallel.activityhub.enterid;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -12,7 +12,7 @@ import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 
-public class FragmentStartEnterIDPresenter implements BasePresenter {
+public class FragmentHubEnterIDPresenter implements BasePresenter {
 
     @Override
     public void start () {

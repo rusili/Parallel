@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityHub.profile;
+package com.rooksoto.parallel.activityhub.profile;
 
 import android.app.Fragment;
 import android.os.Bundle;

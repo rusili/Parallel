@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityHub;
+package com.rooksoto.parallel.activityhub;
 
 import android.app.Fragment;
 import android.content.res.Resources;
@@ -16,9 +16,9 @@ import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityHub.attendees.FragmentAttendees;
-import com.rooksoto.parallel.activityHub.chat.FragmentChat;
-import com.rooksoto.parallel.activityHub.eventinfo.FragmentItinerary;
+import com.rooksoto.parallel.activityhub.attendees.FragmentAttendees;
+import com.rooksoto.parallel.activityhub.chat.FragmentChat;
+import com.rooksoto.parallel.activityhub.eventinfo.FragmentItinerary;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 

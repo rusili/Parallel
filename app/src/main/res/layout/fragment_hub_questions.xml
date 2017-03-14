@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.rooksoto.parallel.activityStart.ActivityStart">
+    tools:context="com.rooksoto.parallel.activityhub.ActivityHub">
 
     <LinearLayout
-        android:id="@+id/fragment_start_questions_layout_bottom"
+        android:id="@+id/fragment_hub_questions_layout_bottom"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
@@ -23,21 +23,19 @@
             >
 
             <ImageView
-                android:id="@+id/fragment_start_questions_swipestack_leftanswer"
+                android:id="@+id/fragment_hub_questions_swipestack_leftanswer"
                 android:layout_width="47dp"
                 android:layout_height="100dp"
                 android:src="@drawable/xbutton"
-                android:layout_toRightOf="@id/fragment_start_questions_leftchevron"
                 android:layout_marginLeft="48dp"
                 android:tint="#f9f9f9"
                 android:scaleType="centerInside"
                 />
             <ImageView
-                android:id="@+id/fragment_start_questions_swipestack_rightanswer"
+                android:id="@+id/fragment_hub_questions_swipestack_rightanswer"
                 android:layout_width="47dp"
                 android:layout_height="100dp"
                 android:src="@drawable/checkbutton"
-                android:layout_toLeftOf="@id/fragment_start_questions_rightchevron"
                 android:layout_marginRight="48dp"
                 android:tint="#f9f9f9"
                 android:scaleType="centerInside"
@@ -52,39 +50,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="48dp"
-        android:layout_above="@id/fragment_start_questions_layout_bottom"
+        android:layout_above="@id/fragment_hub_questions_layout_bottom"
         >
 
         <TextView
-            android:id="@+id/fragment_start_questions_line0"
+            android:id="@+id/fragment_hub_questions_line0"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textAlignment="viewEnd"
             android:textColor="@color/textMain"
             />
         <TextView
-            android:id="@+id/fragment_start_questions_line1"
+            android:id="@+id/fragment_hub_questions_line1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textAlignment="viewEnd"
             android:textColor="@color/textMain"
             />
         <TextView
-            android:id="@+id/fragment_start_questions_line2"
+            android:id="@+id/fragment_hub_questions_line2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textAlignment="viewEnd"
             android:textColor="@color/textMain"
             />
         <TextView
-            android:id="@+id/fragment_start_questions_line3"
+            android:id="@+id/fragment_hub_questions_line3"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textAlignment="viewEnd"
             android:textColor="@color/textMain"
             />
         <TextView
-            android:id="@+id/fragment_start_questions_line4"
+            android:id="@+id/fragment_hub_questions_line4"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textAlignment="viewEnd"

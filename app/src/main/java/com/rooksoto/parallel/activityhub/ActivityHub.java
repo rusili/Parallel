@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityHub;
+package com.rooksoto.parallel.activityhub;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -11,10 +11,11 @@ import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityHub.attendees.FragmentAttendees;
-import com.rooksoto.parallel.activityHub.chat.FragmentChat;
-import com.rooksoto.parallel.activityHub.eventinfo.FragmentItinerary;
-import com.rooksoto.parallel.activityHub.profile.FragmentProfile;
+import com.rooksoto.parallel.activityhub.attendees.FragmentAttendees;
+import com.rooksoto.parallel.activityhub.chat.FragmentChat;
+import com.rooksoto.parallel.activityhub.enterid.FragmentHubEnterID;
+import com.rooksoto.parallel.activityhub.eventinfo.FragmentItinerary;
+import com.rooksoto.parallel.activityhub.profile.FragmentProfile;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 
 public class ActivityHub extends AppCompatActivity implements BaseView {
@@ -22,7 +23,7 @@ public class ActivityHub extends AppCompatActivity implements BaseView {
 
     private View view;
 
-    private int containerID = R.id.viewpager;
+    private int containerID = R.id.content_frame;
     private static final String TAG = "ActivityHub";
 
     @Override
@@ -57,12 +58,23 @@ public class ActivityHub extends AppCompatActivity implements BaseView {
     public void initialize () {
         setViews();
         activityHubPresenter.checkLocationServices(view);
+        //loadFragmentEnterID();
         setupViewpager();
     }
 
     @Override
     public void setViews () {
         view = getWindow().getDecorView().getRootView();
+    }
+
+    private void loadFragmentEnterID () {
+        SmartTabLayout smartTabLayout = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        smartTabLayout.setVisibility(View.INVISIBLE);
+
+        getFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out)
+                    .add(containerID, new FragmentHubEnterID(), "Enter ID")
+                    .commit();
     }
 
     @Override

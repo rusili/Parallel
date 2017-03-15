@@ -37,6 +37,7 @@ public class GeofenceService extends IntentService {
 
             } else if (transition == Geofence.GEOFENCE_TRANSITION_EXIT) {
                 Log.d(TAG, "onHandleIntent: Exiting Geofence = " + requestID);
+                // FIXME Make a broadcast receiver to get a toast from here
             }
         }
     }

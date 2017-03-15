@@ -1,63 +1,36 @@
 package com.rooksoto.parallel.activityhub.chat;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
-import com.rooksoto.parallel.BasePresenter;
-import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.ChatMessage;
-import com.rooksoto.parallel.utility.AppContext;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
+class FragmentChatPresenter {
 
-import static android.content.ContentValues.TAG;
-
-public class FragmentChatPresenter implements BasePresenter {
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private DatabaseReference databaseRef;
-
-    private View view;
-    private Button buttonSend;
-    private ListView messageListView;
-    private EditText editTextMessage;
-    private ProgressBar progressBar;
-    private ImageView imageViewPic;
-
+    private static final String TAG = FragmentChatPresenter.class.getClass().toString();
+    public static final String CHATIDS = "chatids";
+    private Listener listener;
     private String userName;
     private String profilePic;
-    private FirebaseListAdapter messageListAdapter;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private DatabaseReference ref;
+    private FirebaseListAdapter<ChatMessage> messageListAdapter;
 
-    @Override
-    public void start () {
+    public FragmentChatPresenter(Listener listener) {
+        this.listener = listener;
     }
 
-    public void getProfileInfo () {
+    void onCreate() {
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged (@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -68,99 +41,41 @@ public class FragmentChatPresenter implements BasePresenter {
                 }
             }
         };
-        // FIXME need to use eventID/chatId for latter child method
-        databaseRef = FirebaseDatabase.getInstance().getReference().child("chatIds").child("001");
-    }
-
-    public void getViews (View viewP, ProgressBar progressBarP, EditText messageEditTextP, Button sendButtonP, ListView listViewP, ImageView picImageViewP) {
-        this.view = viewP;
-        this.progressBar = progressBarP;
-        this.editTextMessage = messageEditTextP;
-        this.buttonSend = sendButtonP;
-        this.messageListView = listViewP;
-        this.imageViewPic = picImageViewP;
-    }
-
-    @Override
-    public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
+        setChatroomReference("001");
 
     }
 
-    public void onStartOverride () {
+    void onViewCreated() {
+        messageListAdapter = listener.createFirebaseListAdapter(ref);
+    }
+
+    void onSendButtonClick(String message) {
+        ref.push().setValue(new ChatMessage(userName, message, profilePic));
+    }
+
+    void onStart() {
         firebaseAuth.addAuthStateListener(authStateListener);
     }
 
-    public void onStopOverride () {
+    void onStop() {
         if (authStateListener != null) {
             firebaseAuth.removeAuthStateListener(authStateListener);
         }
     }
 
-    public void onDestroyOverride () {
+    void onDestroy() {
         messageListAdapter.cleanup();
     }
 
-    public void setUpChatRoomsOnViewCreated (Bundle argsP, FirebaseListAdapter firebaseListAdapterP) {
-        this.messageListAdapter = firebaseListAdapterP;
-
-        int position = FragmentPagerItem.getPosition(argsP);
-
-        createFirebaseListAdapter(databaseRef);
-        messageListView.setAdapter(messageListAdapter);
-        setupTextChangedListenerForMessage();
-        // FIXME: pass in the uri into the database
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view) {
-                databaseRef.push().setValue(new ChatMessage(userName, editTextMessage.getText().toString(), profilePic));
-                editTextMessage.setText("");
-            }
-        });
-
-        List <String> chatroomArray = new ArrayList <>();
-        chatroomArray.add("Main");
-        chatroomArray.add("IOS");
-        chatroomArray.add("Android");
+    void setChatroomReference(String chatId) {
+        ref = FirebaseDatabase.getInstance().getReference().child(CHATIDS).child(chatId);
     }
 
-    private void createFirebaseListAdapter (final DatabaseReference ref) {
-        messageListAdapter = new FirebaseListAdapter <ChatMessage>(((Activity) view.getContext()), ChatMessage.class, R.layout.chat_message, ref) {
-            @Override
-            protected void populateView (View view, ChatMessage chatMessage, int position) {
-                progressBar.setVisibility(View.INVISIBLE);
-                // TODO: must get profilepic link from database
-                if (chatMessage.getProfilePic() == null) {
-                    Picasso.with(AppContext.getAppContext()).load(R.drawable.bruttino_large).fit().into(imageViewPic);
-                } else {
-                    Picasso.with(AppContext.getAppContext()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(imageViewPic);
-                }
-                ((TextView) view.findViewById(R.id.messageTextView)).setText(chatMessage.getText());
-                ((TextView) view.findViewById(R.id.nameTextView)).setText(chatMessage.getName());
 
-            }
-        };
-    }
+    interface Listener {
 
-    private void setupTextChangedListenerForMessage () {
-        editTextMessage.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged (CharSequence charSequence, int i, int i1, int i2) {
-            }
+        FirebaseListAdapter<ChatMessage> createFirebaseListAdapter(DatabaseReference ref);
 
-            @Override
-            public void onTextChanged (CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().trim().length() == 0) {
-                    buttonSend.setEnabled(false);
-                } else {
-                    buttonSend.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void afterTextChanged (Editable editable) {
-
-            }
-        });
     }
 
 }

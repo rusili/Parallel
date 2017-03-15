@@ -58,7 +58,8 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
             @Override
             public void onClick (View v) {
                 OnClickEffect.setButton(buttonEnter);
-                fragmentHubEnterIDPresenter.checkEventID(eventID);
+                // TODO: 3/15/2017 Parameter:
+                //fragmentHubEnterIDPresenter.checkEventID(eventID);
                 fragmentHubEnterIDPresenter.setOnClickReplace(fragmentHubQuestions, buttonEnter, containerID, "Questions");
             }
         });

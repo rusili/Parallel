@@ -151,7 +151,6 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
 
     @Override
     public void startActivityAfterAuthenticated() {
-        //FIXME go to ActivityStart
         Intent intent = new Intent(getActivity(), ActivityStart.class);
         startActivity(intent);
     }

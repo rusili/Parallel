@@ -46,6 +46,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
 
         pages = new FragmentPagerItems(this);
+        pages.add(FragmentPagerItem.of("Event Map", EventMapFragment.class));
         pages.add(FragmentPagerItem.of("Event Info", FragmentEventInfo.class));
         pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
         pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
@@ -63,15 +64,18 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
                                                       false);
                                               switch (position) {
                                                   case 0:
-                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_today));
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_map_black));
                                                       break;
                                                   case 1:
-                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_today));
                                                       break;
                                                   case 2:
-                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_people_outline));
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
                                                       break;
                                                   case 3:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_people_outline));
+                                                      break;
+                                                  case 4:
                                                       icon.setImageDrawable(res.getDrawable(R.drawable.ic_panorama_wide_angle));
                                                       break;
                                                   default:

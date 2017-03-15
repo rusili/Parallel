@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityHub.EventMapFragment;
+import com.rooksoto.parallel.activityStart.enterid.FragmentStartEnterID;
 import com.rooksoto.parallel.activityStart.welcome.FragmentStartWelcome;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
@@ -51,7 +51,7 @@ public class ActivityStart extends AppCompatActivity implements SwipeStack.Swipe
     }
 
     private void loadFragmentEnterID () {
-        EventMapFragment mFragmentStartEnterID = new EventMapFragment();
+        FragmentStartEnterID mFragmentStartEnterID = new FragmentStartEnterID();
         getFragmentManager().beginTransaction()
                 .replace(containerID, mFragmentStartEnterID)
                 .commit();

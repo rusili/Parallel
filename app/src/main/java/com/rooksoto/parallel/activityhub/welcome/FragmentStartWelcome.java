@@ -18,7 +18,7 @@ public class FragmentStartWelcome extends Fragment implements BaseView {
     private View view;
 
     private int containerID = R.id.activity_start_fragment_container;
-    private String[] welcomeText = new String[] {"Welcome", "to", "C4Q's", "3.3 Demo Day", "Enjoy"};
+    private String[] welcomeText = new String[] {"Welcome", "to C4Q's", "3.3 Demo Day", "Enjoy"};
 
     @Nullable
     @Override
@@ -40,16 +40,11 @@ public class FragmentStartWelcome extends Fragment implements BaseView {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                fragmentStartWelcomePresenter.setOnClickReplace(new FragmentHubQuestions(), view, containerID, "Questions");
+                //fragmentStartWelcomePresenter.setOnClickReplace(new FragmentHubQuestions(), view, containerID, "Questions");
             }
         });
 
         fragmentStartWelcomePresenter.start();
-    }
-
-    @Override
-    public void onBackPressed () {
-        fragmentStartWelcomePresenter.onBackPressedOverride(view);
     }
 
 }

@@ -29,10 +29,6 @@ public class ActivityLoginPresenter implements BasePresenter {
     }
 
     @Override
-    public void onBackPressedOverride (View viewP) {
-    }
-
-    @Override
     public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
     }
 

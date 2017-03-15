@@ -6,5 +6,4 @@ public interface BaseView {
 
     void setViews ();
 
-    void onBackPressed ();
 }

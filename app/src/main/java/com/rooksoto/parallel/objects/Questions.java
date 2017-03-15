@@ -2,7 +2,7 @@ package com.rooksoto.parallel.objects;
 
 public class Questions {
     String question;
-    boolean answer;
+    String answer;
     int leftResID = 0;
     int rightResID = 0;
 
@@ -16,11 +16,11 @@ public class Questions {
         this.rightResID = rightResIDParam;
     }
 
-    public boolean isAnswer () {
+    public String getAnswer () {
         return answer;
     }
 
-    public void setAnswer (boolean answer) {
+    public void setAnswer (String answer) {
         this.answer = answer;
     }
 

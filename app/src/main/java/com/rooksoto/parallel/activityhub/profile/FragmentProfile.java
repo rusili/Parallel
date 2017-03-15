@@ -44,10 +44,6 @@ public class FragmentProfile extends Fragment implements BaseView {
         recyclerViewProfile.setAdapter(profileAdapter);
     }
 
-    @Override
-    public void onBackPressed () {
-
-    }
 
     private void tempRV(){
         listofAnswers.add(new Answers("Placeholder", "True"));

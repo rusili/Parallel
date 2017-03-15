@@ -10,9 +10,15 @@ import android.widget.Toast;
 
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentHubEnterIDPresenter implements BasePresenter {
+    private ActivityHubPresenter.Listener listener;
+
+    public FragmentHubEnterIDPresenter(ActivityHubPresenter.Listener listener){
+        this.listener = listener;
+    }
 
     @Override
     public void start () {

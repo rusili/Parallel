@@ -20,12 +20,6 @@ public class FragmentLoginSplashPresenter implements BasePresenter {
     public void start () {
     }
 
-    @Override
-    public void onBackPressedOverride (View viewP) {
-        CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-        customAlertDialog.exit(viewP.getContext());
-    }
-
     // Animations:
     public void setAnimatorSetViews (View view1P, View view2P) {
         this.viewAnimatorSet1 = view1P;

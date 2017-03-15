@@ -58,10 +58,6 @@ public class FragmentChat extends Fragment implements BaseView {
     }
 
     @Override
-    public void onBackPressed () {
-    }
-
-    @Override
     public void onViewCreated (View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fragmentChatPresenter.setUpChatRoomsOnViewCreated(getArguments(), messageListAdapter);

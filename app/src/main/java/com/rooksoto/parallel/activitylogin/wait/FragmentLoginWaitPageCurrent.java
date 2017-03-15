@@ -46,9 +46,4 @@ public class FragmentLoginWaitPageCurrent extends Fragment implements BaseView{
     public void setViews () {
 
     }
-
-    @Override
-    public void onBackPressed () {
-
-    }
 }

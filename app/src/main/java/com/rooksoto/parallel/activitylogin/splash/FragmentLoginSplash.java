@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentLoginSplash extends Fragment implements BaseView {
     private FragmentLoginSplashPresenter fragmentLoginSplashPresenter = new FragmentLoginSplashPresenter();
@@ -71,11 +72,6 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
             }
         }, 3000);
 
-    }
-
-    @Override
-    public void onBackPressed () {
-        fragmentLoginSplashPresenter.onBackPressedOverride(view);
     }
 
     private void splashWordAnimation () {

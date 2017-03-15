@@ -44,10 +44,6 @@ public class FragmentAttendees extends Fragment implements BaseView {
         recyclerViewAttendees.setAdapter(attendeesAdapter);
     }
 
-    @Override
-    public void onBackPressed () {
-    }
-
     private void tempRV(){
         listofUsers.add(new User("Temp", "Temp@Temp.com"));
         listofUsers.add(new User("Temp", "Temp@Temp.com"));

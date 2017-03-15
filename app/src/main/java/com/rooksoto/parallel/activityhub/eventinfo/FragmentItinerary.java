@@ -52,8 +52,4 @@ public class FragmentItinerary extends Fragment implements BaseView {
         listofSessions.add(new Session("Introduction", "Google main stage", date, date));
     }
 
-    @Override
-    public void onBackPressed () {
-
-    }
 }

@@ -47,8 +47,4 @@ public class FragmentLoginWaitPageFavorites extends Fragment implements BaseView
 
     }
 
-    @Override
-    public void onBackPressed () {
-
-    }
 }

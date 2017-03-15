@@ -122,10 +122,6 @@ public class FragmentLoginLogin extends Fragment implements BaseView {
     }
 
     @Override
-    public void onBackPressed () {
-    }
-
-    @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         fragmentLoginLoginPresenter.checkLoginID(requestCode, resultCode, data);

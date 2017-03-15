@@ -1,8 +1,4 @@
-package com.rooksoto.parallel.activityHub;
-
-/**
- * Created by rook on 3/2/17.
- */
+package com.rooksoto.parallel.activityhub;
 
 import android.app.Fragment;
 import android.graphics.PointF;

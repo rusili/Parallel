@@ -29,11 +29,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.rooksoto.parallel.R;
-<<<<<<< HEAD
 import com.rooksoto.parallel.activityhub.ActivityHub;
-=======
-import com.rooksoto.parallel.activityHub.ActivityHub;
->>>>>>> 2e7f6b1399aef97ea281dff311b61964e66cfe23
 import com.rooksoto.parallel.activitylogin.ActivityLoginPresenter;
 import com.rooksoto.parallel.activitylogin.createaccount.FragmentLoginCreateAccount;
 import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;

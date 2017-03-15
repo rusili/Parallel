@@ -5,21 +5,30 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.RemoteViews;
+import android.widget.TextView;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.ActivityHub;
+import com.rooksoto.parallel.activitylogin.ActivityLogin;
 
-public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class CustomFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
-
+    private static View view;
     /**
      * Called when message is received.
      *
@@ -50,6 +59,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d(TAG, "getSentTime: " + String.valueOf(remoteMessage.getSentTime()));
+            sendNotification(remoteMessage.getNotification().getBody());
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -63,7 +74,15 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, ActivityHub.class);
+        DateFormat df = new SimpleDateFormat("h:mm a");
+        String time = df.format(Calendar.getInstance().getTime());
+
+        final RemoteViews smallView = new RemoteViews(view.getContext().getPackageName(), R.layout.notification_layout);
+        smallView.setTextViewText(R.id.notification_body, messageBody);
+        smallView.setTextViewText(R.id.notification_time, time);
+        final Uri defaultSoundURI = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        Intent intent = new Intent(this, ActivityLogin.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -71,15 +90,22 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                .setContentTitle("FCM Message")
+                .setContentTitle("Parallel")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)
+                .setContent(smallView)
+                .setVibrate(new long[] {500, 1000})
+                .setLights(Color.MAGENTA, 2000, 2000)
+                .setSound(defaultSoundURI)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    public static void giveView(View viewP){
+        view = viewP;
     }
 }

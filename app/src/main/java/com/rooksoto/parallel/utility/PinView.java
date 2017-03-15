@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityhub;
+package com.rooksoto.parallel.utility;
 
 import android.content.Context;
 import android.graphics.Bitmap;

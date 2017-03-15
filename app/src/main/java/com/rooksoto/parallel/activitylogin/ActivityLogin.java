@@ -8,13 +8,12 @@ import android.widget.ImageView;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityhub.enterid.FragmentHubEnterID;
-import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
 import com.rooksoto.parallel.activitylogin.splash.FragmentLoginSplash;
 import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomToast;
+import com.rooksoto.parallel.utility.firebase.CustomFirebaseMessagingService;
 
 public class ActivityLogin extends AppCompatActivity implements BaseView {
     private ActivityLoginPresenter activityLoginPresenter = new ActivityLoginPresenter();
@@ -35,6 +34,7 @@ public class ActivityLogin extends AppCompatActivity implements BaseView {
     }
 
     public void initialize () {
+        CustomFirebaseMessagingService.giveView(getWindow().getDecorView().getRootView());
         setViews();
     }
 

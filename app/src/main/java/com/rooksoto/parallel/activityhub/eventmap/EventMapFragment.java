@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityhub;
+package com.rooksoto.parallel.activityhub.eventmap;
 
 import android.app.Fragment;
 import android.graphics.PointF;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.utility.PinView;
 
 import java.util.ArrayList;
 

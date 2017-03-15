@@ -10,10 +10,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
         vectorDrawables.useSupportLibrary = true
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -79,6 +78,7 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
     // Firebase Messaging:
     compile 'com.google.firebase:firebase-messaging:10.2.0'
+    // Firebase Storage:
     compile 'com.firebaseui:firebase-ui-storage:1.2.0'
     // Google Play Services (Location)
     compile 'com.google.android.gms:play-services-location:10.2.0'

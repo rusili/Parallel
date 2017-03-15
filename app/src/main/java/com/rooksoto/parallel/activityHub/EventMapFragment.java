@@ -69,6 +69,7 @@ public class EventMapFragment extends Fragment {
 
     }
 
+
     @Override
     public void onStop() {
         super.onStop();

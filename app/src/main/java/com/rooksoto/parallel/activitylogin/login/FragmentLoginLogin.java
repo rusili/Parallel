@@ -29,7 +29,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityStart.ActivityStart;
+import com.rooksoto.parallel.activityHub.ActivityHub;
 import com.rooksoto.parallel.activitylogin.ActivityLoginPresenter;
 import com.rooksoto.parallel.activitylogin.createaccount.FragmentLoginCreateAccount;
 import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;
@@ -151,7 +151,7 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
 
     @Override
     public void startActivityAfterAuthenticated() {
-        Intent intent = new Intent(getActivity(), ActivityStart.class);
+        Intent intent = new Intent(getActivity(), ActivityHub.class);
         startActivity(intent);
     }
 

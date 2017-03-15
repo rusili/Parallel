@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.rooksoto.parallel.R;
@@ -39,5 +40,15 @@ public class OnClickEffect {
         view.setColorFilter(ContextCompat.getColor(view.getContext(), R.color.teal));
         Animation fadeout = AnimationUtils.loadAnimation(view.getContext(), R.anim.fadeoutonclick);
         view.startAnimation(fadeout);
+    }
+
+    public static void setButton(final Button button) {
+        button.setTextColor(button.getContext().getResources().getColor(R.color.teal));
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                button.setTextColor(button.getContext().getResources().getColor(R.color.teal));
+            }
+        }, 150);
     }
 }

@@ -77,6 +77,8 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:10.2.0'
     // FirebaseUI Library
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
+    // Firebase Messaging:
+    compile 'com.google.firebase:firebase-messaging:10.2.0'
     // Google Play Services (Location)
     compile 'com.google.android.gms:play-services-location:10.2.0'
     // Google Play Services (Authorization)

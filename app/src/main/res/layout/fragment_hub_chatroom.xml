@@ -15,7 +15,6 @@
         />
 
     <LinearLayout
-        android:id="@+id/fragment_hub_chat_main_type_layout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_above="@id/fragment_hub_space"

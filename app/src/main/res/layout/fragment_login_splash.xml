@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/fragment_login_splash_container"
-              android:orientation="vertical"
+    android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center"
@@ -50,7 +49,6 @@
             />
 
         <ImageView
-            android:id="@+id/fragment_login_splash_lineleft2"
             android:layout_width="@dimen/activity_start_edittext_width"
             android:layout_height="match_parent"
             android:src="@drawable/logo_final_left"
@@ -59,7 +57,6 @@
             android:tint="#F9f9f9"
             />
         <ImageView
-            android:id="@+id/fragment_login_splash_lineright2"
             android:layout_width="@dimen/activity_start_edittext_width"
             android:layout_height="match_parent"
             android:src="@drawable/logo_final_right"

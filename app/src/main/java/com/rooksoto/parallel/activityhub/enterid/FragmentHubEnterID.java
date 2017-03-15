@@ -14,6 +14,7 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
 import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
+import com.rooksoto.parallel.utility.OnClickEffect;
 
 @SuppressLint("ValidFragment")
 public class FragmentHubEnterID extends Fragment implements BaseView {
@@ -56,6 +57,7 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
         buttonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
+                OnClickEffect.setButton(buttonEnter);
                 fragmentHubEnterIDPresenter.checkEventID(eventID);
                 fragmentHubEnterIDPresenter.setOnClickReplace(fragmentHubQuestions, buttonEnter, containerID, "Questions");
             }

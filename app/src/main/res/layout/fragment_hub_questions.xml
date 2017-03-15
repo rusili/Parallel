@@ -17,9 +17,11 @@
         >
 
         <RelativeLayout
+            android:id="@+id/fragment_hub_questions_layout_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:visibility="invisible"
             >
 
             <ImageView
@@ -33,7 +35,6 @@
                 />
 
             <TextView
-                android:id="@+id/fragment_hub_questions_skip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SKIP"
@@ -86,8 +87,10 @@
                 android:id="@+id/fragment_hub_questions_gradient1"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient"
+                android:src="@drawable/gradient"
                 android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
                 />
 
             <TextView
@@ -112,8 +115,10 @@
                 android:id="@+id/fragment_hub_questions_gradient2"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient"
+                android:src="@drawable/gradient"
                 android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
                 />
 
             <TextView
@@ -137,8 +142,10 @@
                 android:id="@+id/fragment_hub_questions_gradient3"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient"
+                android:src="@drawable/gradient"
                 android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
                 />
 
             <TextView
@@ -162,8 +169,10 @@
                 android:id="@+id/fragment_hub_questions_gradient4"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient"
+                android:src="@drawable/gradient"
                 android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
                 />
 
             <TextView
@@ -187,37 +196,14 @@
                 android:id="@+id/fragment_hub_questions_gradient5"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient"
+                android:src="@drawable/gradient"
                 android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
                 />
 
             <TextView
                 android:id="@+id/fragment_hub_questions_line5"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:textAlignment="viewEnd"
-                android:textColor="#e6dbdbdb"
-                android:textSize="16dp"
-                android:layout_marginRight="16dp"
-                />
-        </FrameLayout>
-        <FrameLayout
-            android:id="@+id/fragment_hub_questions_container6"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_above="@id/fragment_hub_questions_container5"
-            >
-
-            <ImageView
-                android:id="@+id/fragment_hub_questions_gradient6"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradient"
-                android:layout_gravity="right"
-                />
-
-            <TextView
-                android:id="@+id/fragment_hub_questions_line6"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:textAlignment="viewEnd"

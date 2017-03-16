@@ -66,9 +66,11 @@ public class FragmentHubEnterIDPresenter implements BasePresenter {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(eventID)) {
                     // Command the view to go to next fragment
+                    listener.activateParallelEvent();
                     Log.d(TAG, "onDataChange: Event ID exists, load next fragment");
                 } else {
                     // Command the view to show an error - Event ID does not exist
+                    listener.showEventIdError();
                     Log.d(TAG, "onDataChange: This Event ID does not exist");
                 }
             }

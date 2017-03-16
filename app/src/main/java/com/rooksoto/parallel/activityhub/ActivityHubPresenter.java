@@ -24,14 +24,6 @@ public class ActivityHubPresenter {
         listener.disconnectLocationService(locationService);
     }
 
-    public interface Listener {
-        void setupViewpager();
-
-        void checkLocationServices(ParallelLocation locationService);
-
-        void disconnectLocationService(ParallelLocation locationService);
-    }
-
     public void toViewPager(){
         listener.setupViewpager();
     }
@@ -46,6 +38,18 @@ public class ActivityHubPresenter {
         locationService = ParallelLocation.getInstance();
         locationService.connect();
         locationService.startGeofenceMonitoring(view.getContext());
+    }
+
+    public interface Listener {
+        void setupViewpager();
+
+        void checkLocationServices(ParallelLocation locationService);
+
+        void disconnectLocationService(ParallelLocation locationService);
+
+        void activateParallelEvent();
+
+        void showEventIdError();
     }
 
 }

@@ -18,11 +18,13 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rooksoto.parallel.model.Event;
 import com.rooksoto.parallel.model.EventLocation;
 import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.Constants;
@@ -44,22 +46,32 @@ public class ParallelLocation {
     private static double parallelLongitude;
     private static EventLocation eventLocation;
 
+    // Inits to default eventID, at US White House, 100m radius
+    public static String eventID = "demoday";
+    public static double eventLatitude = 38.8976763;
+    public static double eventLongitude = -77.0365298;
+    public static float eventGeofenceRadius = 100;
+
     private ParallelLocation () {
 
         // [BLOCK]
         // I'm getting event/geofence location information from Firebase here
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference(
-                Globals.eventID + "/event_location"
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference eventReference = database.getReference(
+                eventID + "event_location/"
         );
 
-        reference.addValueEventListener(new ValueEventListener() {
+        eventReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 eventLocation = dataSnapshot.getValue(EventLocation.class);
-                Globals.eventLatitude = eventLocation.getLatitude();
-                Globals.eventLongitude = eventLocation.getLongitude();
-                Globals.eventGeofenceRadius = eventLocation.getRadiusMeters();
+
+                if (eventLocation != null) {
+                    eventLatitude = eventLocation.getLatitude();
+                    eventLongitude = eventLocation.getLongitude();
+                    eventGeofenceRadius = eventLocation.getRadiusMeters();
+                }
+                Log.d(TAG, "onDataChange: " + eventLatitude+ " " +eventLongitude+ " " +eventGeofenceRadius);
             }
 
             @Override
@@ -70,6 +82,23 @@ public class ParallelLocation {
                 );
             }
         });
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                eventLocation = dataSnapshot.getValue(EventLocation.class);
+//                Globals.eventLatitude = eventLocation.getLatitude();
+//                Globals.eventLongitude = eventLocation.getLongitude();
+//                Globals.eventGeofenceRadius = (Float) eventLocation.getRadiusMeters();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.d(TAG,
+//                        "onCancelled: Error Reading Location from" +
+//                                " Firebase in ParallelLocation Constructor"
+//                );
+//            }
+//        });
 
         // [/Block]
 
@@ -149,9 +178,9 @@ public class ParallelLocation {
             Geofence geofence = new Geofence.Builder()
                     .setRequestId(Constants.GOFENCE_ID)
                     .setCircularRegion(
-                            Globals.eventLatitude,
-                            Globals.eventLongitude,
-                            Globals.eventGeofenceRadius)
+                            eventLatitude,
+                            eventLongitude,
+                            eventGeofenceRadius)
                     .setExpirationDuration(Geofence.NEVER_EXPIRE)
                     .setNotificationResponsiveness(1000)
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)

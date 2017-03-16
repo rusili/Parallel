@@ -19,6 +19,7 @@ import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
 import com.rooksoto.parallel.utility.Constants;
 import com.rooksoto.parallel.utility.Globals;
 import com.rooksoto.parallel.utility.OnClickEffect;
+import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
 @SuppressLint("ValidFragment")
 public class FragmentHubEnterID extends Fragment implements BaseView {
@@ -31,14 +32,15 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
 
     private int containerID = R.id.content_frame;
 
+    ParallelLocation location;
     FirebaseDatabase database;
     DatabaseReference reference;
 
     @Override
     public void onStart() {
         super.onStart();
+        location = ParallelLocation.getInstance();
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference().getRoot();
     }
 
     @SuppressLint("ValidFragment")
@@ -71,9 +73,10 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
             public void onClick (View v) {
                 OnClickEffect.setButton(buttonEnter);
                 // Initialize Global Var "eventID" on button click
-                Globals.eventID = textViewEventID.getText().toString();
+                ParallelLocation.eventID = textViewEventID.getText().toString();
+                reference = database.getReference(ParallelLocation.eventID).getParent();
                 // TODO: 3/15/2017 Parameter:
-                fragmentHubEnterIDPresenter.checkEventID(Globals.eventID, reference);
+                fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
                 fragmentHubEnterIDPresenter.setOnClickReplace(fragmentHubQuestions, buttonEnter, containerID, "Questions");
             }
         });

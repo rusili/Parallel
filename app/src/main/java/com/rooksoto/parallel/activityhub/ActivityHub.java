@@ -1,6 +1,7 @@
 package com.rooksoto.parallel.activityhub;
 
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -9,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.eftimoff.viewpagertransformers.DepthPageTransformer;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.attendees.FragmentAttendees;
 import com.rooksoto.parallel.activityhub.chat.FragmentChat;
@@ -22,6 +25,7 @@ import com.rooksoto.parallel.activityhub.enterid.FragmentHubEnterID;
 import com.rooksoto.parallel.activityhub.eventmap.FragmentEventMap;
 import com.rooksoto.parallel.activityhub.itinerary.FragmentItinerary;
 import com.rooksoto.parallel.activityhub.profile.FragmentProfile;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 

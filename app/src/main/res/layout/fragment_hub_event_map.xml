@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-    android:layout_marginTop="24dp"
-    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.rooksoto.parallel.utility.PinView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +21,7 @@
             android:id="@+id/activity_hub_action_bar_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="ITINERARY"
+            android:text="EVENT MAP"
             android:textStyle="italic"
             android:textSize="16dp"
             android:textColor="@color/textMain"
@@ -40,11 +42,4 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_hub_itinerary_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-    </android.support.v7.widget.RecyclerView>
-
-</LinearLayout>
+</RelativeLayout>

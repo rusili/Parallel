@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.PinView;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class FragmentEventMap extends Fragment {
     private View rootView;
     private PinView imageView;
     private ArrayList<PointF> listOfCoord;
+    private ImageButton imageButtonExit;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,8 +32,10 @@ public class FragmentEventMap extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_event_map, container, false);
+        rootView = inflater.inflate(R.layout.fragment_hub_event_map, container, false);
         imageView = (PinView) rootView.findViewById(R.id.imageView);
+        imageButtonExit = (ImageButton) rootView.findViewById(R.id.activity_hub_action_bar_button);
+        setOnClickListeners();
         return rootView;
     }
 
@@ -66,6 +71,15 @@ public class FragmentEventMap extends Fragment {
 
     }
 
+    private void setOnClickListeners() {
+        imageButtonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+                customAlertDialog.exit(view.getContext());
+            }
+        });
+    }
 
     @Override
     public void onStop() {

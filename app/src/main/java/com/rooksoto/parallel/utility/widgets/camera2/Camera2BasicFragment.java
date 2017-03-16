@@ -68,6 +68,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -366,6 +367,7 @@ public class Camera2BasicFragment extends Fragment
 
     };
     private boolean noExternalPermission = false;
+    private ImageButton imageButtonExit;
 
     /**
      * Given {@code choices} of {@code Size}s supported by a camera, choose the smallest one that
@@ -444,6 +446,7 @@ public class Camera2BasicFragment extends Fragment
 
     @Override
     public void onViewCreated (final View view, Bundle savedInstanceState) {
+        view.findViewById(R.id.activity_hub_action_bar_button).setOnClickListener(this);
         ImageButton imageButtonTakePicture = (ImageButton) view.findViewById(R.id.picture);
         view.findViewById(R.id.fragment_hub_camera_flip).setOnClickListener(this);
         if (!noExternalPermission) {
@@ -957,6 +960,10 @@ public class Camera2BasicFragment extends Fragment
             case R.id.fragment_hub_camera_flip: {
                 switchCamera();
                 break;
+            }
+            case R.id.activity_hub_action_bar_button: {
+                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+                customAlertDialog.exit(view.getContext());
             }
         }
     }

@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Answers;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.widgets.recyclerview.ProfileAdapter;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class FragmentProfile extends Fragment implements BaseView {
     List<Answers> listofAnswers = new ArrayList<>();
 
     private View view;
+    private ImageButton imageButtonExit;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,12 +41,23 @@ public class FragmentProfile extends Fragment implements BaseView {
     @Override
     public void setViews () {
         tempRV();
+        imageButtonExit = (ImageButton) view.findViewById(R.id.activity_hub_action_bar_button);
         ProfileAdapter profileAdapter = new ProfileAdapter(listofAnswers);
         recyclerViewProfile = (RecyclerView) view.findViewById(R.id.fragment_hub_profile_recyclerview);
         recyclerViewProfile.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewProfile.setAdapter(profileAdapter);
+        setOnClickListeners();
     }
 
+    private void setOnClickListeners() {
+        imageButtonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+                customAlertDialog.exit(view.getContext());
+            }
+        });
+    }
 
     private void tempRV(){
         listofAnswers.add(new Answers("Placeholder", "True"));

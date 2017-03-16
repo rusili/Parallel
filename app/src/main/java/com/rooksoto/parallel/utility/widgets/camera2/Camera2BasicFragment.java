@@ -22,8 +22,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
@@ -43,9 +46,12 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentCompat;
 import android.support.v4.content.ContextCompat;
@@ -65,11 +71,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -167,6 +176,36 @@ public class Camera2BasicFragment extends Fragment
 
         @Override
         public void onImageAvailable (ImageReader reader) {
+            // First I get the path to gallery and crate new Album to my app
+            String pathD = Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
+            File mediaStorageDir = new File(pathD, "Parallel");
+            if (!mediaStorageDir.exists()) {
+                if (!mediaStorageDir.mkdirs()) {
+                    Log.d("MyCameraApp", "failed to create directory");
+                }
+            }
+        /*Second I cut mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
+        from onActivityCreated and add here with the new path from my Album*/
+
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            mFile = new File(mediaStorageDir,"ImageName"+"_"+ timeStamp+".jpeg");
+
+            //Then the contentValues
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.TITLE, "ImageName");
+            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+            values.put(MediaStore.Images.Media.MIME_TYPE,"image/jpeg");
+            values.put("_data", mFile.getAbsolutePath());
+            ContentResolver cr = getActivity().getContentResolver();
+            cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            //This line is already in the code
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("image/jpeg");
+
+            share.putExtra(Intent.EXTRA_STREAM,
+                    Uri.parse("file:///sdcard/DCIM/Camera/myPic.jpg"));
+
+            startActivity(Intent.createChooser(share, "Share Image"));
             mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
         }
 
@@ -401,8 +440,8 @@ public class Camera2BasicFragment extends Fragment
 
     @Override
     public void onViewCreated (final View view, Bundle savedInstanceState) {
+        view.findViewById(R.id.fragment_hub_camera_flip).setOnClickListener(this);
         view.findViewById(R.id.picture).setOnClickListener(this);
-        view.findViewById(R.id.info).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.fragment_hub_camera_textureview);
     }
 
@@ -456,6 +495,11 @@ public class Camera2BasicFragment extends Fragment
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+    public static final String CAMERA_FRONT_ID = "1";
+    public static final String CAMERA_BACK_ID = "0";
+
+    private String myCameraId = CAMERA_BACK_ID;
 
     /**
      * Sets up member variables related to camera.
@@ -558,7 +602,9 @@ public class Camera2BasicFragment extends Fragment
                 Boolean available = characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
                 mFlashSupported = available == null ? false : available;
 
-                mCameraId = cameraId;
+                mCameraId = myCameraId;
+                //Toast.makeText(activity, mCameraId, Toast.LENGTH_LONG).show();
+
                 return;
             }
         } catch (CameraAccessException e) {
@@ -862,19 +908,38 @@ public class Camera2BasicFragment extends Fragment
     public void onClick (View view) {
         switch (view.getId()) {
             case R.id.picture: {
-                takePicture();
-                break;
-            }
-            case R.id.info: {
-                Activity activity = getActivity();
-                if (null != activity) {
-                    new AlertDialog.Builder(activity)
-                            .setMessage("Picture taken")
-                            .setPositiveButton(android.R.string.ok, null)
-                            .show();
+                if (myCameraId.equals(CAMERA_FRONT_ID)){
+                    captureStillPicture();
+                } else if (myCameraId.equals(CAMERA_BACK_ID)) {
+                    takePicture();
                 }
                 break;
             }
+            case R.id.fragment_hub_camera_flip: {
+                switchCamera();
+                break;
+            }
+        }
+    }
+
+    private void switchCamera() {
+        if (myCameraId.equals(CAMERA_FRONT_ID)) {
+            myCameraId = CAMERA_BACK_ID;
+            closeCamera();
+            reopenCamera();
+
+        } else if (myCameraId.equals(CAMERA_BACK_ID)) {
+            myCameraId = CAMERA_FRONT_ID;
+            closeCamera();
+            reopenCamera();
+        }
+    }
+
+    private void reopenCamera() {
+        if (mTextureView.isAvailable()) {
+            openCamera(mTextureView.getWidth(), mTextureView.getHeight());
+        } else {
+            mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
     }
 

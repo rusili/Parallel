@@ -38,17 +38,17 @@
         <activity android:name=".activitylogin.ActivityLogin"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".activityhub.ActivityHub"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityHub"
             android:windowSoftInputMode="adjustPan">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <!-- // Activities -->
 

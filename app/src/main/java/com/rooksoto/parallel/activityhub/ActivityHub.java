@@ -63,35 +63,35 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         final Resources res = view.getResources();
 
         viewPagerTab.setCustomTabView(new SmartTabLayout.TabProvider() {
-              @Override
-              public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
-                  ImageView icon = (ImageView) inflater.inflate(R.layout.custom_tab_icon, container,
-                          false);
-                  switch (position) {
-                      case 0:
-                          icon.setImageDrawable(res.getDrawable(R.drawable.ic_today));
-                          break;
-                      case 1:
-                          icon.setImageDrawable(res.getDrawable(R.drawable.ic_person_outline_black_24dp));
-                          break;
-                      case 2:
-                          icon.setImageDrawable(res.getDrawable(R.drawable.ic_people_outline));
-                          break;
-                      case 3:
-                          icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
-                          break;
-                      case 4:
-                          icon.setImageDrawable(res.getDrawable(R.drawable.ic_map_black));
-                          break;
-                      case 5:
-                          icon.setImageDrawable(res.getDrawable(R.drawable.ic_photo_camera_black_24dp));
-                          break;
-                      default:
-                          throw new IllegalStateException("Invalid position: " + position);
-                  }
-                  return icon;
-              }
-            }
+                                          @Override
+                                          public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
+                                              ImageView icon = (ImageView) inflater.inflate(R.layout.custom_tab_icon, container,
+                                                      false);
+                                              switch (position) {
+                                                  case 0:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_today));
+                                                      break;
+                                                  case 1:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_person_outline_black_24dp));
+                                                      break;
+                                                  case 2:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_people_outline));
+                                                      break;
+                                                  case 3:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
+                                                      break;
+                                                  case 4:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_map_black));
+                                                      break;
+                                                  case 5:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_photo_camera_black_24dp));
+                                                      break;
+                                                  default:
+                                                      throw new IllegalStateException("Invalid position: " + position);
+                                              }
+                                              return icon;
+                                          }
+                                      }
         );
 
         viewPager.setAdapter(adapter);
@@ -141,5 +141,16 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     @Override
     public void disconnectLocationService(ParallelLocation locationService) {
         locationService.disconnect();
+    }
+
+    @Override
+    public void activateParallelEvent() {
+        //TODO Command the view to go to next fragment
+    }
+
+    @Override
+    public void showEventIdError() {
+        //TODO Command the view to show an error - Event ID does not exist
+
     }
 }

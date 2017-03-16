@@ -107,7 +107,8 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     public void initialize() {
         view = getWindow().getDecorView().getRootView();
         activityHubPresenter.onInitialize();
-        loadFragmentEnterID();
+        //loadFragmentEnterID();
+        activityHubPresenter.toViewPager();
     }
 
     private void loadFragmentEnterID () {

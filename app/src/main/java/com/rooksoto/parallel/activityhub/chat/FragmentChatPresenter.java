@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rooksoto.parallel.objects.ChatMessage;
+import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
 class FragmentChatPresenter {
 
@@ -41,7 +42,9 @@ class FragmentChatPresenter {
                 }
             }
         };
-        setChatroomReference("001");
+
+        // Set chat room below (based on conditionals/answerlist
+        setChatroomReference("main_room");
 
     }
 
@@ -68,7 +71,10 @@ class FragmentChatPresenter {
     }
 
     void setChatroomReference(String chatId) {
-        ref = FirebaseDatabase.getInstance().getReference().child(CHATIDS).child(chatId);
+        ref = FirebaseDatabase.getInstance().getReference()
+                .child(ParallelLocation.eventID)
+                .child("room_list")
+                .child(chatId);
     }
 
 

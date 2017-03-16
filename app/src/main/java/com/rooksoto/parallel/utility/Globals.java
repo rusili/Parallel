@@ -6,11 +6,11 @@ package com.rooksoto.parallel.utility;
 
 public class Globals {
 
-    // Initialized in --->/activityhub/FragmentHubEnterID
-    public static String eventID;
-
-    // Initialized in --->/utility/ParallelLocation
-    public static double eventLatitude;
-    public static double eventLongitude;
-    public static float eventGeofenceRadius;
+//    // Initialized in --->/activityhub/FragmentHubEnterID
+//    public static String eventID = "default";
+//
+//    // Initialized in --->/utility/ParallelLocation
+//    public static double eventLatitude = 38.8976763;
+//    public static double eventLongitude = -77.0365298;
+//    public static float eventGeofenceRadius = 100;
 }

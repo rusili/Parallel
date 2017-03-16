@@ -16,7 +16,7 @@ import com.rooksoto.parallel.utility.PinView;
 
 import java.util.ArrayList;
 
-public class EventMapFragment extends Fragment {
+public class FragmentEventMap extends Fragment {
     private View rootView;
     private PinView imageView;
     private ArrayList<PointF> listOfCoord;

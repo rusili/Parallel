@@ -16,10 +16,10 @@ import android.widget.ImageView;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 
 public class FragmentLoginSplash extends Fragment implements BaseView {
     private FragmentLoginSplashPresenter fragmentLoginSplashPresenter = new FragmentLoginSplashPresenter();
+    private Handler handler = new Handler();
 
     private View view;
     private int containerID = R.id.activity_login_fragment_container;
@@ -47,10 +47,10 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
         parallelWordRight = (ImageView) view.findViewById(R.id.fragment_login_splash_wordright);
         parallelLineLeft = (ImageView) view.findViewById(R.id.fragment_login_splash_lineleft);
         parallelLineRight = (ImageView) view.findViewById(R.id.fragment_login_splash_lineright);
-        parallelWordLeft.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                //fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
+                fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
             }
         });
 
@@ -59,19 +59,12 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
 
         splashLineAnimation();
 
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run () {
                 splashWordAnimation();
             }
-        }, 1250);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run () {
-                fragmentLoginSplashPresenter.setOnClickReplace(new FragmentLoginLogin().newInstance(true), parallelWordLeft, containerID, "Login");
-            }
-        }, 3000);
-
+        }, 1500);
     }
 
     private void splashWordAnimation () {

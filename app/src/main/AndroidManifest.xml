@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rooksoto.parallel">
 
+    <!-- Permissions: -->
     <uses-feature android:name="android.hardware.camera2.full" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -12,12 +12,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- // Permissions: -->
 
     <application
         android:name=".utility.AppContext"
@@ -25,34 +25,45 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity
-            android:name=".activitylogin.ActivityLogin"
-            android:screenOrientation="portrait"
-            android:theme="@style/ActivityLogin">
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_ic_notification" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming notification message. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <!-- Activities: -->
+        <activity android:name=".activitylogin.ActivityLogin"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/ActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
-            android:name=".activityStart.ActivityStart"
-            android:screenOrientation="portrait"
-            android:theme="@style/ActivityLogin"></activity>
-
-        <activity
-            android:name=".activityHub.ActivityHub"
+            android:name=".activityhub.ActivityHub"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityHub"
             android:windowSoftInputMode="adjustPan">
 
         </activity>
+        <!-- // Activities -->
 
+        <!-- Services: -->
         <service
             android:name=".utility.geolocation.GeofenceService"
             android:enabled="true"
             android:exported="true" />
-    </application>
+        <service
+            android:name=".utility.firebase.CustomFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <!-- // Services -->
 
+    </application>
 </manifest>

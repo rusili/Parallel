@@ -56,7 +56,4 @@ public class FragmentLoginCreateAccount extends Fragment implements BaseView {
         });
     }
 
-    @Override
-    public void onBackPressed () {
-    }
 }

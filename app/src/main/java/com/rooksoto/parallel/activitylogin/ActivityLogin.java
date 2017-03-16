@@ -1,5 +1,6 @@
 package com.rooksoto.parallel.activitylogin;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,8 +10,10 @@ import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
 import com.rooksoto.parallel.activitylogin.splash.FragmentLoginSplash;
+import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomToast;
+import com.rooksoto.parallel.utility.firebase.CustomFirebaseMessagingService;
 
 public class ActivityLogin extends AppCompatActivity implements BaseView {
     private ActivityLoginPresenter activityLoginPresenter = new ActivityLoginPresenter();
@@ -31,6 +34,7 @@ public class ActivityLogin extends AppCompatActivity implements BaseView {
     }
 
     public void initialize () {
+        CustomFirebaseMessagingService.giveView(getWindow().getDecorView().getRootView());
         setViews();
     }
 
@@ -48,6 +52,13 @@ public class ActivityLogin extends AppCompatActivity implements BaseView {
 
     @Override
     public void onBackPressed () {
+        Fragment currentFrag = getFragmentManager().findFragmentById(containerID);
+        if (currentFrag instanceof FragmentLoginWait || currentFrag instanceof FragmentLoginSplash){
+            CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+            customAlertDialog.exit(this);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     public void onClickToActivityStart (View view) {

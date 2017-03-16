@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="48dp">
+              android:layout_height="64dp"
+    >
 
     <ImageView
         android:id="@+id/fragment_hub_attendees_viewholder_picture"
         android:layout_width="48dp"
-        android:layout_height="match_parent"
+        android:layout_height="48dp"
+        android:scaleType="fitXY"
+        android:layout_margin="8dp"
         />
 
     <LinearLayout
@@ -24,23 +27,28 @@
         android:layout_marginRight="48dp"
         android:orientation="vertical"
         android:layout_toRightOf="@id/fragment_hub_attendees_viewholder_picture"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
         >
 
         <TextView
             android:id="@+id/fragment_hub_attendees_viewholder_name"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="26dp"
             android:text="Name"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/textMain"
             />
         <TextView
             android:id="@+id/fragment_hub_attendees_viewholder_email"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="26dp"
             android:text="Email"
+            android:textSize="14dp"
+            android:textColor="@color/textAlt"
             />
 
     </LinearLayout>
-
-
 
 </RelativeLayout>

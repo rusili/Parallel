@@ -7,7 +7,7 @@ public class User {
     String name;
     String email;
     String pictureLink;
-    List <Questions> listofAnswers = new ArrayList <>();
+    List <Answers> listofAnswers = new ArrayList <>();
 
     public User (String nameParam, String emailParam) {
         this.name = nameParam;
@@ -30,11 +30,11 @@ public class User {
         this.pictureLink = pictureLinkParam;
     }
 
-    public List <Questions> getListofAnswers () {
+    public List <Answers> getListofAnswers () {
         return listofAnswers;
     }
 
-    public void setListofAnswers (List <Questions> listofAnswers) {
+    public void setListofAnswers (List <Answers> listofAnswers) {
         this.listofAnswers = listofAnswers;
     }
 }

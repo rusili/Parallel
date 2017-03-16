@@ -16,4 +16,10 @@
     <color name="icon_enabled">#FF6bdecd</color>
     <color name="icon_disabled">#FFf9f9f9</color>
 
+    <color name="red_transparent">#80ff3d3d</color>
+    <color name="green_transparent">#802bff47</color>
+
+    <color name="red">#ff3d3d</color>
+    <color name="green">#2bff47</color>
+
 </resources>

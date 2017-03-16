@@ -38,8 +38,4 @@ public class FragmentLoginWait extends Fragment implements BaseView {
         fragmentLoginWaitPresenter.setViewPager(view, viewPager, viewPagerTab);
     }
 
-    @Override
-    public void onBackPressed () {
-        fragmentLoginWaitPresenter.onBackPressedOverride(view);
-    }
 }

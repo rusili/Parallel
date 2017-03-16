@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AttendeesAdapter extends RecyclerView.Adapter {
-    private List <User> userList = new ArrayList <>();
+    private List <User> listofUsers = new ArrayList <>();
+
+    public AttendeesAdapter (List<User> listofUsersP) {
+        this.listofUsers = listofUsersP;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
@@ -25,11 +29,11 @@ public class AttendeesAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder (RecyclerView.ViewHolder holder, int position) {
         AttendeesViewholder attendeesViewholder = (AttendeesViewholder) holder;
-        attendeesViewholder.bind(userList.get(position));
+        attendeesViewholder.bind(listofUsers.get(position));
     }
 
     @Override
     public int getItemCount () {
-        return userList.size();
+        return listofUsers.size();
     }
 }

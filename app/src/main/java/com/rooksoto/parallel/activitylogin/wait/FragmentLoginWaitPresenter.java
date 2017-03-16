@@ -23,12 +23,6 @@ public class FragmentLoginWaitPresenter implements BasePresenter {
     }
 
     @Override
-    public void onBackPressedOverride (View viewP) {
-        CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-        customAlertDialog.exit(viewP.getContext());
-    }
-
-    @Override
     public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {
     }
 

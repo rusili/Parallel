@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="100dp"
+              android:background="#40000000"
+    >
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#40000000"
+        >
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                          android:orientation="horizontal"
+                          android:layout_width="80dp"
+                          android:layout_height="50dp"
+                >
+
+                <FrameLayout
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/fragment_hub_eventinfo_sessions_time1_hour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="07"
+                        android:textSize="44dp"
+                        android:textColor="@color/teal"
+                        android:textAlignment="textEnd"
+                        android:gravity="center_vertical"
+                        />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    >
+                    <TextView
+                        android:id="@+id/fragment_hub_eventinfo_sessions_time1_minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00"
+                        android:textSize="24dp"
+                        android:textColor="@color/teal"
+                        android:gravity="bottom"
+                        />
+                    <TextView
+                        android:id="@+id/fragment_hub_eventinfo_sessions_time1_ampm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PM"
+                        android:textSize="10dp"
+                        android:layout_marginTop="-2dp"
+                        android:textColor="@color/teal"
+                        android:gravity="top"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:paddingRight="4dp"
+            >
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                          android:orientation="horizontal"
+                          android:layout_width="80dp"
+                          android:layout_height="50dp"
+                >
+
+                <FrameLayout
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/fragment_hub_eventinfo_sessions_time2_hour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="07"
+                        android:textSize="44dp"
+                        android:textColor="@color/teal"
+                        android:textAlignment="textEnd"
+                        android:gravity="center_vertical"
+                        />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    >
+                    <TextView
+                        android:id="@+id/fragment_hub_eventinfo_sessions_time2_minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30"
+                        android:textSize="24dp"
+                        android:textColor="@color/teal"
+                        android:gravity="bottom"
+                        />
+                    <TextView
+                        android:id="@+id/fragment_hub_eventinfo_sessions_time2_ampm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PM"
+                        android:textSize="10dp"
+                        android:layout_marginTop="-2dp"
+                        android:textColor="@color/teal"
+                        android:gravity="top"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:id="@+id/fragment_login_wait_event_viewholder_icons"
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="6dp"
+            >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_bookmark_border_black_24dp"
+                android:background="#00000000"
+                android:tint="@color/teal"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="6dp"
+            android:layout_toLeftOf="@id/fragment_login_wait_event_viewholder_icons"
+            >
+
+            <TextView
+                android:id="@+id/fragment_hub_eventinfo_sessions_viewholder_name"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:text="Introduction"
+                android:textColor="@color/textMain"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                />
+            <TextView
+                android:id="@+id/fragment_hub_eventinfo_sessions_viewholder_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:text="Tagline"
+                android:textColor="@color/textAlt"
+                android:gravity="center"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:text="\u0040 : "
+                    android:textColor="@color/textAlt"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/fragment_hub_eventinfo_sessions_viewholder_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:text="Google main stage"
+                    android:textColor="@color/textMain"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

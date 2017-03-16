@@ -34,7 +34,7 @@ public class SwipeStackAdapter extends BaseAdapter {
     @Override
     public View getView (int position, View viewParam, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        view = inflater.inflate(R.layout.fragment_start_questions_swipestack, parent, false);
+        view = inflater.inflate(R.layout.fragment_hub_questions_swipestack, parent, false);
         bind(position);
 
         return view;
@@ -42,13 +42,13 @@ public class SwipeStackAdapter extends BaseAdapter {
 
     private void bind (int position) {
         Questions question = listOfQuestions.get(position);
-        HTextView hTextViewQuestion = (HTextView) view.findViewById(R.id.fragment_start_questions_htextview_question);
+        HTextView hTextViewQuestion = (HTextView) view.findViewById(R.id.fragment_hub_questions_htextview_question);
         hTextViewQuestion.setAnimateType(HTextViewType.SCALE);
         hTextViewQuestion.animateText(question.getQuestion());
 
         if (question.getLeftResID() != 0) {
-            ImageView imageViewLeft = (ImageView) view.findViewById(R.id.fragment_start_questions_swipestack_leftanswer);
-            ImageView imageViewRight = (ImageView) view.findViewById(R.id.fragment_start_questions_swipestack_rightanswer);
+            ImageView imageViewLeft = (ImageView) view.findViewById(R.id.fragment_hub_questions_swipestack_leftanswer);
+            ImageView imageViewRight = (ImageView) view.findViewById(R.id.fragment_hub_questions_swipestack_rightanswer);
             imageViewLeft.setImageResource(question.getLeftResID());
             imageViewRight.setImageResource(question.getRightResID());
         }

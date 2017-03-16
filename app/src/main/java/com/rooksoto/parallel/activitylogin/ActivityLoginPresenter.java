@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityHub.ActivityHub;
+import com.rooksoto.parallel.activityhub.ActivityHub;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomToast;
@@ -26,10 +26,6 @@ public class ActivityLoginPresenter implements BasePresenter {
 
     @Override
     public void start () {
-    }
-
-    @Override
-    public void onBackPressedOverride (View viewP) {
     }
 
     @Override

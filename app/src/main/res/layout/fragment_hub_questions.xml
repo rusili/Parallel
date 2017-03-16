@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rooksoto.parallel.activityhub.ActivityHub">
+
+    <LinearLayout
+        android:id="@+id/fragment_hub_questions_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="48dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/fragment_hub_questions_layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible"
+            >
+
+            <ImageView
+                android:id="@+id/fragment_hub_questions_leftanswer"
+                android:layout_width="47dp"
+                android:layout_height="100dp"
+                android:src="@drawable/xbutton"
+                android:layout_marginLeft="48dp"
+                android:tint="@color/red_transparent"
+                android:scaleType="fitCenter"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SKIP"
+                android:textSize="18dp"
+                android:layout_centerInParent="true"
+                android:textColor="@color/textAlt"
+                />
+            <ImageView
+                android:id="@+id/fragment_hub_questions_rightanswer"
+                android:layout_width="47dp"
+                android:layout_height="100dp"
+                android:src="@drawable/checkbutton"
+                android:layout_marginRight="48dp"
+                android:tint="@color/green_transparent"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="48dp"
+        android:layout_above="@id/fragment_hub_questions_layout_bottom"
+        >
+
+        <com.hanks.htextview.HTextView
+            android:id="@+id/fragment_hub_questions_line0"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/textMain"
+            android:layout_alignParentBottom="true"
+            android:textSize="18dp"
+            android:layout_marginTop="24dp"
+            android:textAllCaps="true"
+            />
+
+        <FrameLayout
+            android:id="@+id/fragment_hub_questions_container1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@id/fragment_hub_questions_line0"
+            >
+
+            <ImageView
+                android:id="@+id/fragment_hub_questions_gradient1"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient"
+                android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
+                />
+
+            <TextView
+                android:id="@+id/fragment_hub_questions_line1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#e6dbdbdb"
+                android:textSize="16dp"
+                android:layout_marginRight="16dp"
+                />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_hub_questions_container2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@id/fragment_hub_questions_container1"
+            >
+
+            <ImageView
+                android:id="@+id/fragment_hub_questions_gradient2"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient"
+                android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
+                />
+
+            <TextView
+                android:id="@+id/fragment_hub_questions_line2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#e6dbdbdb"
+                android:textSize="16dp"
+                android:layout_marginRight="16dp"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragment_hub_questions_container3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@id/fragment_hub_questions_container2"
+            >
+
+            <ImageView
+                android:id="@+id/fragment_hub_questions_gradient3"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient"
+                android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
+                />
+
+            <TextView
+                android:id="@+id/fragment_hub_questions_line3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#e6dbdbdb"
+                android:textSize="16dp"
+                android:layout_marginRight="16dp"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragment_hub_questions_container4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@id/fragment_hub_questions_container3"
+            >
+
+            <ImageView
+                android:id="@+id/fragment_hub_questions_gradient4"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient"
+                android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
+                />
+
+            <TextView
+                android:id="@+id/fragment_hub_questions_line4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#e6dbdbdb"
+                android:textSize="16dp"
+                android:layout_marginRight="16dp"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragment_hub_questions_container5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@id/fragment_hub_questions_container4"
+            >
+
+            <ImageView
+                android:id="@+id/fragment_hub_questions_gradient5"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/gradient"
+                android:layout_gravity="right"
+                android:visibility="invisible"
+                android:scaleType="center"
+                />
+
+            <TextView
+                android:id="@+id/fragment_hub_questions_line5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#e6dbdbdb"
+                android:textSize="16dp"
+                android:layout_marginRight="16dp"
+                />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

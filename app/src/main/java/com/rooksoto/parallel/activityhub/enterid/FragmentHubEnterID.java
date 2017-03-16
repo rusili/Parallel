@@ -75,7 +75,6 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
                 // Initialize Global Var "eventID" on button click
                 ParallelLocation.eventID = textViewEventID.getText().toString();
                 reference = database.getReference(ParallelLocation.eventID).getParent();
-                // TODO: 3/15/2017 Parameter:
                 fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
                 fragmentHubEnterIDPresenter.setOnClickReplace(fragmentHubQuestions, buttonEnter, containerID, "Questions");
             }

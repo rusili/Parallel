@@ -47,6 +47,7 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -63,6 +64,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.rooksoto.parallel.R;
@@ -90,6 +92,7 @@ public class Camera2BasicFragment extends Fragment
      */
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
+    private static final int REQUEST_EXTERNAL_PERMISSION = 2;
     private static final String FRAGMENT_DIALOG = "dialog";
     /**
      * Tag for the {@link Log}.
@@ -203,7 +206,7 @@ public class Camera2BasicFragment extends Fragment
             share.setType("image/jpeg");
 
             share.putExtra(Intent.EXTRA_STREAM,
-                    Uri.parse("file:///sdcard/DCIM/Camera/myPic.jpg"));
+                    Uri.parse(mFile.getAbsolutePath()));
 
             startActivity(Intent.createChooser(share, "Share Image"));
             mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
@@ -362,6 +365,7 @@ public class Camera2BasicFragment extends Fragment
         }
 
     };
+    private boolean noExternalPermission = false;
 
     /**
      * Given {@code choices} of {@code Size}s supported by a camera, choose the smallest one that
@@ -440,8 +444,13 @@ public class Camera2BasicFragment extends Fragment
 
     @Override
     public void onViewCreated (final View view, Bundle savedInstanceState) {
+        ImageButton imageButtonTakePicture = (ImageButton) view.findViewById(R.id.picture);
         view.findViewById(R.id.fragment_hub_camera_flip).setOnClickListener(this);
-        view.findViewById(R.id.picture).setOnClickListener(this);
+        if (!noExternalPermission) {
+            imageButtonTakePicture.setOnClickListener(this);
+        } else {
+            imageButtonTakePicture.setColorFilter(R.color.gray70);
+        }
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.fragment_hub_camera_textureview);
     }
 
@@ -476,23 +485,44 @@ public class Camera2BasicFragment extends Fragment
 
     private void requestCameraPermission () {
         if (FragmentCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-            new ConfirmationDialog().show(getChildFragmentManager(), FRAGMENT_DIALOG);
+            new CameraConfirmationDialog().show(getChildFragmentManager(), FRAGMENT_DIALOG);
         } else {
             FragmentCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA},
                     REQUEST_CAMERA_PERMISSION);
         }
     }
 
+    private void requestExternalPermission () {
+        if (FragmentCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            new ExternalConfirmationDialog().show(getChildFragmentManager(), FRAGMENT_DIALOG);
+        } else {
+            FragmentCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_EXTERNAL_PERMISSION);
+        }
+    }
+
+
     @Override
     public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions,
                                             @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CAMERA_PERMISSION) {
-            if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                ErrorDialog.newInstance(getString(R.string.request_permission))
-                        .show(getChildFragmentManager(), FRAGMENT_DIALOG);
+        switch (requestCode) {
+            case (REQUEST_CAMERA_PERMISSION): {
+                if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Access to the camera has been locked.", Toast.LENGTH_SHORT).show();
+                } else {
+                    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                }
+                break;
             }
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            case (REQUEST_EXTERNAL_PERMISSION): {
+                if (grantResults.length != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Access to image saving has been locked.", Toast.LENGTH_SHORT).show();
+                    noExternalPermission = true;
+                } else {
+                    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                }
+                break;
+            }
         }
     }
 
@@ -626,6 +656,15 @@ public class Camera2BasicFragment extends Fragment
             requestCameraPermission();
             return;
         }
+        // Check if we're running on Android 5.0 or higher
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestExternalPermission();
+                return;
+            }
+        }
+
         setUpCameraOutputs(width, height);
         configureTransform(width, height);
         Activity activity = getActivity();
@@ -1042,7 +1081,7 @@ public class Camera2BasicFragment extends Fragment
     /**
      * Shows OK/Cancel confirmation dialog about camera permission.
      */
-    public static class ConfirmationDialog extends DialogFragment {
+    public static class CameraConfirmationDialog extends DialogFragment {
 
         @Override
         public Dialog onCreateDialog (Bundle savedInstanceState) {
@@ -1055,6 +1094,35 @@ public class Camera2BasicFragment extends Fragment
                             FragmentCompat.requestPermissions(parent,
                                     new String[] {Manifest.permission.CAMERA},
                                     REQUEST_CAMERA_PERMISSION);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick (DialogInterface dialog, int which) {
+                                    Activity activity = parent.getActivity();
+                                    if (activity != null) {
+                                        activity.finish();
+                                    }
+                                }
+                            })
+                    .create();
+        }
+    }
+
+    public static class ExternalConfirmationDialog extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog (Bundle savedInstanceState) {
+            final Fragment parent = getParentFragment();
+            return new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.request_permission)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick (DialogInterface dialog, int which) {
+                            FragmentCompat.requestPermissions(parent,
+                                    new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    REQUEST_EXTERNAL_PERMISSION);
                         }
                     })
                     .setNegativeButton(android.R.string.cancel,

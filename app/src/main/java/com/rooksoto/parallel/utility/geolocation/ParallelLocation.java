@@ -18,7 +18,15 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.rooksoto.parallel.model.EventLocation;
 import com.rooksoto.parallel.utility.AppContext;
+import com.rooksoto.parallel.utility.Constants;
+import com.rooksoto.parallel.utility.Globals;
 
 import java.util.ArrayList;
 
@@ -34,12 +42,40 @@ public class ParallelLocation {
     private static ParallelLocation instance;
     private static double parallelLatitude;
     private static double parallelLongitude;
-    private static double eventLatitude = 42.339670;
-    private static double eventLongitude = -71.104664;
-    private static float eventGeofenceRadius = 100;
-    private String GOFENCE_ID = "geoFenceID";
+    private static EventLocation eventLocation;
 
     private ParallelLocation () {
+
+        // [BLOCK]
+        // I'm getting event/geofence location information from Firebase here
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference(
+                Globals.eventID + "/event_location"
+        );
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                eventLocation = dataSnapshot.getValue(EventLocation.class);
+                Globals.eventLatitude = eventLocation.getLatitude();
+                Globals.eventLongitude = eventLocation.getLongitude();
+                Globals.eventGeofenceRadius = eventLocation.getRadiusMeters();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG,
+                        "onCancelled: Error Reading Location from" +
+                                " Firebase in ParallelLocation Constructor"
+                );
+            }
+        });
+
+        // [/Block]
+
+
+
+
         final Context context = AppContext.getAppContext();
         googleApiClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
@@ -111,8 +147,11 @@ public class ParallelLocation {
 
         try {
             Geofence geofence = new Geofence.Builder()
-                    .setRequestId(GOFENCE_ID)
-                    .setCircularRegion(eventLatitude, eventLongitude, eventGeofenceRadius)
+                    .setRequestId(Constants.GOFENCE_ID)
+                    .setCircularRegion(
+                            Globals.eventLatitude,
+                            Globals.eventLongitude,
+                            Globals.eventGeofenceRadius)
                     .setExpirationDuration(Geofence.NEVER_EXPIRE)
                     .setNotificationResponsiveness(1000)
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
@@ -152,7 +191,7 @@ public class ParallelLocation {
     public void stopGeofenceMonitoring () {
         Log.d(TAG, "stopGeofenceMonitoring: Called");
         ArrayList <String> geofenceIds = new ArrayList <>();
-        geofenceIds.add(GOFENCE_ID);
+        geofenceIds.add(Constants.GOFENCE_ID);
     }
 
     public double getLatitude () {

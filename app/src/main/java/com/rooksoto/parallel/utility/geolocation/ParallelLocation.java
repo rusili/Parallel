@@ -31,6 +31,7 @@ import com.rooksoto.parallel.utility.Constants;
 import com.rooksoto.parallel.utility.Globals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by rook on 3/2/17.
@@ -56,50 +57,29 @@ public class ParallelLocation {
 
         // [BLOCK]
         // I'm getting event/geofence location information from Firebase here
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference eventReference = database.getReference(
-                eventID + "event_location/"
+                eventID + "/event_location/"
         );
 
-        eventReference.addValueEventListener(new ValueEventListener() {
+        Log.d(TAG, "Initial Geofence: " + eventLatitude + ", " + eventLongitude + ", " + eventGeofenceRadius);
+
+        eventReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                eventLocation = dataSnapshot.getValue(EventLocation.class);
-
-                if (eventLocation != null) {
-                    eventLatitude = eventLocation.getLatitude();
-                    eventLongitude = eventLocation.getLongitude();
-                    eventGeofenceRadius = eventLocation.getRadiusMeters();
-                }
-                Log.d(TAG, "onDataChange: " + eventLatitude+ " " +eventLongitude+ " " +eventGeofenceRadius);
+                HashMap<String, Object> locationMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                eventLongitude = Double.valueOf(locationMap.get("latitude").toString());
+                eventLongitude = Double.valueOf(locationMap.get("longitude").toString());
+                eventGeofenceRadius = Float.valueOf(locationMap.get("radius_meters").toString());
+                Log.d(TAG, "Event Geofence: " + eventLatitude + ", " + eventLongitude + ", " + eventGeofenceRadius);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG,
-                        "onCancelled: Error Reading Location from" +
-                                " Firebase in ParallelLocation Constructor"
-                );
+                Log.d(TAG, "onCancelled: Error getting location data from Firebase");
             }
         });
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                eventLocation = dataSnapshot.getValue(EventLocation.class);
-//                Globals.eventLatitude = eventLocation.getLatitude();
-//                Globals.eventLongitude = eventLocation.getLongitude();
-//                Globals.eventGeofenceRadius = (Float) eventLocation.getRadiusMeters();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.d(TAG,
-//                        "onCancelled: Error Reading Location from" +
-//                                " Firebase in ParallelLocation Constructor"
-//                );
-//            }
-//        });
-
         // [/Block]
 
 

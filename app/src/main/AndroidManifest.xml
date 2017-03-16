@@ -35,9 +35,18 @@
             android:resource="@color/colorAccent" />
 
         <!-- Activities: -->
+        <activity android:name=".activitylogout.ActivityLogout"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/Animation.AppCompat.Dialog">
+
+        </activity>
         <activity android:name=".activitylogin.ActivityLogin"
                   android:screenOrientation="portrait"
                   android:theme="@style/ActivityLogin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -45,10 +54,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/ActivityHub"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <!-- // Activities -->
 

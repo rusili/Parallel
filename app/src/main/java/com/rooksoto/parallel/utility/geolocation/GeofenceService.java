@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
+import com.rooksoto.parallel.activitylogout.ActivityLogout;
 
 import java.util.List;
 
@@ -34,10 +35,14 @@ public class GeofenceService extends IntentService {
 
             if (transition == Geofence.GEOFENCE_TRANSITION_ENTER) {
                 Log.d(TAG, "onHandleIntent: Entering Geofence - " + requestID);
+                Intent geofenceEntry = new Intent();
+
 
             } else if (transition == Geofence.GEOFENCE_TRANSITION_EXIT) {
                 Log.d(TAG, "onHandleIntent: Exiting Geofence = " + requestID);
-                // FIXME Make a broadcast receiver to get a toast from here
+                Intent geofenceExit = new Intent(this, ActivityLogout.class);
+                geofenceExit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(geofenceExit);
             }
         }
     }

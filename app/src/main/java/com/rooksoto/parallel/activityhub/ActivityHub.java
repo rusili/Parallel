@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.eftimoff.viewpagertransformers.DepthPageTransformer;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -35,6 +36,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     private ViewPager viewPager;
     private SmartTabLayout viewPagerTab;
     private FragmentPagerItems pages;
+    ParallelLocation location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,10 +107,10 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     public void initialize() {
+        location = ParallelLocation.getInstance();
         view = getWindow().getDecorView().getRootView();
         activityHubPresenter.onInitialize();
-        //loadFragmentEnterID();
-        activityHubPresenter.toViewPager();
+        loadFragmentEnterID();
     }
 
     private void loadFragmentEnterID () {
@@ -144,13 +146,17 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     @Override
-    public void activateParallelEvent() {
-        //TODO Command the view to go to next fragment
+    public void activateParallelEvent(String enteredEventID) {
+        ParallelLocation.eventID = enteredEventID;
+        // Todo - Rusi - Start Questions Fragment Here
     }
 
     @Override
-    public void showEventIdError() {
-        //TODO Command the view to show an error - Event ID does not exist
-
+    public void showEventIdError(String enteredEventID) {
+        Toast.makeText(this,
+                "The event " + enteredEventID + " does not exist! Please enter a valid Event ID.",
+                Toast.LENGTH_SHORT)
+                .show()
+        ;
     }
 }

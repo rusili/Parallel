@@ -47,9 +47,9 @@ public class ActivityHubPresenter {
 
         void disconnectLocationService(ParallelLocation locationService);
 
-        void activateParallelEvent();
+        void activateParallelEvent(String enteredEventID);
 
-        void showEventIdError();
+        void showEventIdError(String enteredEventID);
     }
 
 }

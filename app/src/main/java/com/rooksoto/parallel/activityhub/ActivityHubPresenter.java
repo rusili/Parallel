@@ -40,6 +40,7 @@ public class ActivityHubPresenter {
         locationService.startGeofenceMonitoring(view.getContext());
     }
 
+
     public interface Listener {
         void setupViewpager();
 

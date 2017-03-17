@@ -48,7 +48,7 @@ public class ParallelLocation {
     private static EventLocation eventLocation;
 
     // Inits to default eventID, at US White House, 100m radius
-    public static String eventID = "demoday";
+    public static String eventID = "default_id";
     public static double eventLatitude = 38.8976763;
     public static double eventLongitude = -77.0365298;
     public static float eventGeofenceRadius = 100;

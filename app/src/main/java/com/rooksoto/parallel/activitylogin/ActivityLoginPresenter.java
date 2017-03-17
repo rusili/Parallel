@@ -20,7 +20,7 @@ public class ActivityLoginPresenter implements BasePresenter {
     private int containerID = R.id.activity_login_fragment_container;
     private CustomAlertDialog mCustomAlertDialog = new CustomAlertDialog();
     private CustomToast mCustomToast = new CustomToast();
-    private boolean logoVisible = false;
+    public static boolean logoVisible = false;
     private FragmentLoginLogin mFragmentLoginLogin;
     private boolean isNew = true;
 

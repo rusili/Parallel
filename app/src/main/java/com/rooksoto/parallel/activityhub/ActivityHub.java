@@ -1,8 +1,10 @@
 package com.rooksoto.parallel.activityhub;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.eftimoff.viewpagertransformers.DepthPageTransformer;
@@ -19,7 +20,6 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.attendees.FragmentAttendees;
 import com.rooksoto.parallel.activityhub.chat.FragmentChat;
@@ -28,8 +28,6 @@ import com.rooksoto.parallel.activityhub.eventmap.FragmentEventMap;
 import com.rooksoto.parallel.activityhub.itinerary.FragmentItinerary;
 import com.rooksoto.parallel.activityhub.profile.FragmentProfile;
 import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
-import com.rooksoto.parallel.activitylogin.splash.FragmentLoginSplash;
-import com.rooksoto.parallel.activitylogin.wait.FragmentLoginWait;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
@@ -162,6 +160,15 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     public void activateParallelEvent(String enteredEventID) {
         ParallelLocation.eventID = enteredEventID;
         // Todo - Rusi - Start Questions Fragment Here
+        final FragmentHubQuestions fragmentHubQuestions = new FragmentHubQuestions(this);
+        if (!isOnline()) {
+            Toast.makeText(this, "Cannot Connect - Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+        } else {
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out)
+                    .replace(containerID, fragmentHubQuestions, "Questions")
+                    .commit();
+        }
     }
 
     @Override
@@ -172,4 +179,17 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
                 .show()
         ;
     }
+
+    private boolean isOnline () {
+        ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

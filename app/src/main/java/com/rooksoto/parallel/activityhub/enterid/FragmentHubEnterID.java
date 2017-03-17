@@ -15,9 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
-import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
-import com.rooksoto.parallel.utility.Constants;
-import com.rooksoto.parallel.utility.Globals;
 import com.rooksoto.parallel.utility.OnClickEffect;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
@@ -63,7 +60,6 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-        final FragmentHubQuestions fragmentHubQuestions = new FragmentHubQuestions(listener);
 
         textViewEventID = (EditText) view.findViewById(R.id.fragment_start_enterid_eventid);
 
@@ -76,7 +72,8 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
                 ParallelLocation.eventID = textViewEventID.getText().toString();
                 reference = database.getReference();
                 fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
-                // TODO: 3/16/17 Start the questions fragment only if eventID is valid 
+                // TODO: 3/16/17 Start the questions fragment only if eventID is valid
+//                final FragmentHubQuestions fragmentHubQuestions = new FragmentHubQuestions(listener);
 //                fragmentHubEnterIDPresenter.setOnClickReplace(fragmentHubQuestions, buttonEnter, containerID, "Questions");
             }
         });

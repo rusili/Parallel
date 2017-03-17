@@ -33,10 +33,6 @@ import com.rooksoto.parallel.utility.Globals;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by rook on 3/2/17.
- */
-
 public class ParallelLocation {
 
     private static final String TAG = "ParallelLocation";
@@ -81,9 +77,6 @@ public class ParallelLocation {
             }
         });
         // [/Block]
-
-
-
 
         final Context context = AppContext.getAppContext();
         googleApiClient = new GoogleApiClient.Builder(context)

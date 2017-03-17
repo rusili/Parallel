@@ -5,7 +5,39 @@
               android:layout_height="match_parent"
               android:layout_marginTop="24dp"
     >
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_hub_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="#40000000"
+        >
 
+        <TextView
+            android:id="@+id/activity_hub_action_bar_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="PROFILE"
+            android:textStyle="italic"
+            android:textSize="16dp"
+            android:textColor="@color/textMain"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            />
+
+        <ImageButton
+            android:id="@+id/activity_hub_action_bar_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/ic_clear_black_24dp"
+            android:background="#00000000"
+            android:tint="@color/textAlt"
+            />
+
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

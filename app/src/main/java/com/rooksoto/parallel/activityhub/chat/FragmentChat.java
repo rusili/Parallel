@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -20,6 +21,7 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.ChatMessage;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.squareup.picasso.Picasso;
 
 public class FragmentChat extends Fragment implements FragmentChatPresenter.Listener{
@@ -30,6 +32,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
     private ListView messageListView;
     private ImageView picImageView;
     private FragmentChatPresenter fragmentChatPresenter;
+    private ImageButton imageButtonExit;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
         messageEditText = (EditText) view.findViewById(R.id.fragment_hub_chatroom_edittext_message);
         sendButton = (Button) view.findViewById(R.id.sendButton);
         messageListView = (ListView) view.findViewById(R.id.fragment_hub_chat_main_messageListView);
+        imageButtonExit = (ImageButton) view.findViewById(R.id.activity_hub_action_bar_button);
         return view;
     }
 
@@ -63,7 +67,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
                 messageEditText.setText("");
             }
         });
-
+        setOnClickListeners();
 
     }
 
@@ -90,6 +94,15 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
         });
     }
 
+    private void setOnClickListeners() {
+        imageButtonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+                customAlertDialog.exit(view.getContext());
+            }
+        });
+    }
 
     @Override
     public void onStart() {

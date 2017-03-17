@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Session;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.widgets.recyclerview.ItineraryAdapter;
 
 import java.text.DateFormat;
@@ -21,10 +23,11 @@ import java.util.List;
 
 public class FragmentItinerary extends Fragment implements BaseView {
     private FragmentItineraryPresenter fragmentItineraryPresenter = new FragmentItineraryPresenter();
-    private RecyclerView recyclerViewItinerary;
     private List<Session> listofSessions = new ArrayList <>();
 
     private View view;
+    private RecyclerView recyclerViewItinerary;
+    private ImageButton imageButtonExit;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +43,21 @@ public class FragmentItinerary extends Fragment implements BaseView {
     @Override
     public void setViews () {
         tempRV();
+        imageButtonExit = (ImageButton) view.findViewById(R.id.activity_hub_action_bar_button);
         recyclerViewItinerary = (RecyclerView) view.findViewById(R.id.fragment_hub_itinerary_recyclerview);
         recyclerViewItinerary.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewItinerary.setAdapter(new ItineraryAdapter(listofSessions));
+        setOnClickListeners();
+    }
+
+    private void setOnClickListeners() {
+        imageButtonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+                customAlertDialog.exit(view.getContext());
+            }
+        });
     }
 
     private void tempRV(){

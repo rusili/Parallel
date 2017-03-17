@@ -64,7 +64,7 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
             public void run () {
                 splashWordAnimation();
             }
-        }, 1500);
+        }, 1250);
     }
 
     private void splashWordAnimation () {

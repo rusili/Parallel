@@ -120,7 +120,7 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
         textViewCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginFragmentPresenter.onGeneralLoginClicked(CREATE_ACCOUNT);
+                //loginFragmentPresenter.onGeneralLoginClicked(CREATE_ACCOUNT);
             }
         });
         final ImageView imageViewGoogleSignIn = (ImageView) view.findViewById(R.id.fragment_login_login_button_googlesignin);

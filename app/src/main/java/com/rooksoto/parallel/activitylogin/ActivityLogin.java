@@ -1,5 +1,6 @@
 package com.rooksoto.parallel.activitylogin;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -56,12 +57,19 @@ public class ActivityLogin extends AppCompatActivity implements BaseView {
         if (currentFrag instanceof FragmentLoginWait || currentFrag instanceof FragmentLoginSplash){
             CustomAlertDialog customAlertDialog = new CustomAlertDialog();
             customAlertDialog.exit(this);
+        } else if (currentFrag instanceof FragmentLoginLogin){
+            hideLoginLogo();
+            getFragmentManager().beginTransaction().replace(containerID, new FragmentLoginSplash()).commit();
         } else {
             super.onBackPressed();
         }
     }
 
-    public void onClickToActivityStart (View view) {
-        activityLoginPresenter.intentToActivityStart();
+    private void hideLoginLogo() {
+        ImageView logoViewLeft = (ImageView) findViewById(R.id.activity_login_logoleft);
+        logoViewLeft.setVisibility(View.INVISIBLE);
+        ImageView logoViewRight = (ImageView) findViewById(R.id.activity_login_logoright);
+        logoViewRight.setVisibility(View.INVISIBLE);
+        activityLoginPresenter.logoVisible = false;
     }
 }

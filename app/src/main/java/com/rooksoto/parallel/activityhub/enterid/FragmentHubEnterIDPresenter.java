@@ -21,6 +21,7 @@ import com.rooksoto.parallel.utility.CustomAlertDialog;
 public class FragmentHubEnterIDPresenter implements BasePresenter {
     private ActivityHubPresenter.Listener listener;
 
+
     public FragmentHubEnterIDPresenter(ActivityHubPresenter.Listener listener){
         this.listener = listener;
     }
@@ -59,19 +60,19 @@ public class FragmentHubEnterIDPresenter implements BasePresenter {
     }
 
     // TODO: 3/12/17 - ROOK - Implement check for valid eventID. See comments. 
-    void checkEventID (final String eventID, DatabaseReference reference) {
+    void checkEventID (final String enteredEventID, DatabaseReference reference) {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild(eventID)) {
-                    // Command the fragment to load the next screen, using eventID data
-                    // There should be a reference to the FragmentStartEnterID fragment here
-                    // So we can call its "load next fragment" method
+                if (dataSnapshot.hasChild(enteredEventID)) {
+                    // Command the view to go to next fragment
+                    listener.activateParallelEvent(enteredEventID);
+
+                    Log.d(TAG, "onDataChange: Event ID exists, load next fragment");
                 } else {
-                    // User typed invalid eventID... Handle here (Send to error page?)
-                    // There should be a reference to the FragmentStartEnterID fragment here
-                    // So that we can call the fragment's "invalid event id" method
-                    // Which should probably show a toast or take the user to an error page
+                    // Command the view to show an error - Event ID does not exist
+                    listener.showEventIdError(enteredEventID);
+                    Log.d(TAG, "onDataChange: This Event ID does not exist");
                 }
             }
 

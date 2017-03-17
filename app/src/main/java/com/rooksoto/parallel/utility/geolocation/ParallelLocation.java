@@ -18,9 +18,20 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.rooksoto.parallel.model.Event;
+import com.rooksoto.parallel.model.EventLocation;
 import com.rooksoto.parallel.utility.AppContext;
+import com.rooksoto.parallel.utility.Constants;
+import com.rooksoto.parallel.utility.Globals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by rook on 3/2/17.
@@ -34,12 +45,46 @@ public class ParallelLocation {
     private static ParallelLocation instance;
     private static double parallelLatitude;
     private static double parallelLongitude;
-    private static double eventLatitude = 42.339670;
-    private static double eventLongitude = -71.104664;
-    private static float eventGeofenceRadius = 100;
-    private String GOFENCE_ID = "geoFenceID";
+    private static EventLocation eventLocation;
+
+    // Inits to default eventID, at US White House, 100m radius
+    public static String eventID = "default_id";
+    public static double eventLatitude = 38.8976763;
+    public static double eventLongitude = -77.0365298;
+    public static float eventGeofenceRadius = 100;
 
     private ParallelLocation () {
+
+        // [BLOCK]
+        // I'm getting event/geofence location information from Firebase here
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference eventReference = database.getReference(
+                eventID + "/event_location/"
+        );
+
+        Log.d(TAG, "Initial Geofence: " + eventLatitude + ", " + eventLongitude + ", " + eventGeofenceRadius);
+
+        eventReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, Object> locationMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                eventLongitude = Double.valueOf(locationMap.get("latitude").toString());
+                eventLongitude = Double.valueOf(locationMap.get("longitude").toString());
+                eventGeofenceRadius = Float.valueOf(locationMap.get("radius_meters").toString());
+                Log.d(TAG, "Event Geofence: " + eventLatitude + ", " + eventLongitude + ", " + eventGeofenceRadius);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "onCancelled: Error getting location data from Firebase");
+            }
+        });
+        // [/Block]
+
+
+
+
         final Context context = AppContext.getAppContext();
         googleApiClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
@@ -111,8 +156,11 @@ public class ParallelLocation {
 
         try {
             Geofence geofence = new Geofence.Builder()
-                    .setRequestId(GOFENCE_ID)
-                    .setCircularRegion(eventLatitude, eventLongitude, eventGeofenceRadius)
+                    .setRequestId(Constants.GOFENCE_ID)
+                    .setCircularRegion(
+                            eventLatitude,
+                            eventLongitude,
+                            eventGeofenceRadius)
                     .setExpirationDuration(Geofence.NEVER_EXPIRE)
                     .setNotificationResponsiveness(1000)
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
@@ -152,7 +200,7 @@ public class ParallelLocation {
     public void stopGeofenceMonitoring () {
         Log.d(TAG, "stopGeofenceMonitoring: Called");
         ArrayList <String> geofenceIds = new ArrayList <>();
-        geofenceIds.add(GOFENCE_ID);
+        geofenceIds.add(Constants.GOFENCE_ID);
     }
 
     public double getLatitude () {

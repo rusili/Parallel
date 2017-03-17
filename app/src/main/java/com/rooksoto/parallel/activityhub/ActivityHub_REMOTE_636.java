@@ -1,4 +1,4 @@
-package com.rooksoto.parallel.activityHub;
+package com.rooksoto.parallel.activityhub;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -9,16 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.eftimoff.viewpagertransformers.TabletTransformer;
+import com.eftimoff.viewpagertransformers.DepthPageTransformer;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItems;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityHub.attendees.FragmentAttendees;
-import com.rooksoto.parallel.activityHub.chat.FragmentChat;
-import com.rooksoto.parallel.activityHub.eventinfo.FragmentEventInfo;
+import com.rooksoto.parallel.activityhub.attendees.FragmentAttendees;
+import com.rooksoto.parallel.activityhub.chat.FragmentChat;
+import com.rooksoto.parallel.activityhub.enterid.FragmentHubEnterID;
+import com.rooksoto.parallel.activityhub.eventmap.FragmentEventMap;
+import com.rooksoto.parallel.activityhub.itinerary.FragmentItinerary;
+import com.rooksoto.parallel.activityhub.profile.FragmentProfile;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 
@@ -27,11 +31,12 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
 
     private View view;
 
-    private int containerID = R.id.viewpager;
+    private int containerID = R.id.content_frame;
     private static final String TAG = "ActivityHub";
     private ViewPager viewPager;
     private SmartTabLayout viewPagerTab;
     private FragmentPagerItems pages;
+    ParallelLocation location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +46,17 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         initialize();
     }
 
-    private void setupViewpager() {
+    public void setupViewpager() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        viewPagerTab.setVisibility(View.VISIBLE);
 
         pages = new FragmentPagerItems(this);
-        pages.add(FragmentPagerItem.of("Event Map", EventMapFragment.class));
-        pages.add(FragmentPagerItem.of("Event Info", FragmentEventInfo.class));
-        pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
+        pages.add(FragmentPagerItem.of("Itinerary", FragmentItinerary.class));
+        pages.add(FragmentPagerItem.of("Profile", FragmentProfile.class));
         pages.add(FragmentPagerItem.of("Attendees", FragmentAttendees.class));
+        pages.add(FragmentPagerItem.of("Chat", FragmentChat.class));
+        pages.add(FragmentPagerItem.of("Map", FragmentEventMap.class));
         pages.add(FragmentPagerItem.of("Camera", Camera2BasicFragment.class));
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getFragmentManager(), pages);
@@ -64,19 +71,22 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
                                                       false);
                                               switch (position) {
                                                   case 0:
-                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_map_black));
-                                                      break;
-                                                  case 1:
                                                       icon.setImageDrawable(res.getDrawable(R.drawable.ic_today));
                                                       break;
-                                                  case 2:
-                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
+                                                  case 1:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_person_outline_black_24dp));
                                                       break;
-                                                  case 3:
+                                                  case 2:
                                                       icon.setImageDrawable(res.getDrawable(R.drawable.ic_people_outline));
                                                       break;
+                                                  case 3:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_chat_bubble_outline));
+                                                      break;
                                                   case 4:
-                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_panorama_wide_angle));
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_map_black));
+                                                      break;
+                                                  case 5:
+                                                      icon.setImageDrawable(res.getDrawable(R.drawable.ic_photo_camera_black_24dp));
                                                       break;
                                                   default:
                                                       throw new IllegalStateException("Invalid position: " + position);
@@ -87,7 +97,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         );
 
         viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new TabletTransformer());
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
         viewPagerTab.setViewPager(viewPager);
     }
 
@@ -97,9 +107,20 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     public void initialize() {
+        location = ParallelLocation.getInstance();
         view = getWindow().getDecorView().getRootView();
         activityHubPresenter.onInitialize();
-        setupViewpager();
+        loadFragmentEnterID();
+    }
+
+    private void loadFragmentEnterID () {
+        SmartTabLayout smartTabLayout = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        smartTabLayout.setVisibility(View.INVISIBLE);
+
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out)
+                .add(containerID, new FragmentHubEnterID(this), "Enter ID")
+                .commit();
     }
 
     @Override
@@ -122,5 +143,20 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     @Override
     public void disconnectLocationService(ParallelLocation locationService) {
         locationService.disconnect();
+    }
+
+    @Override
+    public void activateParallelEvent(String enteredEventID) {
+        ParallelLocation.eventID = enteredEventID;
+        // Todo - Rusi - Start Questions Fragment Here
+    }
+
+    @Override
+    public void showEventIdError(String enteredEventID) {
+        Toast.makeText(this,
+                "The event " + enteredEventID + " does not exist! Please enter a valid Event ID.",
+                Toast.LENGTH_SHORT)
+                .show()
+        ;
     }
 }

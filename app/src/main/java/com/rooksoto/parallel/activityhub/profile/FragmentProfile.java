@@ -77,6 +77,8 @@ public class FragmentProfile extends Fragment implements BaseView {
         tvEmail.setText(user.getEmail());
         Picasso.with(getActivity()).load(user.getPhotoUrl()).into(ivProfilePic);
 
+
+        // Get Answer List from Firebase
         answerRef = reference.child("attendee_list").child(user.getUid()).child("listofAnswers");
 
         answerRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -84,7 +86,7 @@ public class FragmentProfile extends Fragment implements BaseView {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot question:dataSnapshot.getChildren()) {
                     listofAnswers.add(new Answers(
-                            (String)question.child("answer").getValue(),
+                            (String) question.child("answer").getValue(),
                             (String) question.child("question").getValue()
                     ));
                     profileAdapter.notifyDataSetChanged();

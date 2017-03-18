@@ -11,6 +11,12 @@ public class User {
     String pictureLink;
     List<Answers> listofAnswers = new ArrayList <>();
 
+    public User(String name, String email, String pictureLink) {
+        this.name = name;
+        this.email = email;
+        this.pictureLink = pictureLink;
+    }
+
     public User(String name, String email, String pictureLink, List<Answers> listofAnswers) {
         this.name = name;
         this.email = email;

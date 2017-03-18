@@ -2,7 +2,6 @@ package com.rooksoto.parallel.activitylogin;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 
 import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.activityhub.ActivityHub;
 import com.rooksoto.parallel.activitylogin.login.FragmentLoginLogin;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.CustomToast;
@@ -76,12 +74,6 @@ public class ActivityLoginPresenter implements BasePresenter {
             logoViewRight.startAnimation(fadeInDown);
             logoVisible = true;
         }
-    }
-
-    public void intentToActivityStart () {
-        Intent fromActivityStartToActivityHub = new Intent(activity, ActivityHub.class);
-        activity.startActivity(fromActivityStartToActivityHub);
-        activity.finish();
     }
 
     public void giveActivity (Activity activityP, View rootView) {

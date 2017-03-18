@@ -1,11 +1,11 @@
 package com.rooksoto.parallel.activitylogin;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
@@ -23,6 +23,7 @@ public class ActivityLogin extends AppCompatActivity implements BaseView {
     private CustomToast mCustomToast = new CustomToast();
     private ImageView logoViewLeft;
     private ImageView logoViewRight;
+    private TextView textViewCreate;
     private boolean logoVisible = false;
     private FragmentLoginLogin mFragmentLoginLogin;
     private boolean isNew = true;
@@ -31,6 +32,11 @@ public class ActivityLogin extends AppCompatActivity implements BaseView {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("EXIT", false)) {
+            finishAffinity();
+            finish();
+        }
+
         initialize();
     }
 

@@ -61,7 +61,7 @@ public class FragmentAttendees extends Fragment implements BaseView {
             @Override
             public void onClick(View view) {
                 CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(view.getContext());
+                customAlertDialog.exit(getActivity());
             }
         });
     }

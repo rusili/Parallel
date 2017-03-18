@@ -99,7 +99,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
             @Override
             public void onClick(View view) {
                 CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(view.getContext());
+                customAlertDialog.exit(getActivity());
             }
         });
     }
@@ -138,7 +138,6 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
                 }
                 ((TextView) view.findViewById(R.id.messageTextView)).setText(chatMessage.getText());
                 ((TextView) view.findViewById(R.id.nameTextView)).setText(chatMessage.getName());
-
             }
         };
 

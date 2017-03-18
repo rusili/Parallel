@@ -73,8 +73,6 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
                 reference = database.getReference();
                 fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
                 // TODO: 3/16/17 Start the questions fragment only if eventID is valid
-//                final FragmentHubQuestions fragmentHubQuestions = new FragmentHubQuestions(listener);
-//                fragmentHubEnterIDPresenter.setOnClickReplace(fragmentHubQuestions, buttonEnter, containerID, "Questions");
             }
         });
     }

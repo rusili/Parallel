@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -196,19 +194,27 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
             default:
                 break;
         }
-        if (counter == (listofQuestions.size()-1)){
+        if (counter == (listofQuestions.size()-2)){
             showDelayedButtonClick(counter);
+            disableButtons();
+            counter++;
+            showNextQuestion();
             handler.postDelayed(new Runnable() {
                 public void run() {
                     toViewPagerHub();
                 }
-            }, 250);
+            }, 750);
 
         } else {
             counter++;
             altImage = false;
             showNextQuestion();
         }
+    }
+
+    private void disableButtons () {
+        imageViewLeftButton.setOnClickListener(null);
+        imageViewRightButton.setOnClickListener(null);
     }
 
     private void toViewPagerHub(){
@@ -221,7 +227,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
                 getFragmentManager().beginTransaction().remove(currentFrag).commit();
                 fragmentHubQuestionsPresenter.toViewPager();
             }
-        }, 250);
+        }, 100);
     }
 
     private Runnable runnableHTextView = new Runnable() {

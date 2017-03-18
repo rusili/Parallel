@@ -164,6 +164,9 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         if (!isOnline()) {
             Toast.makeText(this, "Cannot Connect - Please Check Internet Connection", Toast.LENGTH_SHORT).show();
         } else {
+            Fragment currentFrag = getFragmentManager().findFragmentById(containerID);
+            getFragmentManager().beginTransaction().remove(currentFrag).commit();
+
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out)
                     .replace(containerID, fragmentHubQuestions, "Questions")

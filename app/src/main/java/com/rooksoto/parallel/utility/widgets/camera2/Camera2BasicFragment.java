@@ -963,7 +963,7 @@ public class Camera2BasicFragment extends Fragment
             }
             case R.id.activity_hub_action_bar_button: {
                 CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(view.getContext());
+                customAlertDialog.exit(getActivity());
             }
         }
     }

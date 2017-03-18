@@ -71,6 +71,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
     private String uid;
     private String userName;
     private String profilePic;
+    private String email;
 
     private static final String TAG = "FragmentHubQuestions";
 
@@ -256,6 +257,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
         if (user != null) {
             uid = user.getUid();
             userName = user.getDisplayName();
+            email = user.getEmail();
             if (user.getPhotoUrl() != null) {
                 profilePic = user.getPhotoUrl().toString();
             }
@@ -263,7 +265,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
         listofAnswers.remove(0);
         DatabaseReference reference = database.getReference(ParallelLocation.eventID).child("attendee_list");
 
-        reference.child(uid).setValue(new User(userName, null, profilePic, listofAnswers));
+        reference.child(uid).setValue(new User(userName, email, profilePic, listofAnswers));
     }
 
     private void toViewPagerHub(){

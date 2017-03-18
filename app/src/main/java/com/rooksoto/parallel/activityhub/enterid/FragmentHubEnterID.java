@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
     ParallelLocation location;
     FirebaseDatabase database;
     DatabaseReference reference;
+
+    private static final String TAG = "FragmentHubEnterID";
 
     @Override
     public void onStart() {
@@ -68,8 +71,12 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
             @Override
             public void onClick (View v) {
                 OnClickEffect.setButton(buttonEnter);
-                // Initialize Global Var "eventID" on button click
-                ParallelLocation.eventID = textViewEventID.getText().toString();
+                if (textViewEventID.getText().toString().equals("")) {
+                    ParallelLocation.eventID = "empty";
+                } else {
+                    ParallelLocation.eventID = textViewEventID.getText().toString();
+                }
+                Log.d(TAG, "onClick: eventID Current Value is: " + ParallelLocation.eventID);
                 reference = database.getReference();
                 fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
                 // TODO: 3/16/17 Start the questions fragment only if eventID is valid

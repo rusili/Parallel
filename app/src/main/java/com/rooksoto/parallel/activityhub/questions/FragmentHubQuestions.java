@@ -20,6 +20,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.HTextViewType;
 import com.rooksoto.parallel.BaseView;
@@ -27,13 +34,19 @@ import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
 import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.objects.Questions;
+import com.rooksoto.parallel.objects.User;
 import com.rooksoto.parallel.utility.OnClickEffect;
+import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ValidFragment")
 public class FragmentHubQuestions extends Fragment implements BaseView, View.OnClickListener{
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference reference;
+
     private FragmentHubQuestionsPresenter fragmentHubQuestionsPresenter;
     private List<Questions> listofQuestions;
     private List<Answers> listofAnswers = new ArrayList<>();
@@ -47,11 +60,20 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
     private List<ImageView> imageViewGradient = new ArrayList<>();
     private List<FrameLayout> listofFrameLayouts = new ArrayList<>();
 
+    private int welcomeArrayIndexSize;
     private int containerID = R.id.content_frame;
     private int counter = 0;
     private boolean altImage = false;
-    private String[] welcomeText = new String[] {"Welcome", "to C4Q's", "3.3 Demo Day", "Enjoy"};
+//    private String[] welcomeText = new String[] {"Welcome", "to C4Q's", "3.3 Demo Day", "Enjoy"};
+    private String[] welcomeText;
     private boolean started = false;
+
+    private String uid;
+    private String userName;
+    private String profilePic;
+    private String email;
+
+    private static final String TAG = "FragmentHubQuestions";
 
     @SuppressLint("ValidFragment")
     public FragmentHubQuestions(ActivityHubPresenter.Listener listener){
@@ -67,6 +89,22 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
     }
 
     public void initialize () {
+        reference = database.getReference(ParallelLocation.eventID);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String text = dataSnapshot.child("event_description").getValue().toString();
+                welcomeText = text.split(" z ");
+                welcomeArrayIndexSize = welcomeText.length;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+//        Log.d(TAG, "initialize: Value of text is " + welcomeText);
         startWelcomeAnimation();
     }
 
@@ -194,7 +232,9 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
             default:
                 break;
         }
+
         if (counter == (listofQuestions.size()-2)){
+            addUserToEventDatabase(listofAnswers);
             showDelayedButtonClick(counter);
             disableButtons();
             counter++;
@@ -215,6 +255,24 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
     private void disableButtons () {
         imageViewLeftButton.setOnClickListener(null);
         imageViewRightButton.setOnClickListener(null);
+    }
+  
+    private void addUserToEventDatabase(List<Answers> listofAnswers) {
+        // Send answers to Firebase
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            uid = user.getUid();
+            userName = user.getDisplayName();
+            email = user.getEmail();
+            if (user.getPhotoUrl() != null) {
+                profilePic = user.getPhotoUrl().toString();
+            }
+        }
+        listofAnswers.remove(0);
+        DatabaseReference reference = database.getReference(ParallelLocation.eventID).child("attendee_list");
+
+        reference.child(uid).setValue(new User(userName, email, profilePic, listofAnswers));
     }
 
     private void toViewPagerHub(){
@@ -244,7 +302,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
             if (counter == 1) {
                 playAudio(R.raw.welcome);
             }
-            if (counter == 4) {
+            if (counter == welcomeArrayIndexSize) {
                 stopWelcomeAnimation();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {

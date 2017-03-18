@@ -47,21 +47,25 @@
         >
 
         <ImageView
+            android:id="@+id/iv_profile_pic"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Email"
+            android:text="Name"
             android:gravity="center_horizontal"
             android:textColor="@color/textMain"
             />
         <TextView
+            android:id="@+id/tv_email"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="name"
+            android:text="Email"
             android:gravity="center_horizontal"
             android:textColor="@color/textMain"
             />
@@ -71,7 +75,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_hub_profile_recyclerview"
+        android:id="@+id/rv_profile_answers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="24dp"

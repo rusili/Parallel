@@ -17,6 +17,7 @@ import com.rooksoto.parallel.BasePresenter;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
+import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
 public class FragmentHubEnterIDPresenter implements BasePresenter {
     private ActivityHubPresenter.Listener listener;
@@ -67,15 +68,13 @@ public class FragmentHubEnterIDPresenter implements BasePresenter {
                 if (dataSnapshot.hasChild(enteredEventID)) {
                     // Command the view to go to next fragment
                     listener.activateParallelEvent(enteredEventID);
-
                     Log.d(TAG, "onDataChange: Event ID exists, load next fragment");
                 } else {
                     // Command the view to show an error - Event ID does not exist
                     listener.showEventIdError(enteredEventID);
-                    Log.d(TAG, "onDataChange: This Event ID does not exist");
+                    Log.d(TAG, "onDataChange: This Event ID does not exist - " + ParallelLocation.eventID);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Handle cancellation

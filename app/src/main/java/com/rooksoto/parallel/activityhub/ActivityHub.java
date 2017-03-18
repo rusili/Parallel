@@ -159,7 +159,6 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     @Override
     public void activateParallelEvent(String enteredEventID) {
         ParallelLocation.eventID = enteredEventID;
-        // Todo - Rusi - Start Questions Fragment Here
         final FragmentHubQuestions fragmentHubQuestions = new FragmentHubQuestions(this);
         if (!isOnline()) {
             Toast.makeText(this, "Cannot Connect - Please Check Internet Connection", Toast.LENGTH_SHORT).show();
@@ -174,7 +173,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     @Override
     public void showEventIdError(String enteredEventID) {
         Toast.makeText(this,
-                "The event " + enteredEventID + " does not exist! Please enter a valid Event ID.",
+                "The event \"" + enteredEventID + "\" does not exist! Please enter a valid Event ID.",
                 Toast.LENGTH_SHORT)
                 .show()
         ;

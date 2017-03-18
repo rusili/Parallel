@@ -86,7 +86,6 @@ public class FragmentAttendees extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-//        tempRV();
         attendeesAdapter = new AttendeesAdapter(listofUsers);
         recyclerViewAttendees = (RecyclerView) view.findViewById(R.id.fragment_hub_attendees_recyclerview);
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -94,12 +93,6 @@ public class FragmentAttendees extends Fragment implements BaseView {
 
         imageButtonExit = (ImageButton) view.findViewById(R.id.activity_hub_action_bar_button);
         setOnClickListeners();
-    }
-
-    private void tempRV(){
-        listofUsers.add(new User("Temp", "Temp@Temp.com"));
-        listofUsers.add(new User("Temp", "Temp@Temp.com"));
-        attendeesAdapter = new AttendeesAdapter(listofUsers);
     }
 
     private void setOnClickListeners() {
@@ -111,5 +104,4 @@ public class FragmentAttendees extends Fragment implements BaseView {
             }
         });
     }
-
 }

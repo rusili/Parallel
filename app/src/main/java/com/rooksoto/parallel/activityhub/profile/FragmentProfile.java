@@ -98,8 +98,6 @@ public class FragmentProfile extends Fragment implements BaseView {
                 Log.d(TAG, "onCancelled: Failed to get list of answers from dataSnapshot");
             }
         });
-
-
     }
 
     @Override

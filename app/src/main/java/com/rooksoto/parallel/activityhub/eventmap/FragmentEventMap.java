@@ -76,7 +76,7 @@ public class FragmentEventMap extends Fragment {
             @Override
             public void onClick(View view) {
                 CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(view.getContext());
+                customAlertDialog.exit(getActivity());
             }
         });
     }

@@ -2,6 +2,7 @@ package com.rooksoto.parallel.activitylogin.login;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -47,6 +48,7 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
     private boolean isNew = true;
     private FragmentLoginLoginPresenter loginFragmentPresenter;
     private ActivityLoginPresenter activityLoginPresenter;
+    private TextView textViewCreate;
 
     public static FragmentLoginLogin newInstance(boolean isNewParam) {
         Bundle args = new Bundle();
@@ -103,6 +105,8 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
     private void initialize() {
         EditText editTextUsername = (EditText) view.findViewById(R.id.fragment_login_login_edittext_username);
         EditText editTextPassword = (EditText) view.findViewById(R.id.fragment_login_login_edittext_password);
+        textViewCreate = (TextView) view.findViewById(R.id.fragment_login_login_button_createaccount);
+        textViewCreate.setPaintFlags(textViewCreate.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         username = editTextUsername.getText().toString();
         password = editTextPassword.getText().toString();

@@ -232,16 +232,18 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
             default:
                 break;
         }
-        if (counter == (listofQuestions.size()-1)){
 
+        if (counter == (listofQuestions.size()-2)){
             addUserToEventDatabase(listofAnswers);
-
             showDelayedButtonClick(counter);
+            disableButtons();
+            counter++;
+            showNextQuestion();
             handler.postDelayed(new Runnable() {
                 public void run() {
                     toViewPagerHub();
                 }
-            }, 250);
+            }, 750);
 
         } else {
             counter++;
@@ -250,6 +252,11 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
         }
     }
 
+    private void disableButtons () {
+        imageViewLeftButton.setOnClickListener(null);
+        imageViewRightButton.setOnClickListener(null);
+    }
+  
     private void addUserToEventDatabase(List<Answers> listofAnswers) {
         // Send answers to Firebase
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -278,7 +285,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
                 getFragmentManager().beginTransaction().remove(currentFrag).commit();
                 fragmentHubQuestionsPresenter.toViewPager();
             }
-        }, 250);
+        }, 100);
     }
 
     private Runnable runnableHTextView = new Runnable() {

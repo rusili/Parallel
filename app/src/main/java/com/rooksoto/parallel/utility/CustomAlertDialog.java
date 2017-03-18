@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.activitylogin.ActivityLogin;
 
 // Custom alert dialog allowing the user to use their own layout, title, text, and icon. Defaults to finish() onClick
 // Parameters:  1) Context
@@ -14,8 +16,10 @@ import com.rooksoto.parallel.R;
 
 public class CustomAlertDialog {
 
-    public void exit (final Context contextParam) {
-        new AlertDialog.Builder(contextParam)
+    private int containerID = R.id.content_frame;
+
+    public void exit (final Activity activity) {
+        new AlertDialog.Builder(activity)
                 .setIcon(R.drawable.lines)
                 .setView(null)
                 .setTitle("Exiting App")
@@ -23,7 +27,11 @@ public class CustomAlertDialog {
                 .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick (DialogInterface dialog, int which) {
-                        ((Activity) contextParam).finish();
+                        Intent intent = new Intent(activity, ActivityLogin.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("EXIT", true);
+                        activity.finishAffinity();
+                        activity.startActivity(intent);
                     }
                 })
                 .setNegativeButton("No", null)

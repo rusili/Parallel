@@ -96,5 +96,8 @@ dependencies {
     // Flipboard Bottom Sheet
     compile 'com.flipboard:bottomsheet-core:1.5.3'
     compile 'com.flipboard:bottomsheet-commons:1.5.3'
+
+    // ExpandableLayout:
+    compile 'com.github.traex.expandablelayout:library:1.3'
 }
 apply plugin: 'com.google.gms.google-services'

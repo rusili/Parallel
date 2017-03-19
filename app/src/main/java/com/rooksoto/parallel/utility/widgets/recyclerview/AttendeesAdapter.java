@@ -27,19 +27,28 @@ public class AttendeesAdapter extends RecyclerView.Adapter {
         switch (purpose) {
             case "Attendees":
                 view = inflater.inflate(R.layout.fragment_hub_attendees_viewholder, parent, false);
-                break;
+                AttendeesViewholder viewHolder = new AttendeesViewholder(view);
+                return viewHolder;
             case "Event":
                 view = inflater.inflate(R.layout.event_map_attendees_viewholder, parent, false);
-
+                EventAttendeesViewholder eventViewHolder = new EventAttendeesViewholder(view);
+                return eventViewHolder;
         }
-        AttendeesViewholder viewHolder = new AttendeesViewholder(view);
-        return viewHolder;
+        return null;
     }
+
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        AttendeesViewholder attendeesViewholder = (AttendeesViewholder) holder;
-        attendeesViewholder.bind(listofUsers.get(position));
+        switch (purpose) {
+            case "Attendees":
+                AttendeesViewholder attendeesViewholder = (AttendeesViewholder) holder;
+                attendeesViewholder.bind(listofUsers.get(position));
+                break;
+            case "Event":
+                EventAttendeesViewholder eventViewHolder = (EventAttendeesViewholder) holder;
+                eventViewHolder.bind(listofUsers.get(position));
+        }
     }
 
     @Override

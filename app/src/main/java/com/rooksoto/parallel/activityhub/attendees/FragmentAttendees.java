@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.User;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.recyclerview.AttendeesAdapter;
 
@@ -32,8 +30,6 @@ public class FragmentAttendees extends Fragment implements BaseView {
     private View view;
     private RecyclerView recyclerViewAttendees;
     private AttendeesAdapter attendeesAdapter;
-    private ImageButton imageButtonExit;
-
     private List<User> listofUsers = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -90,17 +86,5 @@ public class FragmentAttendees extends Fragment implements BaseView {
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewAttendees.setAdapter(attendeesAdapter);
 
-        imageButtonExit = (ImageButton) view.findViewById(R.id.activity_hub_action_bar_button);
-        setOnClickListeners();
-    }
-
-    private void setOnClickListeners() {
-        imageButtonExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(getActivity());
-            }
-        });
     }
 }

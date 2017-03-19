@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="48dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/picImageView"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_margin="5dp"
-        android:adjustViewBounds="true" />
+        />
 
     <TextView
         android:id="@+id/nameTextView"
@@ -27,7 +27,7 @@
     <TextView
         android:id="@+id/messageTextView"
         android:layout_width="wrap_content"
-        android:layout_height="14dp"
+        android:layout_height="18dp"
         android:layout_below="@id/nameTextView"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"

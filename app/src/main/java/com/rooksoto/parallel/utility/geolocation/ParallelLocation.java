@@ -18,17 +18,14 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.rooksoto.parallel.model.Event;
 import com.rooksoto.parallel.model.EventLocation;
 import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.Constants;
-import com.rooksoto.parallel.utility.Globals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +44,14 @@ public class ParallelLocation {
     public static String eventID = "/default";
     public static double eventLatitude = 38.8976763;
     public static double eventLongitude = -77.0365298;
+
+    public static ParallelLocation getInstance () {
+        if (instance == null) {
+            instance = new ParallelLocation();
+        }
+        return instance;
+    }
+
     public static float eventGeofenceRadius = 100;
 
     private ParallelLocation () {
@@ -102,13 +107,6 @@ public class ParallelLocation {
                 })
                 .build();
         googleApiClient.connect();
-    }
-
-    public static ParallelLocation getInstance () {
-        if (instance == null) {
-            instance = new ParallelLocation();
-        }
-        return instance;
     }
 
     public void connect () {

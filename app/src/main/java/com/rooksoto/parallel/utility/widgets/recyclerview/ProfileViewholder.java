@@ -24,15 +24,17 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
     public void bind (int position, Answers answerP) {
         textViewQuestion.setText("" + answerP.getQuestion());
         if (answerP.getAnswer().equals("True")){
-            imageViewLeft.setVisibility(View.GONE);
+            imageViewLeft.setVisibility(View.INVISIBLE);
         } else if (answerP.getAnswer().equals("False")){
-            imageViewRight.setVisibility(View.GONE);
-        } else if (answerP.getAnswer().equals("2130837624")) { // Selected Android
-            imageViewLeft.setVisibility(View.GONE);
+            imageViewRight.setVisibility(View.INVISIBLE);
+        } else if (answerP.getAnswer().equals("2130837625")) { // Selected Android
+            imageViewLeft.setVisibility(View.INVISIBLE);
             imageViewRight.setImageResource((R.drawable.ic_androidicon));
-        } else if (answerP.getAnswer().equals("2130837625")) { // Selected iOS
-            imageViewRight.setVisibility(View.GONE);
+            imageViewRight.setColorFilter(itemView.getResources().getColor(R.color.teal));
+        } else if (answerP.getAnswer().equals("2130837624")) { // Selected iOS
+            imageViewRight.setVisibility(View.INVISIBLE);
             imageViewLeft.setImageResource(R.drawable.ic_appleicon);
+            imageViewRight.setColorFilter(itemView.getResources().getColor(R.color.teal));
         }
     }
 }

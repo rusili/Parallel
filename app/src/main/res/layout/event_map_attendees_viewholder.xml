@@ -4,8 +4,7 @@
     android:layout_height="100dp"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
-    android:gravity="center_horizontal|center_vertical"
-    android:onClick="sendCoordinates">
+    android:gravity="center_horizontal|center_vertical">
 
     <ImageView
         android:id="@+id/fragment_hub_attendees_viewholder_picture"
@@ -30,4 +29,5 @@
         android:text="Email"
         android:textColor="@color/textAlt"
         android:textSize="14dp" />
+
 </LinearLayout>

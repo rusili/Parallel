@@ -11,28 +11,26 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.PinView;
 import com.rooksoto.parallel.utility.widgets.recyclerview.AttendeesAdapter;
 
 public class FragmentEventMap extends Fragment implements FragmentEventMapPresenter.Listener {
     private View rootView;
     private PinView imageView;
-    private ImageButton imageButtonExit;
     private RecyclerView recyclerViewAttendees;
     private BottomSheetLayout bottomSheet;
     private View sheetView;
     private FragmentEventMapPresenter fragEventMapPresenter;
+    private PointF coordinatePressed;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragEventMapPresenter = new FragmentEventMapPresenter(this);
+        fragEventMapPresenter = FragmentEventMapPresenter.getInstance(this);
 
     }
 
@@ -43,8 +41,6 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
         imageView = (PinView) rootView.findViewById(R.id.imageView);
         bottomSheet = (BottomSheetLayout) rootView.findViewById(R.id.bottomsheet);
         sheetView = inflater.inflate(R.layout.attendee_bottom_sheet, bottomSheet, false);
-        imageButtonExit = (ImageButton) rootView.findViewById(R.id.activity_hub_action_bar_button);
-        setOnClickListeners();
 
         return rootView;
     }
@@ -69,10 +65,9 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
                     public void onLongPress(MotionEvent e) {
                         super.onLongPress(e);
                         if (imageView.isReady()) {
-                            PointF coordinate = imageView.viewToSourceCoord(e.getX(), e.getY());
-                            imageView.setPin(coordinate);
+                            coordinatePressed = imageView.viewToSourceCoord(e.getX(), e.getY());
+                            imageView.setPin(coordinatePressed);
                             bottomSheet.showWithSheetView(sheetView);
-                            // TODO push coordinates to firebase & refresh view
                         }
                     }
                 });
@@ -83,16 +78,6 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
             }
         });
 
-    }
-
-    private void setOnClickListeners() {
-        imageButtonExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(getActivity());
-            }
-        });
     }
 
     @Override
@@ -106,7 +91,10 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
         recyclerViewAttendees = (RecyclerView) sheetView.findViewById(R.id.fragment_hub_attendees_recyclerview);
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewAttendees.setAdapter(attendeesAdapter);
+    }
 
-        imageButtonExit = (ImageButton) rootView.findViewById(R.id.activity_hub_action_bar_button);
+    @Override
+    public PointF getCoordinates() {
+        return coordinatePressed;
     }
 }

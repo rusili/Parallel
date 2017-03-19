@@ -17,6 +17,13 @@ public class User {
         this.pictureLink = pictureLink;
     }
 
+    public User(String name, String email, String uid, String pictureLink) {
+        this.name = name;
+        this.email = email;
+        this.uid = uid;
+        this.pictureLink = pictureLink;
+    }
+
     public User(String name, String email, String pictureLink, List<Answers> listofAnswers) {
         this.name = name;
         this.email = email;
@@ -52,4 +59,9 @@ public class User {
     public void setListofAnswers (List <Answers> listofAnswers) {
         this.listofAnswers = listofAnswers;
     }
+
+    public String getUid() {
+        return uid;
+    }
+
 }

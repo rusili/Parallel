@@ -89,8 +89,8 @@ public class FragmentProfile extends Fragment implements BaseView {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot question:dataSnapshot.getChildren()) {
                     listofAnswers.add(new Answers(
-                            (String) question.child("answer").getValue(),
-                            (String) question.child("question").getValue()
+                            (String) question.child("question").getValue(),
+                            (String) question.child("answer").getValue()
                     ));
                     profileAdapter.notifyDataSetChanged();
                 }

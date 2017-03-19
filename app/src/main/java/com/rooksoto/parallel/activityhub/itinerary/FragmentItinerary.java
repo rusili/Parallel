@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Session;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.widgets.recyclerview.ItineraryAdapter;
 
 import java.text.DateFormat;
@@ -43,21 +42,9 @@ public class FragmentItinerary extends Fragment implements BaseView {
     @Override
     public void setViews () {
         tempRV();
-        imageButtonExit = (ImageButton) view.findViewById(R.id.activity_hub_action_bar_button);
         recyclerViewItinerary = (RecyclerView) view.findViewById(R.id.fragment_hub_itinerary_recyclerview);
         recyclerViewItinerary.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewItinerary.setAdapter(new ItineraryAdapter(listofSessions));
-        setOnClickListeners();
-    }
-
-    private void setOnClickListeners() {
-        imageButtonExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(getActivity());
-            }
-        });
     }
 
     private void tempRV(){

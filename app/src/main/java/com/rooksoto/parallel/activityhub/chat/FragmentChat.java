@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,8 +20,9 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.ChatMessage;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FragmentChat extends Fragment implements FragmentChatPresenter.Listener{
 
@@ -30,7 +30,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
     private EditText messageEditText;
     private Button sendButton;
     private ListView messageListView;
-    private ImageView picImageView;
+    private CircleImageView picImageView;
     private FragmentChatPresenter fragmentChatPresenter;
     private ImageButton imageButtonExit;
 
@@ -50,7 +50,6 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
         messageEditText = (EditText) view.findViewById(R.id.fragment_hub_chatroom_edittext_message);
         sendButton = (Button) view.findViewById(R.id.sendButton);
         messageListView = (ListView) view.findViewById(R.id.fragment_hub_chat_main_messageListView);
-        imageButtonExit = (ImageButton) view.findViewById(R.id.activity_hub_action_bar_button);
         return view;
     }
 
@@ -67,8 +66,6 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
                 messageEditText.setText("");
             }
         });
-        setOnClickListeners();
-
     }
 
     private void setupTextChangedListenerForMessage() {
@@ -90,16 +87,6 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
             @Override
             public void afterTextChanged(Editable editable) {
 
-            }
-        });
-    }
-
-    private void setOnClickListeners() {
-        imageButtonExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(getActivity());
             }
         });
     }
@@ -130,7 +117,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
             @Override
             protected void populateView(View view, ChatMessage chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);
-                picImageView = (ImageView) view.findViewById(R.id.picImageView);
+                picImageView = (CircleImageView) view.findViewById(R.id.picImageView);
                 if (chatMessage.getProfilePic() == null) {
                     Picasso.with(getActivity()).load(R.drawable.bruttino_large).fit().into(picImageView);
                 } else {

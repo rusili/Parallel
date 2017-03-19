@@ -13,7 +13,6 @@ import android.widget.ImageButton;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.PinView;
 
 import java.util.ArrayList;
@@ -34,8 +33,6 @@ public class FragmentEventMap extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_hub_event_map, container, false);
         imageView = (PinView) rootView.findViewById(R.id.imageView);
-        imageButtonExit = (ImageButton) rootView.findViewById(R.id.activity_hub_action_bar_button);
-        setOnClickListeners();
         return rootView;
     }
 
@@ -69,16 +66,6 @@ public class FragmentEventMap extends Fragment {
             }
         });
 
-    }
-
-    private void setOnClickListeners() {
-        imageButtonExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(getActivity());
-            }
-        });
     }
 
     @Override

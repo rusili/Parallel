@@ -84,4 +84,5 @@ public class FragmentLoginSplash extends Fragment implements BaseView {
 
         fragmentLoginSplashPresenter.startOnAnimationsEnd(accelerateDown, accelerateUp, slowUp, slowDown);
     }
+
 }

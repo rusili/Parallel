@@ -99,7 +99,7 @@
             android:layout_height="24dp"
             android:layout_gravity="bottom"
             android:gravity="center"
-            android:text="Don't have an account?"
+            android:text="Don't have an account? "
             android:textColor="@color/textAlt"
             android:typeface="sans" />
 
@@ -109,9 +109,10 @@
             android:layout_height="24dp"
             android:layout_gravity="bottom"
             android:gravity="center"
-            android:text=" Create one"
+            android:text="Create one"
             android:textColor="@color/teal"
-            android:typeface="sans" />
+            android:typeface="sans"
+            />
 
     </LinearLayout>
 

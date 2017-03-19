@@ -35,7 +35,7 @@ public class FragmentHubEnterIDPresenter implements BasePresenter {
 
     public void onBackPressedOverride (View viewP) {
         CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-        customAlertDialog.exit(viewP.getContext());
+        customAlertDialog.exit((Activity) viewP.getContext());
     }
 
     public void setOnClickReplace (Fragment fragmentP, View viewP, int containerID, String id) {

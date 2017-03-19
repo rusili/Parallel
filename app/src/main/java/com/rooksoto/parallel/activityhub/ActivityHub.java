@@ -16,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.eftimoff.viewpagertransformers.DepthPageTransformer;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v13.FragmentPagerItemAdapter;
@@ -42,6 +46,12 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     private ViewPager viewPager;
     private SmartTabLayout viewPagerTab;
     private FragmentPagerItems pages;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    private DatabaseReference userKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +126,11 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         activityHubPresenter.onInitialize();
         loadFragmentEnterID();
         //activityHubPresenter.toViewPager();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference();
+        userKey = reference.child(ParallelLocation.eventID).child("attendee_list");
     }
 
     private void loadFragmentEnterID () {
@@ -163,6 +178,9 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         if (!isOnline()) {
             Toast.makeText(this, "Cannot Connect - Please Check Internet Connection", Toast.LENGTH_SHORT).show();
         } else {
+            Fragment currentFrag = getFragmentManager().findFragmentById(containerID);
+            getFragmentManager().beginTransaction().remove(currentFrag).commit();
+
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(R.animator.animator_fade_in, R.animator.animator_fade_out)
                     .replace(containerID, fragmentHubQuestions, "Questions")
@@ -190,7 +208,14 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+        userKey.child(firebaseUser.getUid()).removeValue();
+        firebaseAuth.signOut();
+
+    }
     public void sendCoordinates(View view) {
 
     }

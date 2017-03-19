@@ -2,37 +2,66 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="48dp">
+    android:layout_height="44dp"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/picImageView"
+        android:id="@+id/picImageViewLeft"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_margin="5dp"
+        android:layout_alignParentLeft="true"
         />
 
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="4dp"
-        android:layout_toRightOf="@id/picImageView"
-        android:textColor="@color/textAlt"
-        android:textSize="@dimen/chat_username_textsize"
-        android:textStyle="bold"
-        tools:text="Name" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/picImageViewLeft"
+        >
 
-    <TextView
-        android:id="@+id/messageTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_below="@id/nameTextView"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@id/picImageView"
-        android:textColor="@color/textMain"
-        android:textSize="@dimen/chat_message_textsize"
-        tools:text="Message" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/picImageViewRight"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="5dp"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toLeftOf="@id/picImageViewRight"
+            >
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/textAlt"
+                android:textSize="@dimen/chat_username_textsize"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/picImageViewLeft"
+                tools:text="Name"
+                />
+
+            <TextView
+                android:id="@+id/messageTextView"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_below="@id/nameTextView"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/textMain"
+                android:textSize="@dimen/chat_message_textsize"
+                tools:text="Message"
+                android:layout_toRightOf="@id/picImageViewLeft"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
 </RelativeLayout>

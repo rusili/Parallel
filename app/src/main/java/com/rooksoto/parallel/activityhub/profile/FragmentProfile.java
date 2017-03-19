@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Answers;
+import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.recyclerview.ProfileAdapter;
 import com.squareup.picasso.Picasso;
@@ -50,6 +51,7 @@ public class FragmentProfile extends Fragment implements BaseView {
     private ImageView ivProfilePic;
     private TextView tvName;
     private TextView tvEmail;
+    private ImageButton imageButtonLogOut;
 
     private static final String TAG = "FragmentProfile";
 
@@ -98,6 +100,7 @@ public class FragmentProfile extends Fragment implements BaseView {
     @Override
     public void initialize () {
         setViews();
+        setOnClickListeners();
     }
 
     @Override
@@ -105,11 +108,22 @@ public class FragmentProfile extends Fragment implements BaseView {
         ivProfilePic = (ImageView) view.findViewById(R.id.fragment_hub_profile_circularimageview);
         tvName = (TextView) view.findViewById(R.id.tv_name);
         tvEmail = (TextView) view.findViewById(R.id.tv_email);
+        imageButtonLogOut = (ImageButton) view.findViewById(R.id.fragment_hub_profile_button_logout);
 
         recyclerViewProfile = (RecyclerView) view.findViewById(R.id.fragment_hub_profile_recyclerview);
         profileAdapter = new ProfileAdapter(listofAnswers);
         recyclerViewProfile.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewProfile.setAdapter(profileAdapter);
+    }
+
+    private void setOnClickListeners(){
+        imageButtonLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
+                customAlertDialog.exit(getActivity());
+            }
+        });
     }
 
 }

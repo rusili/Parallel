@@ -39,7 +39,7 @@ public class CustomNotifications {
             public void onServiceConnected (ComponentName className, IBinder binder) {
                 ((KillService.KillBinder) binder).service.startService(new Intent(mContext, KillService.class));
                 android.app.Notification mBuilder = new NotificationCompat.Builder(mContext)
-                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
+                        .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle("Parallel Event")
                         .setOngoing(true)
                         .setContent(smallView)

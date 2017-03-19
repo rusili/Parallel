@@ -4,10 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+
+    String uid;
     String name;
     String email;
     String pictureLink;
-    List <Answers> listofAnswers = new ArrayList <>();
+    List<Answers> listofAnswers = new ArrayList <>();
+
+    public User(String name, String email, String pictureLink) {
+        this.name = name;
+        this.email = email;
+        this.pictureLink = pictureLink;
+    }
+
+    public User(String name, String email, String pictureLink, List<Answers> listofAnswers) {
+        this.name = name;
+        this.email = email;
+        this.pictureLink = pictureLink;
+        this.listofAnswers = listofAnswers;
+    }
 
     public User (String nameParam, String emailParam) {
         this.name = nameParam;
@@ -30,7 +45,7 @@ public class User {
         this.pictureLink = pictureLinkParam;
     }
 
-    public List <Answers> getListofAnswers () {
+    public List<Answers> getListofAnswers () {
         return listofAnswers;
     }
 

@@ -36,47 +36,28 @@
         android:layout_marginTop="24dp"
         >
 
-<<<<<<< HEAD
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fragment_hub_profile_circularimageview"
             android:layout_width="48dp"
             android:layout_height="48dp"
-=======
-        <ImageView
-            android:id="@+id/iv_profile_pic"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
->>>>>>> f60cef3d62ebaf763798cc7e522d0e4ea81b6af9
-            />
+            ></de.hdodenhof.circleimageview.CircleImageView>
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-<<<<<<< HEAD
-            android:text="name"
-=======
             android:text="Name"
->>>>>>> f60cef3d62ebaf763798cc7e522d0e4ea81b6af9
             android:gravity="center_horizontal"
             android:textColor="@color/textMain"
             />
 
 
         <TextView
-<<<<<<< HEAD
-            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-=======
             android:id="@+id/tv_email"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
             android:text="Email"
->>>>>>> f60cef3d62ebaf763798cc7e522d0e4ea81b6af9
             android:gravity="center_horizontal"
-            android:text="Email"
             android:textColor="@color/textMain"/>
 
 
@@ -84,7 +65,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_profile_answers"
+        android:id="@+id/fragment_hub_profile_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="12dp"

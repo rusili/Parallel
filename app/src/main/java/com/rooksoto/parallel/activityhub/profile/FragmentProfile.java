@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,18 +23,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Answers;
-<<<<<<< HEAD
-=======
-import com.rooksoto.parallel.objects.Questions;
-import com.rooksoto.parallel.objects.User;
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
->>>>>>> f60cef3d62ebaf763798cc7e522d0e4ea81b6af9
 import com.rooksoto.parallel.utility.widgets.recyclerview.ProfileAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class FragmentProfile extends Fragment implements BaseView {
@@ -110,20 +102,12 @@ public class FragmentProfile extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-<<<<<<< HEAD
-        tempRV();
-        ProfileAdapter profileAdapter = new ProfileAdapter(listofAnswers);
-        recyclerViewProfile = (RecyclerView) view.findViewById(R.id.fragment_hub_profile_recyclerview);
-=======
-
-        ivProfilePic = (ImageView) view.findViewById(R.id.iv_profile_pic);
+        ivProfilePic = (ImageView) view.findViewById(R.id.fragment_hub_profile_circularimageview);
         tvName = (TextView) view.findViewById(R.id.tv_name);
         tvEmail = (TextView) view.findViewById(R.id.tv_email);
 
-        imageButtonExit = (ImageButton) view.findViewById(R.id.activity_hub_action_bar_button);
+        recyclerViewProfile = (RecyclerView) view.findViewById(R.id.fragment_hub_profile_recyclerview);
         profileAdapter = new ProfileAdapter(listofAnswers);
-        recyclerViewProfile = (RecyclerView) view.findViewById(R.id.rv_profile_answers);
->>>>>>> f60cef3d62ebaf763798cc7e522d0e4ea81b6af9
         recyclerViewProfile.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewProfile.setAdapter(profileAdapter);
     }

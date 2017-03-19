@@ -18,13 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.objects.User;
-<<<<<<< HEAD
-=======
-import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
->>>>>>> f60cef3d62ebaf763798cc7e522d0e4ea81b6af9
 import com.rooksoto.parallel.utility.widgets.recyclerview.AttendeesAdapter;
 
 import java.util.ArrayList;
@@ -95,23 +90,4 @@ public class FragmentAttendees extends Fragment implements BaseView {
         recyclerViewAttendees.setAdapter(attendeesAdapter);
 
     }
-
-<<<<<<< HEAD
-    private void tempRV(){
-        listofUsers.add(new User("Temp", "Temp@Temp.com"));
-        listofUsers.add(new User("Temp", "Temp@Temp.com"));
-        attendeesAdapter = new AttendeesAdapter(listofUsers);
-    }
-
-=======
-    private void setOnClickListeners() {
-        imageButtonExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CustomAlertDialog customAlertDialog = new CustomAlertDialog();
-                customAlertDialog.exit(getActivity());
-            }
-        });
-    }
->>>>>>> f60cef3d62ebaf763798cc7e522d0e4ea81b6af9
 }

@@ -39,9 +39,10 @@
                 android:textColor="@color/textMain"
                 android:typeface="sans"
                 android:singleLine="true"
-                android:imeOptions="actionDone"
+                android:imeOptions="actionSend"
                 />
         </android.support.design.widget.TextInputLayout>
+
 
         <Button
             android:id="@+id/enter_button"

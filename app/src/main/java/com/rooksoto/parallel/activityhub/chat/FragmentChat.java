@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -59,6 +61,11 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
 //        int position = FragmentPagerItem.getPosition(getArguments());
         fragmentChatPresenter.onViewCreated();
         setupTextChangedListenerForMessage();
+        setOnCickListeners();
+        setOnEditorActionListeners();
+    }
+
+    private void setOnCickListeners(){
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,11 +75,25 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
         });
     }
 
+    private void setOnEditorActionListeners(){
+        messageEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction (TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEND){
+                    fragmentChatPresenter.onSendButtonClick(messageEditText.getText().toString());
+                    messageEditText.setText("");
+                    handled = true;
+                }
+                return handled;
+            }
+        });
+    }
+
     private void setupTextChangedListenerForMessage() {
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override

@@ -64,7 +64,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
     private int containerID = R.id.content_frame;
     private int counter = 0;
     private boolean altImage = false;
-//    private String[] welcomeText = new String[] {"Welcome", "to C4Q's", "3.3 Demo Day", "Enjoy"};
+    //    private String[] welcomeText = new String[] {"Welcome", "to C4Q's", "3.3 Demo Day", "Enjoy"};
     private String[] welcomeText;
     private boolean started = false;
 
@@ -150,7 +150,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
         hTextViewLine0.animateText(listofQuestions.get(backwardsCounter).getQuestion());
         backwardsCounter--;
 
-        for (int i=1; i<=counter; i++){
+        for (int i=1; i < counter; i++){
             TextView tempView = textViewLine.get(i);
             Answers tempAnswer = listofAnswers.get(backwardsCounter);
 
@@ -234,11 +234,11 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
         }
 
         if (counter == (listofQuestions.size()-2)){
-            addUserToEventDatabase(listofAnswers);
             showDelayedButtonClick(counter);
             disableButtons();
             counter++;
             showNextQuestion();
+            addUserToEventDatabase(listofAnswers);
             handler.postDelayed(new Runnable() {
                 public void run() {
                     toViewPagerHub();
@@ -256,7 +256,7 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
         imageViewLeftButton.setOnClickListener(null);
         imageViewRightButton.setOnClickListener(null);
     }
-  
+
     private void addUserToEventDatabase(List<Answers> listofAnswers) {
         // Send answers to Firebase
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -270,8 +270,8 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
             }
         }
         listofAnswers.remove(0);
-        DatabaseReference reference = database.getReference(ParallelLocation.eventID).child("attendee_list");
 
+        DatabaseReference reference = database.getReference(ParallelLocation.eventID).child("attendee_list");
         reference.child(uid).setValue(new User(userName, email, profilePic, listofAnswers));
     }
 

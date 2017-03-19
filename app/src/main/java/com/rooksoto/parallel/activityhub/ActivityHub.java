@@ -216,4 +216,5 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         firebaseAuth.signOut();
 
     }
+
 }

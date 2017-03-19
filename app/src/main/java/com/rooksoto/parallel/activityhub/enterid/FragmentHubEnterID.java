@@ -5,11 +5,16 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -63,7 +68,6 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-
         textViewEventID = (EditText) view.findViewById(R.id.fragment_start_enterid_eventid);
 
         buttonEnter = (Button) view.findViewById(R.id.enter_button);
@@ -71,17 +75,37 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
             @Override
             public void onClick (View v) {
                 OnClickEffect.setButton(buttonEnter);
-                if (textViewEventID.getText().toString().equals("")) {
-                    ParallelLocation.eventID = "empty";
-                } else {
-                    ParallelLocation.eventID = textViewEventID.getText().toString();
+                checkEventID();
+            }
+        });
+        textViewEventID.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction (TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEND){
+                    checkEventID();
+                    handled = true;
                 }
-                Log.d(TAG, "onClick: eventID Current Value is: " + ParallelLocation.eventID);
-                reference = database.getReference();
-                fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
-                // TODO: 3/16/17 Start the questions fragment only if eventID is valid
+                return handled;
             }
         });
     }
 
+    private void checkEventID(){
+        if (textViewEventID.getText().toString().equals("")) {
+            ParallelLocation.eventID = "empty";
+            shakeAnimation();
+        } else {
+            ParallelLocation.eventID = textViewEventID.getText().toString();
+        }
+        Log.d(TAG, "onClick: eventID Current Value is: " + ParallelLocation.eventID);
+        reference = database.getReference();
+        fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
+        // TODO: 3/16/17 Start the questions fragment only if eventID is valid
+    }
+
+    private void shakeAnimation () {
+        Animation animShake = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_side_to_side);
+        textViewEventID.startAnimation(animShake);
+    }
 }

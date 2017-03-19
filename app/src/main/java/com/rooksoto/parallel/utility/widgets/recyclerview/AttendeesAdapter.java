@@ -12,28 +12,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AttendeesAdapter extends RecyclerView.Adapter {
-    private List <User> listofUsers = new ArrayList <>();
+    private String purpose = "";
+    private List<User> listofUsers = new ArrayList<>();
+    private View view;
 
-    public AttendeesAdapter (List<User> listofUsersP) {
+    public AttendeesAdapter(List<User> listofUsersP, String purpose) {
         this.listofUsers = listofUsersP;
+        this.purpose = purpose;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View attendeesView = inflater.inflate(R.layout.fragment_hub_attendees_viewholder, parent, false);
-        AttendeesViewholder viewHolder = new AttendeesViewholder(attendeesView);
-        return viewHolder;
+        switch (purpose) {
+            case "Attendees":
+                view = inflater.inflate(R.layout.fragment_hub_attendees_viewholder, parent, false);
+                AttendeesViewholder viewHolder = new AttendeesViewholder(view);
+                return viewHolder;
+            case "Event":
+                view = inflater.inflate(R.layout.event_map_attendees_viewholder, parent, false);
+                EventAttendeesViewholder eventViewHolder = new EventAttendeesViewholder(view);
+                return eventViewHolder;
+        }
+        return null;
+    }
+
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (purpose) {
+            case "Attendees":
+                AttendeesViewholder attendeesViewholder = (AttendeesViewholder) holder;
+                attendeesViewholder.bind(listofUsers.get(position));
+                break;
+            case "Event":
+                EventAttendeesViewholder eventViewHolder = (EventAttendeesViewholder) holder;
+                eventViewHolder.bind(listofUsers.get(position));
+        }
     }
 
     @Override
-    public void onBindViewHolder (RecyclerView.ViewHolder holder, int position) {
-        AttendeesViewholder attendeesViewholder = (AttendeesViewholder) holder;
-        attendeesViewholder.bind(listofUsers.get(position));
-    }
-
-    @Override
-    public int getItemCount () {
+    public int getItemCount() {
         return listofUsers.size();
     }
 }

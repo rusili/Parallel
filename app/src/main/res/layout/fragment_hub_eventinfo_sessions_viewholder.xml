@@ -7,20 +7,23 @@
     >
 
     <RelativeLayout
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#40000000"
+        android:gravity="left"
         >
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                           android:orientation="horizontal"
                           android:layout_width="80dp"
                           android:layout_height="50dp"
+                          android:layout_marginTop="4dp"
                 >
 
                 <FrameLayout
@@ -33,7 +36,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="07"
-                        android:textSize="44dp"
+                        android:textSize="36dp"
                         android:textColor="@color/teal"
                         android:textAlignment="textEnd"
                         android:gravity="center_vertical"
@@ -52,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="00"
-                        android:textSize="24dp"
+                        android:textSize="22dp"
                         android:textColor="@color/teal"
                         android:gravity="bottom"
                         />
@@ -75,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:paddingRight="4dp"
+            android:paddingRight="8dp"
             >
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -94,7 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="07"
-                        android:textSize="44dp"
+                        android:textSize="40dp"
                         android:textColor="@color/teal"
                         android:textAlignment="textEnd"
                         android:gravity="center_vertical"
@@ -113,7 +116,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="30"
-                        android:textSize="24dp"
+                        android:textSize="22dp"
                         android:textColor="@color/teal"
                         android:gravity="bottom"
                         />
@@ -163,14 +166,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginTop="6dp"
             android:layout_toLeftOf="@id/fragment_login_wait_event_viewholder_icons"
             >
 
             <TextView
                 android:id="@+id/fragment_hub_eventinfo_sessions_viewholder_name"
                 android:layout_width="wrap_content"
-                android:layout_height="33dp"
+                android:layout_height="32dp"
                 android:text="Introduction"
                 android:textColor="@color/textMain"
                 android:gravity="center"
@@ -180,7 +182,7 @@
             <TextView
                 android:id="@+id/fragment_hub_eventinfo_sessions_viewholder_tag"
                 android:layout_width="wrap_content"
-                android:layout_height="33dp"
+                android:layout_height="22dp"
                 android:text="Tagline"
                 android:textColor="@color/textAlt"
                 android:gravity="center"
@@ -192,7 +194,7 @@
                 >
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="33dp"
+                    android:layout_height="24dp"
                     android:text="\u0040 : "
                     android:textColor="@color/textAlt"
                     android:gravity="center"
@@ -201,7 +203,7 @@
                 <TextView
                     android:id="@+id/fragment_hub_eventinfo_sessions_viewholder_location"
                     android:layout_width="wrap_content"
-                    android:layout_height="33dp"
+                    android:layout_height="24dp"
                     android:text="Google main stage"
                     android:textColor="@color/textMain"
                     android:gravity="center"

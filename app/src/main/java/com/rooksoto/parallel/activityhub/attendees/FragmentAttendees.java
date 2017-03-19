@@ -82,6 +82,7 @@ public class FragmentAttendees extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
+        listofUsers.clear();
         attendeesAdapter = new AttendeesAdapter(listofUsers);
         recyclerViewAttendees = (RecyclerView) view.findViewById(R.id.fragment_hub_attendees_recyclerview);
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(view.getContext()));

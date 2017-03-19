@@ -6,12 +6,15 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -46,6 +49,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     private ViewPager viewPager;
     private SmartTabLayout viewPagerTab;
     private FragmentPagerItems pages;
+    private Handler handler = new Handler();
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
@@ -64,7 +68,13 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     public void setupViewpager() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
-        viewPagerTab.setVisibility(View.VISIBLE);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        viewPager.startAnimation(fadeIn);
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                viewPagerTab.setVisibility(View.VISIBLE);
+            }
+        }, 100);
 
         pages = new FragmentPagerItems(this);
         pages.add(FragmentPagerItem.of("Itinerary", FragmentItinerary.class));

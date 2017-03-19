@@ -91,6 +91,10 @@ dependencies {
     // Retrofit 2 + GSON
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    // Subsampling Scale Image View
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
+    // Flipboard Bottom Sheet
+    compile 'com.flipboard:bottomsheet-core:1.5.3'
+    compile 'com.flipboard:bottomsheet-commons:1.5.3'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -191,4 +191,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
 
+    public void sendCoordinates(View view) {
+
+    }
 }

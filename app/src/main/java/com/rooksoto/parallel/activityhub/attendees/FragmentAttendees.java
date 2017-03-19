@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
-import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.objects.User;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
@@ -86,7 +85,7 @@ public class FragmentAttendees extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-        attendeesAdapter = new AttendeesAdapter(listofUsers);
+        attendeesAdapter = new AttendeesAdapter(listofUsers, "Attendees");
         recyclerViewAttendees = (RecyclerView) view.findViewById(R.id.fragment_hub_attendees_recyclerview);
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewAttendees.setAdapter(attendeesAdapter);

@@ -11,9 +11,13 @@ import android.util.AttributeSet;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.rooksoto.parallel.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PinView extends SubsamplingScaleImageView {
 
     private PointF sPin;
+    private List<PointF> pointList = new ArrayList<>();
     private Bitmap pin;
 
     public PinView(Context context) {
@@ -23,6 +27,12 @@ public class PinView extends SubsamplingScaleImageView {
     public PinView(Context context, AttributeSet attr) {
         super(context, attr);
         initialise();
+    }
+
+    public void addPin(PointF point) {
+        pointList.add(point);
+        initialise();
+        invalidate();
     }
 
     public void setPin(PointF sPin) {
@@ -36,11 +46,13 @@ public class PinView extends SubsamplingScaleImageView {
     }
 
     private void initialise() {
-        float density = getResources().getDisplayMetrics().densityDpi;
-        pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
-        float w = (density/420f) * pin.getWidth();
-        float h = (density/420f) * pin.getHeight();
-        pin = Bitmap.createScaledBitmap(pin, (int)w, (int)h, true);
+        if (pin == null) {
+            float density = getResources().getDisplayMetrics().densityDpi;
+            pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
+            float w = (density/420f) * pin.getWidth();
+            float h = (density/420f) * pin.getHeight();
+            pin = Bitmap.createScaledBitmap(pin, (int)w, (int)h, true);
+        }
     }
 
     @Override
@@ -51,17 +63,24 @@ public class PinView extends SubsamplingScaleImageView {
         if (!isReady()) {
             return;
         }
-
         Paint paint = new Paint();
         paint.setAntiAlias(true);
 
         if (sPin != null && pin != null) {
-            PointF vPin = sourceToViewCoord(sPin);
-            float vX = vPin.x - (pin.getWidth()/2);
-            float vY = vPin.y - pin.getHeight();
-            canvas.drawBitmap(pin, vX, vY, paint);
+            drawPin(canvas, paint, sPin);
         }
 
+        for (PointF point:pointList) {
+            drawPin(canvas, paint, point);
+        }
+
+    }
+
+    private void drawPin(Canvas canvas, Paint paint, PointF sPin) {
+        PointF vPin = sourceToViewCoord(sPin);
+        float vX = vPin.x - (pin.getWidth()/2);
+        float vY = vPin.y - pin.getHeight();
+        canvas.drawBitmap(pin, vX, vY, paint);
     }
 
 }

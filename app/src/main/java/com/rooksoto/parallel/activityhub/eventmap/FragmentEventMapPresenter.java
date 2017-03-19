@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
+
 /**
  * Created by huilin on 3/18/17.
  */
@@ -34,7 +35,7 @@ public class FragmentEventMapPresenter {
     private static FragmentEventMapPresenter instance;
     private DatabaseReference userRef;
 
-    public static FragmentEventMapPresenter getInstance (Listener listener) {
+    public static FragmentEventMapPresenter getInstance(Listener listener) {
         if (instance == null) {
             instance = new FragmentEventMapPresenter(listener);
         }
@@ -50,7 +51,7 @@ public class FragmentEventMapPresenter {
     public void onCreation() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         attendeesRef = FirebaseDatabase.getInstance().getReference().child(ParallelLocation.eventID).child("attendee_list");
-        userRef = FirebaseDatabase.getInstance().getReference().child(ParallelLocation.eventID).child(user.getUid());
+        userRef = FirebaseDatabase.getInstance().getReference().child(ParallelLocation.eventID).child("attendee_list").child(user.getUid());
     }
 
     void onViewCreated() {
@@ -73,7 +74,6 @@ public class FragmentEventMapPresenter {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot user : dataSnapshot.getChildren()) {
                     if (!user.child("name").getValue().toString().equals("Test")) {
-                        listofUsers.clear();
                         listofUsers.add(new User(
                                 (String) user.child("name").getValue(),
                                 (String) user.child("email").getValue(),
@@ -94,17 +94,31 @@ public class FragmentEventMapPresenter {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild(RECEIVED_PINS)){
-                    //        imageView.addPin(new PointF(293.5547f, 1392.5f));
-
+                Log.d(TAG, "onDataChange: Pins have been added");
+                Log.d(TAG, "onDataChange: " + dataSnapshot.hasChild(RECEIVED_PINS));
+                if (dataSnapshot.hasChild(RECEIVED_PINS)) {
+                    for (DataSnapshot item : dataSnapshot.child(RECEIVED_PINS).getChildren()) {
+                        PointF coordinates = new PointF((Float) item.child("coordinates").child("x").getValue(), (Float) item.child("coordinates").child("y").getValue());
+                        Pin pin = new Pin((String) item.child("uid").getValue(), coordinates);
+                        listener.populatePin(pin.getCoordinates());
+                    }
                 }
+                Log.d(TAG, "onDataChange: " + dataSnapshot.hasChild(SENT_PINS));
+                if (dataSnapshot.hasChild(SENT_PINS)) {
+                    for (DataSnapshot item : dataSnapshot.child(SENT_PINS).getChildren()) {
+                        PointF coordinates = new PointF((Float.valueOf(String.valueOf(item.child("coordinates").child("x").getValue()))), (Float.valueOf(String.valueOf(item.child("coordinates").child("y").getValue()))));
+                        Pin pin = new Pin((String) item.child("uid").getValue(), coordinates);
+                        listener.populatePin(pin.getCoordinates());
+                    }
+                }
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        })
+        });
     }
 
 
@@ -113,5 +127,7 @@ public class FragmentEventMapPresenter {
         void setViews(AttendeesAdapter attendeesAdapter);
 
         PointF getCoordinates();
+
+        void populatePin(PointF coordinates);
     }
 }

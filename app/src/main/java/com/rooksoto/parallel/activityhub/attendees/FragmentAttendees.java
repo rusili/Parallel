@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +30,6 @@ public class FragmentAttendees extends Fragment implements BaseView {
     private View view;
     private RecyclerView recyclerViewAttendees;
     private AttendeesAdapter attendeesAdapter;
-    private ImageButton imageButtonExit;
 
     private List<User> listofUsers = new ArrayList<>();
     private FirebaseDatabase database;
@@ -87,7 +85,7 @@ public class FragmentAttendees extends Fragment implements BaseView {
         attendeesAdapter = new AttendeesAdapter(listofUsers);
         recyclerViewAttendees = (RecyclerView) view.findViewById(R.id.fragment_hub_attendees_recyclerview);
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        attendeesAdapter.setRecyclerView(recyclerViewAttendees);
         recyclerViewAttendees.setAdapter(attendeesAdapter);
-
     }
 }

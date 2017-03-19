@@ -1,7 +1,6 @@
 package com.rooksoto.parallel.activityhub.eventmap;
 
 import android.graphics.PointF;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,16 +25,13 @@ import static android.content.ContentValues.TAG;
 
 public class FragmentEventMapPresenter {
     private Listener listener;
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
     private DatabaseReference attendeesRef;
     private List<User> listofUsers;
     private AttendeesAdapter attendeesAdapter;
-    private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private static FragmentEventMapPresenter instance;
 
-    public static FragmentEventMapPresenter getInstance (@Nullable Listener listener) {
+    public static FragmentEventMapPresenter getInstance (Listener listener) {
         if (instance == null) {
             instance = new FragmentEventMapPresenter(listener);
         }
@@ -48,17 +44,31 @@ public class FragmentEventMapPresenter {
     }
 
 
+    public void onCreation() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        attendeesRef = FirebaseDatabase.getInstance().getReference().child(ParallelLocation.eventID).child("attendee_list");
+    }
+
     void onViewCreated() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        user = firebaseAuth.getCurrentUser();
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference().child(ParallelLocation.eventID);
-        attendeesRef = reference.child("attendee_list");
+        attendeesAdapter = new AttendeesAdapter(listofUsers, "Event");
+        listener.setViews(attendeesAdapter);
+
+    }
+
+    public void onUserSelected(String uid) {
+        listener.getCoordinates();
+        Log.d(TAG, "onUserSelected: " + uid);
+        attendeesRef.child(user.getUid()).child("sentPins").push().setValue(new Pin(uid, listener.getCoordinates()));
+        attendeesRef.child(uid).child("receivedPins").push().setValue(new Pin(user.getUid(), listener.getCoordinates()));
+    }
+
+    public void onStartup() {
         attendeesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot user : dataSnapshot.getChildren()) {
                     if (!user.child("name").getValue().toString().equals("Test")) {
+                        listofUsers.clear();
                         listofUsers.add(new User(
                                 (String) user.child("name").getValue(),
                                 (String) user.child("email").getValue(),
@@ -75,16 +85,6 @@ public class FragmentEventMapPresenter {
                 Log.d(TAG, "onCancelled: Error getting list of attendees");
             }
         });
-
-        attendeesAdapter = new AttendeesAdapter(listofUsers, "Event");
-        listener.setViews(attendeesAdapter);
-    }
-
-    public void onUserSelected(String uid) {
-        listener.getCoordinates();
-        Log.d(TAG, "onUserSelected: " + uid);
-        attendeesRef.child(user.getUid()).child("sentPins").push().setValue(new Pin(uid, listener.getCoordinates()));
-        attendeesRef.child(uid).child("receivedPins").push().setValue(new Pin(user.getUid(), listener.getCoordinates()));
     }
 
 

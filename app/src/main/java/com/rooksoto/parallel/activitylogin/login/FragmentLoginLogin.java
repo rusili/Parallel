@@ -205,7 +205,6 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
     @Override
     public void startFragmentReplacement(String id) {
         switch (id) {
-
             case WAIT:
                 replaceFragment(new FragmentLoginWait(), id);
                 break;

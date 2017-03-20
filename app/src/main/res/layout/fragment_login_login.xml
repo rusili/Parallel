@@ -85,7 +85,7 @@
             android:layout_gravity="center"
             android:background="#00FFFFFF"
             android:src="@drawable/ic_googleplus"
-            android:tint="@color/teal" />
+            android:tint="#df4a32" />
 
     </FrameLayout>
 

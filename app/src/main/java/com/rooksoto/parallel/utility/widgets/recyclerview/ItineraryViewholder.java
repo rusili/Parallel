@@ -35,5 +35,20 @@ public class ItineraryViewholder extends RecyclerView.ViewHolder {
         textViewName.setText(sessionP.getName());
         textViewTagline.setText(sessionP.getTagline());
         textViewLocation.setText(sessionP.getLocation());
+
+        int temp = sessionP.getStartTime().getHours();
+        if (temp > 12){
+            temp = temp - 12;
+        }
+        textViewHour1.setText("" + temp);
+
+        String tempString = null;
+        temp = sessionP.getStartTime().getMinutes();
+        if (temp == 0){
+            tempString = "00";
+            textViewMinute1.setText(tempString);
+        } else {
+            textViewMinute1.setText("" + temp);
+        }
     }
 }

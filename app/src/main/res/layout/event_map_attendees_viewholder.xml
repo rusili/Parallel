@@ -2,16 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="100dp"
     android:layout_height="100dp"
-    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     android:gravity="center_horizontal|center_vertical">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/fragment_hub_attendees_viewholder_picture"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="8dp"
-        android:scaleType="fitXY" />
+        ></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
         android:id="@+id/fragment_hub_attendees_viewholder_name"
@@ -19,15 +18,7 @@
         android:layout_height="26dp"
         android:text="Name"
         android:textColor="@color/textMain"
-        android:textSize="16dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/fragment_hub_attendees_viewholder_email"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Email"
-        android:textColor="@color/textAlt"
-        android:textSize="14dp" />
+        android:textSize="14dp"
+        />
 
 </LinearLayout>

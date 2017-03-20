@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +31,8 @@ public class FragmentAttendees extends Fragment implements BaseView {
     private View view;
     private RecyclerView recyclerViewAttendees;
     private AttendeesAdapter attendeesAdapter;
+    private ImageButton imageButtonExit;
+
     private List<User> listofUsers = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -41,6 +44,7 @@ public class FragmentAttendees extends Fragment implements BaseView {
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hub_attendees, container, false);
+        listofUsers.clear();
         initialize();
         return view;
     }
@@ -55,6 +59,7 @@ public class FragmentAttendees extends Fragment implements BaseView {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot user:dataSnapshot.getChildren()) {
+
                     if (!user.child("name").getValue().toString().equals("Test")){
                         listofUsers.add(new User(
                                 (String) user.child("name").getValue(),
@@ -83,6 +88,7 @@ public class FragmentAttendees extends Fragment implements BaseView {
         attendeesAdapter = new AttendeesAdapter(listofUsers, "Attendees");
         recyclerViewAttendees = (RecyclerView) view.findViewById(R.id.fragment_hub_attendees_recyclerview);
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        attendeesAdapter.setRecyclerView(recyclerViewAttendees);
         recyclerViewAttendees.setAdapter(attendeesAdapter);
 
     }

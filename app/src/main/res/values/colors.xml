@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="purpleDark">#280d37</color>
+    <color name="purpleMedium">#64286d</color>
+    <color name="purpleLight">#ca6998</color>
+    <color name="peachMedium">#f29f9b</color>
     <color name="peachLight">#ffc19d</color>
 
     <color name="teal">#6bdecd</color>

@@ -19,6 +19,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.ChatMessage;
@@ -32,9 +34,11 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
     private EditText messageEditText;
     private Button sendButton;
     private ListView messageListView;
-    private CircleImageView picImageView;
+    private CircleImageView picImageViewLeft;
+    private CircleImageView picImageViewRight;
     private FragmentChatPresenter fragmentChatPresenter;
     private ImageButton imageButtonExit;
+    private FirebaseUser firebaseUser;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
         messageEditText = (EditText) view.findViewById(R.id.fragment_hub_chatroom_edittext_message);
         sendButton = (Button) view.findViewById(R.id.sendButton);
         messageListView = (ListView) view.findViewById(R.id.fragment_hub_chat_main_messageListView);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return view;
     }
 
@@ -134,18 +139,31 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
 
     @Override
     public FirebaseListAdapter<ChatMessage> createFirebaseListAdapter(DatabaseReference ref) {
-        FirebaseListAdapter<ChatMessage> messageListAdapter = new FirebaseListAdapter<ChatMessage>(getActivity(), ChatMessage.class, R.layout.chat_message, ref) {
+        final FirebaseListAdapter<ChatMessage> messageListAdapter = new FirebaseListAdapter<ChatMessage>(getActivity(), ChatMessage.class, R.layout.chat_message, ref) {
             @Override
             protected void populateView(View view, ChatMessage chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);
-                picImageView = (CircleImageView) view.findViewById(R.id.picImageView);
+                picImageViewLeft = (CircleImageView) view.findViewById(R.id.picImageViewLeft);
+                picImageViewRight = (CircleImageView) view.findViewById(R.id.picImageViewRight);
                 if (chatMessage.getProfilePic() == null) {
-                    Picasso.with(getActivity()).load(R.drawable.bruttino_large).fit().into(picImageView);
+                    Picasso.with(getActivity()).load(R.drawable.bruttino_large).fit().into(picImageViewLeft);
+                    Picasso.with(getActivity()).load(R.drawable.bruttino_large).fit().into(picImageViewRight);
                 } else {
-                    Picasso.with(getActivity()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageView);
+                    Picasso.with(getActivity()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageViewLeft);
+                    Picasso.with(getActivity()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageViewRight);
                 }
-                ((TextView) view.findViewById(R.id.messageTextView)).setText(chatMessage.getText());
-                ((TextView) view.findViewById(R.id.nameTextView)).setText(chatMessage.getName());
+                TextView textViewMessage = (TextView) view.findViewById(R.id.messageTextView);
+                textViewMessage.setText(chatMessage.getText());
+                TextView textViewName = (TextView)  view.findViewById(R.id.nameTextView);
+                textViewName.setText(chatMessage.getName());
+                if (firebaseUser.getDisplayName().equals(chatMessage.getName())){
+                    picImageViewLeft.setVisibility(View.INVISIBLE);
+                    textViewName.setTextColor(getResources().getColor(R.color.teal));
+                    textViewName.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+                    textViewMessage.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+                } else {
+                    picImageViewRight.setVisibility(View.INVISIBLE);
+                }
             }
         };
 

@@ -239,6 +239,14 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
             counter++;
             showNextQuestion();
             addUserToEventDatabase(listofAnswers);
+
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    Animation fadeoutup = AnimationUtils.loadAnimation(view.getContext(), R.anim.fadeoutuptransition);
+                    view.startAnimation(fadeoutup);
+                }
+            }, 500);
+
             handler.postDelayed(new Runnable() {
                 public void run() {
                     toViewPagerHub();
@@ -276,13 +284,9 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
     }
 
     private void toViewPagerHub(){
-        Animation fadeoutup = AnimationUtils.loadAnimation(view.getContext(), R.anim.fadeoutuptransition);
-        view.startAnimation(fadeoutup);
-
-        final Fragment currentFrag = this;
+        getFragmentManager().beginTransaction().remove(this).commit();
         handler.postDelayed(new Runnable() {
             public void run() {
-                getFragmentManager().beginTransaction().remove(currentFrag).commit();
                 fragmentHubQuestionsPresenter.toViewPager();
             }
         }, 100);

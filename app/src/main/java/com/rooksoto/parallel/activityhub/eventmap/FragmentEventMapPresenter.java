@@ -71,6 +71,7 @@ public class FragmentEventMapPresenter {
         attendeesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                listofUsers.clear();
                 for (DataSnapshot user : dataSnapshot.getChildren()) {
                     if (!user.child("name").getValue().toString().equals("Test")) {
                         listofUsers.add(new User(

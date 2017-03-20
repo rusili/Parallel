@@ -88,7 +88,7 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
                 if (actionId == EditorInfo.IME_ACTION_SEND){
                     fragmentChatPresenter.onSendButtonClick(messageEditText.getText().toString());
                     messageEditText.setText("");
-                    handled = true;
+                    handled = false;
                 }
                 return handled;
             }

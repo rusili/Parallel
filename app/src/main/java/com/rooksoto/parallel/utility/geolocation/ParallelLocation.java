@@ -28,7 +28,6 @@ import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.Constants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ParallelLocation {
 
@@ -42,8 +41,10 @@ public class ParallelLocation {
 
     // Inits to default eventID, at US White House, 100m radius
     public static String eventID = "/default";
-    public static double eventLatitude = 38.8976763;
-    public static double eventLongitude = -77.0365298;
+    private static double eventLatitude = 38.8976763;
+    private static double eventLongitude = -77.0365298;
+    private static float eventGeofenceRadius = 10;
+
 
     public static ParallelLocation getInstance () {
         if (instance == null) {
@@ -51,37 +52,9 @@ public class ParallelLocation {
         }
         return instance;
     }
-
-    public static float eventGeofenceRadius = 100;
-
     private ParallelLocation () {
 
-        // [BLOCK]
-        // I'm getting event/geofence location information from Firebase here
-
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference eventReference = database.getReference(
-                eventID + "/event_location/"
-        );
-
         Log.d(TAG, "Initial Geofence: " + eventLatitude + ", " + eventLongitude + ", " + eventGeofenceRadius);
-
-        eventReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String, Object> locationMap = (HashMap<String, Object>) dataSnapshot.getValue();
-                eventLongitude = Double.valueOf(locationMap.get("latitude").toString());
-                eventLongitude = Double.valueOf(locationMap.get("longitude").toString());
-                eventGeofenceRadius = Float.valueOf(locationMap.get("radius_meters").toString());
-                Log.d(TAG, "Event Geofence: " + eventLatitude + ", " + eventLongitude + ", " + eventGeofenceRadius);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d(TAG, "onCancelled: Error getting location data from Firebase");
-            }
-        });
-        // [/Block]
 
         final Context context = AppContext.getAppContext();
         googleApiClient = new GoogleApiClient.Builder(context)
@@ -91,7 +64,7 @@ public class ParallelLocation {
                     public void onConnected (@Nullable Bundle bundle) {
                         Log.d(TAG, "Successfully Connected to GPS-L");
                         startLocationMonitoring();
-                        startGeofenceMonitoring(context);
+//                        startGeofenceMonitoring(context);
                     }
 
                     @Override
@@ -107,6 +80,27 @@ public class ParallelLocation {
                 })
                 .build();
         googleApiClient.connect();
+    }
+
+    public void setEventMonitoring() {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference eventReference = database.getReference().child(eventID).child("event_location");
+        eventReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                eventLatitude = Double.valueOf(dataSnapshot.child("latitude").getValue().toString());
+                eventLongitude = Double.valueOf(dataSnapshot.child("longitude").getValue().toString());
+                eventGeofenceRadius = Float.valueOf(dataSnapshot.child("radius_meters").getValue().toString());
+                Log.d(TAG, "Event Geofence: " + eventLatitude + ", " + eventLongitude + ", " + eventGeofenceRadius);
+                startGeofenceMonitoring(AppContext.getAppContext());
+                Log.d(TAG, "onDataChange: New Geofence being monitored");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "onCancelled: Error getting location data from Firebase");
+            }
+        });
     }
 
     public void connect () {
@@ -157,7 +151,6 @@ public class ParallelLocation {
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
                     .build();
             GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
-                    .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
                     .addGeofence(geofence)
                     .build();
             Intent intent = new Intent(context, GeofenceService.class);

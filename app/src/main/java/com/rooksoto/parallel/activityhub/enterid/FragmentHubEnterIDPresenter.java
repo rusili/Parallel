@@ -60,7 +60,6 @@ public class FragmentHubEnterIDPresenter implements BasePresenter {
         }
     }
 
-    // TODO: 3/12/17 - ROOK - Implement check for valid eventID. See comments. 
     void checkEventID (final String enteredEventID, DatabaseReference reference) {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -69,6 +68,8 @@ public class FragmentHubEnterIDPresenter implements BasePresenter {
                     // Command the view to go to next fragment
                     listener.activateParallelEvent(enteredEventID);
                     Log.d(TAG, "onDataChange: Event ID exists, load next fragment");
+                    ParallelLocation location = ParallelLocation.getInstance();
+                    location.setEventMonitoring();
                 } else {
                     // Command the view to show an error - Event ID does not exist
                     listener.showEventIdError(enteredEventID);

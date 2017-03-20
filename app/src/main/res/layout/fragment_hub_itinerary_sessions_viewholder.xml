@@ -182,14 +182,14 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 />
-            <TextView
-                android:id="@+id/fragment_hub_eventinfo_sessions_viewholder_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:text="Tagline"
-                android:textColor="@color/textAlt"
-                android:gravity="center"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/fragment_hub_eventinfo_sessions_viewholder_tag"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="16dp"-->
+                <!--android:text="Tagline"-->
+                <!--android:textColor="@color/textAlt"-->
+                <!--android:gravity="center"-->
+                <!--/>-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

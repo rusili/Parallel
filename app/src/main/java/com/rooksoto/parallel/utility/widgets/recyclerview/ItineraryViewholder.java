@@ -1,6 +1,7 @@
 package com.rooksoto.parallel.utility.widgets.recyclerview;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +19,8 @@ public class ItineraryViewholder extends RecyclerView.ViewHolder {
     private TextView textViewTagline;
     private TextView textViewLocation;
 
+    private static final String TAG = "ItineraryViewholder";
+
     public ItineraryViewholder (View itemView) {
         super(itemView);
         textViewHour1 = (TextView) itemView.findViewById(R.id.fragment_hub_eventinfo_sessions_time1_hour);
@@ -33,22 +36,26 @@ public class ItineraryViewholder extends RecyclerView.ViewHolder {
 
     public void bind (int position, Session sessionP) {
         textViewName.setText(sessionP.getName());
-        textViewTagline.setText(sessionP.getTagline());
         textViewLocation.setText(sessionP.getLocation());
+        String[] timeArray = sessionP.getStartTime().split(":");
+        String[] timeArray2 = timeArray[1].split(" ");
+        textViewHour1.setText(timeArray[0]);
+        textViewMinute1.setText(timeArray2[0]);
+        textViewAMPM1.setText(timeArray2[1]);
 
-        int temp = sessionP.getStartTime().getHours();
-        if (temp > 12){
-            temp = temp - 12;
-        }
-        textViewHour1.setText("" + temp);
-
-        String tempString = null;
-        temp = sessionP.getStartTime().getMinutes();
-        if (temp == 0){
-            tempString = "00";
-            textViewMinute1.setText(tempString);
-        } else {
-            textViewMinute1.setText("" + temp);
-        }
+//        int temp = sessionP.getStartTime().getHours();
+//        if (temp > 12){
+//            temp = temp - 12;
+//        }
+//        textViewHour1.setText("" + temp);
+//
+//        String tempString = null;
+//        temp = sessionP.getStartTime().getMinutes();
+//        if (temp == 0){
+//            tempString = "00";
+//            textViewMinute1.setText(tempString);
+//        } else {
+//            textViewMinute1.setText("" + temp);
+//        }
     }
 }

@@ -24,16 +24,16 @@ public class User {
         this.pictureLink = pictureLink;
     }
 
-    public User(String name, String email, String pictureLink, List<Answers> listofAnswers) {
-        this.name = name;
-        this.email = email;
-        this.pictureLink = pictureLink;
-        this.listofAnswers = listofAnswers;
-    }
-
     public User (String nameParam, String emailParam) {
         this.name = nameParam;
         this.email = emailParam;
+    }
+
+    public User(String userName, String email, String profilePic, List<Answers> listofAnswers) {
+        this.name = userName;
+        this.email = email;
+        this.pictureLink = profilePic;
+        this.listofAnswers = listofAnswers;
     }
 
     public String getName () {

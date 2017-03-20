@@ -76,11 +76,7 @@ public class FragmentEventMapPresenter {
                 for (DataSnapshot user : dataSnapshot.getChildren()) {
                     if (!user.child("name").getValue().toString().equals("Test")) {
                         listofUsers.add(new User(
-                                (String) user.child("name").getValue(),
-                                (String) user.child("email").getValue(),
-                                user.getKey(),
-                                (String) user.child("pictureLink").getValue())
-                        );
+                                (String) user.child("name").getValue(), (String) user.child("email").getValue(), (String) user.child("pictureLink").getValue(), user.getKey()));
                     }
                     attendeesAdapter.notifyDataSetChanged();
                 }

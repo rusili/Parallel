@@ -26,11 +26,11 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
             imageViewLeft.setVisibility(View.INVISIBLE);
         } else if (answerP.getAnswer().equals("False")){
             imageViewRight.setVisibility(View.INVISIBLE);
-        } else if (answerP.getAnswer().equals("2130837625")) { // Selected Android
+        } else if (answerP.getAnswer().equals("2130837628")) { // Selected Android
             imageViewLeft.setVisibility(View.INVISIBLE);
             imageViewRight.setImageResource((R.drawable.ic_androidicon));
             imageViewRight.setColorFilter(itemView.getResources().getColor(R.color.teal));
-        } else if (answerP.getAnswer().equals("2130837626")) { // Selected iOS
+        } else if (answerP.getAnswer().equals("2130837629")) { // Selected iOS
             imageViewRight.setVisibility(View.INVISIBLE);
             imageViewLeft.setImageResource(R.drawable.ic_appleicon);
             imageViewRight.setColorFilter(itemView.getResources().getColor(R.color.teal));

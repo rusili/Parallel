@@ -37,8 +37,7 @@ class EventAttendeesViewholder extends RecyclerView.ViewHolder {
     }
 
     public void bind(final User userParam) {
-        textViewName.setText(userParam.getName());
-        textViewEmail.setText(userParam.getEmail());
+        textViewName.setText("" + userParam.getName());
         if (userParam.getPictureLink() == null) {
             Picasso.with(AppContext.getAppContext()).load(R.drawable.bruttino_large).fit().into(imageViewProfile);
         } else {

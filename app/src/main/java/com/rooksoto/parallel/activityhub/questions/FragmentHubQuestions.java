@@ -35,6 +35,7 @@ import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
 import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.objects.Questions;
 import com.rooksoto.parallel.objects.User;
+import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.OnClickEffect;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 

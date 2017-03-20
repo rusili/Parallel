@@ -2,7 +2,10 @@ package com.rooksoto.parallel.activityhub;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,9 +14,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,12 +160,30 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
                 .getReference(ParallelLocation.eventID)
                 .child("attendee_list");
         checkLocationServices(location);
+        setupReceiver();
+    }
+
+    private void setupReceiver() {
+        LocalBroadcastManager.getInstance(this).registerReceiver(geofenceTriggerReceiver,
+                new IntentFilter("geofence_exit"));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
     }
+
+    private BroadcastReceiver geofenceTriggerReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            Log.d("TAG", "onReceive: Received Geofence Exit Trigger");
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+            // Code Logout Here!!!gi
+        }
+    };
 
     private void loadFragmentEnterID() {
         SmartTabLayout smartTabLayout = (SmartTabLayout) findViewById(R.id.viewpagertab);
@@ -239,6 +262,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     private void logOutAndRemoveFromParallel() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(geofenceTriggerReceiver);
         attendeeList.child(firebaseUser.getUid()).getRef().removeValue();
         firebaseAuth.signOut();
     }

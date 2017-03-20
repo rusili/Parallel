@@ -62,7 +62,7 @@ public class PinView extends SubsamplingScaleImageView {
                     pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
                     break;
                 case FragmentEventMapPresenter.SENT_PINS:
-                    pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pin3);
+                    pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pin);
                     break;
                 default:
                     pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);

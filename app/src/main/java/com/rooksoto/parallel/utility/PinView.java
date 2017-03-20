@@ -183,10 +183,6 @@ public class PinView extends SubsamplingScaleImageView {
 
     public void setPin(PointF pinPoint) {
         this.pinPoint = pinPoint;
-//        receivedPointList.add(new PointF(293.5547f, 1392.5f));
-//        receivedPointList.add(new PointF(890.15625f, 1356.875f));
-//        receivedPointList.add(new PointF(866.25f, 1547.5f));
-//        receivedPointList.add(new PointF(1221.3281f, 1079.375f));
         initialise();
         invalidate();
     }
@@ -199,12 +195,12 @@ public class PinView extends SubsamplingScaleImageView {
         float density = getResources().getDisplayMetrics().densityDpi;
 
         if (sentPin == null) {
-            sentPin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
+            sentPin = BitmapFactory.decodeResource(this.getResources(), R.drawable.sentpin);
             sentPin = createPinBitmaps(density, sentPin);
         }
 
         if (receivedPin == null) {
-            receivedPin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pin);
+            receivedPin = BitmapFactory.decodeResource(this.getResources(), R.drawable.receivedpin);
             receivedPin = createPinBitmaps(density, receivedPin);
         }
     }

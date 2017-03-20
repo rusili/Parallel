@@ -65,4 +65,8 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
     public LinearLayout getLinearLayoutExpanding () {
         return linearLayoutExpanding;
     }
+
+    public RecyclerView getRecyclerViewAnswers() {
+        return recyclerViewAnswers;
+    }
 }

@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.rooksoto.parallel.BaseView;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
+import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.OnClickEffect;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
@@ -42,10 +43,15 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
     private static final String TAG = "FragmentHubEnterID";
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         location = ParallelLocation.getInstance();
         database = FirebaseDatabase.getInstance();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @SuppressLint("ValidFragment")
@@ -101,7 +107,6 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
         Log.d(TAG, "onClick: eventID Current Value is: " + ParallelLocation.eventID);
         reference = database.getReference();
         fragmentHubEnterIDPresenter.checkEventID(ParallelLocation.eventID, reference);
-        // TODO: 3/16/17 Start the questions fragment only if eventID is valid
     }
 
     private void shakeAnimation () {

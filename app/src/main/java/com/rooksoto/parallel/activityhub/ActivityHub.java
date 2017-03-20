@@ -1,15 +1,19 @@
 package com.rooksoto.parallel.activityhub;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.eftimoff.viewpagertransformers.DepthPageTransformer;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +56,8 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     private SmartTabLayout viewPagerTab;
     private FragmentPagerItems pages;
     private Handler handler = new Handler();
+
+    ParallelLocation location;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
@@ -132,8 +140,11 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     }
 
     public void initialize() {
+        location = ParallelLocation.getInstance();
+        checkPlayServices();
+        getLocationPermissions();
         view = getWindow().getDecorView().getRootView();
-        activityHubPresenter.onInitialize();
+//        activityHubPresenter.onInitialize();
         loadFragmentEnterID();
         //activityHubPresenter.toViewPager();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -141,6 +152,11 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
         userKey = reference.child(ParallelLocation.eventID).child("attendee_list");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void loadFragmentEnterID () {
@@ -210,11 +226,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
-        if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
-            return true;
-        } else {
-            return false;
-        }
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
 
     @Override
@@ -222,8 +234,32 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         super.onDestroy();
 
         userKey.child(firebaseUser.getUid()).removeValue();
+        Log.d(TAG, "onDestroy: Current user getting removed: " + firebaseUser.getUid());
         firebaseAuth.signOut();
 
     }
 
+    public void getLocationPermissions() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    9999
+            );
+        }
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvaliability = GoogleApiAvailability.getInstance();
+        int result = apiAvaliability.isGooglePlayServicesAvailable(this);
+        if(result != ConnectionResult.SUCCESS) {
+            if(apiAvaliability.isUserResolvableError(result)) {
+                apiAvaliability.getErrorDialog(this, result,
+                        9998).show();
+            }
+            return false;
+        }
+        return true;
+    }
 }

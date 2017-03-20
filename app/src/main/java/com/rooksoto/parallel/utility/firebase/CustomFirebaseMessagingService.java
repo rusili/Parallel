@@ -2,24 +2,19 @@ package com.rooksoto.parallel.utility.firebase;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activityhub.ActivityHub;
-import com.rooksoto.parallel.activitylogin.ActivityLogin;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -82,7 +77,7 @@ public class CustomFirebaseMessagingService extends com.google.firebase.messagin
         smallView.setTextViewText(R.id.notification_time, time);
         final Uri defaultSoundURI = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Intent intent = new Intent(this, ActivityLogin.class);
+        Intent intent = new Intent(this, ActivityHub.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

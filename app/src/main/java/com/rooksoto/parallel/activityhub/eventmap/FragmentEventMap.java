@@ -50,11 +50,6 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
         super.onViewCreated(view, savedInstanceState);
         fragEventMapPresenter.onViewCreated();
         imageView.setImage(ImageSource.resource(R.drawable.floorplan));
-
-        // TODO grab list of coordinates from firebase and display all
-//        imageView.addPin(new PointF(293.5547f, 1392.5f));
-//        imageView.addPin(new PointF(890.15625f, 1356.875f));
-//        imageView.addPin(new PointF(1221.3281f, 1079.375f));
     }
 
     @Override
@@ -103,5 +98,10 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
     @Override
     public PointF getCoordinates() {
         return coordinatePressed;
+    }
+
+    @Override
+    public void populatePin(PointF coordinates) {
+        imageView.addPin(coordinates);
     }
 }

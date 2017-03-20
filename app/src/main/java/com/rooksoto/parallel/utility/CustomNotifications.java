@@ -3,7 +3,6 @@ package com.rooksoto.parallel.utility;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.media.RingtoneManager;
@@ -27,7 +26,6 @@ public class CustomNotifications {
     }
 
     public void show_Station () {
-
     }
 
     private void show () {
@@ -37,9 +35,8 @@ public class CustomNotifications {
 
         ServiceConnection mConnection = new ServiceConnection() {
             public void onServiceConnected (ComponentName className, IBinder binder) {
-                ((KillService.KillBinder) binder).service.startService(new Intent(mContext, KillService.class));
                 android.app.Notification mBuilder = new NotificationCompat.Builder(mContext)
-                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
+                        .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle("Parallel Event")
                         .setOngoing(true)
                         .setContent(smallView)
@@ -56,6 +53,5 @@ public class CustomNotifications {
             public void onServiceDisconnected (ComponentName name) {
             }
         };
-        mContext.bindService(new Intent(mContext, KillService.class), mConnection, Context.BIND_AUTO_CREATE);
     }
 }

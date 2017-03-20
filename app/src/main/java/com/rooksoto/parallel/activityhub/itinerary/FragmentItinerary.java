@@ -25,6 +25,7 @@ import com.rooksoto.parallel.utility.widgets.recyclerview.ItineraryAdapter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class FragmentItinerary extends Fragment implements BaseView {
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hub_itinerary, container, false);
+        listofSessions.clear();
         initialize();
         return view;
     }
@@ -88,17 +90,64 @@ public class FragmentItinerary extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
+<<<<<<< HEAD
         itineraryAdapter = new ItineraryAdapter(listofSessions);
+=======
+
+        tempRV();
+>>>>>>> 44423725a1768be5273894910c5ba56a6dd3c4c6
         recyclerViewItinerary = (RecyclerView) view.findViewById(R.id.fragment_hub_itinerary_recyclerview);
         recyclerViewItinerary.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewItinerary.setAdapter(itineraryAdapter);
     }
 
     private void tempRV(){
+<<<<<<< HEAD
 //        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 //        Date date = new Date();
 //        dateFormat.format(date);
 //        listofSessions.add(new Session("Introduction", "Google main stage", date, date));
+=======
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2017);
+        calendar.set(Calendar.MONTH, 3);
+        calendar.set(Calendar.DATE, 22);
+        calendar.set(Calendar.HOUR,18);
+        calendar.set(Calendar.MINUTE,00);
+        calendar.set(Calendar.SECOND,00);
+        Date date = calendar.getTime();
+        dateFormat.format(date);
+        listofSessions.add(new Session("Arrive at Google", "Google", date, date));
+        calendar.set(Calendar.HOUR,18);
+        calendar.set(Calendar.MINUTE,10);
+        date = calendar.getTime();
+        listofSessions.add(new Session("Shirts & Snacks", "Google", date, date));
+        calendar.set(Calendar.HOUR,18);
+        calendar.set(Calendar.MINUTE,20);
+        date = calendar.getTime();
+        listofSessions.add(new Session("Group Photos", "Google", date, date));
+        calendar.set(Calendar.HOUR,18);
+        calendar.set(Calendar.MINUTE,30);
+        date = calendar.getTime();
+        listofSessions.add(new Session("Doors Open", "Google", date, date));
+        calendar.set(Calendar.HOUR,19);
+        calendar.set(Calendar.MINUTE,00);
+        date = calendar.getTime();
+        listofSessions.add(new Session("Opening Remarks", "Google", date, date));
+        calendar.set(Calendar.HOUR,19);
+        calendar.set(Calendar.MINUTE,22);
+        date = calendar.getTime();
+        listofSessions.add(new Session("Demos Begin", "Google", date, date));
+        calendar.set(Calendar.HOUR,21);
+        calendar.set(Calendar.MINUTE,00);
+        date = calendar.getTime();
+        listofSessions.add(new Session("Reception & Networking", "Google", date, date));
+        calendar.set(Calendar.HOUR,22);
+        calendar.set(Calendar.MINUTE,00);
+        date = calendar.getTime();
+        listofSessions.add(new Session("Closing & Cleanup", "Google", date, date));
+>>>>>>> 44423725a1768be5273894910c5ba56a6dd3c4c6
     }
 
 }

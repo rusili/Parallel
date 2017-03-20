@@ -144,26 +144,26 @@ public class FragmentChat extends Fragment implements FragmentChatPresenter.List
             protected void populateView(View view, ChatMessage chatMessage, int position) {
                 progressBar.setVisibility(View.INVISIBLE);
                 picImageViewLeft = (CircleImageView) view.findViewById(R.id.picImageViewLeft);
-                picImageViewRight = (CircleImageView) view.findViewById(R.id.picImageViewRight);
+//                picImageViewRight = (CircleImageView) view.findViewById(R.id.picImageViewRight);
                 if (chatMessage.getProfilePic() == null) {
                     Picasso.with(getActivity()).load(R.drawable.bruttino_large).fit().into(picImageViewLeft);
-                    Picasso.with(getActivity()).load(R.drawable.bruttino_large).fit().into(picImageViewRight);
+//                    Picasso.with(getActivity()).load(R.drawable.bruttino_large).fit().into(picImageViewRight);
                 } else {
                     Picasso.with(getActivity()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageViewLeft);
-                    Picasso.with(getActivity()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageViewRight);
+//                    Picasso.with(getActivity()).load(Uri.parse(chatMessage.getProfilePic())).fit().into(picImageViewRight);
                 }
                 TextView textViewMessage = (TextView) view.findViewById(R.id.messageTextView);
                 textViewMessage.setText(chatMessage.getText());
                 TextView textViewName = (TextView)  view.findViewById(R.id.nameTextView);
                 textViewName.setText(chatMessage.getName());
-                if (firebaseUser.getDisplayName().equals(chatMessage.getName())){
-                    picImageViewLeft.setVisibility(View.INVISIBLE);
-                    textViewName.setTextColor(getResources().getColor(R.color.teal));
-                    textViewName.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
-                    textViewMessage.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
-                } else {
-                    picImageViewRight.setVisibility(View.INVISIBLE);
-                }
+//                if (firebaseUser.getDisplayName().equals(chatMessage.getName())){
+//                    picImageViewLeft.setVisibility(View.INVISIBLE);
+//                    textViewName.setTextColor(getResources().getColor(R.color.teal));
+//                    textViewName.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+//                    textViewMessage.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+//                } else {
+//                    picImageViewRight.setVisibility(View.INVISIBLE);
+//                }
             }
         };
 

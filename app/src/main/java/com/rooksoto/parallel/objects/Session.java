@@ -6,14 +6,20 @@ public class Session {
     String name;
     String tagline;
     String location;
-    Date startTime;
+    String startTime;
     Date endTime;
 
-    public Session(String nameP, String locationP, Date startTimeP, Date endTimeP){
+    public Session(String nameP, String locationP, String startTimeP, Date endTimeP){
         this.name = nameP;
         this.location = locationP;
         this.startTime = startTimeP;
         this.endTime = endTimeP;
+    }
+
+    public Session(String name, String location, String startTime) {
+        this.name = name;
+        this.location = location;
+        this.startTime = startTime;
     }
 
     public String getName () {
@@ -28,7 +34,7 @@ public class Session {
         return location;
     }
 
-    public Date getStartTime () {
+    public String getStartTime () {
         return startTime;
     }
 

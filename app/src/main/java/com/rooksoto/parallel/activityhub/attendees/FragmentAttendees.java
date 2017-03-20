@@ -42,6 +42,7 @@ public class FragmentAttendees extends Fragment implements BaseView {
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hub_attendees, container, false);
+        listofUsers.clear();
         initialize();
         return view;
     }
@@ -82,7 +83,6 @@ public class FragmentAttendees extends Fragment implements BaseView {
 
     @Override
     public void setViews () {
-        listofUsers.clear();
         attendeesAdapter = new AttendeesAdapter(listofUsers);
         recyclerViewAttendees = (RecyclerView) view.findViewById(R.id.fragment_hub_attendees_recyclerview);
         recyclerViewAttendees.setLayoutManager(new LinearLayoutManager(view.getContext()));

@@ -21,7 +21,7 @@ public class ItineraryAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View sessionView = inflater.inflate(R.layout.fragment_hub_eventinfo_sessions_viewholder, parent, false);
+        View sessionView = inflater.inflate(R.layout.fragment_hub_itinerary_sessions_viewholder, parent, false);
         ItineraryViewholder viewHolder = new ItineraryViewholder(sessionView);
         return viewHolder;
     }

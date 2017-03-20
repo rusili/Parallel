@@ -58,6 +58,7 @@ public class FragmentProfile extends Fragment implements BaseView {
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_hub_profile, container, false);
+        listofAnswers.clear();
         initialize();
         return view;
     }

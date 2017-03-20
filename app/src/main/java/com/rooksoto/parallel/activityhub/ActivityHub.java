@@ -3,18 +3,17 @@ package com.rooksoto.parallel.activityhub;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,6 @@ import com.rooksoto.parallel.activityhub.profile.FragmentProfile;
 import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
 import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
-import com.rooksoto.parallel.utility.geolocation.GeofenceService;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 
@@ -144,8 +142,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
 
     public void initialize() {
         location = ParallelLocation.getInstance();
-        checkPlayServices();
-        getLocationPermissions();
+        checkForGoogleApiAvail();
         view = getWindow().getDecorView().getRootView();
 //        activityHubPresenter.onInitialize();
         loadFragmentEnterID();
@@ -156,8 +153,8 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         reference = database.getReference();
         attendeeList = FirebaseDatabase.getInstance()
                 .getReference(ParallelLocation.eventID)
-                .child("attendee_list")
-        ;
+                .child("attendee_list");
+        checkLocationServices(location);
     }
 
     @Override
@@ -165,7 +162,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         super.onResume();
     }
 
-    private void loadFragmentEnterID () {
+    private void loadFragmentEnterID() {
         SmartTabLayout smartTabLayout = (SmartTabLayout) findViewById(R.id.viewpagertab);
         smartTabLayout.setVisibility(View.INVISIBLE);
 
@@ -194,7 +191,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
 
     @Override
     public void checkLocationServices(ParallelLocation locationService) {
-        locationService.startGeofenceMonitoring(this);
+        locationService.startGeofenceMonitoring(AppContext.getAppContext());
 
     }
 
@@ -228,7 +225,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         ;
     }
 
-    private boolean isOnline () {
+    private boolean isOnline() {
         ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
@@ -246,27 +243,48 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         firebaseAuth.signOut();
     }
 
-    public void getLocationPermissions() {
-        if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    9999
-            );
+    //    private boolean checkPlayServices() {
+//        GoogleApiAvailability apiAvaliability = GoogleApiAvailability.getInstance();
+//        int result = apiAvaliability.isGooglePlayServicesAvailable(this);
+//        if(result != ConnectionResult.SUCCESS) {
+//            if(apiAvaliability.isUserResolvableError(result)) {
+//                apiAvaliability.getErrorDialog(this, result,
+//                        9998).show();
+//            }
+//            return false;
+//        }
+//        return true;
+//    }
+    private void checkForGoogleApiAvail() {
+        int hasGpsInstalled = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
+        if (hasGpsInstalled != ConnectionResult.SUCCESS) {
+            GoogleApiAvailability.getInstance().getErrorDialog(this, hasGpsInstalled, 1).show();
+        }
+        if (Build.VERSION.SDK_INT >= 23) {
+            getLocationPermissions();
         }
     }
 
-    private boolean checkPlayServices() {
-        GoogleApiAvailability apiAvaliability = GoogleApiAvailability.getInstance();
-        int result = apiAvaliability.isGooglePlayServicesAvailable(this);
-        if(result != ConnectionResult.SUCCESS) {
-            if(apiAvaliability.isUserResolvableError(result)) {
-                apiAvaliability.getErrorDialog(this, result,
-                        9998).show();
-            }
-            return false;
-        }
-        return true;
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void getLocationPermissions() {
+        requestPermissions(new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION},
+                9999);
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                999
+        );
     }
+
+//    public void getLocationPermissions() {
+//        if (ActivityCompat.checkSelfPermission(
+//                this, Manifest.permission.ACCESS_FINE_LOCATION)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                    9999
+//            );
+//        }
+//    }
 }

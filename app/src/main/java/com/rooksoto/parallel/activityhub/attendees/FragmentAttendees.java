@@ -59,7 +59,6 @@ public class FragmentAttendees extends Fragment implements BaseView {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot user:dataSnapshot.getChildren()) {
-
                     if (!user.child("name").getValue().toString().equals("Test")){
                         listofUsers.add(new User(
                                 (String) user.child("name").getValue(),

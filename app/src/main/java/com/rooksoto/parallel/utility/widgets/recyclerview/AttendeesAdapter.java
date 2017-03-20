@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.User;
+import com.rooksoto.parallel.utility.widgets.recyclerview.ExpandedRecyclerView.AttendeesExpandViewholder;
+import com.rooksoto.parallel.utility.widgets.recyclerview.ExpandedRecyclerView.UserExtend;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class AttendeesAdapter extends RecyclerView.Adapter {
     private List<User> listofUsers = new ArrayList<>();
     private View view;
 
-    public AttendeesAdapter(List<User> listofUsersP, String purpose) {
+    public AttendeesAdapter(List <User> listofUsersP, String purpose) {
         this.listofUsers = listofUsersP;
         this.purpose = purpose;
     }
@@ -27,7 +29,7 @@ public class AttendeesAdapter extends RecyclerView.Adapter {
         switch (purpose) {
             case "Attendees":
                 view = inflater.inflate(R.layout.fragment_hub_attendees_viewholder, parent, false);
-                AttendeesViewholder viewHolder = new AttendeesViewholder(view);
+                AttendeesExpandViewholder viewHolder = new AttendeesExpandViewholder(view);
                 return viewHolder;
             case "Event":
                 view = inflater.inflate(R.layout.event_map_attendees_viewholder, parent, false);

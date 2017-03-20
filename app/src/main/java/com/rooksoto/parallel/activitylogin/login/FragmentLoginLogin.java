@@ -1,9 +1,11 @@
 package com.rooksoto.parallel.activitylogin.login;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -155,8 +159,25 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
 
     @Override
     public void startActivityAfterAuthenticated() {
-        Intent intent = new Intent(getActivity(), ActivityHub.class);
-        startActivity(intent);
+        checkLogoVisibility();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Intent intent = new Intent(view.getContext(), ActivityHub.class);
+                startActivity(intent);
+            }
+        }, 250);
+
+    }
+
+    public void checkLogoVisibility () {
+            ImageView logoViewLeft = (ImageView) ((Activity) view.getContext()).findViewById(R.id.activity_login_logoleft);
+            Animation fadeInUp = AnimationUtils.loadAnimation(view.getContext(), R.anim.fadeoutdown);
+            logoViewLeft.startAnimation(fadeInUp);
+
+            ImageView logoViewRight = (ImageView) ((Activity) view.getContext()).findViewById(R.id.activity_login_logoright);
+            Animation fadeInDown = AnimationUtils.loadAnimation(view.getContext(), R.anim.fadeoutup);
+            logoViewRight.startAnimation(fadeInDown);
     }
 
     @Override
@@ -171,7 +192,6 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
                 .enableAutoManage((FragmentActivity) getActivity(), this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-
     }
 
     @Override
@@ -211,7 +231,6 @@ public class FragmentLoginLogin extends Fragment implements FragmentLoginLoginPr
             case CREATE_ACCOUNT:
                 replaceFragment(new FragmentLoginCreateAccount(), id);
         }
-
     }
 
     @Override

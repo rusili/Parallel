@@ -39,8 +39,6 @@ public class FragmentProfile extends Fragment implements BaseView {
     private FirebaseUser user;
 
     private View view;
-    private ImageButton imageButtonExit;
-
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private DatabaseReference reference;

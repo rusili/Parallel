@@ -267,18 +267,6 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         firebaseAuth.signOut();
     }
 
-    //    private boolean checkPlayServices() {
-//        GoogleApiAvailability apiAvaliability = GoogleApiAvailability.getInstance();
-//        int result = apiAvaliability.isGooglePlayServicesAvailable(this);
-//        if(result != ConnectionResult.SUCCESS) {
-//            if(apiAvaliability.isUserResolvableError(result)) {
-//                apiAvaliability.getErrorDialog(this, result,
-//                        9998).show();
-//            }
-//            return false;
-//        }
-//        return true;
-//    }
     private void checkForGoogleApiAvail() {
         int hasGpsInstalled = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
         if (hasGpsInstalled != ConnectionResult.SUCCESS) {
@@ -301,14 +289,4 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         );
     }
 
-//    public void getLocationPermissions() {
-//        if (ActivityCompat.checkSelfPermission(
-//                this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                    9999
-//            );
-//        }
-//    }
 }

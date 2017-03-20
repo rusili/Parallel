@@ -6,8 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.activitylogin.ActivityLogin;
+import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
 // Custom alert dialog allowing the user to use their own layout, title, text, and icon. Defaults to finish() onClick
 // Parameters:  1) Context
@@ -15,8 +20,10 @@ import com.rooksoto.parallel.activitylogin.ActivityLogin;
 //              2) View/Layout
 
 public class CustomAlertDialog {
+    private DatabaseReference userRef;
 
     private int containerID = R.id.content_frame;
+    private FirebaseUser firebaseUser;
 
     public void exit (final Activity activity) {
         new AlertDialog.Builder(activity)
@@ -27,6 +34,10 @@ public class CustomAlertDialog {
                 .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick (DialogInterface dialog, int which) {
+                        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                        userRef = FirebaseDatabase.getInstance().getReference().child(ParallelLocation.eventID).child("attendee_list");
+                        userRef.child(firebaseUser.getUid()).removeValue();
+                        FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(activity, ActivityLogin.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("EXIT", true);
@@ -36,6 +47,7 @@ public class CustomAlertDialog {
                 })
                 .setNegativeButton("No", null)
                 .show();
+
     }
 
     public void exit (final Context contextParam, String messageP) {

@@ -104,4 +104,9 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
     public void populatePin(String tag, PointF coordinates) {
         imageView.addPin(tag, coordinates);
     }
+
+    @Override
+    public void closeSheet() {
+        bottomSheet.dismissSheet();
+    }
 }

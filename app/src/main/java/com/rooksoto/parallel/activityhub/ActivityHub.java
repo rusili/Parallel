@@ -14,7 +14,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +64,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     private FirebaseUser firebaseUser;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    private DatabaseReference userKey;
+    private DatabaseReference attendeeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +151,9 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         firebaseUser = firebaseAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
-        userKey = reference.child(ParallelLocation.eventID).child("attendee_list");
+        attendeeList = FirebaseDatabase.getInstance()
+                .getReference(ParallelLocation.eventID)
+                .child("attendee_list");
         checkLocationServices(location);
     }
 
@@ -234,11 +235,12 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        logOutAndRemoveFromParallel();
+    }
 
-        userKey.child(firebaseUser.getUid()).removeValue();
-        Log.d(TAG, "onDestroy: Current user getting removed: " + firebaseUser.getUid());
+    private void logOutAndRemoveFromParallel() {
+        attendeeList.child(firebaseUser.getUid()).getRef().removeValue();
         firebaseAuth.signOut();
-
     }
 
     //    private boolean checkPlayServices() {

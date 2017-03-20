@@ -152,12 +152,13 @@ public class ParallelLocation {
                     .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
                     .build();
             GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
+                    .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
                     .addGeofence(geofence)
                     .build();
             Intent intent = new Intent(context, GeofenceService.class);
             PendingIntent pendingIntent = PendingIntent.getService(
                     context,
-                    0,
+                    9997,
                     intent,
                     PendingIntent.FLAG_UPDATE_CURRENT
             );

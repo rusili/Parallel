@@ -53,9 +53,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/ActivityHub"
             android:windowSoftInputMode="adjustPan">
-
-        </activity>
-        <!-- // Activities -->
+    </activity>
+    <!-- // Activities -->
 
         <!-- Services: -->
         <service

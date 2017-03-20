@@ -42,6 +42,7 @@ import com.rooksoto.parallel.activityhub.eventmap.FragmentEventMap;
 import com.rooksoto.parallel.activityhub.itinerary.FragmentItinerary;
 import com.rooksoto.parallel.activityhub.profile.FragmentProfile;
 import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
+import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
@@ -152,6 +153,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
         userKey = reference.child(ParallelLocation.eventID).child("attendee_list");
+        checkLocationServices(location);
     }
 
     @Override
@@ -188,7 +190,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
 
     @Override
     public void checkLocationServices(ParallelLocation locationService) {
-        locationService.startGeofenceMonitoring(view.getContext());
+        locationService.startGeofenceMonitoring(AppContext.getAppContext());
 
     }
 
@@ -269,7 +271,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
                 9999);
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                9999
+                999
         );
     }
 

@@ -56,7 +56,6 @@ public class FragmentAttendees extends Fragment implements BaseView {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot user:dataSnapshot.getChildren()) {
                     if (!user.child("name").getValue().toString().equals("Test")){
-                        listofUsers.clear();
                         listofUsers.add(new User(
                                 (String) user.child("name").getValue(),
                                 (String) user.child("email").getValue(),

@@ -3,6 +3,7 @@ package com.rooksoto.parallel.activityhub;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -41,7 +42,9 @@ import com.rooksoto.parallel.activityhub.eventmap.FragmentEventMap;
 import com.rooksoto.parallel.activityhub.itinerary.FragmentItinerary;
 import com.rooksoto.parallel.activityhub.profile.FragmentProfile;
 import com.rooksoto.parallel.activityhub.questions.FragmentHubQuestions;
+import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.CustomAlertDialog;
+import com.rooksoto.parallel.utility.geolocation.GeofenceService;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.rooksoto.parallel.utility.widgets.camera2.Camera2BasicFragment;
 
@@ -63,7 +66,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     private FirebaseUser firebaseUser;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    private DatabaseReference userKey;
+    private DatabaseReference attendeeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +154,10 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         firebaseUser = firebaseAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
-        userKey = reference.child(ParallelLocation.eventID).child("attendee_list");
+        attendeeList = FirebaseDatabase.getInstance()
+                .getReference(ParallelLocation.eventID)
+                .child("attendee_list")
+        ;
     }
 
     @Override
@@ -188,7 +194,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
 
     @Override
     public void checkLocationServices(ParallelLocation locationService) {
-        locationService.startGeofenceMonitoring(view.getContext());
+        locationService.startGeofenceMonitoring(this);
 
     }
 
@@ -232,11 +238,12 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        logOutAndRemoveFromParallel();
+    }
 
-        userKey.child(firebaseUser.getUid()).removeValue();
-        Log.d(TAG, "onDestroy: Current user getting removed: " + firebaseUser.getUid());
+    private void logOutAndRemoveFromParallel() {
+        attendeeList.child(firebaseUser.getUid()).getRef().removeValue();
         firebaseAuth.signOut();
-
     }
 
     public void getLocationPermissions() {

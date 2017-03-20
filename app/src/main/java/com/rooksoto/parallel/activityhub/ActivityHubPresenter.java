@@ -5,7 +5,7 @@ import android.view.View;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
 public class ActivityHubPresenter {
-    private ParallelLocation locationService = null;
+    private ParallelLocation locationService = ParallelLocation.getInstance();
     private Listener listener;
     private View view;
 
@@ -14,7 +14,6 @@ public class ActivityHubPresenter {
     }
 
     public void onInitialize() {
-        locationService = ParallelLocation.getInstance();
         locationService.connect();
         listener.checkLocationServices(locationService);
     }

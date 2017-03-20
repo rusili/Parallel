@@ -4,18 +4,20 @@ import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rooksoto.parallel.R;
 import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.objects.User;
 import com.rooksoto.parallel.utility.AppContext;
+import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,7 +29,6 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
     private ImageView imageViewProfile;
     private List <Answers> listofAnswers = new ArrayList <>();
     private User user;
-    private ImageButton expandBtn;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -35,16 +36,12 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
 
     private RecyclerView recyclerViewAnswers;
     private ProfileAdapter profileAdapter;
-    private LinearLayout linearLayoutExpanding;
 
     public AttendeesViewholder (View itemView) {
         super(itemView);
         textViewName = (TextView) itemView.findViewById(R.id.fragment_hub_attendees_viewholder_name);
         textViewEmail = (TextView) itemView.findViewById(R.id.fragment_hub_attendees_viewholder_email);
         imageViewProfile = (ImageView) itemView.findViewById(R.id.fragment_hub_attendees_viewholder_picture);
-        linearLayoutExpanding = (LinearLayout) itemView.findViewById(R.id.expanding_layout);
-        expandBtn = (ImageButton) itemView.findViewById(R.id.expand_btn);
-        profileAdapter = new ProfileAdapter(listofAnswers);
 
         recyclerViewAnswers = (RecyclerView) itemView.findViewById(R.id.fragment_hub_attendees_expand_recyclerview);
         recyclerViewAnswers.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
@@ -52,27 +49,27 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
     }
 
     public void bind (User userParam) {
-//        firebaseAuth = FirebaseAuth.getInstance();
-//        database = FirebaseDatabase.getInstance();
-//        reference = database.getReference().child(ParallelLocation.eventID);
-//
-//        answerRef = reference.child("attendee_list").child(userParam.).child("listofAnswers");
-//        answerRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot question:dataSnapshot.getChildren()) {
-//                    listofAnswers.add(new Answers(
-//                            (String) question.child("question").getValue(),
-//                            (String) question.child("answer").getValue()
-//                    ));
-//                    profileAdapter.notifyDataSetChanged();
-//                }
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {}
-//        });
+        firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference().child(ParallelLocation.eventID);
 
-        profileAdapter = new ProfileAdapter(userParam.getListofAnswers());
+        answerRef = reference.child("attendee_list").child(userParam.getUid()).child("listofAnswers");
+        answerRef.addValueEventListener (new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot question:dataSnapshot.getChildren()) {
+                    listofAnswers.add(new Answers(
+                            (String) question.child("question").getValue(),
+                            (String) question.child("answer").getValue()
+                    ));
+                    profileAdapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+        profileAdapter = new ProfileAdapter(listofAnswers);
         recyclerViewAnswers.setAdapter(profileAdapter);
 
         textViewName.setText(userParam.getName());
@@ -84,15 +81,4 @@ public class AttendeesViewholder extends RecyclerView.ViewHolder {
         }
     }
 
-    public ImageButton getExpandBtn () {
-        return expandBtn;
-    }
-
-    public LinearLayout getLinearLayoutExpanding () {
-        return linearLayoutExpanding;
-    }
-
-    public RecyclerView getRecyclerViewAnswers() {
-        return recyclerViewAnswers;
-    }
 }

@@ -35,6 +35,7 @@ import com.rooksoto.parallel.activityhub.ActivityHubPresenter;
 import com.rooksoto.parallel.objects.Answers;
 import com.rooksoto.parallel.objects.Questions;
 import com.rooksoto.parallel.objects.User;
+import com.rooksoto.parallel.utility.AppContext;
 import com.rooksoto.parallel.utility.OnClickEffect;
 import com.rooksoto.parallel.utility.geolocation.ParallelLocation;
 
@@ -123,9 +124,9 @@ public class FragmentHubQuestions extends Fragment implements BaseView, View.OnC
             String viewID = "fragment_hub_questions_line" + i;
             String imageID = "fragment_hub_questions_gradient" + i;
             String layoutID = "fragment_hub_questions_container" + i;
-            TextView tempView = (TextView) view.findViewById(getResources().getIdentifier(viewID, "id", view.getContext().getPackageName()));
-            ImageView tempImage = (ImageView) view.findViewById(getResources().getIdentifier(imageID, "id", view.getContext().getPackageName()));
-            FrameLayout tempLayout = (FrameLayout) view.findViewById(getResources().getIdentifier(layoutID, "id", view.getContext().getPackageName()));
+            TextView tempView = (TextView) getActivity().findViewById(AppContext.getAppContext().getResources().getIdentifier(viewID, "id", view.getContext().getPackageName()));
+            ImageView tempImage = (ImageView) getActivity().findViewById(AppContext.getAppContext().getResources().getIdentifier(imageID, "id", view.getContext().getPackageName()));
+            FrameLayout tempLayout = (FrameLayout) getActivity().findViewById(AppContext.getAppContext().getResources().getIdentifier(layoutID, "id", view.getContext().getPackageName()));
             textViewLine.add(tempView);
             imageViewGradient.add(tempImage);
             listofFrameLayouts.add(tempLayout);

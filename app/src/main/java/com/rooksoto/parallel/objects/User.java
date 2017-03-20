@@ -17,7 +17,7 @@ public class User {
         this.pictureLink = pictureLink;
     }
 
-    public User(String name, String email, String uid, String pictureLink) {
+    public User(String name, String email, String pictureLink, String uid) {
         this.name = name;
         this.email = email;
         this.uid = uid;

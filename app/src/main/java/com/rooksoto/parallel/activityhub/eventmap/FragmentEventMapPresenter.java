@@ -57,8 +57,6 @@ public class FragmentEventMapPresenter {
     void onViewCreated() {
         attendeesAdapter = new AttendeesAdapter(listofUsers, "Event");
         listener.setViews(attendeesAdapter);
-
-
     }
 
     public void onUserSelected(String uid) {

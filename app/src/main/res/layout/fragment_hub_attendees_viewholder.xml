@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="68dp"
-    android:orientation="vertical">
+              android:animateLayoutChanges="true"
+              android:orientation="vertical"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,13 +22,11 @@
             android:layout_alignParentRight="true"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/expand_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#00000000"
-                android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
-                android:tint="@color/textAlt" />
+            <ImageView android:id="@+id/arrow_expand_imageview"
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:tint="@color/textMain"
+                       android:src="@drawable/ic_keyboard_arrow_down_black_24dp"/>
 
         </LinearLayout>
 
@@ -69,6 +69,13 @@
         android:stateListAnimator="@animator/desc_selection"
         android:visibility="gone"
         android:background="@color/colorAccent">
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YOYOYOYO"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_hub_attendees_expand_recyclerview"

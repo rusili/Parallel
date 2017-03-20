@@ -67,6 +67,7 @@ public class FragmentEventMapPresenter {
         Log.d(TAG, "onUserSelected: " + uid);
         attendeesRef.child(user.getUid()).child(SENT_PINS).push().setValue(new Pin(uid, listener.getCoordinates()));
         attendeesRef.child(uid).child(RECEIVED_PINS).push().setValue(new Pin(user.getUid(), listener.getCoordinates()));
+        listener.closeSheet();
     }
 
     public void onStartup() {
@@ -135,5 +136,7 @@ public class FragmentEventMapPresenter {
         PointF getCoordinates();
 
         void populatePin(String tag, PointF coordinates);
+
+        void closeSheet();
     }
 }

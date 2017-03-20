@@ -48,6 +48,7 @@ public class AttendeesAdapter extends RecyclerView.Adapter {
                 attendeesViewholder.bind(listofUsers.get(position));
 
                 final boolean isExpanded = position == mExpandedPostion;
+                attendeesViewholder.getRecyclerViewAnswers().setVisibility(isExpanded ? View.VISIBLE : View.GONE);
                 attendeesViewholder.getLinearLayoutExpanding().setVisibility(isExpanded ? View.VISIBLE : View.GONE);
                 attendeesViewholder.itemView.setActivated(isExpanded);
                 attendeesViewholder.getExpandBtn().setOnClickListener(new View.OnClickListener() {

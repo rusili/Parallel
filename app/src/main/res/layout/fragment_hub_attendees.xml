@@ -1,33 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginTop="24dp"
-    >
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/activity_hub_action_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
-        android:background="#40000000"
-        >
+        android:background="#40000000">
 
         <TextView
             android:id="@+id/activity_hub_action_bar_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="ATTENDEES"
-            android:textStyle="italic"
-            android:textSize="16dp"
-            android:textColor="@color/textMain"
-            android:gravity="center_vertical"
             android:layout_marginLeft="24dp"
-            />
+            android:gravity="center_vertical"
+            android:text="ATTENDEES"
+            android:textColor="@color/textMain"
+            android:textSize="16dp"
+            android:textStyle="italic" />
 
     </RelativeLayout>
 
-    <include layout="@layout/rv_attendees"/>
+    <include layout="@layout/rv_attendees" />
 
 </LinearLayout>

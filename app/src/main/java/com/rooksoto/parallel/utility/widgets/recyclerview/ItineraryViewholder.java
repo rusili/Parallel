@@ -30,7 +30,6 @@ public class ItineraryViewholder extends RecyclerView.ViewHolder {
         textViewAMPM1 = (TextView) itemView.findViewById(R.id.fragment_hub_eventinfo_sessions_time1_ampm);
         textViewAMPM2 = (TextView) itemView.findViewById(R.id.fragment_hub_eventinfo_sessions_time2_ampm);
         textViewName = (TextView) itemView.findViewById(R.id.fragment_hub_eventinfo_sessions_viewholder_name);
-        textViewTagline = (TextView) itemView.findViewById(R.id.fragment_hub_eventinfo_sessions_viewholder_tag);
         textViewLocation = (TextView) itemView.findViewById(R.id.fragment_hub_eventinfo_sessions_viewholder_location);
     }
 
@@ -42,20 +41,5 @@ public class ItineraryViewholder extends RecyclerView.ViewHolder {
         textViewHour1.setText(timeArray[0]);
         textViewMinute1.setText(timeArray2[0]);
         textViewAMPM1.setText(timeArray2[1]);
-
-//        int temp = sessionP.getStartTime().getHours();
-//        if (temp > 12){
-//            temp = temp - 12;
-//        }
-//        textViewHour1.setText("" + temp);
-//
-//        String tempString = null;
-//        temp = sessionP.getStartTime().getMinutes();
-//        if (temp == 0){
-//            tempString = "00";
-//            textViewMinute1.setText(tempString);
-//        } else {
-//            textViewMinute1.setText("" + temp);
-//        }
     }
 }

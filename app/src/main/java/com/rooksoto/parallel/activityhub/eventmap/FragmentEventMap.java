@@ -101,7 +101,7 @@ public class FragmentEventMap extends Fragment implements FragmentEventMapPresen
     }
 
     @Override
-    public void populatePin(PointF coordinates) {
-        imageView.addPin(coordinates);
+    public void populatePin(String tag, PointF coordinates) {
+        imageView.addPin(tag, coordinates);
     }
 }

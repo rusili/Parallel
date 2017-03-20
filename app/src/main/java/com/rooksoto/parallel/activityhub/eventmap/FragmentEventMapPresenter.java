@@ -100,14 +100,14 @@ public class FragmentEventMapPresenter {
                 if (dataSnapshot.hasChild(RECEIVED_PINS)) {
                     for (DataSnapshot item : dataSnapshot.child(RECEIVED_PINS).getChildren()) {
                         Pin pin = getPin(item);
-                        listener.populatePin(pin.getCoordinates());
+                        listener.populatePin(RECEIVED_PINS, pin.getCoordinates());
                     }
                 }
                 Log.d(TAG, "onDataChange: " + dataSnapshot.hasChild(SENT_PINS));
                 if (dataSnapshot.hasChild(SENT_PINS)) {
                     for (DataSnapshot item : dataSnapshot.child(SENT_PINS).getChildren()) {
                         Pin pin = getPin(item);
-                        listener.populatePin(pin.getCoordinates());
+                        listener.populatePin(SENT_PINS, pin.getCoordinates());
                     }
                 }
 
@@ -133,6 +133,6 @@ public class FragmentEventMapPresenter {
 
         PointF getCoordinates();
 
-        void populatePin(PointF coordinates);
+        void populatePin(String tag, PointF coordinates);
     }
 }

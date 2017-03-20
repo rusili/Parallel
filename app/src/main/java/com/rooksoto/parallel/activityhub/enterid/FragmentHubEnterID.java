@@ -84,7 +84,7 @@ public class FragmentHubEnterID extends Fragment implements BaseView {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEND){
                     checkEventID();
-                    handled = true;
+                    handled = false;
                 }
                 return handled;
             }

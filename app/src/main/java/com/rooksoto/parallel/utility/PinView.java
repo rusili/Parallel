@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.rooksoto.parallel.R;
+import com.rooksoto.parallel.activityhub.eventmap.FragmentEventMapPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.List;
 public class PinView extends SubsamplingScaleImageView {
 
     private PointF sPin;
-    private List<PointF> pointList = new ArrayList<>();
+    private List<PointF> receivedPointList = new ArrayList<>();
+    private List<PointF> sentPointList = new ArrayList<>();
     private Bitmap pin;
 
     public PinView(Context context) {
@@ -26,18 +28,25 @@ public class PinView extends SubsamplingScaleImageView {
 
     public PinView(Context context, AttributeSet attr) {
         super(context, attr);
-        initialise();
+        initialise("");
     }
 
-    public void addPin(PointF point) {
-        pointList.add(point);
-        initialise();
+    public void addPin(String tag, PointF point) {
+        switch (tag) {
+            case FragmentEventMapPresenter.RECEIVED_PINS:
+                receivedPointList.add(point);
+                break;
+            case FragmentEventMapPresenter.SENT_PINS:
+                sentPointList.add(point);
+                break;
+        }
+        initialise(tag);
         invalidate();
     }
 
     public void setPin(PointF sPin) {
         this.sPin = sPin;
-        initialise();
+        initialise("");
         invalidate();
     }
 
@@ -45,13 +54,23 @@ public class PinView extends SubsamplingScaleImageView {
         return sPin;
     }
 
-    private void initialise() {
+    private void initialise(String tag) {
         if (pin == null) {
             float density = getResources().getDisplayMetrics().densityDpi;
-            pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
-            float w = (density/420f) * pin.getWidth();
-            float h = (density/420f) * pin.getHeight();
-            pin = Bitmap.createScaledBitmap(pin, (int)w, (int)h, true);
+            switch (tag) {
+                case FragmentEventMapPresenter.RECEIVED_PINS:
+                    pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
+                    break;
+                case FragmentEventMapPresenter.SENT_PINS:
+                    pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pin3);
+                    break;
+                default:
+                    pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
+                    break;
+            }
+            float w = (density / 420f) * pin.getWidth();
+            float h = (density / 420f) * pin.getHeight();
+            pin = Bitmap.createScaledBitmap(pin, (int) w, (int) h, true);
         }
     }
 
@@ -70,7 +89,10 @@ public class PinView extends SubsamplingScaleImageView {
             drawPin(canvas, paint, sPin);
         }
 
-        for (PointF point:pointList) {
+        for (PointF point : receivedPointList) {
+            drawPin(canvas, paint, point);
+        }
+        for (PointF point : sentPointList) {
             drawPin(canvas, paint, point);
         }
 
@@ -78,7 +100,7 @@ public class PinView extends SubsamplingScaleImageView {
 
     private void drawPin(Canvas canvas, Paint paint, PointF sPin) {
         PointF vPin = sourceToViewCoord(sPin);
-        float vX = vPin.x - (pin.getWidth()/2);
+        float vX = vPin.x - (pin.getWidth() / 2);
         float vY = vPin.y - pin.getHeight();
         canvas.drawBitmap(pin, vX, vY, paint);
     }

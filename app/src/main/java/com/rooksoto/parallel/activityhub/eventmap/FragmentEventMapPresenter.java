@@ -1,6 +1,7 @@
 package com.rooksoto.parallel.activityhub.eventmap;
 
 import android.graphics.PointF;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -98,17 +99,15 @@ public class FragmentEventMapPresenter {
                 Log.d(TAG, "onDataChange: " + dataSnapshot.hasChild(RECEIVED_PINS));
                 if (dataSnapshot.hasChild(RECEIVED_PINS)) {
                     for (DataSnapshot item : dataSnapshot.child(RECEIVED_PINS).getChildren()) {
-                        PointF coordinates = new PointF((Float) item.child("coordinates").child("x").getValue(), (Float) item.child("coordinates").child("y").getValue());
-                        Pin pin = new Pin((String) item.child("uid").getValue(), coordinates);
-                        listener.populatePin(pin.getCoordinates());
+                        Pin pin = getPin(item);
+                        listener.populatePin(RECEIVED_PINS, pin.getCoordinates());
                     }
                 }
                 Log.d(TAG, "onDataChange: " + dataSnapshot.hasChild(SENT_PINS));
                 if (dataSnapshot.hasChild(SENT_PINS)) {
                     for (DataSnapshot item : dataSnapshot.child(SENT_PINS).getChildren()) {
-                        PointF coordinates = new PointF((Float.valueOf(String.valueOf(item.child("coordinates").child("x").getValue()))), (Float.valueOf(String.valueOf(item.child("coordinates").child("y").getValue()))));
-                        Pin pin = new Pin((String) item.child("uid").getValue(), coordinates);
-                        listener.populatePin(pin.getCoordinates());
+                        Pin pin = getPin(item);
+                        listener.populatePin(SENT_PINS, pin.getCoordinates());
                     }
                 }
 
@@ -121,6 +120,12 @@ public class FragmentEventMapPresenter {
         });
     }
 
+    @NonNull
+    private Pin getPin(DataSnapshot item) {
+        PointF coordinates = new PointF((Float.valueOf(String.valueOf(item.child("coordinates").child("x").getValue()))), (Float.valueOf(String.valueOf(item.child("coordinates").child("y").getValue()))));
+        return new Pin((String) item.child("uid").getValue(), coordinates);
+    }
+
 
     interface Listener {
 
@@ -128,6 +133,6 @@ public class FragmentEventMapPresenter {
 
         PointF getCoordinates();
 
-        void populatePin(PointF coordinates);
+        void populatePin(String tag, PointF coordinates);
     }
 }

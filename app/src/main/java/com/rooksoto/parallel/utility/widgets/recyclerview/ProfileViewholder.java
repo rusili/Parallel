@@ -18,7 +18,6 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
         textViewQuestion = (TextView) itemView.findViewById(R.id.fragment_hub_profile_textview_question);
         imageViewLeft = (ImageView) itemView.findViewById(R.id.fragment_hub_profile_leftanswer);
         imageViewRight = (ImageView) itemView.findViewById(R.id.fragment_hub_profile_rightanswer);
-
     }
 
     public void bind (int position, Answers answerP) {

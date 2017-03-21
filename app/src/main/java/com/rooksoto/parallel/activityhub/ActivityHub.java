@@ -153,9 +153,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
         location = ParallelLocation.getInstance();
         checkForGoogleApiAvail();
         view = getWindow().getDecorView().getRootView();
-//        activityHubPresenter.onInitialize();
         loadFragmentEnterID();
-        //activityHubPresenter.toViewPager();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
@@ -185,11 +183,11 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
             Log.d("TAG", "onReceive: Received Geofence Exit Trigger");
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
-            alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog = new AlertDialog.Builder(AppContext.getAppContext()).create();
             alertDialog.setTitle("You've Left The Event");
             alertDialog.setMessage("Logging out in 01:00");
             alertDialog.setCancelable(false);
-            alertDialog.show();   //
+            alertDialog.show();
 
             new CountDownTimer(59000, 1000) {
                 @Override

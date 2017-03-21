@@ -11,12 +11,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +72,8 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private DatabaseReference attendeeList;
+
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,7 +185,27 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
             Log.d("TAG", "onReceive: Received Geofence Exit Trigger");
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
-            // Code Logout Here!!!gi
+            alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("You've Left The Event");
+            alertDialog.setMessage("Logging out in 01:00");
+            alertDialog.setCancelable(false);
+            alertDialog.show();   //
+
+            new CountDownTimer(59000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    alertDialog.setMessage(
+                            "Logging out in 00:"+ (millisUntilFinished/1000)
+                    );
+                    if (millisUntilFinished <= 0) {
+                        logOutAndRemoveFromParallel();
+                    }
+                }
+                @Override
+                public void onFinish() {
+                    logOutAndRemoveFromParallel();
+                }
+            }.start();
         }
     };
 
@@ -263,6 +287,7 @@ public class ActivityHub extends AppCompatActivity implements ActivityHubPresent
 
     private void logOutAndRemoveFromParallel() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(geofenceTriggerReceiver);
+        location.stopGeofenceMonitoring();
         attendeeList.child(firebaseUser.getUid()).getRef().removeValue();
         firebaseAuth.signOut();
     }

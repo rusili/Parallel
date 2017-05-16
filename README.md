@@ -28,6 +28,8 @@ We're a small team of students. Some stuff is broken. Check out our [Waffle.Io] 
  
 ******
  Team Aftercastle
+ 
+[Click here to download our app on the Google Play Store](https://play.google.com/store/apps/details?id=com.rooksoto.parallel&hl=en)
 
 [this]: <https://github.com/rooksoto/Parallel>
 [Waffle.Io]: <https://waffle.io/rooksoto/Parallel>
